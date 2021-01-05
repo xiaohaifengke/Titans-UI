@@ -1,4 +1,4 @@
 module.exports = {
     outputDir: 'docs',
-    publicPath: '/titans-ui/'
+    publicPath: '/Titans-UI/'
 }
