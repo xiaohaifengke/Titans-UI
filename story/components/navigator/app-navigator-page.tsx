@@ -1,31 +1,33 @@
-import { defineComponent, reactive, onBeforeUnmount, provide, inject } from 'vue'
+import { defineComponent, reactive, DefineComponent, markRaw, watch } from 'vue'
+import { injectAppNavigator } from './app-navigator'
 
-interface Route {
-    path?: string,
-    hash?: string,
-    param?: { [k: string]: string }
-}
+export const AppNavigatorPage = defineComponent({
+    setup() {
+        const state = reactive({
+            PageComponent: null as null | DefineComponent
+        })
 
-const APP_NAVIGATOR_PROVIDER = '@@app-navigator'
+        const navigator = injectAppNavigator()
+        const utils = {
+            reset: async () => {
+                let {path} = navigator.state.route
+                if(!path) return
+                if(path.charAt(0) === '/') {
+                    path = path.slice(1)
+                }
+                const Component = (await import('story/pages/' + path)).default
+                state.PageComponent = markRaw(Component)
+            }
+        }
 
-/**
- * @Description: hash路由
- * @Author:  Jhail
- * @Date: 2021-01-05 23:58:27
- */
-function getRoute(): Route {
-    let locationHash = window.location.hash || ''
-    if (locationHash.charAt(0) === '#') {
-        locationHash = locationHash.slice(1)
+        watch(() => navigator.state.route.path, utils.reset, {immediate: true})
+        return () => {
+            const {PageComponent} = state
+            return (
+                <div class="app-navigator-page">
+                    {PageComponent ? <PageComponent/> : null}
+                </div>
+            )
+        }
     }
-    const [path, hash] = (decodeURIComponent(locationHash)).split('#')
-    return {
-        path,
-        hash
-    }
-}
-
-
-function useAppNavigator(props: { defaultPath?: string }) {
-
-}
+})
