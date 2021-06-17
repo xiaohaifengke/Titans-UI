@@ -5,7 +5,7 @@
         class="app-header"
         :style="{ height: HomeConfig.headSize + 'px' }"
       >
-        v3-component
+        Titans-UI
       </section>
       <section
         class="app-menu"
