@@ -1,11 +1,11 @@
 <template>
-  <AppNavigator defaultPath="normal/button">
+  <AppNavigator defaultPath="normal/button" ref="navigator">
     <article class="app-home">
       <section
         class="app-header"
         :style="{ height: HomeConfig.headSize + 'px' }"
       >
-        Titans-UI
+        <span @click="goHome">Titans-UI</span>
       </section>
       <section
         class="app-menu"
@@ -29,16 +29,17 @@
   </AppNavigator>
 </template>
 
-<script>
+<script lang="ts">
 import { AppNavigator } from "./components/navigator/app-navigator";
 import { AppNavigatorPage } from "./components/navigator/app-navigator-page";
-import AppMenu from "./components/app/app-menu";
+import AppMenu from "./components/app/app-menu.vue";
+import { defineComponent } from "@vue/runtime-core";
 const HomeConfig = {
   headSize: 60,
   menuSize: 300,
 };
 
-export default {
+export default defineComponent({
   components: {
     AppMenu,
     AppNavigator,
@@ -50,12 +51,17 @@ export default {
       HomeConfig,
     };
   },
-};
+  methods: {
+    goHome() {
+      console.log(this.$refs.navigator);
+      (this.$refs.navigator as any).$._refer.methods.go('home');
+    }
+  }
+});
 </script>
 
 <style lang="scss">
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
 }

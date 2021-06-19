@@ -22,7 +22,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
-    'prefer-const': 'off'
+    'prefer-const': 'off',
+    "semi": [2, "always"],
   },
   overrides: [
     {

@@ -10,6 +10,9 @@ export const MENUS: Array<AppMenu> = [
     {
         path: '/normal',
         name: 'normal',
+        meta: {
+            title: '基础'
+        },
         children: [{
             path: 'color',
             name: 'color',
@@ -38,9 +41,23 @@ export const MENUS: Array<AppMenu> = [
                 title: 'Layout',
                 subtitle: '布局'
             }
-        }],
+        }]
+    },
+    {
+        path: '/form',
+        name: 'form',
         meta: {
-            title: '基础'
-        }
+            title: '表单组件'
+        },
+        children: [
+            {
+                path: 'input',
+                name: 'input',
+                meta: {
+                    title: 'Input',
+                    subtitle: '输入框'
+                }
+            }
+        ]
     }
-]
+];

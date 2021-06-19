@@ -1,5 +1,5 @@
-const path = require('path')
-const resolve = filePath => path.join(__dirname, './', filePath)
+const path = require('path');
+const resolve = filePath => path.join(__dirname, './', filePath);
 
 module.exports = {
     outputDir: 'docs',
@@ -16,8 +16,15 @@ module.exports = {
     chainWebpack: config => {
         config.plugins
             .delete('prefetch-index')
-            .delete('preload-index')
+            .delete('preload-index');
         config.resolve.alias
-            .set('story', resolve('story'))
+            .set('story', resolve('story')); 
+    },
+    css: {
+        loaderOptions: {
+            scss: {
+                prependData: `@import "src/style/global-import.scss";`
+            }
+        }
     }
-}
+};
