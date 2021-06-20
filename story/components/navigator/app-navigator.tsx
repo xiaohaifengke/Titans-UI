@@ -1,3 +1,4 @@
+import { designComponent } from '@/use/designComponent';
 import { defineComponent, reactive, onBeforeUnmount, provide, inject, getCurrentInstance } from 'vue';
 
 interface Route {
@@ -5,8 +6,6 @@ interface Route {
     hash?: string,
     param?: { [k: string]: string }
 }
-
-const APP_NAVIGATOR_PROVIDER = '@@app-navigator';
 
 /**
  * @Description: hash路由
@@ -58,22 +57,19 @@ function useAppNavigator(props: { defaultPath?: string }) {
     window.addEventListener('hashchange', handler.hashchange);
     onBeforeUnmount(() => window.removeEventListener('hashchange', handler.hashchange));
 
-    provide(APP_NAVIGATOR_PROVIDER, refer);
-
     return refer;
 }
 
-export function injectAppNavigator() {
-    return inject(APP_NAVIGATOR_PROVIDER) as ReturnType<typeof useAppNavigator>;
-}
-
-export const AppNavigator = defineComponent({
+export const AppNavigator = designComponent({
     name: 'app-navigator',
     props: {
         defaultPath: String
     },
+    provideRefer: true,
     setup(props, setupContext) {
-        useAppNavigator(props);
-        return () => setupContext.slots.default && setupContext.slots.default();
+        return {
+            refer: useAppNavigator(props),
+            render: () => setupContext.slots.default && setupContext.slots.default()
+        };
     }
 });

@@ -1,13 +1,14 @@
-import { defineComponent, reactive, DefineComponent, markRaw, watch } from 'vue';
-import { injectAppNavigator } from './app-navigator';
+import { designComponent } from '@/use/designComponent';
+import { reactive, DefineComponent, markRaw, watch } from 'vue';
+import { AppNavigator } from './app-navigator';
 
-export const AppNavigatorPage = defineComponent({
+export const AppNavigatorPage = designComponent({
     setup() {
         const state = reactive({
             PageComponent: null as null | DefineComponent
         });
 
-        const navigator = injectAppNavigator();
+        const navigator = AppNavigator.use.inject();
         const utils = {
             reset: async () => {
                 let {path} = navigator.state.route;
@@ -21,13 +22,15 @@ export const AppNavigatorPage = defineComponent({
         };
 
         watch(() => navigator.state.route.path, utils.reset, {immediate: true});
-        return () => {
-            const {PageComponent} = state;
-            return (
-                <div class="app-navigator-page">
-                    {PageComponent ? <PageComponent/> : null}
-                </div>
-            );
+        return {
+            render: () => {
+                const {PageComponent} = state;
+                return (
+                    <div class="app-navigator-page">
+                        {PageComponent ? <PageComponent/> : null}
+                    </div>
+                );
+            }
         };
     }
 });
