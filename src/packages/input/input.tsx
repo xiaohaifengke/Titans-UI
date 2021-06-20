@@ -1,7 +1,8 @@
-import { defineComponent, ref, computed } from "vue";
+import { designComponent } from "@/use/designComponent";
+import { ref, computed } from "vue";
 import './input.scss';
 
-export default defineComponent({
+export default designComponent({
     name: 'TiInput',
     props: {
         status: {
@@ -26,11 +27,17 @@ export default defineComponent({
             }
         };
 
-        return (() => (
-            <div class={classes.value}>
-                <input class="ti-input-inner" type="text" v-model={modelValue.value} ref={inputRef}/>
-                <button onClick={methods.clear}>clear</button>
-            </div>
-        ));
+        return {
+            refer: {
+                methods,
+                modelValue
+            },
+            render: () => (
+                <div class={classes.value}>
+                    <input class="ti-input-inner" type="text" v-model={modelValue.value} ref={inputRef}/>
+                    <button onClick={methods.clear}>clear</button>
+                </div>
+            )
+        };
     }
 });

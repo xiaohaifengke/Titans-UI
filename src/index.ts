@@ -1,8 +1,8 @@
 import { App } from 'vue';
-import Input from '@/packages/input';
+import TiInput from '@/packages/input';
 
 const plugins = [
-    Input
+    TiInput
 ];
 
 function install (app: App) {
@@ -14,6 +14,6 @@ export default {
 };
 
 export {
-    Input,
+    TiInput,
     install
 };

@@ -1,10 +1,9 @@
 import { App } from 'vue';
-import Input from './input';
-console.log(Input);
+import TiInput from './input';
+
 export default {
-    ...Input,
+    ...TiInput,
     install(app: App) {
-        console.log(Input.name, Input);
-        app.component(Input.name, Input);
+        app.component(TiInput.name, TiInput);
     }
 };

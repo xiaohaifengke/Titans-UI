@@ -11,24 +11,24 @@
 </template>
 
 <script lang="ts">
-import {injectAppNavigator} from '../navigator/app-navigator'
-import {AppMenu, MENUS} from './menus'
+import {injectAppNavigator} from '../navigator/app-navigator';
+import {AppMenu, MENUS} from './menus';
 export default {
     name: 'app-menu',
     props: {
         currentPath: {type: String}
     },
     setup() {
-        const navigator = injectAppNavigator()
+        const navigator = injectAppNavigator();
 
         return {
             menus: MENUS,
             handleClickMenu(menu: AppMenu) {
                 console.log(menu);
                 
-                navigator.methods.go(menu.path)
+                navigator.methods.go(menu.path);
             }
-        }
+        };
     }
-}
+};
 </script>
