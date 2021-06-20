@@ -18,6 +18,7 @@ module.exports = {
             .delete('prefetch-index')
             .delete('preload-index');
         config.resolve.alias
+            .clear()
             .set('src', resolve('src'))
             .set('story', resolve('story')); 
     },

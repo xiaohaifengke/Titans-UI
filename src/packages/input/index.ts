@@ -1,9 +1,7 @@
+import { installPlugins } from '../../utils/installPlugins';
 import { App } from 'vue';
 import TiInput from './input';
 
-export default {
-    ...TiInput,
-    install(app: App) {
-        app.component(TiInput.name, TiInput);
-    }
-};
+console.log('加载了 TiInput 组件');
+
+export default installPlugins(TiInput);

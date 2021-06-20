@@ -1,4 +1,4 @@
-import { designComponent } from '@/use/designComponent';
+import { designComponent } from 'src/use/designComponent';
 import { reactive, DefineComponent, markRaw, watch } from 'vue';
 import { AppNavigator } from './app-navigator';
 

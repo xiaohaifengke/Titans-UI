@@ -28,13 +28,6 @@ export const MENUS: Array<AppMenu> = [
                 subtitle: '图标'
             }
         }, {
-            path: 'button',
-            name: 'button',
-            meta: {
-                title: 'Button',
-                subtitle: '按钮'
-            }
-        }, {
             path: 'layout',
             name: 'layout',
             meta: {
@@ -49,8 +42,14 @@ export const MENUS: Array<AppMenu> = [
         meta: {
             title: '表单组件'
         },
-        children: [
-            {
+        children: [ {
+            path: 'button',
+            name: 'button',
+            meta: {
+                title: 'Button',
+                subtitle: '按钮'
+            }
+        }, {
                 path: 'input',
                 name: 'input',
                 meta: {
