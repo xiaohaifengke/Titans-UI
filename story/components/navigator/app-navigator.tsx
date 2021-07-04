@@ -66,7 +66,7 @@ export const AppNavigator = designComponent({
         defaultPath: String
     },
     provideRefer: true,
-    setup(props, setupContext) {
+    setup({props, setupContext}) {
         return {
             refer: useAppNavigator(props),
             render: () => setupContext.slots.default && setupContext.slots.default()

@@ -1,23 +1,27 @@
 import { ComponentPropsOptions, defineComponent, ExtractPropTypes, getCurrentInstance, inject, provide, SetupContext } from "vue";
+import { ComponentEventHub, getComponentEmits, useEvent } from "./useEvent";
 
 export function designComponent<
     PropsOptions extends Readonly<ComponentPropsOptions>,
     Props extends Readonly<ExtractPropTypes<PropsOptions>>,
+    Emits extends { [key: string]: (...args: any[]) => boolean },
     Refer
 >(options: {
     name?: string,
     props?: PropsOptions,
     provideRefer?: boolean,
-    setup: (props: Props, setupContext: SetupContext) => {
+    emits?: Emits,
+    setup: (options: { props: Props, setupContext: SetupContext, event: ComponentEventHub<Emits> }) => {
         refer?: Refer,
         render: () => any
     }
 }) {
-    const { setup, provideRefer, ...leftOptions } = options;
+    const { setup, provideRefer, emits, ...leftOptions } = options;
 
     return {
         ...defineComponent({
             ...leftOptions,
+            emits: getComponentEmits(emits),
             setup(props: Props, setupContext: SetupContext) {
                 const ctx = getCurrentInstance() as any;
 
@@ -25,7 +29,8 @@ export function designComponent<
                     console.error('designComponent: set up is required');
                     return () => null;
                 }
-                const { refer, render } = setup(props, setupContext);
+                const event = useEvent(emits);
+                const { refer, render } = setup({ props, setupContext, event });
                 if (refer) {
                     const duplicateKey = Object.keys(leftOptions.props || {})
                         .find(item => Object.prototype.hasOwnProperty.call(refer as any, item));
@@ -55,7 +60,7 @@ export function designComponent<
                 };
             },
             inject: (defaultValue?: any) => {
-                return inject(`@@${leftOptions.name}`, defaultValue) as Refer;
+                return inject(`@@${leftOptions.name}`, defaultValue) as Refer | any;
             }
         }
     };

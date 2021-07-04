@@ -1,17 +1,23 @@
 import { designComponent } from "src/use/designComponent";
-import { ref, computed } from "vue";
+import { ref, computed, watch, handleError } from "vue";
 import './input.scss';
 
 export default designComponent({
     name: 'TiInput',
     props: {
+        modelValue: {
+            type: null
+        },
         status: {
             type: String, 
             default: 'primary'
         }
     },
-    setup(props) {
-        const modelValue = ref('');
+    emits: {
+        updateModelValue: (value) => true
+    },
+    setup({props, event}) {
+        const model = ref(props.modelValue);
         const inputRef = ref(null as null | HTMLInputElement);
 
         const classes = computed(() => [
@@ -23,18 +29,26 @@ export default designComponent({
                 inputRef.value!.focus();
             },
             clear: () => {
-                modelValue.value = '';
+                model.value = '';
             }
         };
 
+        const handler = {
+            onInput(e: Event) {
+                model.value = (e.target as HTMLInputElement).value;
+                event.emit.updateModelValue((e.target as HTMLInputElement).value);
+            }
+        };
+
+        watch(() => props.modelValue, (value) => model.value = value);
         return {
             refer: {
                 methods,
-                modelValue
+                model
             },
             render: () => (
                 <div class={classes.value}>
-                    <input class="ti-input-inner" type="text" v-model={modelValue.value} ref={inputRef}/>
+                    <input class="ti-input-inner" type="text" value={model.value} onInput={handler.onInput} ref={inputRef}/>
                     <button onClick={methods.clear}>clear</button>
                 </div>
             )

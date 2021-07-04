@@ -3,6 +3,7 @@
   <ti-button class="demo-button">primary</ti-button>
   <h4>状态</h4>
   <ti-button v-for="item in statusList" :key="item" :status="item">{{item}}</ti-button>
+  <ti-button @click="testClick">测试click</ti-button>
 </template>
 
 <script>
@@ -12,6 +13,11 @@ export default {
     return {
       statusList: ["primary", "success", "warn", "error", "info"]
     };
+  },
+  methods: {
+    testClick(f) {
+      console.log(f);
+    }
   }
 };
 </script>

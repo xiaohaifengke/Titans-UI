@@ -10,14 +10,17 @@ export default designComponent({
         },
         label: {type: String}
     },
-    setup(props, setupContext) {
+    emits: {
+        click: (e: MouseEvent) => true
+    },
+    setup({props, setupContext, event}) {
         const classes = [
             'ti-button',
             `ti-button-status-${props.status}`
         ];
         return {
             render: () => (
-                <button class={classes}>
+                <button class={classes} onClick={event.emit.click}>
                     {!setupContext.slots.default ? props.label : setupContext.slots.default()}
                 </button>
             )
