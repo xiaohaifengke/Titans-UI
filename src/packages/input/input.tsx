@@ -1,5 +1,6 @@
+import { useModel } from "../../use/useModel";
 import { designComponent } from "src/use/designComponent";
-import { ref, computed, watch, handleError } from "vue";
+import { ref, computed, watch, isRef } from "vue";
 import './input.scss';
 
 export default designComponent({
@@ -14,10 +15,10 @@ export default designComponent({
         }
     },
     emits: {
-        updateModelValue: (value) => true
+        updateModelValue: (value: any) => true
     },
     setup({props, event}) {
-        const model = ref(props.modelValue);
+        const model = useModel(() => props.modelValue, event.emit.updateModelValue);
         const inputRef = ref(null as null | HTMLInputElement);
 
         const classes = computed(() => [
@@ -33,13 +34,6 @@ export default designComponent({
             }
         };
 
-        const handler = {
-            onInput(e: Event) {
-                model.value = (e.target as HTMLInputElement).value;
-                event.emit.updateModelValue((e.target as HTMLInputElement).value);
-            }
-        };
-
         watch(() => props.modelValue, (value) => model.value = value);
         return {
             refer: {
@@ -48,7 +42,7 @@ export default designComponent({
             },
             render: () => (
                 <div class={classes.value}>
-                    <input class="ti-input-inner" type="text" value={model.value} onInput={handler.onInput} ref={inputRef}/>
+                    <input class="ti-input-inner" type="text" v-model={model.value} ref={inputRef}/>
                     <button onClick={methods.clear}>clear</button>
                 </div>
             )
