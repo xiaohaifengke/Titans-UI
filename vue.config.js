@@ -20,7 +20,7 @@ module.exports = {
         config.resolve.alias
             .clear()
             .set('src', resolve('src'))
-            .set('story', resolve('story')); 
+            .set('story', resolve('story'));
     },
     css: {
         loaderOptions: {

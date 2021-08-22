@@ -8,6 +8,28 @@ export interface AppMenu {
 
 export const MENUS: Array<AppMenu> = [
     {
+        path: '/demo',
+        name: 'demo',
+        meta: {
+            title: 'uDemo'
+        },
+        children: [{
+            path: 'demo-use-style',
+            name: 'demo-use-style',
+            meta: {
+                title: 'DemoUseStyle',
+                subtitle: 'useStyle Demo'
+            }
+        }, {
+            path: 'demo-use-slots',
+            name: 'demo-use-slots',
+            meta: {
+                title: 'DemoUseSlots',
+                subtitle: 'useSlots Demo'
+            }
+        }]
+    },
+    {
         path: '/normal',
         name: 'normal',
         meta: {
