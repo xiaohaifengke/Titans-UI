@@ -1,24 +1,23 @@
-import { SetupContext, VNode } from "vue";
+import { VNodeChild } from "@/shims";
+import { getCurrentInstance } from "vue";
 
+type SlotFunction = ((vnode?: VNodeChild) => VNodeChild) & { isExist: () => boolean }
+type SlotsData<T extends string> = { [k in T]: SlotFunction}
 
-export function useSlots(setupContext: SetupContext, slotList: string[] = []) {
-    const slots = slotList.reduce((slots, slot) => {
-        slots[slot] = (defaultVnode: VNode) => {
-            return setupContext.slots[slot]?.() || defaultVnode;
+export function useSlots<T extends string>(slotList: T[] = []): SlotsData<T|'default'> {
+    const ctx = getCurrentInstance()!;
+    const slotNames = [...slotList, 'default'] as T[];
+    const slots = slotNames.reduce((slots, slot) => {
+        const isExist = () => {
+            return !!ctx.slots[slot];
         };
-        slots[slot].isExist = () => {
-            console.log(setupContext.slots[slot]);
-            console.log(setupContext);
-            
-            return !!setupContext.slots[slot];
+        const slotFn = (defaultVnode: VNodeChild) => {
+            return ctx.slots[slot]?.() || defaultVnode;
         };
+        slotFn.isExist = isExist;
+        slots[slot] = slotFn;
         return slots;
-    }, {} as any);
-    if (!slots['default']) {
-        slots['default'] = (defaultVnode: VNode) => {
-            return setupContext.slots['default']?.() || defaultVnode;
-        };
-    }
+    }, {} as SlotsData<string>);
 
     return slots;
 }

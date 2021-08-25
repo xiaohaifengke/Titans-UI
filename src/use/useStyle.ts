@@ -1,31 +1,6 @@
 import { inject, provide, computed } from "@vue/runtime-core";
-import { ComputedRef } from "vue";
+import { getCurrentInstance } from "vue";
 
-type StylePropsType = {
-    shape?: string,
-    size?: string,
-    status?: string
-}
-type StyleComputed = {
-    shape?: any,
-    size?: any,
-    status?: any
-}
-declare type StylePropsTypeKey = keyof StylePropsType
-export function useStyle(props: any, styleProps: StylePropsType): StyleComputed {
-    const propKeys = Object.keys(styleProps) as StylePropsTypeKey[];
-    const styleComputed = propKeys.reduce((propsComputed, propKey) => {
-        const injectProps: ComputedRef<any> | undefined = inject(`@@style-prop-${propKey}`);
-        const propComputed = computed(() => {
-            return props[propKey] || (injectProps && injectProps.value) || styleProps[propKey];
-        });
-        
-        provide(`@@style-prop-${propKey}`, propComputed);
-        propsComputed[propKey] = propComputed;
-        return propsComputed;
-    }, {} as StyleComputed);
-    return styleComputed;
-}
 
 export enum StyleShape {
     fillet = 'fillet',
@@ -52,3 +27,36 @@ export const StyleProps = {
     size: {type: String},                       // normal,large,mini
     status: {type: String},                     // primary,success,error,warn,info
 };
+
+interface DefaultStylePropsOption {
+    shape?: StyleShape,
+    size?: StyleSize,
+    status?: StyleStatus
+}
+interface StyleComputed {
+    shape?: StyleShape,
+    size?: StyleSize,
+    status?: StyleStatus
+}
+
+const USE_STYLE_PROVIDE = '@@USE_STYLE_PROVIDE';
+export function useStyle(defaultStylePropsOption: DefaultStylePropsOption): {value: StyleComputed} {
+    const ctx = getCurrentInstance()! as any;
+    const defaultOptions = {
+        shape: StyleShape.fillet,
+        size: StyleSize.normal,
+        status: StyleStatus.primary,
+        ...defaultStylePropsOption
+    };
+    const injectProps = inject(USE_STYLE_PROVIDE, null) as null | {value: StyleComputed};
+    const styleComputed = computed(() => {
+        const { shape, size, status } = ctx.props;
+        return {
+            shape: shape || (injectProps && injectProps.value.shape) || defaultOptions.shape,
+            size: size || (injectProps && injectProps.value.size) || defaultOptions.size,
+            status: status || (injectProps && injectProps.value.status) || defaultOptions.status,
+        };
+    });
+    provide(USE_STYLE_PROVIDE, styleComputed);
+    return styleComputed;
+}

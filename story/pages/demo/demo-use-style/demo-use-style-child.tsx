@@ -6,12 +6,12 @@ export const DemoUseStyleChild = designComponent({
     props: {
         ...StyleProps,
     },
-    setup({props}) {
+    setup() {
 
-        const styleComputed = useStyle(props, {status: StyleStatus.primary});
+        const styleComputed = useStyle({status: StyleStatus.primary});
         const classes = computed(() => [
             'ti-use-style-child',
-            `ti-use-style-child-status-${styleComputed.status.value}`
+            `ti-use-style-child-status-${styleComputed.value.status}`
         ]);
 
         return {

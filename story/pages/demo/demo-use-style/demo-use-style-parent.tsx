@@ -7,13 +7,13 @@ export const DemoUseStyleParent = designComponent({
     props: {
         ...StyleProps,
     },
-    setup({props, setupContext}) {
+    setup() {
 
-        const slots = useSlots(setupContext);
-        const styleComputed = useStyle(props, {status: StyleStatus.primary});
+        const slots = useSlots();
+        const styleComputed = useStyle({status: StyleStatus.primary});
         const classes = computed(() => [
             'ti-use-style-parent',
-            `ti-use-style-parent-status-${styleComputed.status.value}`
+            `ti-use-style-parent-status-${styleComputed.value.status}`
         ]);
 
         return {

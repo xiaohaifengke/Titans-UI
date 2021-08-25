@@ -5,9 +5,8 @@ import {computed} from 'vue';
 export default designComponent({
     name: 'demo-use-slots-component',
     props: {},
-    setup({ setupContext }) {
-
-        const slots = useSlots(setupContext, [
+    setup({setupContext}) {
+        const slots = useSlots([
             'head',
             'foot'
         ]);
@@ -18,7 +17,6 @@ export default designComponent({
                 'demo-use-slots-component-has-slot-head': slots.head.isExist()
             }
         ]);
-
         return {
             render() {
                 return (
@@ -34,6 +32,8 @@ export default designComponent({
                         <div class="demo-use-slots-component-foot">
                             {slots.foot('default foot')}
                         </div>
+
+                        
                     </div>
                 );
             },
