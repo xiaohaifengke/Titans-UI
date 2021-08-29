@@ -7,8 +7,6 @@ $defaultThemeMap: map_get($theme-default, '');
 $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
 @mixin themesUsingMap{
   @each $themeName, $themeMap in $themes {
-    //@debug $themeName; // a
-    //@debug $themeMap;
     $themeMap: map_merge($defaultThemeMap, $themeMap);
     $globalThemeMap: $themeMap !global;
     @if str_length($themeName) > 0 {
