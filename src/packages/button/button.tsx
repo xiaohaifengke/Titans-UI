@@ -16,7 +16,7 @@ export default designComponent({
     setup({props, setupContext, event}) {
         const classes = [
             'ti-button',
-            `ti-button-status-${props.status}`
+            `ti-button--${props.status}`
         ];
         return {
             render: () => (

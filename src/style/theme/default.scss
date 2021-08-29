@@ -4,11 +4,12 @@ $boxshadow: 0 2px 8px $boxshadowColor;
 
 $theme-default: (
         '':(
-                colorPrimary: #12b4a5,
-                colorSuccess: #00CC00,
-                colorWarn: #FF7400,
-                colorError: #F38585,
-                colorInfo:#969696,
+                default: #56585a,
+                primary: #12b4a5,
+                success: #00CC00,
+                warning: #FF7400,
+                error: #F38585,
+                info:#969696,
 
                 disabled:#f5f7fa,
                 disabledLight:#fcfcfc,

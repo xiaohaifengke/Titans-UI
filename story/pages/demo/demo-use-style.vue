@@ -42,20 +42,20 @@
 </script>
 
 <style lang="scss">
-    @include theme {
+    @include themes {
         .ti-use-style-parent {
             padding: 20px;
             margin: 10px 0;
-            @include statusMixin(use-style-parent) {
-                background-color: mix($value, white, 20%);
+            @include types(use-style-parent) using($color) {
+                background-color: mix($color, white, 20%);
             }
         }
 
         .ti-use-style-child {
             padding: 8px;
             margin: 8px 0;
-            @include statusMixin(use-style-child) {
-                background-color: $value;
+            @include types(use-style-child) using($color) {
+                background-color: $color;
                 color: white;
             }
         }
