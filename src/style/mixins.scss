@@ -28,7 +28,7 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
 }
 
 @mixin typesUsingType($component) {
-  @each $type in default, primary, success, warning, error, info {
+  @each $type in default, primary, success, warning, danger, info {
     &.ti-#{$component}--#{$type} {
       @content(map_get($globalThemeMap, $type), $type);
     }
