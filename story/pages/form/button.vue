@@ -2,7 +2,7 @@
   <ti-button class="demo-button" label="label"></ti-button>
   <ti-button class="demo-button">primary</ti-button>
   <h4>状态</h4>
-  <ti-button v-for="item in statusList" :key="item" :status="item">{{item}}</ti-button>
+  <ti-button v-for="item in statusList" :key="item" :type="item">{{item}}</ti-button>
   <ti-button @click="testClick">测试click</ti-button>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   name: 'demo-button',
   data() {
     return {
-      statusList: ["primary", "success", "warn", "error", "info"]
+      statusList: ["primary", "success", "warning", "danger", "info"]
     };
   },
   methods: {
