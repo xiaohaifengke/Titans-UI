@@ -1,5 +1,5 @@
 import {designComponent} from "../../../../src/use/designComponent";
-import {StyleProps, StyleStatus, useStyle} from "../../../../src/use/useStyle";
+import {StyleProps, StyleType, useStyle} from "../../../../src/use/useStyle";
 import {computed} from 'vue';
 
 export const DemoUseStyleChild = designComponent({
@@ -8,10 +8,10 @@ export const DemoUseStyleChild = designComponent({
     },
     setup() {
 
-        const styleComputed = useStyle({status: StyleStatus.primary});
+        const styleComputed = useStyle({type: StyleType.primary});
         const classes = computed(() => [
             'ti-use-style-child',
-            `ti-use-style-child-status-${styleComputed.value.status}`
+            `ti-use-style-child-status-${styleComputed.value.type}`
         ]);
 
         return {

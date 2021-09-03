@@ -1,15 +1,24 @@
+$border-radius: 4px;
+$default-border-color: mix(#606266, #fff, 20%);
 @include themes {
     .ti-button {
         outline: none;
-        border: none;
         display: inline-block;
         padding: 8px 16px;
-        border-radius: 4px;
+        border: 1px solid;
+        border-radius: $border-radius;
         cursor: pointer;
 
-        @include types(button) using ($color) {
-            background-color: $color;
-            color: white;
+        @include typesUsingType(button) using ($color, $type) {
+            @if $type == default {
+                color: $color;
+                background-color: #fff;
+                border-color: $default-border-color;
+            } @else {
+                color: #fff;
+                background-color: $color;
+                border-color: $color;
+            }
         }
     }
 }

@@ -9,12 +9,13 @@ export enum StyleShape {
 }
 
 export enum StyleSize {
-    normal = 'normal',
     large = 'large',
+    normal = 'normal',
+    small = 'small',
     mini = 'mini',
 }
 
-export enum StyleStatus {
+export enum StyleType {
     primary = 'primary',
     success = 'success',
     error = 'error',
@@ -25,18 +26,18 @@ export enum StyleStatus {
 export const StyleProps = {
     shape: {type: String},                      // fillet,round,square
     size: {type: String},                       // normal,large,mini
-    status: {type: String},                     // primary,success,error,warn,info
+    type: {type: String},                     // primary,success,error,warn,info
 };
 
 interface DefaultStylePropsOption {
     shape?: StyleShape,
     size?: StyleSize,
-    status?: StyleStatus
+    type?: StyleType
 }
 interface StyleComputed {
     shape?: StyleShape,
     size?: StyleSize,
-    status?: StyleStatus
+    type?: StyleType
 }
 
 const USE_STYLE_PROVIDE = '@@USE_STYLE_PROVIDE';
@@ -45,16 +46,16 @@ export function useStyle(defaultStylePropsOption: DefaultStylePropsOption): {val
     const defaultOptions = {
         shape: StyleShape.fillet,
         size: StyleSize.normal,
-        status: StyleStatus.primary,
+        type: StyleType.primary,
         ...defaultStylePropsOption
     };
     const injectProps = inject(USE_STYLE_PROVIDE, null) as null | {value: StyleComputed};
     const styleComputed = computed(() => {
-        const { shape, size, status } = ctx.props;
+        const { shape, size, type } = ctx.props;
         return {
             shape: shape || (injectProps && injectProps.value.shape) || defaultOptions.shape,
             size: size || (injectProps && injectProps.value.size) || defaultOptions.size,
-            status: status || (injectProps && injectProps.value.status) || defaultOptions.status,
+            type: type || (injectProps && injectProps.value.type) || defaultOptions.type,
         };
     });
     provide(USE_STYLE_PROVIDE, styleComputed);

@@ -23,7 +23,7 @@ export default defineComponent({
   data() {
     return {
       value: "test",
-      statusList: ["primary", "success", "warn", "error", "info"],
+      statusList: ["", "primary", "success", "warn", "error", "info"],
     };
   },
   setup() {

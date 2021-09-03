@@ -29,7 +29,7 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
 
 @mixin typesUsingType($component) {
   @each $type in default, primary, success, warning, danger, info {
-    &.ti-#{$component}--#{$type} {
+    &.ti-#{$component}-type-#{$type} {
       @content(map_get($globalThemeMap, $type), $type);
     }
   }
@@ -38,5 +38,13 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
 @mixin types($component) {
   @include typesUsingType($component) using ($color, $type) {
     @content($color);
+  }
+}
+
+@mixin modes($component) {
+  @each $mode in fill, plain, outline, text {
+    &.ti-#{$component}-mode-#{$mode} {
+      @content(map_get($globalThemeMap, $mode), $mode);
+    }
   }
 }

@@ -9,6 +9,7 @@
     
     
 - 接受的props:
+    - label(和slot的功能类似)
     - type（按钮类型）：default/primary/success/warning/danger/info
     - mode（按钮模式）：fill/plain/outline/text
     - shape（按钮形状）：fillet/round/square
