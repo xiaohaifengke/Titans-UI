@@ -2,10 +2,42 @@
   <ti-button class="demo-button"></ti-button>
   <ti-button class="demo-button" label="label"></ti-button>
   <ti-button class="demo-button">primary</ti-button>
-  <h4>状态</h4>
-<!--  <ti-button>default</ti-button>-->
-  <ti-button v-for="item in statusList" :key="item" :type="item">{{item}}</ti-button>
   <ti-button @click="testClick">测试click</ti-button>
+  <h4>按钮类型 type</h4>
+  <ti-button v-for="type in typeList" :key="type" :type="type">{{type}}</ti-button>
+  <h4>按钮模式 mode</h4>
+  <ti-button mode="text">text按钮</ti-button>
+  <ti-button mode="plain">plain按钮</ti-button>
+  <ti-button mode="outline">outline按钮</ti-button>
+  <div>
+    <div v-for="mode in modeList" :key="mode" style="margin-bottom: 20px;">
+      <ti-button v-for="type in typeList" :key="type" :type="type" :mode="mode">{{type === 'default'?mode:type}}</ti-button>
+    </div>
+  </div>
+  <h4>按钮形状 shape</h4>
+  <ti-button mode="text" shape="round">text按钮</ti-button>
+  <ti-button type="primary" shape="square">fill按钮</ti-button>
+  <ti-button mode="plain" type="primary" shape="fillet">plain按钮</ti-button>
+  <ti-button mode="outline" type="primary" shape="round" >outline按钮</ti-button>
+  <div>
+    <div v-for="shape in shapeList" :key="shape" style="margin-bottom: 20px;">
+      <ti-button v-for="type in typeList" :key="type" :type="type" :shape="shape">{{type === 'default'?shape:type}}</ti-button>
+    </div>
+  </div>
+  <h4>按钮大小 size</h4>
+  <ti-button mode="text" shape="round">text按钮</ti-button>
+  <ti-button type="primary" shape="square">fill按钮</ti-button>
+  <ti-button mode="plain" type="primary" shape="fillet">plain按钮</ti-button>
+  <ti-button mode="outline" type="primary" shape="round" >outline按钮</ti-button>
+  <div>
+    <div v-for="size in sizeList" :key="size" style="margin-bottom: 20px;">
+      <ti-button v-for="type in typeList" :key="type" :type="type" :size="size">{{type === 'default'?size:type}}</ti-button>
+    </div>
+  </div>
+  <h4>禁用状态</h4>
+  <div>
+    <ti-button v-for="type in typeList" :key="type" :type="type" disabled>{{type}}</ti-button>
+  </div>
 </template>
 
 <script>
@@ -13,7 +45,10 @@ export default {
   name: 'demo-button',
   data() {
     return {
-      statusList: ["default", "primary", "success", "warning", "danger", "info"]
+      typeList: ['default', 'primary', 'success', 'warning', 'danger', 'info'],
+      modeList: ['fill','plain','outline','text'],
+      shapeList: ['fillet','round','square'],
+      sizeList: ['large', 'normal', 'small', 'mini']
     };
   },
   methods: {

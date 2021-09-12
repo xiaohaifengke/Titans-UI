@@ -14,9 +14,7 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
         @content($themeMap);
       }
     } @else {
-      html {
-        @content($themeMap);
-      }
+      @content($themeMap);
     }
   }
 }
@@ -41,10 +39,26 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
   }
 }
 
-@mixin modes($component) {
+@mixin modes($component, $color) {
   @each $mode in fill, plain, outline, text {
     &.ti-#{$component}-mode-#{$mode} {
-      @content(map_get($globalThemeMap, $mode), $mode);
+      @content($color, $mode);
+    }
+  }
+}
+
+@mixin shapes($component) {
+  @each $shape in fillet, round, square {
+    &.ti-#{$component}-shape-#{$shape} {
+      border-radius: map_get($globalThemeMap, $shape);
+    }
+  }
+}
+
+@mixin sizes($component) {
+  @each $size in large, normal, small, mini {
+    &.ti-#{$component}-size-#{$size} {
+      @content(map_get($globalThemeMap, $size), $size);
     }
   }
 }

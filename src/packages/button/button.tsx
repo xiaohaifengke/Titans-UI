@@ -30,7 +30,7 @@ export default defineComponent({
         // 按钮类型: default/primary/success/warning/danger/info
         type: {
             type: String,
-            default: 'default',
+            default: '',
             // validator(value: unknown): boolean {
             //     const types = ['primary', 'success', 'warning', 'danger', 'info'];
             //     if (!types.includes(value as string)) {
@@ -43,12 +43,12 @@ export default defineComponent({
         // 按钮模式: fill/plain/outline/text
         mode: {
             type: String,
-            default: 'fill'
+            default: ''
         },
         // 按钮形状: fillet/round/square
-        shape: {type: String, default: 'fillet'},
+        shape: {type: String, default: ''},
         // 按钮大小: large/normal/small/mini
-        size: {type: String, default: 'normal'},
+        size: {type: String, default: ''},
         icon: {type: String},
         disabled: {type: Boolean},
         loading: {type: Boolean}
@@ -60,13 +60,17 @@ export default defineComponent({
     setup(props, {slots, emit}) {
         const classes = [
             'ti-button',
-            `ti-button-type-${props.type}`,
-            `ti-button-mode-${props.mode}`,
-            `ti-button-shape-${props.shape}`,
-            `ti-button-size-${props.size}`
+            {
+                [`ti-button-type-${props.type}`]: props.type,
+                [`ti-button-mode-${props.mode}`]: props.mode,
+                [`ti-button-shape-${props.shape}`]: props.shape,
+                [`ti-button-size-${props.size}`]: props.size,
+                'ti-button-disabled': props.disabled
+            }
         ];
+
         return () => (
-            <button class={classes} onClick={(e) => emit('click', e)}>
+            <button disabled={props.disabled} class={classes} onClick={(e) => emit('click', e)}>
                 {!slots.default ? props.label : slots.default()}
             </button>
         );
