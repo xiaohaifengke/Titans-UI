@@ -1,5 +1,5 @@
 <template>
-  icon
+  <ti-icon icon="edit"></ti-icon>
 </template>
 
 <script>

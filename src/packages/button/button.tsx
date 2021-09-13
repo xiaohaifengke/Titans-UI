@@ -50,6 +50,13 @@ export default defineComponent({
         // 按钮大小: large/normal/small/mini
         size: {type: String, default: ''},
         icon: {type: String},
+        // iconPosition: {
+        //     type: String,
+        //     default: 'prefix', // suffix
+        //     validator(value: string): boolean {
+        //         return ['prefix', 'suffix'].includes(value);
+        //     }
+        // },
         disabled: {type: Boolean},
         loading: {type: Boolean}
 
