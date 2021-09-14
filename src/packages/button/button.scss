@@ -1,11 +1,12 @@
 $border-radius: 4px;
 $default-border-color: mix(#606266, #fff, 30%);
 $textColor: #fff;
+//$default-padding: map_get($defaultThemeMap, normal);
 @include themes {
     .ti-button {
         outline: none;
         display: inline-block;
-        padding: map_get($defaultThemeMap, normal);
+        //padding: $default-padding $default-padding + 6px;
         border: 1px solid;
         border-radius: $border-radius;
         cursor: pointer;
@@ -152,12 +153,21 @@ $textColor: #fff;
         @include shapes(button);
 
         @include sizes(button) using ($sizeValue, $sizeName) {
-            padding: $sizeValue;
+            padding: $sizeValue $sizeValue+6px;
+
+            &.ti-button-shape-circle {
+                padding: $sizeValue;
+            }
             @if($sizeName == large or $sizeName == normal ) {
                 font-size: 14px;
             } @else {
                 font-size: 12px;
             }
+        }
+
+        .ti-icon+span,
+        span+.ti-icon{
+            margin-left: 5px;
         }
     }
 }

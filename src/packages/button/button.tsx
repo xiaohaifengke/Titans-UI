@@ -1,5 +1,6 @@
 import './button.scss';
 import { defineComponent } from 'vue';
+import TiIcon from "../icon/icon";
 
 enum StyleShape {
     fillet = 'fillet',
@@ -25,6 +26,7 @@ enum StyleType {
 
 export default defineComponent({
     name: 'TiButton',
+    components: { TiIcon },
     props: {
         label: {type: String},
         // 按钮类型: default/primary/success/warning/danger/info
@@ -45,18 +47,18 @@ export default defineComponent({
             type: String,
             default: ''
         },
-        // 按钮形状: fillet/round/square
+        // 按钮形状: fillet/round/square/circle
         shape: {type: String, default: ''},
         // 按钮大小: large/normal/small/mini
         size: {type: String, default: ''},
         icon: {type: String},
-        // iconPosition: {
-        //     type: String,
-        //     default: 'prefix', // suffix
-        //     validator(value: string): boolean {
-        //         return ['prefix', 'suffix'].includes(value);
-        //     }
-        // },
+        iconPosition: {
+            type: String,
+            default: 'prefix', // suffix
+            // validator(value: string): boolean {
+            //     return ['prefix', 'suffix'].includes(value);
+            // }
+        },
         disabled: {type: Boolean},
         loading: {type: Boolean}
 
@@ -78,7 +80,9 @@ export default defineComponent({
 
         return () => (
             <button disabled={props.disabled} class={classes} onClick={(e) => emit('click', e)}>
-                {!slots.default ? props.label : slots.default()}
+                {props.icon && props.iconPosition !== 'suffix' && <TiIcon icon={props.icon} />}
+                {(slots.default || props.label) && (<span>{!slots.default ? props.label : slots.default()}</span>)}
+                {props.icon && props.iconPosition === 'suffix' && <TiIcon icon={props.icon} />}
             </button>
         );
     }
