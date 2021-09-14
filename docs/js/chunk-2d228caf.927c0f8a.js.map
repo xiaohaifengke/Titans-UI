@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./story/pages/home.vue"],"names":["script","render"],"mappings":"iKACA,MAAMA,EAAS,GACfA,EAAOC,OAASA,EAED","file":"js/chunk-2d228caf.927c0f8a.js","sourcesContent":["import { render } from \"./home.vue?vue&type=template&id=981d873a\"\nconst script = {}\nscript.render = render\n\nexport default script"],"sourceRoot":""}
