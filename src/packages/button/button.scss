@@ -141,6 +141,17 @@ $textColor: #fff;
 
                         } @else {
                             color: $color;
+                            &:focus,
+                            &:hover {
+                                color: mix($textColor, $color, 20%);
+                                border-color: transparent;
+                                background-color: transparent;
+                            }
+                            &:active {
+                                border-color: transparent;
+                                background-color: transparent;
+                                color: mix(#000, $color, 20%);
+                            }
                             &.ti-button-disabled {
                                 color: mix($color, #fff, 40%);
                             }
