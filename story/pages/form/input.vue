@@ -17,7 +17,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { TiInput } from "../../../src";
+import { Input } from "../../../src";
 export default defineComponent({
   name: "demo-input",
   data() {
@@ -27,7 +27,7 @@ export default defineComponent({
     };
   },
   setup() {
-    const inputRef = TiInput.use.ref("myInput");
+    const inputRef = Input.use.ref("myInput");
     return {
       outerClear() {
         inputRef.value!.methods.clear();

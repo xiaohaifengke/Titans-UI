@@ -57,6 +57,24 @@
         <TiButton type="danger" icon="close" shape="circle" size="mini"></TiButton>
       </div>
     </div>
+    <h4>按钮组</h4>
+    <div>
+      <ti-button-group>
+        <ti-button type="primary" icon="edit"></ti-button>
+        <ti-button type="warning" icon="share"></ti-button>
+        <ti-button type="danger" icon="delete"></ti-button>
+      </ti-button-group>
+      <ti-button-group>
+        <ti-button type="primary" icon="edit" shape="circle"></ti-button>
+        <ti-button type="warning" icon="share" shape="circle" mode="outline"></ti-button>
+        <ti-button type="danger" icon="delete" shape="circle" mode="plain"></ti-button>
+      </ti-button-group>
+      <ti-button-group>
+        <ti-button type="primary" icon="edit" shape="square" mode="plain"></ti-button>
+        <ti-button type="warning" icon="share" mode="outline"></ti-button>
+        <ti-button icon="delete" shape="round"></ti-button>
+      </ti-button-group>
+    </div>
   </div>
 </template>
 

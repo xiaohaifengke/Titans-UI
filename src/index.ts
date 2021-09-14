@@ -1,12 +1,14 @@
 import { App } from 'vue';
-import TiInput from './packages/input';
-import TiButton from './packages/button';
-import TiIcon from './packages/icon';
+import Input from './packages/input';
+import Button from './packages/button';
+import Icon from './packages/icon';
+import ButtonGroup from "./packages/button-group";
 
 const plugins = [
-    TiInput,
-    TiButton,
-    TiIcon
+    Input,
+    Button,
+    ButtonGroup,
+    Icon
 ];
 
 function install (app: App) {
@@ -18,8 +20,9 @@ export default {
 };
 
 export {
-    TiInput,
-    TiButton,
-    TiIcon,
+    Input,
+    Button,
+    ButtonGroup,
+    Icon,
     install
 };

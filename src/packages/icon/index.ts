@@ -1,4 +1,4 @@
 import { installPlugins } from '../../utils/installPlugins';
-import TiIcon from './icon';
+import Icon from './icon';
 
-export default installPlugins(TiIcon);
+export default installPlugins(Icon);
