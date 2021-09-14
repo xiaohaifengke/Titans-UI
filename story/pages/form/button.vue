@@ -75,6 +75,11 @@
         <ti-button icon="delete" shape="round"></ti-button>
       </ti-button-group>
     </div>
+    <h4>加载中</h4>
+    <div>
+      <ti-button type="primary" icon="edit" loading @click="testClick">加载中</ti-button>
+      <ti-button type="danger" icon="search" iconPosition="suffix" loading>加载中</ti-button>
+    </div>
   </div>
 </template>
 

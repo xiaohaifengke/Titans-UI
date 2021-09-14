@@ -12,7 +12,7 @@ export default defineComponent({
     },
     setup(props) {
         return () => (
-            <svg class="ti-icon" aria-hidden="true">
+            <svg class={`ti-icon ti-icon-${props.icon}`}  aria-hidden="true">
                 <use xlinkHref={`#icon-${props.icon}`} />
             </svg>
         );

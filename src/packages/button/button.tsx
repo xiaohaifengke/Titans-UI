@@ -74,15 +74,19 @@ export default defineComponent({
                 [`ti-button-mode-${props.mode}`]: props.mode,
                 [`ti-button-shape-${props.shape}`]: props.shape,
                 [`ti-button-size-${props.size}`]: props.size,
-                'ti-button-disabled': props.disabled
+                'ti-button-disabled': props.disabled,
+                'ti-button-loading': props.loading
             }
         ];
 
+        const prefixIcon = props.loading ? <TiIcon icon="loading" /> :
+            (props.icon && props.iconPosition !== 'suffix' && <TiIcon icon={props.icon} />);
+
         return () => (
-            <button disabled={props.disabled} class={classes} onClick={(e) => emit('click', e)}>
-                {props.icon && props.iconPosition !== 'suffix' && <TiIcon icon={props.icon} />}
+            <button disabled={props.disabled || props.loading} class={classes} onClick={(e) => emit('click', e)}>
+                {prefixIcon}
                 {(slots.default || props.label) && (<span>{!slots.default ? props.label : slots.default()}</span>)}
-                {props.icon && props.iconPosition === 'suffix' && <TiIcon icon={props.icon} />}
+                {!props.loading && props.icon && props.iconPosition === 'suffix' && <TiIcon icon={props.icon} />}
             </button>
         );
     }
