@@ -3,7 +3,7 @@
     - 基础按钮（可通过props定制状态）
     - 支持插槽
     - 支持icon
-    - 按钮组
+    - 按钮组 (额外的button-group组件)
     - 加载中 loading
     - disabled
     
@@ -15,7 +15,10 @@
     - shape（按钮形状）：fillet/round/square
         > 当mode为text时，shape无效
     - size（按钮大小）：large/normal/small/mini
-    - 图标按钮
-    - 禁用状态
+    - disabled
+    - loading
+    - icon
+    - iconPosition
+
     
     

@@ -1,4 +1,3 @@
-
 export interface AppMenu {
     path: string,
     name?: string,
@@ -64,14 +63,24 @@ export const MENUS: Array<AppMenu> = [
         meta: {
             title: '表单组件'
         },
-        children: [ {
-            path: 'button',
-            name: 'button',
-            meta: {
-                title: 'Button',
-                subtitle: '按钮'
-            }
-        }, {
+        children: [
+            {
+                path: 'button',
+                name: 'button',
+                meta: {
+                    title: 'Button',
+                    subtitle: '按钮'
+                }
+            },
+            {
+                path: 'toggle',
+                name: 'toggle',
+                meta: {
+                    title: 'toggle',
+                    subtitle: '切换开关'
+                }
+            },
+            {
                 path: 'input',
                 name: 'input',
                 meta: {
