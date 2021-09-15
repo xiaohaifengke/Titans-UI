@@ -11,7 +11,7 @@ export default defineComponent({
         },
         type: {
             type: String,
-            default: ''
+            default: 'primary'
         },
         width: {
             type: Number,
@@ -42,15 +42,39 @@ export default defineComponent({
         const isOn = computed(() => {
             return props.modelValue === props.onValue;
         });
+
+        const toggleClasses = computed(() => [
+            'ti-toggle',
+            {
+                'is-on': isOn.value
+            }
+        ]);
+
+        const controllerClasses = [
+            'ti-toggle-controller',
+            {
+                [`ti-toggle-type-${props.type}`]: props.type
+            }
+        ];
+        const controllerStyles = {
+            width: props.width + 'px',
+            height: props.height + 'px'
+        };
+        const sliderStyles = computed(() => ({
+            width: (props.height - 4) + 'px',
+            height: (props.height - 4) + 'px',
+            left: isOn.value ? '100%' : '1px',
+            marginLeft: isOn.value ? -(props.height - 3) + 'px' : 0
+        }));
         const onClick = () => {
-            console.log(isOn.value);
             const modelValue = isOn.value ? props.offValue : props.onValue;
             emit('update:modelValue', modelValue);
         };
         return () => (
-            <div role="toggle" class="ti-toggle" onClick={onClick}
-                 style={{width: props.width + 'px', height: props.height + 'px'}}>
-                <span class="ti-toggle-controller"></span>
+            <div role="toggle" class={toggleClasses.value} onClick={onClick}>
+                <span class={controllerClasses} style={controllerStyles}>
+                    <i class="slider" style={sliderStyles.value}></i>
+                </span>
             </div>
         );
     }
