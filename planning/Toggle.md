@@ -12,7 +12,6 @@
   - inactive-value：switch 关闭时的值
   - active-color
   - inactive-color
-  - name
   - validate-event?: 暂时不做
 
 
@@ -29,13 +28,15 @@
   - inactive-value：switch 关闭时的值
   - active-color
   - inactive-color
-  - name
  
-emits:
+- emits:
   - change
 
-methos:
+- methos:
   - focus
+  
+- 其它：
+  参考antd，点击时边框周围box-shadow渐变
 
     
     

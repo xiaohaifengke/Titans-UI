@@ -46,20 +46,17 @@ export default defineComponent({
         const toggleClasses = computed(() => [
             'ti-toggle',
             {
-                'is-on': isOn.value
+                'is-on': isOn.value,
+                [`ti-toggle-type-${props.type}`]: props.type
             }
         ]);
 
-        const controllerClasses = [
-            'ti-toggle-controller',
-            {
-                [`ti-toggle-type-${props.type}`]: props.type
-            }
-        ];
-        const controllerStyles = {
+        const toggleStyles = computed(() => ({
             width: props.width + 'px',
-            height: props.height + 'px'
-        };
+            height: props.height + 'px',
+            backgroundColor: isOn.value ? props.onColor : props.offColor,
+            borderColor: isOn.value ? props.onColor : props.offColor
+        }));
         const sliderStyles = computed(() => ({
             width: (props.height - 4) + 'px',
             height: (props.height - 4) + 'px',
@@ -71,11 +68,9 @@ export default defineComponent({
             emit('update:modelValue', modelValue);
         };
         return () => (
-            <div role="toggle" class={toggleClasses.value} onClick={onClick}>
-                <span class={controllerClasses} style={controllerStyles}>
-                    <i class="slider" style={sliderStyles.value}></i>
-                </span>
-            </div>
+            <button role="toggle" class={toggleClasses.value} style={toggleStyles.value} onClick={onClick}>
+                <span class="slider" style={sliderStyles.value}/>
+            </button>
         );
     }
 });
