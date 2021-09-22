@@ -14,12 +14,10 @@ export default defineComponent({
             default: 'primary'
         },
         width: {
-            type: Number,
-            // default: 40
+            type: Number
         },
         height: {
-            type: Number,
-            // default: 20
+            type: Number
         },
         onValue: {
             type: [Boolean, String, Number],
@@ -39,10 +37,6 @@ export default defineComponent({
             type: Boolean,
             default: false
         },
-        textPosition: {
-            type: String,
-            default: 'inner' // outer
-        },
         onText: {
             type: String
         },
@@ -52,8 +46,6 @@ export default defineComponent({
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-        let defaultWidth = 40;
-        let defaultHeight = 20;
         // 未设置 width
         const noSetWidth = computed(() => {
             return props.width === undefined;
