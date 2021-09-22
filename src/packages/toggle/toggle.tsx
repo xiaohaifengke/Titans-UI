@@ -15,11 +15,11 @@ export default defineComponent({
         },
         width: {
             type: Number,
-            default: 40
+            // default: 40
         },
         height: {
             type: Number,
-            default: 20
+            // default: 20
         },
         onValue: {
             type: [Boolean, String, Number],
@@ -34,10 +34,34 @@ export default defineComponent({
         },
         offColor: {
             type: String
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        textPosition: {
+            type: String,
+            default: 'inner' // outer
+        },
+        onText: {
+            type: String
+        },
+        offText: {
+            type: String
         }
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
+        let defaultWidth = 40;
+        let defaultHeight = 20;
+        // 未设置 width
+        const noSetWidth = computed(() => {
+            return props.width === undefined;
+        });
+        // 未设置 height
+        const noSetHeight = computed(() => {
+            return props.height === undefined;
+        });
 
         const isOn = computed(() => {
             return props.modelValue === props.onValue;
@@ -47,29 +71,42 @@ export default defineComponent({
             'ti-toggle',
             {
                 'is-on': isOn.value,
-                [`ti-toggle-type-${props.type}`]: props.type
+                [`ti-toggle-type-${props.type}`]: props.type,
+                'ti-toggle-disabled': props.disabled
             }
         ]);
+
+        const handleSize = computed(() => {
+            return (props.height ?? 20) - 4;
+        });
 
         const toggleStyles = computed(() => ({
             width: props.width + 'px',
             height: props.height + 'px',
             backgroundColor: isOn.value ? props.onColor : props.offColor,
-            borderColor: isOn.value ? props.onColor : props.offColor
+            borderColor: isOn.value ? props.onColor : props.offColor,
+            paddingRight: isOn.value ? (props.height ?? 20) + 'px' : (props.height ?? 20) / 2 + 'px',
+            paddingLeft: isOn.value ? (props.height ?? 20) / 2 + 'px' : (props.height ?? 20) + 'px'
         }));
-        const sliderStyles = computed(() => ({
-            width: (props.height - 4) + 'px',
-            height: (props.height - 4) + 'px',
+        const textStyles = computed(() => ({
+            maxWidth: `cacl(100% - ${handleSize.value + 'px'})`,
+            marginLeft: isOn.value ? handleSize.value + 'px' : 0
+        }));
+        const handleStyles = computed(() => ({
+            width: handleSize.value + 'px',
+            height: handleSize.value + 'px',
             left: isOn.value ? '100%' : '1px',
-            marginLeft: isOn.value ? -(props.height - 3) + 'px' : 0
+            marginLeft: isOn.value ? -(handleSize.value + 1) + 'px' : 0
         }));
         const onClick = () => {
+            if (props.disabled) return;
             const modelValue = isOn.value ? props.offValue : props.onValue;
             emit('update:modelValue', modelValue);
         };
         return () => (
-            <button role="toggle" class={toggleClasses.value} style={toggleStyles.value} onClick={onClick}>
-                <span class="slider" style={sliderStyles.value}/>
+            <button role="switch" class={toggleClasses.value} style={toggleStyles.value} onClick={onClick}>
+                <span class="ti-toggle-text">{isOn.value ? props.onText : props.offText}</span>
+                <span class="ti-toggle-handle" style={handleStyles.value}/>
             </button>
         );
     }

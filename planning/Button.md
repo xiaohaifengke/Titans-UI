@@ -4,6 +4,8 @@
     - 支持插槽
     - 支持icon
     - 按钮组 (额外的button-group组件)
+      - 考虑添加的props:
+        - disabled
     - 加载中 loading
     - disabled
     
