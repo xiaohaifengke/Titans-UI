@@ -39,6 +39,7 @@
           off-text="关闭"
           :width="70"
           :height="30"
+          @change="change"
           type="success"/>
       <ti-toggle
           v-model="value3"
@@ -48,7 +49,8 @@
           :height="30"
           type="success"/>
       <ti-toggle
-          v-model="value3"
+          v-model="switchValue"
+          ref="switchRef"
           on-text="开启"
           off-text="关闭"
           :width="100"
@@ -65,8 +67,18 @@ export default {
     return {
       value: false,
       value2: true,
-      value3: true
+      value3: true,
+      switchValue: true
     };
+  },
+  mounted() {
+    this.$refs.switchRef.focus();
+    // this.$refs.switchRef.blur();
+  },
+  methods: {
+    change(a) {
+      console.log(a);
+    }
   }
 };
 </script>

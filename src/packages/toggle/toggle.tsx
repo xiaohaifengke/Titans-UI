@@ -1,6 +1,7 @@
 import './toggle.scss';
-import {defineComponent} from "vue";
+import {defineComponent, getCurrentInstance, ref, watch, withModifiers} from "vue";
 import {computed} from "@vue/runtime-core";
+import {useMethodsToInstance} from "../../use/useMethodsToInstance";
 
 export default defineComponent({
     name: 'TiToggle',
@@ -44,7 +45,7 @@ export default defineComponent({
             type: String
         }
     },
-    emits: ['update:modelValue'],
+    emits: ['update:modelValue', 'change'],
     setup(props, { emit }) {
         // 未设置 width
         const noSetWidth = computed(() => {
@@ -80,23 +81,51 @@ export default defineComponent({
             paddingRight: isOn.value ? (props.height ?? 20) + 'px' : (props.height ?? 20) / 2 + 'px',
             paddingLeft: isOn.value ? (props.height ?? 20) / 2 + 'px' : (props.height ?? 20) + 'px'
         }));
-        const textStyles = computed(() => ({
-            maxWidth: `cacl(100% - ${handleSize.value + 'px'})`,
-            marginLeft: isOn.value ? handleSize.value + 'px' : 0
-        }));
         const handleStyles = computed(() => ({
             width: handleSize.value + 'px',
             height: handleSize.value + 'px',
             left: isOn.value ? '100%' : '1px',
             marginLeft: isOn.value ? -(handleSize.value + 1) + 'px' : 0
         }));
-        const onClick = () => {
+        const handleChange = (e: Event) => {
             if (props.disabled) return;
             const modelValue = isOn.value ? props.offValue : props.onValue;
             emit('update:modelValue', modelValue);
         };
+        const handleKeydown = (e: KeyboardEvent) => {
+            if (e.code === 'Enter' || e.code === 'Space') {
+                handleChange(e);
+            } else if (e.code === 'ArrowLeft') {
+                emit('update:modelValue', props.offValue);
+            } else if (e.code === 'ArrowRight') {
+                emit('update:modelValue', props.onValue);
+            }
+        };
+        const switchRef = ref(null as null | HTMLButtonElement);
+        const focus = () => {
+            switchRef.value && switchRef.value.focus();
+        };
+        const blur = () => {
+            switchRef.value && switchRef.value.blur();
+        };
+        // change 事件
+        watch(() => props.modelValue, (val) => {
+            emit('change', val);
+        });
+
+        useMethodsToInstance({
+            focus,
+            blur
+        });
+
         return () => (
-            <button role="switch" class={toggleClasses.value} style={toggleStyles.value} onClick={onClick}>
+            <button
+                role="switch"
+                ref={switchRef}
+                class={toggleClasses.value}
+                style={toggleStyles.value}
+                onKeydown={withModifiers(handleKeydown, ['enter', 'prevent', 'self'])}
+                onClick={handleChange}>
                 <span class="ti-toggle-text">{isOn.value ? props.onText : props.offText}</span>
                 <span class="ti-toggle-handle" style={handleStyles.value}/>
             </button>

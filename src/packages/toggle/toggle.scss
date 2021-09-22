@@ -19,6 +19,10 @@ $offBackgroundColor: #ccc;
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  &:focus {
+    outline: 0;
+  }
+
   .ti-toggle-text {
     color: #fff;
   }
