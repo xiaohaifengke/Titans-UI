@@ -85,7 +85,7 @@
 
 <script>
 export default {
-  name: 'demo-button',
+  name: 'button-demo',
   data() {
     return {
       typeList: ['default', 'primary', 'success', 'warning', 'danger', 'info'],

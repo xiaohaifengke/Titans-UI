@@ -73,10 +73,10 @@ export const MENUS: Array<AppMenu> = [
                 }
             },
             {
-                path: 'toggle',
-                name: 'toggle',
+                path: 'switch',
+                name: 'switch',
                 meta: {
-                    title: 'toggle',
+                    title: 'switch',
                     subtitle: '切换开关'
                 }
             },

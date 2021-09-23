@@ -1,10 +1,10 @@
-import './toggle.scss';
+import './switch.scss';
 import {defineComponent, getCurrentInstance, ref, watch, withModifiers} from "vue";
 import {computed} from "@vue/runtime-core";
 import {useMethodsToInstance} from "../../use/useMethodsToInstance";
 
 export default defineComponent({
-    name: 'TiToggle',
+    name: 'TiSwitch',
     props: {
         modelValue: {
             type: [Boolean, String, Number],
@@ -60,12 +60,12 @@ export default defineComponent({
             return props.modelValue === props.onValue;
         });
 
-        const toggleClasses = computed(() => [
-            'ti-toggle',
+        const switchClasses = computed(() => [
+            'ti-switch',
             {
                 'is-on': isOn.value,
-                [`ti-toggle-type-${props.type}`]: props.type,
-                'ti-toggle-disabled': props.disabled
+                [`ti-switch-type-${props.type}`]: props.type,
+                'ti-switch-disabled': props.disabled
             }
         ]);
 
@@ -73,7 +73,7 @@ export default defineComponent({
             return (props.height ?? 20) - 4;
         });
 
-        const toggleStyles = computed(() => ({
+        const switchStyles = computed(() => ({
             width: props.width + 'px',
             height: props.height + 'px',
             backgroundColor: isOn.value ? props.onColor : props.offColor,
@@ -122,12 +122,12 @@ export default defineComponent({
             <button
                 role="switch"
                 ref={switchRef}
-                class={toggleClasses.value}
-                style={toggleStyles.value}
+                class={switchClasses.value}
+                style={switchStyles.value}
                 onKeydown={withModifiers(handleKeydown, ['enter', 'prevent', 'self'])}
                 onClick={handleChange}>
-                <span class="ti-toggle-text">{isOn.value ? props.onText : props.offText}</span>
-                <span class="ti-toggle-handle" style={handleStyles.value}/>
+                <span class="ti-switch-text">{isOn.value ? props.onText : props.offText}</span>
+                <span class="ti-switch-handle" style={handleStyles.value}/>
             </button>
         );
     }

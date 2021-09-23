@@ -3,14 +3,14 @@ import Input from './packages/input';
 import Button from './packages/button';
 import Icon from './packages/icon';
 import ButtonGroup from "./packages/button-group";
-import Toggle from "./packages/toggle";
+import Switch from "./packages/switch";
 
 const plugins = [
     Input,
     Button,
     ButtonGroup,
     Icon,
-    Toggle
+    Switch
 ];
 
 function install (app: App) {
@@ -26,6 +26,6 @@ export {
     Button,
     ButtonGroup,
     Icon,
-    Toggle,
+    Switch,
     install
 };

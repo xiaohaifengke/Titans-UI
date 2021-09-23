@@ -1,6 +1,6 @@
 $offBackgroundColor: #ccc;
 
-.ti-toggle {
+.ti-switch {
   padding: 0;
   position: relative;
   display: inline-block;
@@ -23,16 +23,16 @@ $offBackgroundColor: #ccc;
     outline: 0;
   }
 
-  .ti-toggle-text {
+  .ti-switch-text {
     color: #fff;
   }
 
-  &.ti-toggle-disabled {
+  &.ti-switch-disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .ti-toggle-handle {
+  .ti-switch-handle {
     position: absolute;
     top: 1px;
     left: 1px;
@@ -44,7 +44,7 @@ $offBackgroundColor: #ccc;
 
 @include themes {
   .is-on {
-    @include typesUsingType(toggle) using($color, $type) {
+    @include typesUsingType(switch) using($color, $type) {
       @if $type != default {
         background-color: $color;
         border: 1px solid $color;
