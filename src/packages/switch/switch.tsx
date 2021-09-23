@@ -93,11 +93,11 @@ export default defineComponent({
             emit('update:modelValue', modelValue);
         };
         const handleKeydown = (e: KeyboardEvent) => {
-            if (e.code === 'Enter' || e.code === 'Space') {
+            if (e.key === 'Enter' || e.key === 'Space') {
                 handleChange(e);
-            } else if (e.code === 'ArrowLeft') {
+            } else if (e.key === 'ArrowLeft') {
                 emit('update:modelValue', props.offValue);
-            } else if (e.code === 'ArrowRight') {
+            } else if (e.key === 'ArrowRight') {
                 emit('update:modelValue', props.onValue);
             }
         };
@@ -124,7 +124,7 @@ export default defineComponent({
                 ref={switchRef}
                 class={switchClasses.value}
                 style={switchStyles.value}
-                onKeydown={withModifiers(handleKeydown, ['enter', 'prevent', 'self'])}
+                onKeydown={withModifiers(handleKeydown, ['Enter', 'prevent', 'self'])}
                 onClick={handleChange}>
                 <span class="ti-switch-text">{isOn.value ? props.onText : props.offText}</span>
                 <span class="ti-switch-handle" style={handleStyles.value}/>
