@@ -1,4 +1,4 @@
-import { VNode } from "vue";
+import { VNode } from "@vue/runtime-core";
 
 export type SimpleFunction = (...args: any[]) => any
 
