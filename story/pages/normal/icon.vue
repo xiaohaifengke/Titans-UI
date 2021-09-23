@@ -1,4 +1,5 @@
 <template>
+  <ti-icon icon="close" @click="testClick" />
   <ul class="icon-list">
     <li
         v-for="icon in icons"
@@ -12,6 +13,9 @@
 
 <script setup>
 import { icons } from './icons';
+const testClick = (e) => {
+  console.log('icon click', e);
+};
 </script>
 
 <style scoped lang="scss">

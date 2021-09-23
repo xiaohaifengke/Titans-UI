@@ -89,5 +89,22 @@ export const MENUS: Array<AppMenu> = [
                 }
             }
         ]
+    },
+    {
+        path: '/others',
+        name: 'others',
+        meta: {
+            title: '其他组件'
+        },
+        children: [
+            {
+                path: 'dialog',
+                name: 'dialog',
+                meta: {
+                    title: 'Dialog',
+                    subtitle: '对话框'
+                }
+            }
+        ]
     }
 ];
