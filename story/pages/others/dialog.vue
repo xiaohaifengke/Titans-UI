@@ -1,9 +1,19 @@
 <template>
   <div class="dialog-demo">
     <TiButton @click="showDialog">显示</TiButton>
-    <TiDialog v-model:visible="visible">
-      TiDialog的默认slot
-    </TiDialog>
+<!--    <teleport to="body">-->
+      <TiDialog
+          v-model:visible="visible"
+          custom-class="custom-class-test">
+        <template #title>
+          <div>这是 测试 title slot</div>
+        </template>
+<!--        <template #footer>-->
+<!--          <div>这是 测试 footer slot</div>-->
+<!--        </template>-->
+        TiDialog的默认slot
+      </TiDialog>
+<!--    </teleport>-->
   </div>
 </template>
 
@@ -18,9 +28,14 @@ export default {
       console.log('click');
       visible.value = true;
     };
+    const beforeClose = (done) => {
+      console.log(done);
+      done();
+    };
     return {
       visible,
-      showDialog
+      showDialog,
+      beforeClose
     };
   }
 };

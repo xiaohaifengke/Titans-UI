@@ -1,5 +1,5 @@
 import './dialog.scss';
-import {defineComponent} from "vue";
+import {defineComponent, Teleport, withModifiers} from "vue";
 import TiIcon from '../icon/icon';
 import TiButton from '../button/button';
 
@@ -11,6 +11,22 @@ export default defineComponent({
             type: Boolean,
             default: false
         },
+        title: {
+            type: String,
+            default: '提示'
+        },
+        top: {
+            type: [Number, String],
+            default: '15vh'
+        },
+        width: {
+            type: [Number, String],
+            default: 520
+        },
+        overlay: { // 是否显示遮罩层
+            type: Boolean,
+            default: true
+        },
         closeOnClickOverlay: {
             type: Boolean,
             default: true
@@ -20,12 +36,41 @@ export default defineComponent({
         },
         cancel: {
             type: Function
+        },
+        okText: {
+            type: String,
+            default: '确定'
+        },
+        cancelText: {
+            type: String,
+            default: '取消'
+        },
+        customClass: {
+            type: String
+        },
+        showClose: {
+            type: Boolean,
+            default: true
+        },
+        beforeClose: {
+            type: Function
+        },
+        afterClose: {
+            type: Function
         }
     },
     emits: ['update:visible'],
-    setup(props,{emit}) {
+    setup(props, {emit, slots}) {
         const close = () => {
-            emit('update:visible', false);
+            const close = () => {
+                emit('update:visible', false);
+            };
+            if (props.beforeClose) {
+                props.beforeClose(close);
+            } else {
+                close();
+            }
+
         };
         const clickOnOverlay = () => {
             if (props.closeOnClickOverlay) {
@@ -41,26 +86,48 @@ export default defineComponent({
             close();
         };
 
-        return () => props.visible && (
-            <div class="ti-dialog-root">
-                <div class="ti-dialog-overlay" onClick={clickOnOverlay} />
-                <div class="ti-dialog-wrapper">
-                    <div role="dialog" class="ti-dialog">
-                        <div class="ti-dialog-header">
-                            <span class="ti-dialog-title">标题</span>
-                            <TiIcon class="ti-dialog-close" icon="close" {...{onClick: close}} />
-                        </div>
-                        <div class="ti-dialog-content">
-                            <div>这是内容</div>
-                            <div>这是内容</div>
-                        </div>
-                        <div class="ti-dialog-footer">
-                            <TiButton onClick={onOk}>取消</TiButton>
-                            <TiButton onClick={onCancel}>确定</TiButton>
+        const TiDialogClasses = [
+            'ti-dialog',
+            props.customClass
+        ];
+
+        const TiDialogStyles = {
+            marginTop: typeof props.top === 'string' ? props.top : `${props.top}px`,
+            width: typeof props.width === 'string' ? props.width : `${props.width}px`
+        };
+
+        return () => (
+            <Teleport to="body">
+                {props.visible && (
+                    <div class="ti-dialog-container">
+                        {props.overlay && <div class="ti-dialog-overlay"/>}
+                        <div class="ti-dialog-wrapper" onClick={withModifiers(clickOnOverlay, ['self'])}>
+                            <div
+                                class={TiDialogClasses}
+                                style={TiDialogStyles}
+                                role="dialog"
+                                aria-modal="true"
+                                aria-label={props.title || 'dialog'}>
+                                <div class="ti-dialog-header">
+                                    {slots.title?.() ?? <span class="ti-dialog-title">{props.title}</span>}
+                                    {props.showClose && <TiIcon class="ti-dialog-close" icon="close" {...{onClick: close}} />}
+                                </div>
+                                <div class="ti-dialog-content">
+                                    {slots.default?.()}
+                                </div>
+                                <div class="ti-dialog-footer">
+                                    {slots.footer?.() ?? <>
+                                      <TiButton class="ti-dialog-footer-default-slot-button"
+                                                onClick={onCancel}>{props.cancelText}</TiButton>
+                                      <TiButton class="ti-dialog-footer-default-slot-button"
+                                                onClick={onOk}>{props.okText}</TiButton>
+                                    </>}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                )}
+            </Teleport>
         );
     }
 });
