@@ -2,59 +2,55 @@ $border-radius: 4px;
 $default-border-color: mix(#606266, #fff, 20%);
 $textColor: #fff;
 @include themes {
-    .ti-button {
-        outline: none;
-        display: inline-block;
-        padding: 8px 16px;
-        border: 1px solid;
-        border-radius: $border-radius;
-        cursor: pointer;
-        color: map_get($defaultThemeMap, defalut);
-        background-color: $textColor;
-        border-color: $default-border-color;
+  .ti-button {
+    display: inline-block;
+    padding: 8px 16px;
+    color: map_get($defaultThemeMap, defalut);
+    cursor: pointer;
+    background-color: $textColor;
+    border: 1px solid;
+    border-color: $default-border-color;
+    border-radius: $border-radius;
+    outline: none;
 
-        /**
+    /**
          * 这里将default type 放在type mixin中是为了方便把default的主题色定义在列表中，方便取值。
          * 如果将default type的相关颜色写在.ti-button中，则只能是hard code的方式，无法统一配主题色。
          */
-        @include typesUsingType(button) using ($color, $type) {
-            @if $type == default {
-
-
-                &.ti-button-mode-text {
-                    border-color: transparent;
-                    background-color: transparent;
-                    padding: 0;
-                }
-            } @else {
-
-                /*@include modes(button, $color) using ($modeColor, $type) {
+    @include typesUsingType(button) using ($color, $type) {
+      @if $type == default {
+        &.ti-button-mode-text {
+          padding: 0;
+          background-color: transparent;
+          border-color: transparent;
+        }
+      } @else {
+        /* @include modes(button, $color) using ($modeColor, $type) {
                     color: $textColor;
                     background-color: $modeColor;
                     border-color: $modeColor;
-                }*/
+                } */
 
-                @each $mode in fill, plain, outline, text {
-                    &.ti-button-mode-#{$mode} {
-                        @if $mode == fill {
-                            color: $textColor;
-                            background-color: $color;
-                            border-color: $color;
-                        } @else if $mode == plain {
-                            color: $color;
-                            background-color: mix($color, $textColor, 10%);
-                            border-color: mix($color, $textColor, 40%);
-                        } @else if $mode == outline {
-                            color: $color;
-                            background-color: $textColor;
-                            border-color: $color;
-                        } @else if $mode == text {
-                            color: $color;
-                        }
-
-                    }
-                }
+        @each $mode in fill, plain, outline, text {
+          &.ti-button-mode-#{$mode} {
+            @if $mode == fill {
+              color: $textColor;
+              background-color: $color;
+              border-color: $color;
+            } @else if $mode == plain {
+              color: $color;
+              background-color: mix($color, $textColor, 10%);
+              border-color: mix($color, $textColor, 40%);
+            } @else if $mode == outline {
+              color: $color;
+              background-color: $textColor;
+              border-color: $color;
+            } @else if $mode == text {
+              color: $color;
             }
+          }
         }
+      }
     }
+  }
 }

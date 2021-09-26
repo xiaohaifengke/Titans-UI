@@ -1,4 +1,4 @@
-import { installPlugins } from '../../utils/installPlugins';
-import Switch from './switch';
+import { installPlugins } from '../../utils/installPlugins'
+import Switch from './switch'
 
-export default installPlugins(Switch);
+export default installPlugins(Switch)

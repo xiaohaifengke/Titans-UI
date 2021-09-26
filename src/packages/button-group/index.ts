@@ -1,4 +1,4 @@
-import { installPlugins } from '../../utils/installPlugins';
-import ButtonGroup from './button-group';
+import { installPlugins } from '../../utils/installPlugins'
+import ButtonGroup from './button-group'
 
-export default installPlugins(ButtonGroup);
+export default installPlugins(ButtonGroup)

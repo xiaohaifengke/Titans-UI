@@ -2,10 +2,10 @@ $border-radius: 4px;
 $border-color: #d9d9d9;
 
 .ti-dialog {
-  margin: 0 auto;
   width: 520px;
-  border-radius: $border-radius;
+  margin: 0 auto;
   background: #fff;
+  border-radius: $border-radius;
   box-shadow: 0 0 3px fade-out(black, 0.5);
 
   &-overlay {
@@ -25,12 +25,12 @@ $border-color: #d9d9d9;
     left: 0;
   }
   & &-header {
-    padding: 12px 16px;
-    border-bottom: 1px solid $border-color;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 12px 16px;
     font-size: 20px;
+    border-bottom: 1px solid $border-color;
   }
   & &-close {
     cursor: pointer;
@@ -44,9 +44,9 @@ $border-color: #d9d9d9;
   }
 
   & &-footer {
-    border-top: 1px solid $border-color;
     padding: 12px 16px;
     text-align: right;
+    border-top: 1px solid $border-color;
 
     .ti-dialog-footer-default-slot-button {
       & + .ti-dialog-footer-default-slot-button {
@@ -58,7 +58,7 @@ $border-color: #d9d9d9;
 
 .dialog-enter-active {
   .ti-dialog-overlay {
-    animation: fade-in-overlay .25s ease;
+    animation: fade-in-overlay 0.25s ease;
   }
   .ti-dialog {
     animation: zoom-in-down 0.4s both;
@@ -66,11 +66,11 @@ $border-color: #d9d9d9;
 }
 .dialog-leave-active {
   .ti-dialog-overlay {
-    animation: fade-out-overlay .25s ease forwards;
+    animation: fade-out-overlay 0.25s ease forwards;
   }
   .ti-dialog {
-    animation: zoom-out-up .25s both;
     transform-origin: center bottom;
+    animation: zoom-out-up 0.25s both;
   }
 }
 

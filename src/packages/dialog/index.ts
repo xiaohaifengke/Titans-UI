@@ -1,4 +1,4 @@
-import Dialog from './dialog';
-import {installPlugins} from "../../utils/installPlugins";
+import Dialog from './dialog'
+import { installPlugins } from '../../utils/installPlugins'
 
-export default installPlugins(Dialog);
+export default installPlugins(Dialog)

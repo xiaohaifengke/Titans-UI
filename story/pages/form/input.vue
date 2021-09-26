@@ -16,32 +16,32 @@
   <ti-button @click="changeValue">change value</ti-button>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import { Input } from "../../../src";
+import { defineComponent } from 'vue'
+import { Input } from '../../../src'
 export default defineComponent({
-  name: "demo-input",
+  name: 'demo-input',
   data() {
     return {
-      value: "test",
-      statusList: ["", "primary", "success", "warn", "error", "info"],
-    };
+      value: 'test',
+      statusList: ['', 'primary', 'success', 'warn', 'error', 'info']
+    }
   },
   setup() {
-    const inputRef = Input.use.ref("myInput");
+    const inputRef = Input.use.ref('myInput')
     return {
       outerClear() {
-        inputRef.value!.methods.clear();
+        inputRef.value!.methods.clear()
       },
       outerFocus() {
-        inputRef.value!.methods.focus();
-      },
-    };
+        inputRef.value!.methods.focus()
+      }
+    }
   },
   methods: {
     changeValue() {
-      console.log(this,this.value, this.statusList);
-      this.value = "成功";
-    },
-  },
-});
+      console.log(this, this.value, this.statusList)
+      this.value = '成功'
+    }
+  }
+})
 </script>

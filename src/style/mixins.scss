@@ -1,20 +1,20 @@
-@import "./theme/default";
-@import "./theme/blue";
-@import "./theme/violet";
+@import './theme/default';
+@import './theme/blue';
+@import './theme/violet';
 
 $themes: map_merge(map_merge($theme-default, $theme-blue), $theme-violet);
 $defaultThemeMap: map_get($theme-default, '');
 $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
-@mixin themesUsingMap{
+@mixin themesUsingMap {
   @each $themeName, $themeMap in $themes {
     $themeMap: map_merge($defaultThemeMap, $themeMap);
     $globalThemeMap: $themeMap !global;
     @if str_length($themeName) > 0 {
       .theme-#{$themeName} {
-        @content($themeMap);
+        @content ($themeMap);
       }
     } @else {
-      @content($themeMap);
+      @content ($themeMap);
     }
   }
 }
@@ -28,21 +28,21 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
 @mixin typesUsingType($component) {
   @each $type in default, primary, success, warning, danger, info {
     &.ti-#{$component}-type-#{$type} {
-      @content(map_get($globalThemeMap, $type), $type);
+      @content (map_get($globalThemeMap, $type), $type);
     }
   }
 }
 
 @mixin types($component) {
   @include typesUsingType($component) using ($color, $type) {
-    @content($color);
+    @content ($color);
   }
 }
 
 @mixin modes($component, $color) {
   @each $mode in fill, plain, outline, text {
     &.ti-#{$component}-mode-#{$mode} {
-      @content($color, $mode);
+      @content ($color, $mode);
     }
   }
 }
@@ -74,7 +74,7 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
   }
   @each $size in large, normal, small, mini {
     &.ti-#{$component}-size-#{$size} {
-      @content(map_get($globalThemeMap, $size), $size);
+      @content (map_get($globalThemeMap, $size), $size);
     }
   }
 }

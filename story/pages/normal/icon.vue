@@ -1,27 +1,23 @@
 <template>
-  <ti-icon icon="close" @click="testClick" />
   <ul class="icon-list">
-    <li
-        v-for="icon in icons"
-        :key="icon"
-        class="icon-wrapper">
+    <li v-for="icon in icons" :key="icon" class="icon-wrapper">
       <ti-icon :icon="icon" />
-      <div class="name">{{icon}}</div>
+      <div class="name">{{ icon }}</div>
     </li>
   </ul>
 </template>
 
 <script setup>
-import { icons } from './icons';
+import { icons } from './icons'
 const testClick = (e) => {
-  console.log('icon click', e);
-};
+  console.log('icon click', e)
+}
 </script>
 
 <style scoped lang="scss">
 .icon-list {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 .icon-wrapper {
   display: inline-block;
@@ -31,8 +27,8 @@ const testClick = (e) => {
   cursor: pointer;
 }
 :deep(.ti-icon) {
-  font-size: 42px;
   height: 76px;
+  font-size: 42px;
   line-height: 76px;
   color: #333;
   transition: font-size 0.25s linear, width 0.25s linear;

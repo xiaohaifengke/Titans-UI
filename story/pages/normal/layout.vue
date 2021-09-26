@@ -1,13 +1,5 @@
-<template>
-  layout
-</template>
+<template>layout</template>
 
 <script>
-export default {
-
-};
+export default {}
 </script>
-
-<style>
-
-</style>

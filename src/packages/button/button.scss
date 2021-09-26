@@ -3,200 +3,192 @@ $default-border-color: mix(#606266, #fff, 30%);
 $textColor: #fff;
 //$default-padding: map_get($defaultThemeMap, normal);
 @include themes {
-    .ti-button {
-        outline: none;
-        display: inline-block;
-        //padding: $default-padding $default-padding + 6px;
-        border: 1px solid;
-        border-radius: $border-radius;
-        cursor: pointer;
-        color: map_get($defaultThemeMap, defalut);
-        background-color: $textColor;
-        border-color: $default-border-color;
-        font-size: map_get($defaultThemeMap, fontSize);
-        line-height: 1;
+  .ti-button {
+    display: inline-block;
+    font-size: map_get($defaultThemeMap, fontsize);
+    line-height: 1;
+    color: map_get($defaultThemeMap, defalut);
+    cursor: pointer;
+    background-color: $textColor;
+    //padding: $default-padding $default-padding + 6px;
+    border: 1px solid;
+    border-color: $default-border-color;
+    border-radius: $border-radius;
+    outline: none;
+    &:focus,
+    &:hover {
+      color: map_get($defaultThemeMap, primary);
+      background-color: mix(map_get($defaultThemeMap, primary), #fff, 10%);
+      border-color: mix(map_get($defaultThemeMap, primary), #fff, 30%);
+    }
+    &:active {
+      color: mix(#000, map_get($defaultThemeMap, primary), 20%);
+      border-color: mix(#000, map_get($defaultThemeMap, primary), 20%);
+    }
+
+    &.ti-button-disabled {
+      color: mix(map_get($defaultThemeMap, default), #fff, 35%);
+      cursor: not-allowed;
+      background-color: $textColor;
+      border-color: mix(map_get($defaultThemeMap, default), #fff, 15%);
+    }
+
+    @include typesUsingType(button) using($color, $type) {
+      @if $type == default {
+        // default 的样式放在.ti-button类上作为默认样式了
+      } @else {
+        color: $textColor;
+        background-color: $color;
+        border-color: $color;
         &:focus,
         &:hover {
-            color: map_get($defaultThemeMap, primary);
-            border-color: mix(map_get($defaultThemeMap, primary), #fff, 30%);
-            background-color: mix(map_get($defaultThemeMap, primary), #fff, 10%);
+          background-color: mix($color, #fff, 80%);
+          border-color: mix($color, #fff, 80%);
         }
         &:active {
-            color: mix(#000, map_get($defaultThemeMap, primary), 20%);
-            border-color: mix(#000, map_get($defaultThemeMap, primary), 20%);
+          background-color: mix(#000, $color, 20%);
+          border-color: mix(#000, $color, 20%);
         }
 
         &.ti-button-disabled {
-            cursor: not-allowed;
-            color: mix(map_get($defaultThemeMap, default), #fff, 35%);
-            background-color: $textColor;
-            border-color: mix(map_get($defaultThemeMap, default), #fff, 15%);
+          color: $textColor;
+          background-color: mix($color, #fff, 40%);
+          border-color: mix($color, #fff, 40%);
         }
-
-        @include typesUsingType(button) using($color, $type) {
-            @if $type == default {
-                // default 的样式放在.ti-button类上作为默认样式了
-            } @else {
-                color: $textColor;
-                background-color: $color;
-                border-color: $color;
-                &:focus,
-                &:hover {
-                    border-color: mix($color, #fff, 80%);
-                    background-color: mix($color, #fff, 80%);
-                }
-                &:active {
-                    border-color: mix(#000, $color, 20%);
-                    background-color: mix(#000, $color, 20%);
-                }
-
-                &.ti-button-disabled {
-                    color: $textColor;
-                    background-color: mix($color, #fff, 40%);
-                    border-color: mix($color, #fff, 40%);
-                }
-            }
-        }
-
-        @each $mode in fill, plain, outline, text {
-            &.ti-button-mode-#{$mode} {
-                @if $mode == fill {
-                    @include typesUsingType(button) using($color, $type) {
-                        @if $type == default {
-
-                        } @else {
-                            color: $textColor;
-                            background-color: $color;
-                            border-color: $color;
-                            &:focus,
-                            &:hover {
-                                border-color: mix($color, #fff, 80%);
-                                background-color: mix($color, #fff, 80%);
-                            }
-                            &:active {
-                                border-color: mix(#000, $color, 20%);
-                                background-color: mix(#000, $color, 20%);
-                            }
-                            &.ti-button-disabled {
-                                color: $textColor;
-                                background-color: mix($color, #fff, 40%);
-                                border-color: mix($color, #fff, 40%);
-                            }
-                        }
-                    }
-                } @else if $mode == plain {
-                    @include typesUsingType(button) using($color, $type) {
-                        @if $type == default {
-
-                        } @else {
-                            color: $color;
-                            background-color: mix($color, $textColor, 10%);
-                            border-color: mix($color, $textColor, 40%);
-                            &:focus,
-                            &:hover {
-                                color: $textColor;
-                                border-color: mix($color, #fff, 80%);
-                                background-color: mix($color, #fff, 80%);
-                            }
-                            &:active {
-                                color: $textColor;
-                                border-color: mix(#000, $color, 20%);
-                                background-color: mix(#000, $color, 20%);
-                            }
-                            &.ti-button-disabled {
-                                color: $textColor;
-                                background-color: mix($color, #fff, 40%);
-                                border-color: mix($color, #fff, 40%);
-                            }
-                        }
-                    }
-                } @else if $mode == outline {
-                    @include typesUsingType(button) using($color, $type) {
-                        @if $type == default {
-
-                        } @else {
-                            color: $color;
-                            background-color: $textColor;
-                            border-color: $color;
-                            &:focus,
-                            &:hover {
-                                background-color: mix($color, $textColor, 10%);
-                            }
-                            &:active {
-                                background-color: mix($color, $textColor, 20%);
-                                border-color: mix(#000, $color, 20%);
-                            }
-                            &.ti-button-disabled {
-                                color: $textColor;
-                                background-color: mix($color, #fff, 40%);
-                                border-color: mix($color, #fff, 40%);
-                            }
-                        }
-                    }
-                } @else if $mode == text {
-                    border-color: transparent;
-                    background-color: transparent;
-                    padding: 0;
-                    @include typesUsingType(button) using($color, $type) {
-                        @if $type == default {
-
-                        } @else {
-                            color: $color;
-                            &:focus,
-                            &:hover {
-                                color: mix($textColor, $color, 20%);
-                                border-color: transparent;
-                                background-color: transparent;
-                            }
-                            &:active {
-                                border-color: transparent;
-                                background-color: transparent;
-                                color: mix(#000, $color, 20%);
-                            }
-                            &.ti-button-disabled {
-                                color: mix($color, #fff, 40%);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        @include shapes(button);
-
-        @include sizes(button) using ($sizeValue, $sizeName) {
-            padding: $sizeValue $sizeValue+6px;
-
-            &.ti-button-shape-circle {
-                padding: $sizeValue;
-            }
-            @if($sizeName == large or $sizeName == normal ) {
-                font-size: 14px;
-            } @else {
-                font-size: 12px;
-            }
-        }
-
-        .ti-icon+span,
-        span+.ti-icon{
-            margin-left: 5px;
-        }
-
-        &.ti-button-loading {
-            position: relative;
-            pointer-events: none;
-
-            &:before {
-                pointer-events: none;
-                content: "";
-                position: absolute;
-                left: -1px;
-                top: -1px;
-                right: -1px;
-                bottom: -1px;
-                border-radius: inherit;
-                background-color: hsla(0,0%,100%,.35);
-            }
-        }
+      }
     }
+
+    @each $mode in fill, plain, outline, text {
+      &.ti-button-mode-#{$mode} {
+        @if $mode == fill {
+          @include typesUsingType(button) using($color, $type) {
+            @if $type != default {
+              color: $textColor;
+              background-color: $color;
+              border-color: $color;
+              &:focus,
+              &:hover {
+                background-color: mix($color, #fff, 80%);
+                border-color: mix($color, #fff, 80%);
+              }
+              &:active {
+                background-color: mix(#000, $color, 20%);
+                border-color: mix(#000, $color, 20%);
+              }
+              &.ti-button-disabled {
+                color: $textColor;
+                background-color: mix($color, #fff, 40%);
+                border-color: mix($color, #fff, 40%);
+              }
+            }
+          }
+        } @else if $mode == plain {
+          @include typesUsingType(button) using($color, $type) {
+            @if $type != default {
+              color: $color;
+              background-color: mix($color, $textColor, 10%);
+              border-color: mix($color, $textColor, 40%);
+              &:focus,
+              &:hover {
+                color: $textColor;
+                background-color: mix($color, #fff, 80%);
+                border-color: mix($color, #fff, 80%);
+              }
+              &:active {
+                color: $textColor;
+                background-color: mix(#000, $color, 20%);
+                border-color: mix(#000, $color, 20%);
+              }
+              &.ti-button-disabled {
+                color: $textColor;
+                background-color: mix($color, #fff, 40%);
+                border-color: mix($color, #fff, 40%);
+              }
+            }
+          }
+        } @else if $mode == outline {
+          @include typesUsingType(button) using($color, $type) {
+            @if $type != default {
+              color: $color;
+              background-color: $textColor;
+              border-color: $color;
+              &:focus,
+              &:hover {
+                background-color: mix($color, $textColor, 10%);
+              }
+              &:active {
+                background-color: mix($color, $textColor, 20%);
+                border-color: mix(#000, $color, 20%);
+              }
+              &.ti-button-disabled {
+                color: $textColor;
+                background-color: mix($color, #fff, 40%);
+                border-color: mix($color, #fff, 40%);
+              }
+            }
+          }
+        } @else if $mode == text {
+          padding: 0;
+          background-color: transparent;
+          border-color: transparent;
+          @include typesUsingType(button) using($color, $type) {
+            @if $type != default {
+              color: $color;
+              &:focus,
+              &:hover {
+                color: mix($textColor, $color, 20%);
+                background-color: transparent;
+                border-color: transparent;
+              }
+              &:active {
+                color: mix(#000, $color, 20%);
+                background-color: transparent;
+                border-color: transparent;
+              }
+              &.ti-button-disabled {
+                color: mix($color, #fff, 40%);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @include shapes(button);
+
+    @include sizes(button) using ($sizeValue, $sizeName) {
+      padding: $sizeValue $sizeValue + 6px;
+
+      &.ti-button-shape-circle {
+        padding: $sizeValue;
+      }
+      @if ($sizeName == large or $sizeName == normal) {
+        font-size: 14px;
+      } @else {
+        font-size: 12px;
+      }
+    }
+
+    .ti-icon + span,
+    span + .ti-icon {
+      margin-left: 5px;
+    }
+
+    &.ti-button-loading {
+      position: relative;
+      pointer-events: none;
+
+      &::before {
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        left: -1px;
+        pointer-events: none;
+        content: '';
+        background-color: hsla(0, 0%, 100%, 0.35);
+        border-radius: inherit;
+      }
+    }
+  }
 }

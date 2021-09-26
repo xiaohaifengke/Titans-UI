@@ -1,3 +1,1 @@
-<template>
-    welcome to home
-</template>
+<template>welcome to home</template>

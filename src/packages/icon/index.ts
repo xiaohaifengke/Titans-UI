@@ -1,4 +1,4 @@
-import { installPlugins } from '../../utils/installPlugins';
-import Icon from './icon';
+import { installPlugins } from '../../utils/installPlugins'
+import Icon from './icon'
 
-export default installPlugins(Icon);
+export default installPlugins(Icon)

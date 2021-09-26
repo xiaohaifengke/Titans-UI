@@ -1,19 +1,19 @@
 @include themes {
-    .ti-input {
-        display: inline-block;
+  .ti-input {
+    display: inline-block;
 
-        .ti-input-inner {
-            outline: none;
-            border: none;
-            padding: 9px 16px;
-        }
-
-        @include types(input) using($color) {
-            border: solid 1px $color;
-            background-color: mix($color, white, 10%);
-            .ti-input-inner:focus {
-                background-color: mix($color, white, 30%);
-            }
-        }
+    .ti-input-inner {
+      padding: 9px 16px;
+      border: none;
+      outline: none;
     }
+
+    @include types(input) using($color) {
+      background-color: mix($color, white, 10%);
+      border: solid 1px $color;
+      .ti-input-inner:focus {
+        background-color: mix($color, white, 30%);
+      }
+    }
+  }
 }

@@ -10,9 +10,9 @@
     }
 
     &:first-child {
+      border-right-color: hsla(0, 0%, 100%, 0.5);
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-right-color: hsla(0,0%,100%,.5);
     }
 
     &:not(:last-child) {
@@ -20,15 +20,15 @@
     }
 
     &:not(:first-child):not(:last-child) {
+      border-right-color: hsla(0, 0%, 100%, 0.5);
+      border-left-color: hsla(0, 0%, 100%, 0.5);
       border-radius: 0;
-      border-right-color: hsla(0,0%,100%,.5);
-      border-left-color: hsla(0,0%,100%,.5);
     }
 
     &:last-child {
+      border-left-color: hsla(0, 0%, 100%, 0.5);
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-left-color: hsla(0,0%,100%,.5);
     }
   }
 }
