@@ -1,5 +1,6 @@
 const path = require('path');
 const resolve = filePath => path.join(__dirname, './', filePath);
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
 module.exports = {
     outputDir: 'docs',
@@ -17,6 +18,10 @@ module.exports = {
         config.plugins
             .delete('prefetch-index')
             .delete('preload-index');
+        config.plugin("stylelint").use(StylelintPlugin, [{
+            files: ['src/**/*.vue', 'src/**/*.((s(c|a)|c)ss)', 'story/**/*.vue', 'story/**/*.((s(c|a)|c)ss)'],
+            fix: true
+        }]);
         config.resolve.alias
             .clear()
             .set('src', resolve('src'))
