@@ -2,10 +2,7 @@ $border-radius: 4px;
 $border-color: #d9d9d9;
 
 .ti-dialog {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 50;
+  margin: 0 auto;
   width: 520px;
   border-radius: $border-radius;
   background: #fff;
@@ -57,5 +54,68 @@ $border-color: #d9d9d9;
       }
     }
   }
+}
 
+.dialog-enter-active {
+  .ti-dialog-overlay {
+    animation: fade-in-overlay .25s ease;
+  }
+  .ti-dialog {
+    animation: zoom-in-down 0.4s both;
+  }
+}
+.dialog-leave-active {
+  .ti-dialog-overlay {
+    animation: fade-out-overlay .25s ease forwards;
+  }
+  .ti-dialog {
+    animation: zoom-out-up .25s both;
+    transform-origin: center bottom;
+  }
+}
+
+@keyframes zoom-in-down {
+  from {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+@keyframes zoom-out-up {
+  40% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+
+@keyframes fade-in-overlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out-overlay {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
