@@ -130,8 +130,9 @@ export default defineComponent({
 
         return () => (
             <Teleport to="body">
-                <Transition name="dialog" duration={{enter: 400, leave: 250}}>
-                    {vIf.value && <div class="ti-dialog-container" v-show={vShow.value}>
+                <Transition name="dialog" duration={{enter: 400, leave: 250}} onAfterLeave={afterLeave}>
+                    {vIf.value &&
+                    <div class="ti-dialog-container" v-show={vShow.value}>
                       <div class="ti-dialog-overlay"/>
                       <div
                         class="ti-dialog-wrapper"
