@@ -17,7 +17,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Input } from '../../../src'
+// import { Input } from '../../../src'
 export default defineComponent({
   name: 'demo-input',
   data() {
@@ -25,23 +25,23 @@ export default defineComponent({
       value: 'test',
       statusList: ['', 'primary', 'success', 'warn', 'error', 'info']
     }
-  },
-  setup() {
-    const inputRef = Input.use.ref('myInput')
-    return {
-      outerClear() {
-        inputRef.value!.methods.clear()
-      },
-      outerFocus() {
-        inputRef.value!.methods.focus()
-      }
-    }
-  },
-  methods: {
-    changeValue() {
-      console.log(this, this.value, this.statusList)
-      this.value = '成功'
-    }
   }
+  // setup() {
+  //   const inputRef = Input.use.ref('myInput')
+  //   return {
+  //     outerClear() {
+  //       inputRef.value!.methods.clear()
+  //     },
+  //     outerFocus() {
+  //       inputRef.value!.methods.focus()
+  //     }
+  //   }
+  // },
+  // methods: {
+  //   changeValue() {
+  //     console.log(this, this.value, this.statusList)
+  //     this.value = '成功'
+  //   }
+  // }
 })
 </script>
