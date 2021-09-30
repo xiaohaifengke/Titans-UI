@@ -1,5 +1,4 @@
 import { installPlugins } from '../../utils/installPlugins'
-import { App } from 'vue'
-import Button from './button'
+import Button from './button.vue'
 
 export default installPlugins(Button)

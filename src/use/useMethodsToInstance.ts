@@ -1,5 +1,5 @@
 import { getCurrentInstance } from 'vue'
-import { SimpleFunction } from '@/shims'
+import { SimpleFunction } from '../shims'
 interface Methods {
   [k: string]: SimpleFunction
 }
