@@ -111,6 +111,14 @@ export const MENUS: Array<AppMenu> = [
           title: 'Dialog',
           subtitle: '对话框'
         }
+      },
+      {
+        path: 'digital-transition',
+        name: 'digital-transition',
+        meta: {
+          title: 'TiDigitalTransition',
+          subtitle: '数字累加'
+        }
       }
     ]
   }
