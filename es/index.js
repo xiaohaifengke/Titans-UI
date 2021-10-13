@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, normalizeClass, createElementVNode, resolveComponent, createBlock, createCommentVNode, renderSlot, createTextVNode, toDisplayString, computed, ref, watch, normalizeStyle, withModifiers, Teleport, createVNode, Transition, withCtx, withDirectives, vShow } from 'vue';
+import { defineComponent, openBlock, createElementBlock, normalizeClass, createElementVNode, resolveComponent, createBlock, createCommentVNode, renderSlot, createTextVNode, toDisplayString, computed as computed$1, ref, watch, normalizeStyle, withModifiers, Teleport, createVNode, Transition, withCtx, withDirectives, vShow, toRefs, toRef, onMounted } from 'vue';
 
 function installPlugins(Component, plugins) {
     return Object.assign(Object.assign({}, Component), { install(app) {
@@ -72,7 +72,7 @@ function installPlugins(Component, plugins) {
         }));
 })(window);
 
-var script$4 = defineComponent({
+var script$5 = defineComponent({
     name: 'TiIcon',
     props: {
         icon: {
@@ -82,23 +82,23 @@ var script$4 = defineComponent({
     }
 });
 
-const _hoisted_1$4 = ["xlink:href"];
+const _hoisted_1$5 = ["xlink:href"];
 
-function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createElementBlock("svg", {
     class: normalizeClass(["ti-icon", `ti-icon-${_ctx.icon}`]),
     "aria-hidden": "true"
   }, [
     createElementVNode("use", {
       "xlink:href": `#icon-${_ctx.icon}`
-    }, null, 8 /* PROPS */, _hoisted_1$4)
+    }, null, 8 /* PROPS */, _hoisted_1$5)
   ], 2 /* CLASS */))
 }
 
-script$4.render = render$4;
-script$4.__file = "src/packages/icon/icon.vue";
+script$5.render = render$5;
+script$5.__file = "src/packages/icon/icon.vue";
 
-var Icon = installPlugins(script$4);
+var Icon = installPlugins(script$5);
 
 var StyleShape;
 (function (StyleShape) {
@@ -122,7 +122,7 @@ var StyleType;
     StyleType["danger"] = "danger";
     StyleType["info"] = "info";
 })(StyleType || (StyleType = {}));
-var script$3 = defineComponent({
+var script$4 = defineComponent({
     name: 'TiButton',
     components: { TiIcon: Icon },
     props: {
@@ -181,9 +181,9 @@ var script$3 = defineComponent({
     }
 });
 
-const _hoisted_1$3 = ["disabled"];
+const _hoisted_1$4 = ["disabled"];
 
-function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_TiIcon = resolveComponent("TiIcon");
 
   return (openBlock(), createElementBlock("button", {
@@ -214,32 +214,32 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
           icon: _ctx.icon
         }, null, 8 /* PROPS */, ["icon"]))
       : createCommentVNode("v-if", true)
-  ], 10 /* CLASS, PROPS */, _hoisted_1$3))
+  ], 10 /* CLASS, PROPS */, _hoisted_1$4))
 }
 
-script$3.render = render$3;
-script$3.__file = "src/packages/button/button.vue";
+script$4.render = render$4;
+script$4.__file = "src/packages/button/button.vue";
 
-var Button = installPlugins(script$3);
+var Button = installPlugins(script$4);
 
-var script$2 = {
+var script$3 = {
     name: 'TiButtonGroup'
 };
 
-const _hoisted_1$2 = { class: "ti-button-group" };
+const _hoisted_1$3 = { class: "ti-button-group" };
 
-function render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createElementBlock("div", _hoisted_1$2, [
+function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createElementBlock("div", _hoisted_1$3, [
     renderSlot(_ctx.$slots, "default")
   ]))
 }
 
-script$2.render = render$2;
-script$2.__file = "src/packages/button-group/button-group.vue";
+script$3.render = render$3;
+script$3.__file = "src/packages/button-group/button-group.vue";
 
-var ButtonGroup = installPlugins(script$2);
+var ButtonGroup = installPlugins(script$3);
 
-var script$1 = defineComponent({
+var script$2 = defineComponent({
     name: 'TiSwitch',
     props: {
         modelValue: {
@@ -284,17 +284,17 @@ var script$1 = defineComponent({
     emits: ['update:modelValue', 'change'],
     setup(props, { emit }) {
         // 未设置 width
-        computed(() => {
+        computed$1(() => {
             return props.width === undefined;
         });
         // 未设置 height
-        computed(() => {
+        computed$1(() => {
             return props.height === undefined;
         });
-        const isOn = computed(() => {
+        const isOn = computed$1(() => {
             return props.modelValue === props.onValue;
         });
-        const switchClasses = computed(() => [
+        const switchClasses = computed$1(() => [
             'ti-switch',
             {
                 'is-on': isOn.value,
@@ -302,11 +302,11 @@ var script$1 = defineComponent({
                 'ti-switch-disabled': props.disabled
             }
         ]);
-        const handleSize = computed(() => {
+        const handleSize = computed$1(() => {
             var _a;
             return ((_a = props.height) !== null && _a !== void 0 ? _a : 20) - 4;
         });
-        const switchStyles = computed(() => {
+        const switchStyles = computed$1(() => {
             var _a, _b, _c, _d;
             return ({
                 width: props.width + 'px',
@@ -321,7 +321,7 @@ var script$1 = defineComponent({
                     : ((_d = props.height) !== null && _d !== void 0 ? _d : 20) + 'px'
             });
         });
-        const handleStyles = computed(() => ({
+        const handleStyles = computed$1(() => ({
             width: handleSize.value + 'px',
             height: handleSize.value + 'px',
             left: isOn.value ? '100%' : '1px',
@@ -370,9 +370,9 @@ var script$1 = defineComponent({
     }
 });
 
-const _hoisted_1$1 = { class: "ti-switch-text" };
+const _hoisted_1$2 = { class: "ti-switch-text" };
 
-function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createElementBlock("button", {
     role: "switch",
     ref: "switchRef",
@@ -381,7 +381,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
     onKeydown: _cache[0] || (_cache[0] = withModifiers((...args) => (_ctx.handleKeydown && _ctx.handleKeydown(...args)), ["prevent","self"])),
     onClick: _cache[1] || (_cache[1] = (...args) => (_ctx.handleChange && _ctx.handleChange(...args)))
   }, [
-    createElementVNode("span", _hoisted_1$1, toDisplayString(_ctx.isOn ? _ctx.onText : _ctx.offText), 1 /* TEXT */),
+    createElementVNode("span", _hoisted_1$2, toDisplayString(_ctx.isOn ? _ctx.onText : _ctx.offText), 1 /* TEXT */),
     createElementVNode("span", {
       class: "ti-switch-handle",
       style: normalizeStyle(_ctx.handleStyles)
@@ -389,14 +389,14 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   ], 38 /* CLASS, STYLE, HYDRATE_EVENTS */))
 }
 
-script$1.render = render$1;
-script$1.__file = "src/packages/switch/switch.vue";
+script$2.render = render$2;
+script$2.__file = "src/packages/switch/switch.vue";
 
-var Switch = installPlugins(script$1);
+var Switch = installPlugins(script$2);
 
-var script = {
+var script$1 = {
   name: 'TiDialog',
-  components: { TiIcon: script$4, TiButton: script$3 },
+  components: { TiIcon: script$5, TiButton: script$4 },
   props: {
     visible: {
       type: Boolean,
@@ -533,7 +533,7 @@ var script = {
   }
 };
 
-const _hoisted_1 = {
+const _hoisted_1$1 = {
   key: 0,
   class: "ti-dialog-container"
 };
@@ -544,7 +544,7 @@ const _hoisted_5 = { class: "ti-dialog-title" };
 const _hoisted_6 = { class: "ti-dialog-content" };
 const _hoisted_7 = { class: "ti-dialog-footer" };
 
-function render(_ctx, _cache, $props, $setup, $data, $options) {
+function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_TiIcon = resolveComponent("TiIcon");
   const _component_TiButton = resolveComponent("TiButton");
 
@@ -556,7 +556,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, {
       default: withCtx(() => [
         ($setup.vIf)
-          ? withDirectives((openBlock(), createElementBlock("div", _hoisted_1, [
+          ? withDirectives((openBlock(), createElementBlock("div", _hoisted_1$1, [
               _hoisted_2,
               createElementVNode("div", {
                 class: "ti-dialog-wrapper",
@@ -620,12 +620,440 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ]))
 }
 
+script$1.render = render$1;
+script$1.__file = "src/packages/dialog/dialog.vue";
+
+var Dialog = installPlugins(script$1);
+
+/**
+ * Make a map and return a function for checking if a key
+ * is in that map.
+ * IMPORTANT: all calls of this function must be prefixed with
+ * \/\*#\_\_PURE\_\_\*\/
+ * So that rollup can tree-shake them if necessary.
+ */
+(process.env.NODE_ENV !== 'production')
+    ? Object.freeze({})
+    : {};
+(process.env.NODE_ENV !== 'production') ? Object.freeze([]) : [];
+const NOOP = () => { };
+const extend = Object.assign;
+const isArray = Array.isArray;
+const isFunction = (val) => typeof val === 'function';
+const isSymbol = (val) => typeof val === 'symbol';
+
+let activeEffectScope;
+function recordEffectScope(effect, scope) {
+    scope = scope || activeEffectScope;
+    if (scope && scope.active) {
+        scope.effects.push(effect);
+    }
+}
+
+const createDep = (effects) => {
+    const dep = new Set(effects);
+    dep.w = 0;
+    dep.n = 0;
+    return dep;
+};
+const wasTracked = (dep) => (dep.w & trackOpBit) > 0;
+const newTracked = (dep) => (dep.n & trackOpBit) > 0;
+const initDepMarkers = ({ deps }) => {
+    if (deps.length) {
+        for (let i = 0; i < deps.length; i++) {
+            deps[i].w |= trackOpBit; // set was tracked
+        }
+    }
+};
+const finalizeDepMarkers = (effect) => {
+    const { deps } = effect;
+    if (deps.length) {
+        let ptr = 0;
+        for (let i = 0; i < deps.length; i++) {
+            const dep = deps[i];
+            if (wasTracked(dep) && !newTracked(dep)) {
+                dep.delete(effect);
+            }
+            else {
+                deps[ptr++] = dep;
+            }
+            // clear bits
+            dep.w &= ~trackOpBit;
+            dep.n &= ~trackOpBit;
+        }
+        deps.length = ptr;
+    }
+};
+// The number of effects currently being tracked recursively.
+let effectTrackDepth = 0;
+let trackOpBit = 1;
+/**
+ * The bitwise track markers support at most 30 levels op recursion.
+ * This value is chosen to enable modern JS engines to use a SMI on all platforms.
+ * When recursion depth is greater, fall back to using a full cleanup.
+ */
+const maxMarkerBits = 30;
+const effectStack = [];
+let activeEffect;
+Symbol((process.env.NODE_ENV !== 'production') ? 'iterate' : '');
+Symbol((process.env.NODE_ENV !== 'production') ? 'Map key iterate' : '');
+class ReactiveEffect {
+    constructor(fn, scheduler = null, scope) {
+        this.fn = fn;
+        this.scheduler = scheduler;
+        this.active = true;
+        this.deps = [];
+        recordEffectScope(this, scope);
+    }
+    run() {
+        if (!this.active) {
+            return this.fn();
+        }
+        if (!effectStack.includes(this)) {
+            try {
+                effectStack.push((activeEffect = this));
+                enableTracking();
+                trackOpBit = 1 << ++effectTrackDepth;
+                if (effectTrackDepth <= maxMarkerBits) {
+                    initDepMarkers(this);
+                }
+                else {
+                    cleanupEffect(this);
+                }
+                return this.fn();
+            }
+            finally {
+                if (effectTrackDepth <= maxMarkerBits) {
+                    finalizeDepMarkers(this);
+                }
+                trackOpBit = 1 << --effectTrackDepth;
+                resetTracking();
+                effectStack.pop();
+                const n = effectStack.length;
+                activeEffect = n > 0 ? effectStack[n - 1] : undefined;
+            }
+        }
+    }
+    stop() {
+        if (this.active) {
+            cleanupEffect(this);
+            if (this.onStop) {
+                this.onStop();
+            }
+            this.active = false;
+        }
+    }
+}
+function cleanupEffect(effect) {
+    const { deps } = effect;
+    if (deps.length) {
+        for (let i = 0; i < deps.length; i++) {
+            deps[i].delete(effect);
+        }
+        deps.length = 0;
+    }
+}
+let shouldTrack = true;
+const trackStack = [];
+function enableTracking() {
+    trackStack.push(shouldTrack);
+    shouldTrack = true;
+}
+function resetTracking() {
+    const last = trackStack.pop();
+    shouldTrack = last === undefined ? true : last;
+}
+function isTracking() {
+    return shouldTrack && activeEffect !== undefined;
+}
+function trackEffects(dep, debuggerEventExtraInfo) {
+    let shouldTrack = false;
+    if (effectTrackDepth <= maxMarkerBits) {
+        if (!newTracked(dep)) {
+            dep.n |= trackOpBit; // set newly tracked
+            shouldTrack = !wasTracked(dep);
+        }
+    }
+    else {
+        // Full cleanup mode.
+        shouldTrack = !dep.has(activeEffect);
+    }
+    if (shouldTrack) {
+        dep.add(activeEffect);
+        activeEffect.deps.push(dep);
+        if ((process.env.NODE_ENV !== 'production') && activeEffect.onTrack) {
+            activeEffect.onTrack(Object.assign({
+                effect: activeEffect
+            }, debuggerEventExtraInfo));
+        }
+    }
+}
+function triggerEffects(dep, debuggerEventExtraInfo) {
+    // spread into array for stabilization
+    for (const effect of isArray(dep) ? dep : [...dep]) {
+        if (effect !== activeEffect || effect.allowRecurse) {
+            if ((process.env.NODE_ENV !== 'production') && effect.onTrigger) {
+                effect.onTrigger(extend({ effect }, debuggerEventExtraInfo));
+            }
+            if (effect.scheduler) {
+                effect.scheduler();
+            }
+            else {
+                effect.run();
+            }
+        }
+    }
+}
+new Set(Object.getOwnPropertyNames(Symbol)
+    .map(key => Symbol[key])
+    .filter(isSymbol));
+function toRaw(observed) {
+    const raw = observed && observed["__v_raw" /* RAW */];
+    return raw ? toRaw(raw) : observed;
+}
+
+function trackRefValue(ref) {
+    if (isTracking()) {
+        ref = toRaw(ref);
+        if (!ref.dep) {
+            ref.dep = createDep();
+        }
+        if ((process.env.NODE_ENV !== 'production')) {
+            trackEffects(ref.dep, {
+                target: ref,
+                type: "get" /* GET */,
+                key: 'value'
+            });
+        }
+        else {
+            trackEffects(ref.dep);
+        }
+    }
+}
+function triggerRefValue(ref, newVal) {
+    ref = toRaw(ref);
+    if (ref.dep) {
+        if ((process.env.NODE_ENV !== 'production')) {
+            triggerEffects(ref.dep, {
+                target: ref,
+                type: "set" /* SET */,
+                key: 'value',
+                newValue: newVal
+            });
+        }
+        else {
+            triggerEffects(ref.dep);
+        }
+    }
+}
+
+class ComputedRefImpl {
+    constructor(getter, _setter, isReadonly) {
+        this._setter = _setter;
+        this.dep = undefined;
+        this._dirty = true;
+        this.__v_isRef = true;
+        this.effect = new ReactiveEffect(getter, () => {
+            if (!this._dirty) {
+                this._dirty = true;
+                triggerRefValue(this);
+            }
+        });
+        this["__v_isReadonly" /* IS_READONLY */] = isReadonly;
+    }
+    get value() {
+        // the computed ref may get wrapped by other proxies e.g. readonly() #3376
+        const self = toRaw(this);
+        trackRefValue(self);
+        if (self._dirty) {
+            self._dirty = false;
+            self._value = self.effect.run();
+        }
+        return self._value;
+    }
+    set value(newValue) {
+        this._setter(newValue);
+    }
+}
+function computed(getterOrOptions, debugOptions) {
+    let getter;
+    let setter;
+    if (isFunction(getterOrOptions)) {
+        getter = getterOrOptions;
+        setter = (process.env.NODE_ENV !== 'production')
+            ? () => {
+                console.warn('Write operation failed: computed value is readonly');
+            }
+            : NOOP;
+    }
+    else {
+        getter = getterOrOptions.get;
+        setter = getterOrOptions.set;
+    }
+    const cRef = new ComputedRefImpl(getter, setter, isFunction(getterOrOptions) || !getterOrOptions.set);
+    if ((process.env.NODE_ENV !== 'production') && debugOptions) {
+        cRef.effect.onTrack = debugOptions.onTrack;
+        cRef.effect.onTrigger = debugOptions.onTrigger;
+    }
+    return cRef;
+}
+Promise.resolve();
+
+// manipulate camelCase to kebab-case
+/**
+ * 重写js native toFixed 方法
+ * @param d
+ * @param number
+ * @returns { string | number }
+ */
+function toFixed(d, number) {
+    if (number === undefined) {
+        // @ts-ignore
+        number = this;
+    }
+    if (!number && number !== 0) {
+        return '';
+    }
+    if (!/^(-|\+)?\d+(?:\.\d+)?$/.test(number)) {
+        return '';
+    }
+    let s = number + '';
+    if (!d && d !== 0)
+        d = 2;
+    d = parseInt(d);
+    if (s.indexOf('.') === -1)
+        s += '.';
+    s += new Array(d + 1).join('0');
+    if (new RegExp('^(-|\\+)?(\\d+(\\.\\d{0,' + (d + 1) + '})?)\\d*$').test(s)) {
+        s = '0' + RegExp.$2;
+        const pm = RegExp.$1;
+        let a = RegExp.$3.length;
+        let b = true;
+        if (a === d + 2) {
+            a = s.match(/\d/g);
+            if ((pm !== '-' && parseInt(a[a.length - 1]) > 4) ||
+                (pm === '-' && parseInt(a[a.length - 1]) > 5)) {
+                for (let i = a.length - 2; i >= 0; i--) {
+                    a[i] = parseInt(a[i]) + 1;
+                    if (a[i] === 10) {
+                        a[i] = 0;
+                        b = i !== 1;
+                    }
+                    else
+                        break;
+                }
+            }
+            s = a.join('').replace(new RegExp('(\\d+)(\\d{' + d + '})\\d$'), '$1.$2');
+        }
+        if (b)
+            s = s.substr(1);
+        return (pm + s).replace(/\.$/, '');
+    }
+    // @ts-ignore
+    return this + '';
+}
+
+// 第n位小数“向上取整”
+function fractionCeil(d, number) {
+    if (!d) {
+        return Math.ceil(number);
+    }
+    const numberStr = `${number + 1 / Math.pow(10, 15)}`;
+    const reg = new RegExp(`(^(-|\\\\+)?\\d+\\.\\d{${d}})\\d*`);
+    const r = numberStr.match(reg);
+    return r && toFixed(d, +r[1] + (1 / Math.pow(10, d)) * (+r[1] > 0 ? 1 : -1));
+}
+var script = defineComponent({
+    name: 'TiDigitalTransition',
+    props: {
+        start: {
+            type: Number,
+            default: 0
+        },
+        end: {
+            type: Number
+        },
+        step: {
+            type: Number,
+            default: 1
+        },
+        interval: {
+            type: Number,
+            default: 16 // ms
+        },
+        // 当 duration 存在时，step 参数无效。单位：ms
+        duration: {
+            type: Number,
+            default: 3000
+        },
+        accuracy: {
+            type: Number,
+            default: 0
+        }
+    },
+    emit: ['ended', 'updated'],
+    setup(props, { slots, emit }) {
+        const { start, step, interval } = toRefs(props);
+        const endProp = toRef(props, 'end');
+        const durationProp = toRef(props, 'duration');
+        const endValue = computed(() => {
+            var _a, _b, _c;
+            return +(endProp.value || ((_c = (_b = (_a = slots.default) === null || _a === void 0 ? void 0 : _a.call(slots)) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.children) || 0);
+        });
+        let tickValue = ref(start.value);
+        let digital = computed(() => {
+            return +toFixed(props.accuracy, tickValue.value);
+        });
+        const timerFn = (() => {
+            let timer;
+            return (start, end, emitName) => {
+                const sv = start.value;
+                const ev = end.value;
+                if (timer)
+                    clearInterval(timer);
+                // 当duration存在时，计算step，否则使用用户传入的step
+                const computedStep = computed(() => {
+                    return durationProp.value
+                        ? fractionCeil(6 /* hack */, (ev - sv) / Math.floor(durationProp.value / interval.value))
+                        : step.value;
+                });
+                timer = setInterval(() => {
+                    start.value =
+                        computedStep.value > 0
+                            ? Math.min(start.value + +computedStep.value, end.value)
+                            : Math.max(start.value + +computedStep.value, end.value);
+                    if ((computedStep.value > 0 && start.value >= end.value) ||
+                        (computedStep.value < 0 && start.value <= end.value)) {
+                        emit(emitName, end.value);
+                        clearInterval(timer);
+                    }
+                }, interval.value);
+            };
+        })();
+        onMounted(() => {
+            timerFn(tickValue, endValue, 'ended');
+        });
+        watch(() => endValue.value, (newVal) => {
+            timerFn(tickValue, ref(newVal), 'updated');
+        });
+        return {
+            digital
+        };
+    }
+});
+
+const _hoisted_1 = { class: "ti-tickValue-transition" };
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createElementBlock("span", _hoisted_1, toDisplayString(_ctx.digital), 1 /* TEXT */))
+}
+
 script.render = render;
-script.__file = "src/packages/dialog/dialog.vue";
+script.__file = "src/packages/digital-transition/digital-transition.vue";
 
-var Dialog = installPlugins(script);
+var DigitalTransition = installPlugins(script);
 
-const plugins = [Button, ButtonGroup, Icon, Switch, Dialog];
+const plugins = [Button, ButtonGroup, Icon, Switch, Dialog, DigitalTransition];
 function install(app) {
     plugins.forEach(app.use);
 }
@@ -633,4 +1061,4 @@ var index = {
     install
 };
 
-export { Button, ButtonGroup, Dialog, Icon, Switch, index as default, install };
+export { Button, ButtonGroup, Dialog, DigitalTransition, Icon, Switch, index as default, install };

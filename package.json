@@ -5,7 +5,7 @@
   "homepage": "https://github.com/xiaohaifengke/Titans-UI#readme",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "es/index.js",
+  "module": "es1/index.js",
   "typings": "es/index.d.ts",
   "style": "dist/index.css",
   "unpkg": "dist/index.js",

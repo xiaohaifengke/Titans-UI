@@ -4,9 +4,10 @@ import Icon from './packages/icon';
 import ButtonGroup from './packages/button-group';
 import Switch from './packages/switch';
 import Dialog from './packages/dialog';
+import DigitalTransition from './packages/digital-transition';
 declare function install(app: App): void;
 declare const _default: {
     install: typeof install;
 };
 export default _default;
-export { Button, ButtonGroup, Icon, Switch, Dialog, install };
+export { Button, ButtonGroup, Icon, Switch, Dialog, DigitalTransition, install };
