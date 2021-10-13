@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "main": "dist/index.js",
-  "module": "es/index.js",
+  "module": "es1/index.js",
   "typings": "es/index.d.ts",
   "style": "dist/index.css",
   "files": [
