@@ -1,14 +1,37 @@
 {
   "name": "titans-ui",
   "version": "0.1.1",
-  "private": true,
+  "description": "前端自研组件库",
+  "homepage": "https://github.com/xiaohaifengke/Titans-UI#readme",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
   "style": "dist/index.css",
+  "unpkg": "dist/index.js",
+  "jsdevlivr": "dist/index.js",
+  "sideEffects": [
+    "dist/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaohaifengke/Titans-UI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xiaohaifengke/Titans-UI/issues"
+  },
   "files": [
     "dist",
+    "es",
     "src"
+  ],
+  "keywords": [
+    "titans-ui",
+    "Titans-UI",
+    "vue",
+    "vue3",
+    "rollup",
+    "typescript"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -103,8 +126,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "vue": "^3.2.0"
   }
 }
