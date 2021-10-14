@@ -1,0 +1,8 @@
+{
+  "removeFields": [
+    "scripts",
+    "lint-staged",
+    "config",
+    "devDependencies"
+  ]
+}

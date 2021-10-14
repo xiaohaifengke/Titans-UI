@@ -6,7 +6,7 @@
   "homepage": "https://github.com/xiaohaifengke/Titans-UI#readme",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "es1/index.js",
+  "module": "es/index.js",
   "typings": "es/index.d.ts",
   "style": "dist/index.css",
   "unpkg": "dist/index.js",
@@ -44,7 +44,9 @@
     "lint": "vue-cli-service lint",
     "prepare": "husky install",
     "cz": "git-cz",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "prepublish": "publish-manager prepublish",
+    "postpublish": "publish-manager postpublish"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
@@ -83,6 +85,7 @@
     "post-loader": "^2.0.0",
     "postcss-loader": "^4.3.0",
     "prettier": "^2.4.1",
+    "publish-manager": "^0.0.1",
     "rollup": "^2.57.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-scss": "^3.0.0",
