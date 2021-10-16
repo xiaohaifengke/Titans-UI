@@ -1,7 +1,11 @@
 <template>
   <div class="switch-demo-page">
     <div class="sep">
-      <ti-switch v-model="value"></ti-switch>
+      <ti-switch
+        v-model="value"
+        handle-on-color="rgba(0, 255, 255, 1)"
+        handleOffColor="rgba(15, 45, 59, 1)"
+      ></ti-switch>
       <ti-switch v-model="value" type="success"></ti-switch>
       <ti-switch
         v-model="value"
