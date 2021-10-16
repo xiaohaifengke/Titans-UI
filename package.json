@@ -36,6 +36,7 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
+    "build": "npm run build:es && npm run build:umd",
     "build:pkg": "webpack -c ./build/webpack.js",
     "build:doc": "vue-cli-service build",
     "build:es": "rollup -c ./build/rollup.config.esm.js",
@@ -45,7 +46,7 @@
     "prepare": "husky install",
     "cz": "git-cz",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
-    "pub": "publish-manager prepublish && npm publish && publish-manager postpublish"
+    "custom:publish": "publish-manager prepublish && npm publish && publish-manager postpublish"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
