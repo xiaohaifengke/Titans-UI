@@ -1,3 +1,13 @@
+# [0.2.0](https://github.com/xiaohaifengke/Titans-UI/compare/v0.1.4...v0.2.0) (2021-10-16)
+
+
+### Features
+
+* build ([9c41567](https://github.com/xiaohaifengke/Titans-UI/commit/9c4156760062224c8de1a700c774a5ce59d6ad63))
+* 为switch组件增加新功能 ([c85e29a](https://github.com/xiaohaifengke/Titans-UI/commit/c85e29a7e5d77518501724cdf3ea89f334a49803))
+
+
+
 ## [0.1.4](https://github.com/xiaohaifengke/Titans-UI/compare/v0.1.2...v0.1.4) (2021-10-15)
 
 
