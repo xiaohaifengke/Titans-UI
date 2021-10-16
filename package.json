@@ -46,7 +46,7 @@
     "prepare": "husky install",
     "cz": "git-cz",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
-    "custom:publish": "publish-manager prepublish && npm publish && publish-manager postpublish"
+    "custom:publish": "publish-manager cleanse && npm publish && publish-manager restore"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
