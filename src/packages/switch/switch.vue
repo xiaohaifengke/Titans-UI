@@ -46,6 +46,12 @@ export default defineComponent({
     offColor: {
       type: String
     },
+    handleOnColor: {
+      type: String
+    },
+    handleOffColor: {
+      type: String
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -82,7 +88,7 @@ export default defineComponent({
     ])
 
     const handleSize = computed(() => {
-      return (props.height ?? 20) - 4
+      return (props.height ?? 16) - 4
     })
 
     const switchStyles = computed(() => ({
@@ -101,7 +107,8 @@ export default defineComponent({
       width: handleSize.value + 'px',
       height: handleSize.value + 'px',
       left: isOn.value ? '100%' : '1px',
-      marginLeft: isOn.value ? -(handleSize.value + 1) + 'px' : 0
+      marginLeft: isOn.value ? -(handleSize.value + 1) + 'px' : 0,
+      backgroundColor: isOn.value ? props.handleOnColor : props.handleOffColor
     }))
     const handleChange = (e: Event) => {
       if (props.disabled) return
