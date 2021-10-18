@@ -12,7 +12,7 @@ function fractionCeil(d: number, number: number) {
   if (!d) {
     return Math.ceil(number)
   }
-  const numberStr = `${number + 1 / 10 ** 15}`
+  const numberStr = `${number + 10 ** -15}`
   const reg = new RegExp(`(^(-|\\\\+)?\\d+\\.\\d{${d}})\\d*`)
   const r = numberStr.match(reg)!
   return r && toFixed(d, +r[1] + (1 / 10 ** d) * (+r[1] > 0 ? 1 : -1))
