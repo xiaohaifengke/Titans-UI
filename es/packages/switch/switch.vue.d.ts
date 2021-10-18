@@ -27,6 +27,12 @@ declare const _default: import("vue").DefineComponent<{
     offColor: {
         type: StringConstructor;
     };
+    handleOnColor: {
+        type: StringConstructor;
+    };
+    handleOffColor: {
+        type: StringConstructor;
+    };
     disabled: {
         type: BooleanConstructor;
         default: boolean;
@@ -58,6 +64,7 @@ declare const _default: import("vue").DefineComponent<{
         height: string;
         left: string;
         marginLeft: string | number;
+        backgroundColor: string | undefined;
     }>;
     handleChange: (e: Event) => void;
     handleKeydown: (e: KeyboardEvent) => void;
@@ -73,6 +80,8 @@ declare const _default: import("vue").DefineComponent<{
     offValue?: unknown;
     onColor?: unknown;
     offColor?: unknown;
+    handleOnColor?: unknown;
+    handleOffColor?: unknown;
     disabled?: unknown;
     onText?: unknown;
     offText?: unknown;
@@ -87,6 +96,8 @@ declare const _default: import("vue").DefineComponent<{
     height?: number | undefined;
     onColor?: string | undefined;
     offColor?: string | undefined;
+    handleOnColor?: string | undefined;
+    handleOffColor?: string | undefined;
     onText?: string | undefined;
     offText?: string | undefined;
 }> & {

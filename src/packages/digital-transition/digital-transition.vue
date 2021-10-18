@@ -3,8 +3,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, toRefs, toRef, watch, ref, Ref } from 'vue'
-import { computed } from '@vue/runtime-core'
+import {
+  defineComponent,
+  onMounted,
+  toRefs,
+  toRef,
+  watch,
+  ref,
+  Ref,
+  computed
+} from 'vue'
 import { toFixed } from '../../utils'
 
 // 第n位小数“向上取整”
@@ -12,7 +20,7 @@ function fractionCeil(d: number, number: number) {
   if (!d) {
     return Math.ceil(number)
   }
-  const numberStr = `${number + 10 ** -15}`
+  const numberStr = `${number + 10 ** -14}`
   const reg = new RegExp(`(^(-|\\\\+)?\\d+\\.\\d{${d}})\\d*`)
   const r = numberStr.match(reg)!
   return r && toFixed(d, +r[1] + (1 / 10 ** d) * (+r[1] > 0 ? 1 : -1))

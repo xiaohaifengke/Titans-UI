@@ -1,17 +1,42 @@
 {
   "name": "titans-ui",
-  "version": "0.1.1",
-  "private": true,
+  "version": "0.2.1",
+  "description": "前端自研组件库",
+  "author": "Jhail <Jhail@foxmail.com>",
+  "homepage": "https://github.com/xiaohaifengke/Titans-UI#readme",
+  "license": "MIT",
   "main": "dist/index.js",
-  "module": "es1/index.js",
+  "module": "es/index.js",
   "typings": "es/index.d.ts",
   "style": "dist/index.css",
+  "unpkg": "dist/index.js",
+  "jsdevlivr": "dist/index.js",
+  "sideEffects": [
+    "dist/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaohaifengke/Titans-UI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xiaohaifengke/Titans-UI/issues"
+  },
   "files": [
     "dist",
+    "es",
     "src"
+  ],
+  "keywords": [
+    "titans-ui",
+    "Titans-UI",
+    "vue",
+    "vue3",
+    "rollup",
+    "typescript"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
+    "build": "npm run build:es && npm run build:umd",
     "build:pkg": "webpack -c ./build/webpack.js",
     "build:doc": "vue-cli-service build",
     "build:es": "rollup -c ./build/rollup.config.esm.js",
@@ -20,9 +45,14 @@
     "lint": "vue-cli-service lint",
     "prepare": "husky install",
     "cz": "git-cz",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "custom:publish": "publish-manager cleanse && npm publish && publish-manager restore"
+  },
+  "dependencies": {
+    "vue": "^3.2.20"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@commitlint/prompt-cli": "^13.1.0",
@@ -59,6 +89,7 @@
     "post-loader": "^2.0.0",
     "postcss-loader": "^4.3.0",
     "prettier": "^2.4.1",
+    "publish-manager": "^0.0.1",
     "rollup": "^2.57.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-scss": "^3.0.0",
@@ -82,9 +113,6 @@
     "webpack-cli": "^4.8.0",
     "webpack-merge": "^5.8.0"
   },
-  "peerDependencies": {
-    "vue": "^3.2.0"
-  },
   "lint-staged": {
     "(src|story)/**/*.vue": [
       "stylelint --fix",
@@ -104,8 +132,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "vue": "^3.2.0"
   }
 }

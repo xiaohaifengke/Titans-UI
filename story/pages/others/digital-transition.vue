@@ -17,6 +17,7 @@
       @updated="updated"
       >{{ value }}</ti-digital-transition
     >
+    <br />
     <ti-digital-transition :duration="300">360</ti-digital-transition>
   </div>
 </template>
