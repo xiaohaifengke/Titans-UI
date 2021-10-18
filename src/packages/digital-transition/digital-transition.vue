@@ -3,8 +3,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, toRefs, toRef, watch, ref, Ref } from 'vue'
-import { computed } from '@vue/runtime-core'
+import {
+  defineComponent,
+  onMounted,
+  toRefs,
+  toRef,
+  watch,
+  ref,
+  Ref,
+  computed
+} from 'vue'
 import { toFixed } from '../../utils'
 
 // 第n位小数“向上取整”
