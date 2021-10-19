@@ -20,7 +20,8 @@ function fractionCeil(d: number, number: number) {
   if (!d) {
     return Math.ceil(number)
   }
-  const numberStr = `${number + 10 ** -14}`
+  const numberLength = `${number}`.length
+  const numberStr = `${number + 10 ** -(16 - numberLength)}` // js限制整数位数+小数位数<=16位
   const reg = new RegExp(`(^(-|\\\\+)?\\d+\\.\\d{${d}})\\d*`)
   const r = numberStr.match(reg)!
   return r && toFixed(d, +r[1] + (1 / 10 ** d) * (+r[1] > 0 ? 1 : -1))

@@ -61,7 +61,7 @@ $border-color: #d9d9d9;
     animation: fade-in-overlay 0.25s ease;
   }
   .ti-dialog {
-    animation: zoom-in-down 0.4s both;
+    animation: zoom-in 0.4s both;
   }
 }
 .dialog-leave-active {
@@ -69,8 +69,30 @@ $border-color: #d9d9d9;
     animation: fade-out-overlay 0.25s ease forwards;
   }
   .ti-dialog {
-    transform-origin: center bottom;
-    animation: zoom-out-up 0.25s both;
+    //transform-origin: center bottom;
+    animation: zoom-out 0.25s both;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1);
   }
 }
 
