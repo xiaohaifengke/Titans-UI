@@ -13,6 +13,7 @@
           @click.self="clickOnOverlay"
         >
           <div
+            class="ti-dialog"
             :class="TiDialogClasses"
             :style="TiDialogStyles"
             role="dialog"
@@ -33,7 +34,7 @@
             <div class="ti-dialog-content">
               <slot></slot>
             </div>
-            <div class="ti-dialog-footer">
+            <div class="ti-dialog-footer" v-if="showFooter">
               <slot name="footer">
                 <TiButton
                   class="ti-dialog-footer-default-slot-button"
@@ -120,6 +121,10 @@ export default {
     destroyOnClose: {
       type: Boolean,
       default: false
+    },
+    showFooter: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:visible'],
@@ -148,10 +153,18 @@ export default {
       close()
     }
 
-    const TiDialogClasses = ['ti-dialog', props.customClass]
+    const TiDialogClasses = [props.customClass]
+
+    const digitalReg = /^\d+$/
     const TiDialogStyles = {
-      marginTop: typeof props.top === 'string' ? props.top : `${props.top}px`,
-      width: typeof props.width === 'string' ? props.width : `${props.width}px`
+      marginTop:
+        typeof props.top === 'string' && !digitalReg.test(props.top)
+          ? props.top
+          : `${props.top}px`,
+      width:
+        typeof props.width === 'string' && !digitalReg.test(props.width)
+          ? props.width
+          : `${props.width}px`
     }
 
     /**

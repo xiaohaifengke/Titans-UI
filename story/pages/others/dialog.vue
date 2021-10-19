@@ -1,5 +1,15 @@
 <template>
   <div class="dialog-demo">
+    <div
+      style="
+        position: fixed;
+        top: 800px;
+        left: 800px;
+        width: 1px;
+        height: 1px;
+        background-color: red;
+      "
+    ></div>
     <TiButton @click="showDialog">显示</TiButton>
     <TiDialog v-model:visible="visible" custom-class="custom-class-test">
       <template #title>
@@ -16,16 +26,20 @@
       <template #title>
         <div>这是 测试 title slot</div>
       </template>
-      TiDialog的默认slot
+      <AirdronePanel />
     </TiDialog>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import AirdronePanel from '../../components/AirdronePanel'
 
 export default {
   name: 'dialog-demo',
+  components: {
+    AirdronePanel
+  },
   setup() {
     let visible = ref(false)
     let visible1 = ref(false)
