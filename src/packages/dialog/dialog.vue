@@ -58,10 +58,9 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import TiIcon from '../icon/icon.vue'
 import TiButton from '../button/button.vue'
-import { computed } from '@vue/runtime-core'
 
 export default {
   name: 'TiDialog',
