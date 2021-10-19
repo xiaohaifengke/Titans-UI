@@ -1,3 +1,17 @@
+## [0.2.5](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.4...v0.2.5) (2021-10-19)
+
+
+### Bug Fixes
+
+* fixed an issue ([d4bb87c](https://github.com/xiaohaifengke/Titans-UI/commit/d4bb87c9d4c2e03086467a067bd65ab652f3bed0))
+
+
+### Features
+
+* build ([fe5ff7c](https://github.com/xiaohaifengke/Titans-UI/commit/fe5ff7c41b0f0a528542a5ca05999f877d504a86))
+
+
+
 ## [0.2.4](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.3...v0.2.4) (2021-10-19)
 
 
