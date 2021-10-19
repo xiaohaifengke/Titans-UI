@@ -1,3 +1,17 @@
+## [0.2.4](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.3...v0.2.4) (2021-10-19)
+
+
+### Bug Fixes
+
+* 修改dialog的bug ([2ea7cbf](https://github.com/xiaohaifengke/Titans-UI/commit/2ea7cbf50d315c2fdddf4842ca0669574d380377))
+
+
+### Features
+
+* build ([63dc571](https://github.com/xiaohaifengke/Titans-UI/commit/63dc57170fd7c80c1b7edb4d5e771923909e35b7))
+
+
+
 ## [0.2.3](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.2...v0.2.3) (2021-10-19)
 
 
