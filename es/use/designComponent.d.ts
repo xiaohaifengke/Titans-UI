@@ -25,16 +25,14 @@ export declare function designComponent<PropsOptions extends Readonly<ComponentP
     __isFragment?: undefined;
     __isTeleport?: undefined;
     __isSuspense?: undefined;
-    setup?: ((this: void, props: Readonly<{
-        [x: string]: any;
-    }>, ctx: SetupContext<Record<string, any>>) => void | object | import("vue").RenderFunction | Promise<object>) | undefined;
+    setup?: ((this: void, props: Readonly<{}>, ctx: SetupContext<{}>) => void | object | import("vue").RenderFunction | Promise<object>) | undefined;
     name: string;
     template?: string | object | undefined;
     render?: Function | undefined;
     components?: Record<string, import("vue").Component<any, any, any, Record<string, import("@vue/reactivity").ComputedGetter<any> | import("vue").WritableComputedOptions<any>>, import("vue").MethodOptions>> | undefined;
     directives?: Record<string, import("vue").Directive<any, any>> | undefined;
     inheritAttrs?: boolean | undefined;
-    emits?: (Record<string, any> & ThisType<void>) | (string[] & ThisType<void>) | undefined;
+    emits?: ThisType<void> | (string[] & ThisType<void>) | undefined;
     expose?: string[] | undefined;
     serverPrefetch?(): Promise<any>;
     compilerOptions?: import("vue").RuntimeCompilerOptions | undefined;
@@ -48,19 +46,7 @@ export declare function designComponent<PropsOptions extends Readonly<ComponentP
             __isSuspense?: undefined;
         } | null) => 2 | 3) | undefined;
     }) | undefined;
-    data?: ((this: import("vue").ComponentPublicInstance<Readonly<{
-        [x: string]: any;
-    }> & {}, {}, {}, {}, import("vue").MethodOptions, {}, Readonly<{
-        [x: string]: any;
-    }> & {}, {}, false, import("vue").ComponentOptionsBase<Readonly<{
-        [x: string]: any;
-    }> & {}, {}, {}, {}, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {}>>, vm: import("vue").ComponentPublicInstance<Readonly<{
-        [x: string]: any;
-    }> & {}, {}, {}, {}, import("vue").MethodOptions, {}, Readonly<{
-        [x: string]: any;
-    }> & {}, {}, false, import("vue").ComponentOptionsBase<Readonly<{
-        [x: string]: any;
-    }> & {}, {}, {}, {}, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {}>>) => {}) | undefined;
+    data?: ((this: import("vue").ComponentPublicInstance<Readonly<unknown>, {}, {}, {}, import("vue").MethodOptions, {}, Readonly<unknown>, {}, false, import("vue").ComponentOptionsBase<Readonly<unknown>, {}, {}, {}, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {}>>, vm: import("vue").ComponentPublicInstance<Readonly<unknown>, {}, {}, {}, import("vue").MethodOptions, {}, Readonly<unknown>, {}, false, import("vue").ComponentOptionsBase<Readonly<unknown>, {}, {}, {}, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {}>>) => {}) | undefined;
     computed?: Record<string, import("@vue/reactivity").ComputedGetter<any> | import("vue").WritableComputedOptions<any>> | undefined;
     methods?: import("vue").MethodOptions | undefined;
     watch?: Record<string, string | import("vue").WatchCallback<any, any> | ({

@@ -626,7 +626,7 @@ function fractionCeil(d, number) {
     if (!d) {
         return Math.ceil(number);
     }
-    const numberStr = `${number + 1 / Math.pow(10, 15)}`;
+    const numberStr = `${number + Math.pow(10, -14)}`;
     const reg = new RegExp(`(^(-|\\\\+)?\\d+\\.\\d{${d}})\\d*`);
     const r = numberStr.match(reg);
     return r && toFixed(d, +r[1] + (1 / Math.pow(10, d)) * (+r[1] > 0 ? 1 : -1));

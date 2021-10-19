@@ -8,5 +8,5 @@ declare const _default: import("vue").DefineComponent<{
     icon?: unknown;
 } & {
     icon: string;
-} & {}> & {}, {}>;
+} & {}>, {}>;
 export default _default;
