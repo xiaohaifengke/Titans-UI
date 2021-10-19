@@ -89,7 +89,7 @@
     "post-loader": "^2.0.0",
     "postcss-loader": "^4.3.0",
     "prettier": "^2.4.1",
-    "publish-manager": "^0.0.1",
+    "publish-manager": "0.0.1",
     "rollup": "^2.57.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-scss": "^3.0.0",
