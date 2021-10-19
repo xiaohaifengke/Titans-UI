@@ -399,6 +399,14 @@
       destroyOnClose: {
         type: Boolean,
         default: false
+      },
+      showHeader: {
+        type: Boolean,
+        default: true
+      },
+      showFooter: {
+        type: Boolean,
+        default: false
       }
     },
     emits: ['update:visible'],
@@ -427,11 +435,21 @@
         close();
       };
 
-      const TiDialogClasses = ['ti-dialog', props.customClass];
-      const TiDialogStyles = {
-        marginTop: typeof props.top === 'string' ? props.top : `${props.top}px`,
-        width: typeof props.width === 'string' ? props.width : `${props.width}px`
-      };
+      const TiDialogClasses = [props.customClass];
+
+      const digitalReg = /^\d+$/;
+      const TiDialogStyles = vue.computed(() => {
+        return {
+          marginTop:
+            typeof props.top === 'string' && !digitalReg.test(props.top)
+              ? props.top
+              : `${props.top}px`,
+          width:
+            typeof props.width === 'string' && !digitalReg.test(props.width)
+              ? props.width
+              : `${props.width}px`
+        }
+      });
 
       /**
        * props.visible, props.destroyOnClose, rendered: 是否已渲染
@@ -483,12 +501,21 @@
     key: 0,
     class: "ti-dialog-container"
   };
-  const _hoisted_2 = /*#__PURE__*/vue.createElementVNode("div", { class: "ti-dialog-overlay" }, null, -1 /* HOISTED */);
+  const _hoisted_2 = {
+    key: 0,
+    class: "ti-dialog-overlay"
+  };
   const _hoisted_3 = ["aria-label"];
-  const _hoisted_4 = { class: "ti-dialog-header" };
+  const _hoisted_4 = {
+    key: 0,
+    class: "ti-dialog-header"
+  };
   const _hoisted_5 = { class: "ti-dialog-title" };
   const _hoisted_6 = { class: "ti-dialog-content" };
-  const _hoisted_7 = { class: "ti-dialog-footer" };
+  const _hoisted_7 = {
+    key: 1,
+    class: "ti-dialog-footer"
+  };
 
   function render$1(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_TiIcon = vue.resolveComponent("TiIcon");
@@ -503,57 +530,63 @@
         default: vue.withCtx(() => [
           ($setup.vIf)
             ? vue.withDirectives((vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
-                _hoisted_2,
+                ($props.overlay)
+                  ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_2))
+                  : vue.createCommentVNode("v-if", true),
                 vue.createElementVNode("div", {
                   class: "ti-dialog-wrapper",
                   style: vue.normalizeStyle({ pointerEvents: $setup.vShow ? undefined : 'none' }),
                   onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => ($setup.clickOnOverlay && $setup.clickOnOverlay(...args)), ["self"]))
                 }, [
                   vue.createElementVNode("div", {
-                    class: vue.normalizeClass($setup.TiDialogClasses),
+                    class: vue.normalizeClass(["ti-dialog", $setup.TiDialogClasses]),
                     style: vue.normalizeStyle($setup.TiDialogStyles),
                     role: "dialog",
                     "aria-modal": "true",
                     "aria-label": $props.title || 'dialog'
                   }, [
-                    vue.createElementVNode("div", _hoisted_4, [
-                      vue.renderSlot(_ctx.$slots, "title", {}, () => [
-                        vue.createElementVNode("span", _hoisted_5, vue.toDisplayString($props.title), 1 /* TEXT */)
-                      ]),
-                      ($props.showClose)
-                        ? (vue.openBlock(), vue.createBlock(_component_TiIcon, {
-                            key: 0,
-                            class: "ti-dialog-close",
-                            icon: "close",
-                            onClick: $setup.close
-                          }, null, 8 /* PROPS */, ["onClick"]))
-                        : vue.createCommentVNode("v-if", true)
-                    ]),
+                    ($props.showHeader)
+                      ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_4, [
+                          vue.renderSlot(_ctx.$slots, "title", {}, () => [
+                            vue.createElementVNode("span", _hoisted_5, vue.toDisplayString($props.title), 1 /* TEXT */)
+                          ]),
+                          ($props.showClose)
+                            ? (vue.openBlock(), vue.createBlock(_component_TiIcon, {
+                                key: 0,
+                                class: "ti-dialog-close",
+                                icon: "close",
+                                onClick: $setup.close
+                              }, null, 8 /* PROPS */, ["onClick"]))
+                            : vue.createCommentVNode("v-if", true)
+                        ]))
+                      : vue.createCommentVNode("v-if", true),
                     vue.createElementVNode("div", _hoisted_6, [
                       vue.renderSlot(_ctx.$slots, "default")
                     ]),
-                    vue.createElementVNode("div", _hoisted_7, [
-                      vue.renderSlot(_ctx.$slots, "footer", {}, () => [
-                        vue.createVNode(_component_TiButton, {
-                          class: "ti-dialog-footer-default-slot-button",
-                          onClick: $setup.onCancel
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode(vue.toDisplayString($props.cancelText), 1 /* TEXT */)
-                          ]),
-                          _: 1 /* STABLE */
-                        }, 8 /* PROPS */, ["onClick"]),
-                        vue.createVNode(_component_TiButton, {
-                          class: "ti-dialog-footer-default-slot-button",
-                          onClick: $setup.onOk
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode(vue.toDisplayString($props.okText), 1 /* TEXT */)
-                          ]),
-                          _: 1 /* STABLE */
-                        }, 8 /* PROPS */, ["onClick"])
-                      ])
-                    ])
+                    ($props.showFooter)
+                      ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_7, [
+                          vue.renderSlot(_ctx.$slots, "footer", {}, () => [
+                            vue.createVNode(_component_TiButton, {
+                              class: "ti-dialog-footer-default-slot-button",
+                              onClick: $setup.onCancel
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(vue.toDisplayString($props.cancelText), 1 /* TEXT */)
+                              ]),
+                              _: 1 /* STABLE */
+                            }, 8 /* PROPS */, ["onClick"]),
+                            vue.createVNode(_component_TiButton, {
+                              class: "ti-dialog-footer-default-slot-button",
+                              onClick: $setup.onOk
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(vue.toDisplayString($props.okText), 1 /* TEXT */)
+                              ]),
+                              _: 1 /* STABLE */
+                            }, 8 /* PROPS */, ["onClick"])
+                          ])
+                        ]))
+                      : vue.createCommentVNode("v-if", true)
                   ], 14 /* CLASS, STYLE, PROPS */, _hoisted_3)
                 ], 4 /* STYLE */)
               ], 512 /* NEED_PATCH */)), [
@@ -630,7 +663,8 @@
       if (!d) {
           return Math.ceil(number);
       }
-      const numberStr = `${number + 1 / Math.pow(10, 15)}`;
+      const numberLength = `${number}`.length;
+      const numberStr = `${number + Math.pow(10, -(16 - numberLength))}`; // js限制整数位数+小数位数<=16位
       const reg = new RegExp(`(^(-|\\\\+)?\\d+\\.\\d{${d}})\\d*`);
       const r = numberStr.match(reg);
       return r && toFixed(d, +r[1] + (1 / Math.pow(10, d)) * (+r[1] > 0 ? 1 : -1));

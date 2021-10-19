@@ -1,3 +1,57 @@
+## [0.2.5](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.4...v0.2.5) (2021-10-19)
+
+
+### Bug Fixes
+
+* fixed an issue ([d4bb87c](https://github.com/xiaohaifengke/Titans-UI/commit/d4bb87c9d4c2e03086467a067bd65ab652f3bed0))
+
+
+### Features
+
+* build ([fe5ff7c](https://github.com/xiaohaifengke/Titans-UI/commit/fe5ff7c41b0f0a528542a5ca05999f877d504a86))
+
+
+
+## [0.2.4](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.3...v0.2.4) (2021-10-19)
+
+
+### Bug Fixes
+
+* 修改dialog的bug ([2ea7cbf](https://github.com/xiaohaifengke/Titans-UI/commit/2ea7cbf50d315c2fdddf4842ca0669574d380377))
+
+
+### Features
+
+* build ([63dc571](https://github.com/xiaohaifengke/Titans-UI/commit/63dc57170fd7c80c1b7edb4d5e771923909e35b7))
+
+
+
+## [0.2.3](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.2...v0.2.3) (2021-10-19)
+
+
+### Features
+
+* install devDependencies ([a981821](https://github.com/xiaohaifengke/Titans-UI/commit/a98182162b6933d3d442d83a07e45742be1b751c))
+* patch build ([84b3e24](https://github.com/xiaohaifengke/Titans-UI/commit/84b3e2443e1e0c54be0994f58dbc502eba9a70e3))
+* 修改dialog组件的动画效果及添加show-footer参数 ([1e79473](https://github.com/xiaohaifengke/Titans-UI/commit/1e7947388a1f919e48fd9ad9b6e20c0c8a3b3e98))
+
+
+
+## [0.2.2](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.1...v0.2.2) (2021-10-19)
+
+
+### Bug Fixes
+
+* fixed an issue ([8f087b0](https://github.com/xiaohaifengke/Titans-UI/commit/8f087b0e40ec4971ce6ab0e73e32fd42f6869797))
+
+
+### Features
+
+* build ([7629466](https://github.com/xiaohaifengke/Titans-UI/commit/76294664676b93757fe8a153e589241764ffd2a3))
+* 为switch组件增加新功能 ([d7db3bc](https://github.com/xiaohaifengke/Titans-UI/commit/d7db3bccc8c873db437d02c0f602ac71ec1d2183))
+
+
+
 ## [0.2.1](https://github.com/xiaohaifengke/Titans-UI/compare/v0.1.4...v0.2.1) (2021-10-18)
 
 

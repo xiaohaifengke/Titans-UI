@@ -39,7 +39,7 @@ declare const _default: import("vue").DefineComponent<{
     accuracy: number;
 } & {
     end?: number | undefined;
-}> & {}, {
+}>, {
     start: number;
     step: number;
     interval: number;

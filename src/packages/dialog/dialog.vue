@@ -6,7 +6,7 @@
       @afterLeave="afterLeave"
     >
       <div v-if="vIf" class="ti-dialog-container" v-show="vShow">
-        <div class="ti-dialog-overlay" />
+        <div class="ti-dialog-overlay" v-if="overlay" />
         <div
           class="ti-dialog-wrapper"
           :style="{ pointerEvents: vShow ? undefined : 'none' }"
@@ -20,7 +20,7 @@
             aria-modal="true"
             :aria-label="title || 'dialog'"
           >
-            <div class="ti-dialog-header">
+            <div class="ti-dialog-header" v-if="showHeader">
               <slot name="title">
                 <span class="ti-dialog-title">{{ title }}</span>
               </slot>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import TiIcon from '../icon/icon.vue'
 import TiButton from '../button/button.vue'
 
@@ -122,6 +122,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
     showFooter: {
       type: Boolean,
       default: false
@@ -156,16 +160,18 @@ export default {
     const TiDialogClasses = [props.customClass]
 
     const digitalReg = /^\d+$/
-    const TiDialogStyles = {
-      marginTop:
-        typeof props.top === 'string' && !digitalReg.test(props.top)
-          ? props.top
-          : `${props.top}px`,
-      width:
-        typeof props.width === 'string' && !digitalReg.test(props.width)
-          ? props.width
-          : `${props.width}px`
-    }
+    const TiDialogStyles = computed(() => {
+      return {
+        marginTop:
+          typeof props.top === 'string' && !digitalReg.test(props.top)
+            ? props.top
+            : `${props.top}px`,
+        width:
+          typeof props.width === 'string' && !digitalReg.test(props.width)
+            ? props.width
+            : `${props.width}px`
+      }
+    })
 
     /**
      * props.visible, props.destroyOnClose, rendered: 是否已渲染

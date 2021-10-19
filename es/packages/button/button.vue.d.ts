@@ -61,7 +61,7 @@ declare const _default: import("vue").DefineComponent<{
     label?: string | undefined;
     icon?: string | undefined;
 }> & {
-    onClick?: ((e: MouseEvent) => true) | undefined;
+    onClick?: ((e: MouseEvent) => any) | undefined;
 }, {
     mode: string;
     type: string;
