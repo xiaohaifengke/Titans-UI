@@ -94,6 +94,14 @@ export const MENUS: Array<AppMenu> = [
           title: 'Input',
           subtitle: '输入框'
         }
+      },
+      {
+        path: 'date-picker',
+        name: 'date-picker',
+        meta: {
+          title: 'TiDatePicker',
+          subtitle: '日期选择'
+        }
       }
     ]
   },

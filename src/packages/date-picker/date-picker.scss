@@ -1,0 +1,35 @@
+@include themes {
+  .ti-date-picker {
+    display: inline-block;
+    width: 220px;
+    height: 40px;
+  }
+
+  .ti-date-picker_popper {
+    width: 322px;
+    height: 340px;
+
+    .ti-date-picker_header {
+      margin: 10px;
+      font-size: map_get($defaultThemeMap, fontsize);
+      font-weight: 500;
+      text-align: center;
+
+      .ti-icon-d-arrow-left {
+        float: left;
+      }
+
+      .ti-icon-arrow-left {
+        float: left;
+      }
+
+      .ti-icon-arrow-right {
+        float: right;
+      }
+
+      .ti-icon-d-arrow-right {
+        float: right;
+      }
+    }
+  }
+}
