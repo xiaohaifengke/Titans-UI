@@ -1,0 +1,22 @@
+@import '../../style/theme-mixins';
+
+@mixin sizes($component) {
+  $default-height: map_get($defaultThemeMap, input-height-normal);
+
+  @each $sizeName in large, normal, small, mini {
+    .ti-input--inner,
+    .ti-input_icon--prefix,
+    .ti-input_icon--suffix {
+      height: $default-height;
+      line-height: $default-height;
+    }
+
+    &.ti-#{$component}-size-#{$sizeName} {
+      .ti-input--inner,
+      .ti-input_icon--prefix,
+      .ti-input_icon--suffix {
+        @content (map_get($globalThemeMap, #{'input-height-'+$sizeName}), $sizeName);
+      }
+    }
+  }
+}

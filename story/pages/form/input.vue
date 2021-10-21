@@ -1,19 +1,54 @@
 <template>
-  <ti-input v-model="value"></ti-input>
-
-  <h4>状态</h4>
+  <button @click="testbutton">focus</button>
+  <button @click="testClear">clear</button>
   <ti-input
-    v-for="item in statusList"
+    @clear="handleClear"
+    ref="tInput"
+    @change="testchange"
+    prefix-icon="edit"
+    @input="testInputEvent"
+    v-model="num"
+    clearable
+  ></ti-input>
+  <h4>slot</h4>
+  <ti-input type="number" v-model="value">
+    <template #prefix>
+      <ti-icon icon="paperclip"></ti-icon>
+    </template>
+    <template #suffix>
+      <ti-icon icon="reading"></ti-icon>
+    </template>
+  </ti-input>
+
+  <h4>disabled</h4>
+  <ti-input
+    v-model="value"
+    disabled
+    placeholder="请输入"
+    style="width: 220px; margin-right: 8px"
+  ></ti-input>
+  <h4>prefix or suffix icon</h4>
+  <ti-input
+    v-model="value"
+    prefix-icon="edit"
+    suffix-icon="warning-outline"
+    placeholder="请输入"
+    style="width: 220px; margin-right: 8px"
+  ></ti-input>
+  <h4>size</h4>
+  <ti-input
+    placeholder="请输入"
+    v-for="item in sizeList"
     :key="item"
-    :status="item"
-    style="margin-right: 8px"
+    :size="item"
+    style="width: 220px; margin-right: 8px"
   ></ti-input>
 
   <h4>类型提示</h4>
   <ti-input ref="myInput"></ti-input>
-  <button @click="outerClear">outer clear</button>
-  <button @click="outerFocus">outer focus</button>
-  <ti-button @click="changeValue">change value</ti-button>
+  <!--  <button @click="outerClear">outer clear</button>-->
+  <!--  <button @click="outerFocus">outer focus</button>-->
+  <!--  <ti-button @click="changeValue">change value</ti-button>-->
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -22,8 +57,28 @@ export default defineComponent({
   name: 'demo-input',
   data() {
     return {
+      num: 123,
       value: 'test',
-      statusList: ['', 'primary', 'success', 'warn', 'error', 'info']
+      sizeList: ['', 'large', 'normal', 'small', 'mini']
+    }
+  },
+  methods: {
+    testClear() {
+      this.$refs.tInput.clear()
+    },
+    handleClear() {
+      console.log('test clear')
+    },
+    testbutton() {
+      // console.log('click button')
+      console.log(this.$refs.tInput)
+      this.$refs.tInput.focus()
+    },
+    testchange(value) {
+      console.log('testchange', value)
+    },
+    testInputEvent(value) {
+      console.log('testInputEvent', value)
     }
   }
   // setup() {
