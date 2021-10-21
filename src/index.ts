@@ -5,6 +5,7 @@ import ButtonGroup from './packages/button-group'
 import Switch from './packages/switch'
 import Dialog from './packages/dialog'
 import DigitalTransition from './packages/digital-transition'
+import Input from './packages/input'
 import DatePicker from './packages/date-picker'
 
 const plugins = [
@@ -14,6 +15,7 @@ const plugins = [
   Switch,
   Dialog,
   DigitalTransition,
+  Input,
   DatePicker
 ]
 
@@ -32,6 +34,7 @@ export {
   Switch,
   Dialog,
   DigitalTransition,
+  Input,
   DatePicker,
   install
 }

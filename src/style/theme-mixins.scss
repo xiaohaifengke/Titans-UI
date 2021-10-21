@@ -1,0 +1,26 @@
+@import './theme/default';
+@import './theme/blue';
+@import './theme/violet';
+
+$themes: map_merge(map_merge($theme-default, $theme-blue), $theme-violet);
+$defaultThemeMap: map_get($theme-default, '');
+$globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
+@mixin themesUsingMap {
+  @each $themeName, $themeMap in $themes {
+    $themeMap: map_merge($defaultThemeMap, $themeMap);
+    $globalThemeMap: $themeMap !global;
+    @if str_length($themeName) > 0 {
+      .theme-#{$themeName} {
+        @content ($themeMap);
+      }
+    } @else {
+      @content ($themeMap);
+    }
+  }
+}
+
+@mixin themes {
+  @include themesUsingMap using ($themeMap) {
+    @content;
+  }
+}
