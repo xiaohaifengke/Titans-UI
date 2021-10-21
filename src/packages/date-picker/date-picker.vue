@@ -3,7 +3,7 @@
     <input class="ti-date-picker_input--date" :class="classes" type="text" />
     <span class="ti-date-picker_input--prefix"></span>
     <span class="ti-date-picker_input--suffix"></span>
-    <div class="ti-date-picker_popper">
+    <div class="ti-date-picker_popper" v-if="datePickerPanelVisible">
       <div class="ti-date-picker_wrapper">
         <div class="ti-date-picker_header">
           <ti-icon icon="d-arrow-left" />
@@ -18,9 +18,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import TiIcon from '../icon'
-import { computed } from '@vue/runtime-core'
 
 export default defineComponent({
   name: 'TiDatePicker',
@@ -43,10 +42,12 @@ export default defineComponent({
 
     const selectYear = ref(2021)
     const selectMonth = ref(10)
+    const datePickerPanelVisible = ref(false)
     return {
       selectYear,
       selectMonth,
-      classes
+      classes,
+      datePickerPanelVisible
     }
   }
 })
