@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import './iconfont'
 export default defineComponent({
   name: 'TiIcon',
   props: {
