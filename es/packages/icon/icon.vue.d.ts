@@ -1,4 +1,3 @@
-import './iconfont';
 declare const _default: import("vue").DefineComponent<{
     icon: {
         type: StringConstructor;

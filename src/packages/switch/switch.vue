@@ -27,10 +27,10 @@ export default defineComponent({
       default: 'primary'
     },
     width: {
-      type: Number
+      type: [Number, String]
     },
     height: {
-      type: Number
+      type: [Number, String]
     },
     onValue: {
       type: [Boolean, String, Number],

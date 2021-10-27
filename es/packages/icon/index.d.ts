@@ -1,3 +1,4 @@
+import './iconfont';
 declare const _default: {
     new (...args: any[]): any;
     __isFragment?: undefined;

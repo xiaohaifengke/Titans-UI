@@ -11,7 +11,7 @@
           } });
   }
 
-  var script$5 = vue.defineComponent({
+  var script$6 = vue.defineComponent({
       name: 'TiIcon',
       props: {
           icon: {
@@ -21,23 +21,23 @@
       }
   });
 
-  const _hoisted_1$5 = ["xlink:href"];
+  const _hoisted_1$6 = ["xlink:href"];
 
-  function render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function render$6(_ctx, _cache, $props, $setup, $data, $options) {
     return (vue.openBlock(), vue.createElementBlock("svg", {
       class: vue.normalizeClass(["ti-icon", `ti-icon-${_ctx.icon}`]),
       "aria-hidden": "true"
     }, [
       vue.createElementVNode("use", {
         "xlink:href": `#icon-${_ctx.icon}`
-      }, null, 8 /* PROPS */, _hoisted_1$5)
+      }, null, 8 /* PROPS */, _hoisted_1$6)
     ], 2 /* CLASS */))
   }
 
-  script$5.render = render$5;
-  script$5.__file = "src/packages/icon/icon.vue";
+  script$6.render = render$6;
+  script$6.__file = "src/packages/icon/icon.vue";
 
-  var Icon = installPlugins(script$5);
+  var Icon = installPlugins(script$6);
 
   var StyleShape;
   (function (StyleShape) {
@@ -61,7 +61,7 @@
       StyleType["danger"] = "danger";
       StyleType["info"] = "info";
   })(StyleType || (StyleType = {}));
-  var script$4 = vue.defineComponent({
+  var script$5 = vue.defineComponent({
       name: 'TiButton',
       components: { TiIcon: Icon },
       props: {
@@ -120,9 +120,9 @@
       }
   });
 
-  const _hoisted_1$4 = ["disabled"];
+  const _hoisted_1$5 = ["disabled"];
 
-  function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_TiIcon = vue.resolveComponent("TiIcon");
 
     return (vue.openBlock(), vue.createElementBlock("button", {
@@ -153,32 +153,32 @@
             icon: _ctx.icon
           }, null, 8 /* PROPS */, ["icon"]))
         : vue.createCommentVNode("v-if", true)
-    ], 10 /* CLASS, PROPS */, _hoisted_1$4))
+    ], 10 /* CLASS, PROPS */, _hoisted_1$5))
   }
 
-  script$4.render = render$4;
-  script$4.__file = "src/packages/button/button.vue";
+  script$5.render = render$5;
+  script$5.__file = "src/packages/button/button.vue";
 
-  var Button = installPlugins(script$4);
+  var Button = installPlugins(script$5);
 
-  var script$3 = {
+  var script$4 = {
       name: 'TiButtonGroup'
   };
 
-  const _hoisted_1$3 = { class: "ti-button-group" };
+  const _hoisted_1$4 = { class: "ti-button-group" };
 
-  function render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    return (vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
+  function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return (vue.openBlock(), vue.createElementBlock("div", _hoisted_1$4, [
       vue.renderSlot(_ctx.$slots, "default")
     ]))
   }
 
-  script$3.render = render$3;
-  script$3.__file = "src/packages/button-group/button-group.vue";
+  script$4.render = render$4;
+  script$4.__file = "src/packages/button-group/button-group.vue";
 
-  var ButtonGroup = installPlugins(script$3);
+  var ButtonGroup = installPlugins(script$4);
 
-  var script$2 = vue.defineComponent({
+  var script$3 = vue.defineComponent({
       name: 'TiSwitch',
       props: {
           modelValue: {
@@ -316,9 +316,9 @@
       }
   });
 
-  const _hoisted_1$2 = { class: "ti-switch-text" };
+  const _hoisted_1$3 = { class: "ti-switch-text" };
 
-  function render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  function render$3(_ctx, _cache, $props, $setup, $data, $options) {
     return (vue.openBlock(), vue.createElementBlock("button", {
       role: "switch",
       ref: "switchRef",
@@ -327,7 +327,7 @@
       onKeydown: _cache[0] || (_cache[0] = vue.withModifiers((...args) => (_ctx.handleKeydown && _ctx.handleKeydown(...args)), ["prevent","self"])),
       onClick: _cache[1] || (_cache[1] = (...args) => (_ctx.handleChange && _ctx.handleChange(...args)))
     }, [
-      vue.createElementVNode("span", _hoisted_1$2, vue.toDisplayString(_ctx.isOn ? _ctx.onText : _ctx.offText), 1 /* TEXT */),
+      vue.createElementVNode("span", _hoisted_1$3, vue.toDisplayString(_ctx.isOn ? _ctx.onText : _ctx.offText), 1 /* TEXT */),
       vue.createElementVNode("span", {
         class: "ti-switch-handle",
         style: vue.normalizeStyle(_ctx.handleStyles)
@@ -335,14 +335,14 @@
     ], 38 /* CLASS, STYLE, HYDRATE_EVENTS */))
   }
 
-  script$2.render = render$2;
-  script$2.__file = "src/packages/switch/switch.vue";
+  script$3.render = render$3;
+  script$3.__file = "src/packages/switch/switch.vue";
 
-  var Switch = installPlugins(script$2);
+  var Switch = installPlugins(script$3);
 
-  var script$1 = {
+  var script$2 = {
     name: 'TiDialog',
-    components: { TiIcon: script$5, TiButton: script$4 },
+    components: { TiIcon: script$6, TiButton: script$5 },
     props: {
       visible: {
         type: Boolean,
@@ -497,27 +497,27 @@
     }
   };
 
-  const _hoisted_1$1 = {
+  const _hoisted_1$2 = {
     key: 0,
     class: "ti-dialog-container"
   };
-  const _hoisted_2 = {
+  const _hoisted_2$1 = {
     key: 0,
     class: "ti-dialog-overlay"
   };
-  const _hoisted_3 = ["aria-label"];
-  const _hoisted_4 = {
+  const _hoisted_3$1 = ["aria-label"];
+  const _hoisted_4$1 = {
     key: 0,
     class: "ti-dialog-header"
   };
-  const _hoisted_5 = { class: "ti-dialog-title" };
+  const _hoisted_5$1 = { class: "ti-dialog-title" };
   const _hoisted_6 = { class: "ti-dialog-content" };
   const _hoisted_7 = {
     key: 1,
     class: "ti-dialog-footer"
   };
 
-  function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function render$2(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_TiIcon = vue.resolveComponent("TiIcon");
     const _component_TiButton = vue.resolveComponent("TiButton");
 
@@ -529,9 +529,9 @@
       }, {
         default: vue.withCtx(() => [
           ($setup.vIf)
-            ? vue.withDirectives((vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
+            ? vue.withDirectives((vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
                 ($props.overlay)
-                  ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_2))
+                  ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_2$1))
                   : vue.createCommentVNode("v-if", true),
                 vue.createElementVNode("div", {
                   class: "ti-dialog-wrapper",
@@ -546,9 +546,9 @@
                     "aria-label": $props.title || 'dialog'
                   }, [
                     ($props.showHeader)
-                      ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_4, [
+                      ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_4$1, [
                           vue.renderSlot(_ctx.$slots, "title", {}, () => [
-                            vue.createElementVNode("span", _hoisted_5, vue.toDisplayString($props.title), 1 /* TEXT */)
+                            vue.createElementVNode("span", _hoisted_5$1, vue.toDisplayString($props.title), 1 /* TEXT */)
                           ]),
                           ($props.showClose)
                             ? (vue.openBlock(), vue.createBlock(_component_TiIcon, {
@@ -587,7 +587,7 @@
                           ])
                         ]))
                       : vue.createCommentVNode("v-if", true)
-                  ], 14 /* CLASS, STYLE, PROPS */, _hoisted_3)
+                  ], 14 /* CLASS, STYLE, PROPS */, _hoisted_3$1)
                 ], 4 /* STYLE */)
               ], 512 /* NEED_PATCH */)), [
                 [vue.vShow, $setup.vShow]
@@ -599,10 +599,10 @@
     ]))
   }
 
-  script$1.render = render$1;
-  script$1.__file = "src/packages/dialog/dialog.vue";
+  script$2.render = render$2;
+  script$2.__file = "src/packages/dialog/dialog.vue";
 
-  var Dialog = installPlugins(script$1);
+  var Dialog = installPlugins(script$2);
 
   // manipulate camelCase to kebab-case
   /**
@@ -669,7 +669,7 @@
       const r = numberStr.match(reg);
       return r && toFixed(d, +r[1] + (1 / Math.pow(10, d)) * (+r[1] > 0 ? 1 : -1));
   }
-  var script = vue.defineComponent({
+  var script$1 = vue.defineComponent({
       name: 'TiDigitalTransition',
       props: {
           start: {
@@ -748,18 +748,219 @@
       }
   });
 
-  const _hoisted_1 = { class: "ti-tickValue-transition" };
+  const _hoisted_1$1 = { class: "ti-tickValue-transition" };
+
+  function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    return (vue.openBlock(), vue.createElementBlock("span", _hoisted_1$1, vue.toDisplayString(_ctx.digital), 1 /* TEXT */))
+  }
+
+  script$1.render = render$1;
+  script$1.__file = "src/packages/digital-transition/digital-transition.vue";
+
+  var DigitalTransition = installPlugins(script$1);
+
+  var script = vue.defineComponent({
+      name: 'TiInput',
+      props: {
+          modelValue: {
+              type: [String, Number]
+          },
+          size: {
+              type: String,
+              default: 'normal'
+          },
+          prefixIcon: {
+              type: String
+          },
+          suffixIcon: {
+              type: String
+          },
+          placeholder: {
+              type: String
+          },
+          clearable: {
+              type: Boolean,
+              default: false
+          },
+          disabled: {
+              type: Boolean,
+              default: false
+          },
+          type: {
+              type: String,
+              default: 'text'
+          },
+          name: {
+              type: String
+          },
+          readonly: {
+              type: Boolean,
+              default: false
+          },
+          max: {
+              type: String
+          },
+          min: {
+              type: String
+          },
+          step: {
+              type: String
+          }
+      },
+      emits: ['update:modelValue', 'focus', 'blur', 'change', 'clear', 'input'],
+      setup(props, { emit, slots }) {
+          const classes = vue.computed(() => [
+              `ti-input-type-${props.type}`,
+              `ti-input-size-${props.size}`,
+              {
+                  'ti-input--disabled': props.disabled
+              }
+          ]);
+          const prefixSlot = vue.toRef(slots, 'prefix');
+          const suffixSlot = vue.toRef(slots, 'suffix');
+          const inputInnerClasses = vue.computed(() => [
+              {
+                  'ti-input--prefix': props.prefixIcon || prefixSlot.value,
+                  'ti-input--suffix': props.suffixIcon || suffixSlot.value || props.clearable
+              }
+          ]);
+          const inputRef = vue.ref(null);
+          const model = vue.computed({
+              get: () => props.modelValue,
+              set: (val) => emit('update:modelValue', val)
+          });
+          const isFocused = vue.ref(false);
+          const isHover = vue.ref(false);
+          const clearIconVisible = vue.computed(() => {
+              return (model.value &&
+                  props.clearable &&
+                  !props.disabled &&
+                  !props.readonly &&
+                  (isFocused.value || isHover.value));
+          });
+          const methods = {
+              onFocus: (e) => {
+                  isFocused.value = true;
+                  emit('focus', e);
+              },
+              onBlur: (e) => {
+                  isFocused.value = false;
+                  emit('blur', e);
+              },
+              onInput: (e) => {
+                  emit('input', e.target.value);
+              },
+              onChange: (e) => {
+                  emit('change', e.target.value);
+              },
+              focus: () => {
+                  inputRef.value.focus();
+              },
+              clear: () => {
+                  model.value = '';
+                  emit('clear');
+              }
+          };
+          return Object.assign(Object.assign({ classes,
+              inputInnerClasses,
+              model,
+              inputRef }, methods), { prefixSlot,
+              suffixSlot,
+              clearIconVisible,
+              isHover });
+      }
+  });
+
+  const _hoisted_1 = ["type", "placeholder", "disabled", "name", "readonly", "max", "min", "step"];
+  const _hoisted_2 = {
+    key: 0,
+    class: "ti-input_icon--prefix"
+  };
+  const _hoisted_3 = { class: "ti-input_icon" };
+  const _hoisted_4 = {
+    key: 1,
+    class: "ti-input_icon--suffix"
+  };
+  const _hoisted_5 = { class: "ti-input_icon" };
 
   function render(_ctx, _cache, $props, $setup, $data, $options) {
-    return (vue.openBlock(), vue.createElementBlock("span", _hoisted_1, vue.toDisplayString(_ctx.digital), 1 /* TEXT */))
+    const _component_ti_icon = vue.resolveComponent("ti-icon");
+
+    return (vue.openBlock(), vue.createElementBlock("div", {
+      class: vue.normalizeClass(["ti-input", _ctx.classes]),
+      onMouseenter: _cache[6] || (_cache[6] = $event => (_ctx.isHover = true)),
+      onMouseleave: _cache[7] || (_cache[7] = $event => (_ctx.isHover = false))
+    }, [
+      vue.withDirectives(vue.createElementVNode("input", {
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((_ctx.model) = $event)),
+        ref: "inputRef",
+        class: vue.normalizeClass(["ti-input--inner", _ctx.inputInnerClasses]),
+        type: _ctx.type,
+        placeholder: _ctx.placeholder,
+        disabled: _ctx.disabled,
+        name: _ctx.name,
+        readonly: _ctx.readonly,
+        max: _ctx.max,
+        min: _ctx.min,
+        step: _ctx.step,
+        onFocus: _cache[1] || (_cache[1] = (...args) => (_ctx.onFocus && _ctx.onFocus(...args))),
+        onBlur: _cache[2] || (_cache[2] = (...args) => (_ctx.onBlur && _ctx.onBlur(...args))),
+        onInput: _cache[3] || (_cache[3] = (...args) => (_ctx.onInput && _ctx.onInput(...args))),
+        onChange: _cache[4] || (_cache[4] = (...args) => (_ctx.onChange && _ctx.onChange(...args)))
+      }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_1), [
+        [vue.vModelDynamic, _ctx.model]
+      ]),
+      (_ctx.prefixIcon || _ctx.prefixSlot)
+        ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_2, [
+            vue.createElementVNode("span", _hoisted_3, [
+              vue.renderSlot(_ctx.$slots, "prefix"),
+              (_ctx.prefixIcon)
+                ? (vue.openBlock(), vue.createBlock(_component_ti_icon, {
+                    key: 0,
+                    icon: _ctx.prefixIcon
+                  }, null, 8 /* PROPS */, ["icon"]))
+                : vue.createCommentVNode("v-if", true)
+            ])
+          ]))
+        : vue.createCommentVNode("v-if", true),
+      (_ctx.suffixIcon || _ctx.suffixSlot || _ctx.clearable)
+        ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_4, [
+            vue.createElementVNode("span", _hoisted_5, [
+              vue.renderSlot(_ctx.$slots, "suffix"),
+              (_ctx.suffixIcon)
+                ? (vue.openBlock(), vue.createBlock(_component_ti_icon, {
+                    key: 0,
+                    icon: _ctx.suffixIcon
+                  }, null, 8 /* PROPS */, ["icon"]))
+                : vue.createCommentVNode("v-if", true),
+              (_ctx.clearIconVisible)
+                ? (vue.openBlock(), vue.createBlock(_component_ti_icon, {
+                    key: 1,
+                    onMousedown: _cache[5] || (_cache[5] = vue.withModifiers(() => {}, ["prevent"])),
+                    onClickCapture: _ctx.clear,
+                    icon: "circle-close"
+                  }, null, 8 /* PROPS */, ["onClickCapture"]))
+                : vue.createCommentVNode("v-if", true)
+            ])
+          ]))
+        : vue.createCommentVNode("v-if", true)
+    ], 34 /* CLASS, HYDRATE_EVENTS */))
   }
 
   script.render = render;
-  script.__file = "src/packages/digital-transition/digital-transition.vue";
+  script.__file = "src/packages/input/input.vue";
 
-  var DigitalTransition = installPlugins(script);
+  var Input = installPlugins(script);
 
-  const plugins = [Button, ButtonGroup, Icon, Switch, Dialog, DigitalTransition];
+  const plugins = [
+      Button,
+      ButtonGroup,
+      Icon,
+      Switch,
+      Dialog,
+      DigitalTransition,
+      Input
+  ];
   function install(app) {
       plugins.forEach(app.use);
   }
@@ -772,6 +973,7 @@
   exports.Dialog = Dialog;
   exports.DigitalTransition = DigitalTransition;
   exports.Icon = Icon;
+  exports.Input = Input;
   exports.Switch = Switch;
   exports["default"] = index;
   exports.install = install;
