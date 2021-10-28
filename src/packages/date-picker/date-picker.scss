@@ -6,8 +6,11 @@
   }
 
   .ti-date-picker_popper {
-    width: 322px;
+    box-sizing: border-box;
+    width: 300px;
     height: 340px;
+    padding-top: 10px;
+    color: map-get($defaultThemeMap, default);
     border-radius: map-get($defaultThemeMap, default-border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 
@@ -16,6 +19,17 @@
       font-size: map_get($defaultThemeMap, fontsize);
       font-weight: 500;
       text-align: center;
+
+      .ti-icon-d-arrow-left,
+      .ti-icon-arrow-left,
+      .ti-icon-arrow-right,
+      .ti-icon-d-arrow-right {
+        padding: 0 5px;
+        cursor: pointer;
+        &:hover {
+          color: map-get($defaultThemeMap, primary);
+        }
+      }
 
       .ti-icon-d-arrow-left {
         float: left;
@@ -32,6 +46,54 @@
       .ti-icon-d-arrow-right {
         float: right;
       }
+
+      .ti-date-picker_year,
+      .ti-date-picker_month {
+        padding: 0 3px;
+        cursor: pointer;
+        &:hover {
+          color: map-get($defaultThemeMap, primary);
+        }
+      }
     }
+  }
+
+  .ti-date-picker_table {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ti-date-picker_td--head {
+    height: 32px;
+    cursor: pointer;
+  }
+
+  .ti-date-picker_td--body {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    border: 1px solid #eee;
+
+    .selected {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      color: #fff;
+      background-color: map-get($defaultThemeMap, primary);
+      border-radius: 50%;
+    }
+    .today {
+      color: map-get($defaultThemeMap, primary);
+    }
+
+    &:hover {
+      color: map-get($defaultThemeMap, primary);
+    }
+  }
+
+  .prev-month,
+  .next-month {
+    color: #b4bbce;
   }
 }
