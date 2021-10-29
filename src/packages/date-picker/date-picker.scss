@@ -3,12 +3,13 @@
     display: inline-block;
     width: 220px;
     height: 40px;
+    user-select: none;
   }
 
   .ti-date-picker_popper {
     box-sizing: border-box;
     width: 300px;
-    height: 340px;
+    //height: 340px;
     padding-top: 10px;
     color: map-get($defaultThemeMap, default);
     border-radius: map-get($defaultThemeMap, default-border-radius);
@@ -60,7 +61,67 @@
 
   .ti-date-picker_table {
     width: 100%;
+    height: 288px;
     text-align: center;
+
+    &--date {
+      .current-month {
+        .ti-date-picker_panel--text {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          padding: 3px;
+          line-height: 20px;
+          border-radius: 2px;
+          &:hover {
+            color: map-get($defaultThemeMap, primary);
+            background-color: #f6f6f6;
+          }
+          &.selected {
+            color: #fff;
+            background-color: map-get($defaultThemeMap, primary);
+          }
+        }
+      }
+    }
+
+    &--month {
+      .ti-date-picker_panel--text {
+        display: inline-block;
+        padding: 3px 5px;
+        line-height: 20px;
+        border-radius: 2px;
+
+        &:hover {
+          color: map-get($defaultThemeMap, primary);
+          background-color: #f6f6f6;
+        }
+        &.selected {
+          color: #fff;
+          background-color: map-get($defaultThemeMap, primary);
+        }
+      }
+    }
+
+    &--year {
+      .current-decade {
+        .ti-date-picker_panel--text {
+          display: inline-block;
+          padding: 3px 5px;
+          line-height: 20px;
+          border-radius: 2px;
+
+          &:hover {
+            color: map-get($defaultThemeMap, primary);
+            background-color: #f6f6f6;
+          }
+          &.selected {
+            color: #fff;
+            background-color: map-get($defaultThemeMap, primary);
+          }
+        }
+      }
+    }
   }
 
   .ti-date-picker_td--head {
@@ -73,27 +134,15 @@
     height: 36px;
     cursor: pointer;
     border: 1px solid #eee;
-
-    .selected {
-      display: inline-block;
-      width: 26px;
-      height: 26px;
-      line-height: 26px;
-      color: #fff;
-      background-color: map-get($defaultThemeMap, primary);
-      border-radius: 50%;
-    }
-    .today {
-      color: map-get($defaultThemeMap, primary);
-    }
-
-    &:hover {
+    .current {
       color: map-get($defaultThemeMap, primary);
     }
   }
 
   .prev-month,
-  .next-month {
+  .next-month,
+  .prev-decade,
+  .next-decade {
     color: #b4bbce;
   }
 }
