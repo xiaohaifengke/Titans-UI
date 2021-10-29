@@ -1,0 +1,15 @@
+@include themes {
+  .ti-time-picker {
+    display: inline-block;
+    width: 220px;
+    height: 40px;
+    user-select: none;
+  }
+
+  .ti-time-picker_panel {
+    width: 150px;
+    height: 210px;
+    border-radius: map-get($defaultThemeMap, default-border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+}

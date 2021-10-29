@@ -99,8 +99,16 @@ export const MENUS: Array<AppMenu> = [
         path: 'date-picker',
         name: 'date-picker',
         meta: {
-          title: 'TiDatePicker',
+          title: 'DatePicker',
           subtitle: '日期选择'
+        }
+      },
+      {
+        path: 'time-picker',
+        name: 'time-picker',
+        meta: {
+          title: 'TimePicker',
+          subtitle: '时间选择'
         }
       }
     ]

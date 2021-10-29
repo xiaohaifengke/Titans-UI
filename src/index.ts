@@ -7,6 +7,7 @@ import Dialog from './packages/dialog'
 import DigitalTransition from './packages/digital-transition'
 import Input from './packages/input'
 import DatePicker from './packages/date-picker'
+import TimePicker from './packages/time-picker'
 
 const plugins = [
   Button,
@@ -16,7 +17,8 @@ const plugins = [
   Dialog,
   DigitalTransition,
   Input,
-  DatePicker
+  DatePicker,
+  TimePicker
 ]
 
 function install(app: App) {
@@ -36,5 +38,6 @@ export {
   DigitalTransition,
   Input,
   DatePicker,
+  TimePicker,
   install
 }
