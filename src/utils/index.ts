@@ -8,8 +8,8 @@ export function kebabCase(str: string): string {
 
 /**
  * 重写js native toFixed 方法
- * @param d
- * @param number
+ * @param d 保留的小数位数
+ * @param number 需要四舍五入的数字
  * @returns { string | number }
  */
 export function toFixed(d: string | number, number: any) {
@@ -54,4 +54,8 @@ export function toFixed(d: string | number, number: any) {
   }
   // @ts-ignore
   return this + ''
+}
+
+export function validatorInt(val: number | string): boolean {
+  return /^\d+$/.test(`${val}`)
 }

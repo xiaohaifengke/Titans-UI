@@ -2,6 +2,9 @@
   font-family: $font;
 }
 
-.pl-select-none {
-  user-select: none !important;
+[class^='ti-'],
+[class^='ti-'] *,
+[class^='ti-'] *::before,
+[class^='ti-'] *::after {
+  box-sizing: border-box;
 }
