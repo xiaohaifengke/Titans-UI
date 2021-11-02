@@ -88,7 +88,7 @@ export default defineComponent({
     ])
 
     const handleSize = computed(() => {
-      return (props.height ?? 16) - 4
+      return +(props.height ?? 16) - 4
     })
 
     const switchStyles = computed(() => ({
@@ -97,11 +97,11 @@ export default defineComponent({
       backgroundColor: isOn.value ? props.onColor : props.offColor,
       borderColor: isOn.value ? props.onColor : props.offColor,
       paddingRight: isOn.value
-        ? (props.height ?? 20) + 'px'
-        : (props.height ?? 20) / 2 + 'px',
+        ? +(props.height ?? 20) + 'px'
+        : +(props.height ?? 20) / 2 + 'px',
       paddingLeft: isOn.value
-        ? (props.height ?? 20) / 2 + 'px'
-        : (props.height ?? 20) + 'px'
+        ? +(props.height ?? 20) / 2 + 'px'
+        : +(props.height ?? 20) + 'px'
     }))
     const handleStyles = computed(() => ({
       width: handleSize.value + 'px',
