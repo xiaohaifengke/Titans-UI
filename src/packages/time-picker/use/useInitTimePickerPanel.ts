@@ -54,7 +54,6 @@ export function useInitTimePickerPanel(props: any, { emit }: SetupContext) {
   watch(
     () => model.value,
     (val) => {
-      console.log(getPanelDateByInputDate(val))
       panel.time = getPanelDateByInputDate(val)
     }
   )
