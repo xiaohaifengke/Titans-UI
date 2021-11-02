@@ -83,7 +83,7 @@ export const MENUS: Array<AppMenu> = [
         path: 'switch',
         name: 'switch',
         meta: {
-          title: 'switch',
+          title: 'Switch',
           subtitle: '切换开关'
         }
       },
@@ -116,8 +116,16 @@ export const MENUS: Array<AppMenu> = [
         path: 'digital-transition',
         name: 'digital-transition',
         meta: {
-          title: 'TiDigitalTransition',
+          title: 'DigitalTransition',
           subtitle: '数字累加'
+        }
+      },
+      {
+        path: 'widget',
+        name: 'widget',
+        meta: {
+          title: 'Widget',
+          subtitle: '小零件'
         }
       }
     ]

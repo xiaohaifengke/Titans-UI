@@ -6,6 +6,7 @@ import Switch from './packages/switch'
 import Dialog from './packages/dialog'
 import DigitalTransition from './packages/digital-transition'
 import Input from './packages/input'
+import Widget from './packages/widget'
 
 const plugins = [
   Button,
@@ -14,7 +15,8 @@ const plugins = [
   Switch,
   Dialog,
   DigitalTransition,
-  Input
+  Input,
+  Widget
 ]
 
 function install(app: App) {
@@ -33,5 +35,6 @@ export {
   Dialog,
   DigitalTransition,
   Input,
+  Widget,
   install
 }
