@@ -14,7 +14,7 @@
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Voice',
+  name: 'TiVoice',
   props: {
     type: {
       type: String,
@@ -66,7 +66,7 @@ export default defineComponent({
     width: 1.055em;
     height: 1.055em;
     overflow: hidden;
-    font-size: 15px;
+    font-size: 25px;
     background: radial-gradient(
       circle 0.14em at top left,
       map-get($globalThemeMap, default) 100%,
