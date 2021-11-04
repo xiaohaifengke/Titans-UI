@@ -29,7 +29,7 @@ import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import clickOutside from '../../utils/clickOutside'
 import TiInput from '../input'
-import TimePanel from './components/time-panel'
+import TimePanel from './components/time-panel.vue'
 import {
   useInitTimePickerPanel,
   formatTime

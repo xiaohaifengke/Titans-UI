@@ -19,7 +19,11 @@
 import { computed, defineComponent, nextTick, onMounted, ref } from 'vue'
 import { toFixed, validatorInt } from '../../../utils'
 import { scrollTo } from '../../../utils/scroll-to'
-
+interface PanelItem {
+  disabled: boolean
+  label: string
+  value: number
+}
 export default defineComponent({
   name: 'TimePanel',
   props: {
@@ -49,8 +53,8 @@ export default defineComponent({
     const timePanel = ref(null)
     const list = computed(() => {
       const length = Math.ceil((props.end - props.start) / props.step + 1)
-      return Array.from({ length }).map((item, index) => {
-        item = props.start + props.step * index
+      return Array.from({ length }).map((u, index): PanelItem => {
+        let item = props.start + props.step * index
         item = item > props.end ? props.end : item
         return {
           value: item,
@@ -73,13 +77,13 @@ export default defineComponent({
       )
       const scrollTop = Math.max(activeIndex, 0) * 30
       if (transition) {
-        scrollTo(timePanel.value, scrollTop, 300, () => {
+        scrollTo(timePanel.value!, scrollTop, 300, () => {
           setTimeout(() => {
             panelScrollDisable.value = false
           }, 20) // hack: 尽量确保在callback在最后一次scroll事件之后执行
         })
       } else {
-        timePanel.value.scrollTop = scrollTop
+        ;(timePanel.value as any).scrollTop = scrollTop
         setTimeout(() => {
           panelScrollDisable.value = false
         }, 20) // hack: 尽量确保在此期间不会触发scroll事件
@@ -91,7 +95,7 @@ export default defineComponent({
 
     const panelScroll = () => {
       if (!panelScrollDisable.value) {
-        const activeIndex = toFixed(0, timePanel.value.scrollTop / 30)
+        const activeIndex = toFixed(0, (timePanel.value as any).scrollTop / 30)
         const activeValue = list.value[+activeIndex].value
         // hack: 值未改变时不触发,这样即使触发了scroll事件，但是若未滚动，即值未改变，也不会触发事件
         if (props.modelValue !== activeValue) {
@@ -100,7 +104,7 @@ export default defineComponent({
       }
     }
 
-    const handleClick = (value) => {
+    const handleClick = (value: number) => {
       emit('update:modelValue', value)
       if (props.modelValue !== value) {
         scrollToModelValue(value, true, true)
