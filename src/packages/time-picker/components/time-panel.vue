@@ -3,10 +3,12 @@
     <div class="ti-time-panel" @scroll="panelScroll" ref="timePanel">
       <ul class="ti-time-panel_list">
         <li
+          tabindex="0"
           v-for="item in list"
           :key="item.value"
           class="ti-time-panel_list--item"
           @click="handleClick(item.value)"
+          @keydown.enter="handleClick(item.value)"
         >
           {{ item.label }}
         </li>
@@ -16,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import { toFixed, validatorInt } from '../../../utils'
 import { scrollTo } from '../../../utils/scroll-to'
 interface PanelItem {
@@ -160,9 +162,17 @@ export default defineComponent({
 
   .ti-time-panel_list--item {
     height: $panel-item;
-    padding-left: 10px;
+    padding-left: 12px;
     line-height: $panel-item;
     list-style: none;
+    outline: none;
+
+    &:hover {
+      background-color: transparentize(map-get($globalThemeMap, default), 0.9);
+    }
+    &:focus {
+      color: map-get($globalThemeMap, primary);
+    }
   }
 }
 </style>
