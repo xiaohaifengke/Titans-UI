@@ -1,6 +1,7 @@
 <template>
   <div class="time-picker-demo">
-    <TiTimePicker v-model="value1" />
+    <TiTimePicker v-model="value1" format="HH时mm分ss秒" />
+    <TiTimePicker v-model="value1" type="hm" />
   </div>
 </template>
 

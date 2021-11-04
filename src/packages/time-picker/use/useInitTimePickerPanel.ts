@@ -20,11 +20,12 @@ function getPanelDateByInputDate(time: string | undefined) {
 export function formatTime(time: string | undefined, format = 'HH:mm:ss') {
   return getPanelDateByInputDate(time).format(format)
 }
+
 export function useInitTimePickerPanel(props: any, { emit }: { emit: any }) {
   // 显示的值
   const model = computed({
     get: () => {
-      return props.modelValue && formatTime(props.modelValue)
+      return props.modelValue && formatTime(props.modelValue, props.format)
     },
     set: (val: string) => emit('update:modelValue', val)
   })
