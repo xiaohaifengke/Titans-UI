@@ -67,7 +67,7 @@ const focusHandler = (props: any) => {
   const datePickerPanelVisible = ref(false)
 
   const panel = reactive({
-    mode: 'date',
+    mode: props.mode,
     date: getPanelDateByInputDate(props.modelValue),
     get dateFormat() {
       return this.date.format('YYYY-MM-DD HH:mm:ss')
@@ -92,7 +92,7 @@ const focusHandler = (props: any) => {
     }
   )
   const handleFocus = () => {
-    panel.mode = 'date'
+    panel.mode = props.mode
     // 此时不更新 panel 的值
     // panel.date = getPanelDateByInputDate(props.modelValue)
     datePickerPanelVisible.value = true
@@ -130,6 +130,10 @@ export default defineComponent({
     valueFormat: {
       type: String,
       default: 'YYYY-MM-DD'
+    },
+    mode: {
+      type: String,
+      default: 'date'
     }
   },
   emits: ['update:modelValue'],
@@ -165,17 +169,21 @@ export default defineComponent({
     })
 
     // 选择日期
-    const updatePanelDate = (date: number) => {
-      if (panel.mode === 'year') {
-        panel.date = panel.date.year(date)
-        panel.mode = 'month'
-      } else if (panel.mode === 'month') {
-        panel.date = panel.date.month(date)
-        panel.mode = 'date'
+    const updatePanelDate = (date: string) => {
+      const order = ['year', 'month', 'date']
+      if (props.mode === 'datetime') {
+        console.log('datetime')
       } else {
-        // date
-        model.value = panel.date.date(date).format(props.valueFormat)
-        datePickerPanelVisible.value = false
+        const propsModeIndexInOrder = order.indexOf(props.mode)
+        const panelModeIndexInOrder = order.indexOf(panel.mode)
+        if (propsModeIndexInOrder < 0 || panelModeIndexInOrder < 0) return
+        if (propsModeIndexInOrder > panelModeIndexInOrder) {
+          panel.date = dayjs(date)
+          panel.mode = order[panelModeIndexInOrder + 1]
+        } else {
+          model.value = dayjs(date).format(props.valueFormat)
+          datePickerPanelVisible.value = false
+        }
       }
     }
     // 切换年月。val：月份数 prevYear: -12, prevMonth: -1, nextMonth: 1, nextYear: 12

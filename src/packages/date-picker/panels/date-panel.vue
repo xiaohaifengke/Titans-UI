@@ -11,7 +11,7 @@
       <tr v-for="row in 6" :key="row">
         <td
           @click.stop="
-            $emit('update:panelDate', dates[getDataIndex(row, col)].day)
+            $emit('update:panelDate', dates[getDataIndex(row, col)].date)
           "
           v-for="col in 7"
           :key="col"

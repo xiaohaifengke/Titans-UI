@@ -1,6 +1,15 @@
 <template>
   <div class="ti-date-picker-demo">
+    <p>default</p>
     <TiDatePicker v-model="value1" />
+    <p>date</p>
+    <TiDatePicker v-model="value2" mode="date" />
+    <p>month</p>
+    <TiDatePicker v-model="value3" mode="month" />
+    <p>year</p>
+    <TiDatePicker v-model="value4" mode="year" />
+    <p>datetime</p>
+    <TiDatePicker v-model="value5" mode="datetime" />
   </div>
 </template>
 
@@ -9,7 +18,11 @@ export default {
   name: 'date-picker',
   data() {
     return {
-      value1: ''
+      value1: '',
+      value2: '',
+      value3: '',
+      value4: '',
+      value5: ''
     }
   }
 }

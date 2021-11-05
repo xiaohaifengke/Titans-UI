@@ -31,7 +31,7 @@ interface YearInfo {
 export const useGenerateDays = (
   date: Dayjs | string | number | undefined,
   modelValue: any,
-  valueFormat?: string
+  valueFormat: string
 ): DateInfo[] => {
   const currentDateFormat = dayjs().format('YYYY-MM-DD')
   const sel = dayjs(modelValue)
@@ -71,7 +71,7 @@ export const useGenerateDays = (
 export const useGenerateMonths = (
   date: Dayjs | string | number | undefined,
   modelValue: any,
-  valueFormat?: string
+  valueFormat: string
 ): MonthInfo[] => {
   const months = [
     '一月',
@@ -111,7 +111,7 @@ export const useGenerateMonths = (
 export const useGenerateYears = (
   date: Dayjs | string | number | undefined,
   modelValue: any,
-  valueFormat?: string
+  valueFormat: string
 ): YearInfo[] => {
   const currentYear = dayjs().year()
   const sel = dayjs(modelValue)

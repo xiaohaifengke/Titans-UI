@@ -4,7 +4,7 @@
       <tr v-for="row in 4" :key="row">
         <td
           @click.stop="
-            $emit('update:panelDate', years[getDataIndex(row, col)].y)
+            $emit('update:panelDate', years[getDataIndex(row, col)].date)
           "
           v-for="col in 3"
           :key="col"
@@ -40,7 +40,7 @@ export default defineComponent({
       default: 'YYYY'
     }
   },
-  emits: [],
+  emits: ['update:panelDate'],
   setup(props) {
     const getDataIndex = useCreateGetDataIndex('year')
     // 日期列表
