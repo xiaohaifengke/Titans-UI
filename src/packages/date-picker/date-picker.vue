@@ -9,21 +9,16 @@
     />
     <div class="ti-date-picker_popper" v-if="datePickerPanelVisible">
       <div class="ti-date-picker_wrapper">
-        <div class="ti-date-picker_header">
-          <ti-icon icon="d-arrow-left" @click="changePanelDate(-12)" />
-          <ti-icon icon="arrow-left" @click="changePanelDate(-1)" />
-          <span class="ti-date-picker_year" @click="panel.mode = 'year'">{{
-            panelYearFilter(panel.year)
-          }}</span>
-          <span
-            v-if="panel.mode === 'date'"
-            class="ti-date-picker_month"
-            @click="panel.mode = 'month'"
-            >{{ panel.month }} 月</span
-          >
-          <ti-icon icon="d-arrow-right" @click="changePanelDate(12)" />
-          <ti-icon icon="arrow-right" @click="changePanelDate(1)" />
-        </div>
+        <TiDatePickerPanelHeader
+          :mode="panel.mode"
+          :year="panel.year"
+          :month="panel.month"
+          :date="panel.dateStr"
+          :time="panel.time"
+          @update:mode="(mode) => (panel.mode = mode)"
+          @changePanelDate="changePanelDate"
+          class="ti-date-picker_header"
+        />
         <div class="ti-date-picker_body">
           <TiYearPanel
             v-if="panel.mode === 'year'"
@@ -54,13 +49,12 @@
 <script lang="ts">
 import { defineComponent, ref, computed, reactive, watch } from 'vue'
 import dayjs from 'dayjs'
-import { Dayjs } from 'dayjs'
 import clickOutside from '../../utils/clickOutside'
-import TiIcon from '../icon'
 import TiInput from '../input'
 import TiDatePanel from './panels/date-panel.vue'
 import TiMonthPanel from './panels/month-panel.vue'
 import TiYearPanel from './panels/year-panel.vue'
+import TiDatePickerPanelHeader from './panels/date-picker-panel-header.vue'
 
 // 根据输入框中的值得到日期面板的值
 function getPanelDateByInputDate(date: string | undefined) {
@@ -83,6 +77,12 @@ const focusHandler = (props: any) => {
     },
     get month() {
       return this.date.month() + 1
+    },
+    get dateStr() {
+      return this.date.date()
+    },
+    get time() {
+      return `${this.date.hour()}:${this.date.minute()}:${this.date.second()}`
     }
   })
   watch(
@@ -93,6 +93,7 @@ const focusHandler = (props: any) => {
   )
   const handleFocus = () => {
     panel.mode = 'date'
+    // 此时不更新 panel 的值
     // panel.date = getPanelDateByInputDate(props.modelValue)
     datePickerPanelVisible.value = true
   }
@@ -132,7 +133,13 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  components: { TiIcon, TiInput, TiDatePanel, TiMonthPanel, TiYearPanel },
+  components: {
+    TiInput,
+    TiDatePickerPanelHeader,
+    TiDatePanel,
+    TiMonthPanel,
+    TiYearPanel
+  },
   setup(props, { emit }) {
     const classes = computed(() => {
       return {
@@ -176,15 +183,6 @@ export default defineComponent({
       panel.date = panel.date.add(val, 'month')
     }
 
-    const panelYearFilter = (year: number) => {
-      if (panel.mode === 'year') {
-        const start = parseInt(`${year / 10}`) * 10
-        const end = start + 9
-        return `${start} 年 - ${end} 年`
-      } else {
-        return `${year} 年`
-      }
-    }
     return {
       model,
       classes,
@@ -193,8 +191,7 @@ export default defineComponent({
       handleBlur,
       panel,
       updatePanelDate,
-      changePanelDate,
-      panelYearFilter
+      changePanelDate
     }
   }
 })

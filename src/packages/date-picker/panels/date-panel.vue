@@ -69,6 +69,10 @@ export default defineComponent({
   height: 288px;
   text-align: center;
 
+  .ti-date-picker_td--head {
+    height: 30px;
+  }
+
   .current-month {
     .ti-date-picker_panel--text {
       display: inline-block;
