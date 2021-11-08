@@ -27,7 +27,7 @@ interface PanelItem {
   value: number
 }
 export default defineComponent({
-  name: 'TimePanel',
+  name: 'TiTimePanel',
   props: {
     modelValue: {
       type: Number,

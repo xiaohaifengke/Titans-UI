@@ -14,7 +14,7 @@
           v-for="p in pattern"
           :key="p.id"
         >
-          <TimePanel
+          <TiTimePanel
             :start="p.start"
             :step="p.step"
             :end="p.end"
@@ -38,7 +38,7 @@ import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import clickOutside from '../../utils/clickOutside'
 import TiInput from '../input'
-import TimePanel from './components/time-panel.vue'
+import TiTimePanel from './components/time-panel.vue'
 import {
   useInitTimePickerPanel,
   formatTime
@@ -48,7 +48,7 @@ import { usePattern } from '../../packages/time-picker/use/usePattern'
 export default defineComponent({
   name: 'TiTimePicker',
   directives: { clickOutside },
-  components: { TiInput, TimePanel },
+  components: { TiInput, TiTimePanel },
   emits: ['update:modelValue'],
   props: {
     modelValue: String,

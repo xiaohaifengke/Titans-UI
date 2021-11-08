@@ -2,15 +2,32 @@
   <div class="ti-date-picker-panel-header">
     <TiIcon icon="d-arrow-left" @click="$emit('changePanelDate', -12)" />
     <TiIcon icon="arrow-left" @click="$emit('changePanelDate', -1)" />
-    <span class="ti-date-picker_year" @click="$emit('update:mode', 'year')">{{
-      panelYearFilter(year)
-    }}</span>
     <span
-      v-if="mode === 'date'"
+      v-if="panelMode !== 'time'"
+      class="ti-date-picker_year"
+      @click="$emit('update:panelMode', 'year')"
+      >{{ panelYearFilter(year) }}</span
+    >
+    <span
+      v-if="panelMode === 'date'"
       class="ti-date-picker_month"
-      @click="$emit('update:mode', 'month')"
+      @click="$emit('update:panelMode', 'month')"
       >{{ month }} 月</span
     >
+    <span
+      v-if="pickerMode === 'datetime' && panelMode === 'time'"
+      class="ti-date-picker_date"
+      @click="$emit('update:panelMode', 'date')"
+    >
+      {{ `${panelYearFilter(year)} ${month}月 ${date}日` }}
+    </span>
+    <span
+      v-if="pickerMode === 'datetime' && panelMode === 'date'"
+      class="ti-date-picker_date"
+      @click="$emit('update:panelMode', 'time')"
+    >
+      {{ time }}
+    </span>
     <TiIcon icon="d-arrow-right" @click="$emit('changePanelDate', 12)" />
     <TiIcon icon="arrow-right" @click="$emit('changePanelDate', 1)" />
   </div>
@@ -24,7 +41,11 @@ export default defineComponent({
   name: 'TiDatePickerPanelHeader',
   components: { TiIcon },
   props: {
-    mode: {
+    pickerMode: {
+      type: String,
+      default: 'date'
+    },
+    panelMode: {
       type: String,
       default: 'date'
       // validator(val: string) {
@@ -36,10 +57,10 @@ export default defineComponent({
     date: [String, Number],
     time: [String, Number]
   },
-  emits: ['update:mode', 'changePanelDate'],
+  emits: ['update:panelMode', 'changePanelDate'],
   setup(props) {
     const panelYearFilter = (year: number) => {
-      if (props.mode === 'year') {
+      if (props.panelMode === 'year') {
         const start = parseInt(`${year / 10}`) * 10
         const end = start + 9
         return `${start} 年 - ${end} 年`
@@ -55,7 +76,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
 .ti-date-picker-panel-header {
   padding: 10px;
   font-size: map_get($defaultThemeMap, fontsize);
@@ -90,7 +111,8 @@ export default defineComponent({
   }
 
   .ti-date-picker_year,
-  .ti-date-picker_month {
+  .ti-date-picker_month,
+  .ti-date-picker_date {
     padding: 0 3px;
     cursor: pointer;
     &:hover {

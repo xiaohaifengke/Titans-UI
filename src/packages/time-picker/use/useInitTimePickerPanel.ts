@@ -1,13 +1,16 @@
 import { computed, reactive, ref, SetupContext, watch } from 'vue'
 import dayjs from 'dayjs'
-
+export function parseTime(time: string) {
+  const timeReg =
+    /^(?<hours>(\d+))[^\d](?<minutes>(\d+))[^\d](?<seconds>(\d+))$/
+  const r = time.match(timeReg)
+  const { hours, minutes, seconds } = r?.groups || {}
+  return { hours, minutes, seconds }
+}
 // 根据输入框中的值得到日期面板的值
 function getPanelDateByInputDate(time: string | undefined) {
   if (time) {
-    const timeReg =
-      /^(?<hours>(\d+))[^\d](?<minutes>(\d+))[^\d](?<seconds>(\d+))$/
-    const r = time.match(timeReg)
-    const { hours, minutes, seconds } = r?.groups || {}
+    const { hours, minutes, seconds } = parseTime(time)
     return dayjs()
       .hour(+hours)
       .minute(+minutes)

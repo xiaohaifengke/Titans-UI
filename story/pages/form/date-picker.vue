@@ -9,7 +9,11 @@
     <p>year</p>
     <TiDatePicker v-model="value4" mode="year" />
     <p>datetime</p>
-    <TiDatePicker v-model="value5" mode="datetime" />
+    <TiDatePicker
+      v-model="value5"
+      mode="datetime"
+      format="YYYY-MM-DD HH:mm:ss"
+    />
   </div>
 </template>
 

@@ -1,6 +1,4 @@
 // 获取面板每一项对应数据列表的索引
-import { getCurrentInstance } from 'vue'
-
 export function useCreateGetDataIndex(mode: string) {
   return function getDataIndex(row: number, col: number): number {
     if (mode === 'year') {
