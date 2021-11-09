@@ -33,3 +33,61 @@
     color: #b4bbce;
   }
 }
+
+.fade-from-right-enter-active {
+  animation: fadeInRight 0.35s ease-out both;
+}
+.fade-from-right-leave-active {
+  animation: fadeOutLeft 0.25s ease-in both;
+}
+.fade-from-left-enter-active {
+  animation: fadeInLeft 0.35s ease-out both;
+}
+.fade-from-left-leave-active {
+  animation: fadeOutRight 0.25s ease-in both;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+}

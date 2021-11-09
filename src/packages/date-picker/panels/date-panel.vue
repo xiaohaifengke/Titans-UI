@@ -1,35 +1,44 @@
 <template>
-  <table class="ti-date-panel">
-    <thead class="ti-date-picker_body--head">
-      <tr>
-        <td v-for="week in weeks" :key="week" class="ti-date-picker_td--head">
-          {{ week }}
-        </td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="row in 6" :key="row">
-        <td
-          @click.stop="
-            $emit('update:panelDate', dates[getDataIndex(row, col)].date)
-          "
-          v-for="col in 7"
-          :key="col"
-          class="ti-date-picker_td--body"
-          :class="dates[getDataIndex(row, col)].monthFlag"
-        >
-          <span
-            class="ti-date-picker_panel--text"
-            :class="{
-              selected: dates[getDataIndex(row, col)].selected,
-              current: dates[getDataIndex(row, col)].today
-            }"
-            >{{ dates[getDataIndex(row, col)].day }}</span
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="ti-date-picker_wrapper">
+    <slot></slot>
+    <div class="ti-date-picker_body">
+      <table class="ti-date-panel">
+        <thead class="ti-date-picker_body--head">
+          <tr>
+            <td
+              v-for="week in weeks"
+              :key="week"
+              class="ti-date-picker_td--head"
+            >
+              {{ week }}
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="row in 6" :key="row">
+            <td
+              @click.stop="
+                $emit('update:panelDate', dates[getDataIndex(row, col)].date)
+              "
+              v-for="col in 7"
+              :key="col"
+              class="ti-date-picker_td--body"
+              :class="dates[getDataIndex(row, col)].monthFlag"
+            >
+              <span
+                class="ti-date-picker_panel--text"
+                :class="{
+                  selected: dates[getDataIndex(row, col)].selected,
+                  current: dates[getDataIndex(row, col)].today
+                }"
+                >{{ dates[getDataIndex(row, col)].day }}</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

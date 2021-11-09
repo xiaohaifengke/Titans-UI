@@ -1,28 +1,33 @@
 <template>
-  <table class="ti-year-panel">
-    <tbody>
-      <tr v-for="row in 4" :key="row">
-        <td
-          @click.stop="
-            $emit('update:panelDate', years[getDataIndex(row, col)].date)
-          "
-          v-for="col in 3"
-          :key="col"
-          class="ti-date-picker_td--body"
-          :class="years[getDataIndex(row, col)].yearFlag"
-        >
-          <span
-            class="ti-date-picker_panel--text"
-            :class="{
-              selected: years[getDataIndex(row, col)].selected,
-              current: years[getDataIndex(row, col)].curYear
-            }"
-            >{{ years[getDataIndex(row, col)].y }}</span
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="ti-date-picker_wrapper">
+    <slot></slot>
+    <div class="ti-date-picker_body">
+      <table class="ti-year-panel">
+        <tbody>
+          <tr v-for="row in 4" :key="row">
+            <td
+              @click.stop="
+                $emit('update:panelDate', years[getDataIndex(row, col)].date)
+              "
+              v-for="col in 3"
+              :key="col"
+              class="ti-date-picker_td--body"
+              :class="years[getDataIndex(row, col)].yearFlag"
+            >
+              <span
+                class="ti-date-picker_panel--text"
+                :class="{
+                  selected: years[getDataIndex(row, col)].selected,
+                  current: years[getDataIndex(row, col)].curYear
+                }"
+                >{{ years[getDataIndex(row, col)].y }}</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -60,6 +65,7 @@ export default defineComponent({
   width: 100%;
   height: 288px;
   text-align: center;
+
   .current-decade {
     .ti-date-picker_panel--text {
       display: inline-block;
@@ -71,6 +77,7 @@ export default defineComponent({
         color: map-get($defaultThemeMap, primary);
         background-color: #f6f6f6;
       }
+
       &.selected {
         color: #fff;
         background-color: map-get($defaultThemeMap, primary);

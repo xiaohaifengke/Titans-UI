@@ -1,27 +1,32 @@
 <template>
-  <table class="ti-month-panel">
-    <tbody>
-      <tr v-for="row in 4" :key="row">
-        <td
-          @click.stop="
-            $emit('update:panelDate', months[getDataIndex(row, col)].date)
-          "
-          v-for="col in 3"
-          :key="col"
-          class="ti-date-picker_td--body"
-        >
-          <span
-            class="ti-date-picker_panel--text"
-            :class="{
-              selected: months[getDataIndex(row, col)].selected,
-              current: months[getDataIndex(row, col)].curMonth
-            }"
-            >{{ months[getDataIndex(row, col)].month }}</span
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="ti-date-picker_wrapper">
+    <slot></slot>
+    <div class="ti-date-picker_body">
+      <table class="ti-month-panel">
+        <tbody>
+          <tr v-for="row in 4" :key="row">
+            <td
+              @click.stop="
+                $emit('update:panelDate', months[getDataIndex(row, col)].date)
+              "
+              v-for="col in 3"
+              :key="col"
+              class="ti-date-picker_td--body"
+            >
+              <span
+                class="ti-date-picker_panel--text"
+                :class="{
+                  selected: months[getDataIndex(row, col)].selected,
+                  current: months[getDataIndex(row, col)].curMonth
+                }"
+                >{{ months[getDataIndex(row, col)].month }}</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

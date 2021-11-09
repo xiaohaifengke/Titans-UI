@@ -8,7 +8,12 @@
       @change="(val) => (model = val)"
     />
     <div class="ti-date-picker_popper" v-if="datePickerPanelVisible">
-      <div class="ti-date-picker_wrapper">
+      <TiDatePickerPanel
+        :model="modelValue"
+        :panel="panel"
+        :updatePanelDate="updatePanelDate"
+        :updatePanelTime="updatePanelTime"
+      >
         <TiDatePickerPanelHeader
           :pickerMode="mode"
           :panelMode="panel.mode"
@@ -20,50 +25,17 @@
           @changePanelDate="changePanelDate"
           class="ti-date-picker_header"
         />
-        <div class="ti-date-picker_body">
-          <TiYearPanel
-            v-if="panel.mode === 'year'"
-            :selectedValue="modelValue"
-            :panelDate="panel.dateFormat"
-            @update:panelDate="updatePanelDate"
-            class="ti-date-picker_table ti-date-picker_table--year"
-          />
-          <TiMonthPanel
-            v-else-if="panel.mode === 'month'"
-            :selectedValue="modelValue"
-            :panelDate="panel.dateFormat"
-            @update:panelDate="updatePanelDate"
-            class="ti-date-picker_table ti-date-picker_table--month"
-          />
-          <TiDatePanel
-            v-else-if="panel.mode === 'date'"
-            :selectedValue="modelValue"
-            :panelDate="panel.dateFormat"
-            @update:panelDate="updatePanelDate"
-            class="ti-date-picker_table ti-date-picker_table--date"
-          />
-          <TiDatetimePanel
-            v-else
-            :selectedValue="modelValue"
-            v-model="panel.time"
-            @update:panelDate="updatePanelDate"
-            class="ti-date-picker_table ti-date-picker_table--datetime"
-          />
-        </div>
-      </div>
+      </TiDatePickerPanel>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, reactive, watch } from 'vue'
+import { defineComponent, ref, computed, shallowReactive, watch } from 'vue'
 import dayjs from 'dayjs'
 import clickOutside from '../../utils/clickOutside'
 import TiInput from '../input'
-import TiDatePanel from './panels/date-panel.vue'
-import TiMonthPanel from './panels/month-panel.vue'
-import TiYearPanel from './panels/year-panel.vue'
 import TiDatePickerPanelHeader from './panels/date-picker-panel-header.vue'
-import TiDatetimePanel from './panels/time-panel.vue'
+import TiDatePickerPanel from './panels/date-picker-panel.vue'
 import { parseTime } from '../time-picker/use/useInitTimePickerPanel'
 
 // 根据输入框中的值得到日期面板的值
@@ -71,6 +43,7 @@ function getPanelDateByInputDate(date: string | undefined): dayjs.Dayjs {
   const inputDate = dayjs(date)
   return date && inputDate.isValid() ? inputDate : dayjs()
 }
+
 function getDefaultFormatByMode(mode: string): string {
   switch (mode) {
     case 'year':
@@ -98,12 +71,8 @@ export default defineComponent({
   name: 'TiDatePicker',
   directives: { clickOutside },
   props: {
-    modelValue: {
-      type: String
-    },
-    placeholder: {
-      type: String
-    },
+    modelValue: String,
+    placeholder: String,
     size: {
       type: String,
       default: 'normal'
@@ -125,10 +94,7 @@ export default defineComponent({
   components: {
     TiInput,
     TiDatePickerPanelHeader,
-    TiDatePanel,
-    TiMonthPanel,
-    TiYearPanel,
-    TiDatetimePanel
+    TiDatePickerPanel
   },
   setup(props, { emit }) {
     const format = computed(() => {
@@ -161,7 +127,7 @@ export default defineComponent({
     const focusHandler = (props: any) => {
       const datePickerPanelVisible = ref(false)
 
-      const panel = reactive({
+      const panel = shallowReactive({
         mode: props.mode === 'datetime' ? 'date' : props.mode,
         date: getPanelDateByInputDate(props.modelValue),
         get dateFormat() {
@@ -213,47 +179,59 @@ export default defineComponent({
         datePickerPanelVisible.value = false
       }
 
+      // 选择日期
+      const updatePanelDate = (dateStr: string) => {
+        const order = ['year', 'month', 'date']
+        if (props.mode === 'datetime') {
+          const { year, month, date } = parseDate(dateStr)
+          year && (panel.date = panel.date.year(+year))
+          month && (panel.date = panel.date.month(+month - 1))
+          date && (panel.date = panel.date.date(+date))
+          const panelModeIndexInOrder = order.indexOf(panel.mode)
+          if (
+            panelModeIndexInOrder >= 0 &&
+            panelModeIndexInOrder < order.length - 1
+          ) {
+            panel.mode = order[panelModeIndexInOrder + 1]
+          } else if (panelModeIndexInOrder === order.length - 1) {
+            model.value = panel.date.format(valueFormat.value)
+          }
+        } else {
+          const propsModeIndexInOrder = order.indexOf(props.mode)
+          const panelModeIndexInOrder = order.indexOf(panel.mode)
+          if (propsModeIndexInOrder < 0 || panelModeIndexInOrder < 0) return
+          if (propsModeIndexInOrder > panelModeIndexInOrder) {
+            panel.date = dayjs(dateStr)
+            panel.mode = order[panelModeIndexInOrder + 1]
+          } else {
+            model.value = dayjs(dateStr).format(valueFormat.value)
+            datePickerPanelVisible.value = false
+          }
+        }
+      }
+      // 选择时间
+      const updatePanelTime = (time: string) => {
+        panel.time = time
+      }
       return {
         datePickerPanelVisible,
         handleFocus,
         handleBlur,
-        panel
+        panel,
+        updatePanelDate,
+        updatePanelTime
       }
     }
     // 控制显示隐藏日期面板及相关事件
-    const { datePickerPanelVisible, handleFocus, handleBlur, panel } =
-      focusHandler(props)
+    const {
+      datePickerPanelVisible,
+      handleFocus,
+      handleBlur,
+      panel,
+      updatePanelDate,
+      updatePanelTime
+    } = focusHandler(props)
 
-    // 选择日期
-    const updatePanelDate = (dateStr: string) => {
-      const order = ['year', 'month', 'date']
-      if (props.mode === 'datetime') {
-        const { year, month, date } = parseDate(dateStr)
-        year && (panel.date = panel.date.year(+year))
-        month && (panel.date = panel.date.month(+month - 1))
-        date && (panel.date = panel.date.date(+date))
-        const panelModeIndexInOrder = order.indexOf(panel.mode)
-        if (
-          panelModeIndexInOrder >= 0 &&
-          panelModeIndexInOrder < order.length - 1
-        ) {
-          panel.mode = order[panelModeIndexInOrder + 1]
-        } else if (panelModeIndexInOrder === order.length - 1) {
-          model.value = panel.date.format(valueFormat.value)
-        }
-      } else {
-        const propsModeIndexInOrder = order.indexOf(props.mode)
-        const panelModeIndexInOrder = order.indexOf(panel.mode)
-        if (propsModeIndexInOrder < 0 || panelModeIndexInOrder < 0) return
-        if (propsModeIndexInOrder > panelModeIndexInOrder) {
-          panel.date = dayjs(dateStr)
-          panel.mode = order[panelModeIndexInOrder + 1]
-        } else {
-          model.value = dayjs(dateStr).format(valueFormat.value)
-          datePickerPanelVisible.value = false
-        }
-      }
-    }
     // 切换年月。val：月份数 prevYear: -12, prevMonth: -1, nextMonth: 1, nextYear: 12
     const changePanelDate = (val: number) => {
       panel.date = panel.date.add(val, 'month')
@@ -266,8 +244,9 @@ export default defineComponent({
       handleFocus,
       handleBlur,
       panel,
+      changePanelDate,
       updatePanelDate,
-      changePanelDate
+      updatePanelTime
     }
   }
 })

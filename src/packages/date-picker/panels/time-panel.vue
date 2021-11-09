@@ -1,16 +1,21 @@
 <template>
-  <div class="ti-datetime-panel">
-    <div
-      class="ti-datetime-picker_panel--item"
-      v-for="p in pattern"
-      :key="p.id"
-    >
-      <TiTimePanel
-        :start="p.start"
-        :step="p.step"
-        :end="p.end"
-        v-model="panel[p.id]"
-      />
+  <div class="ti-date-picker_wrapper">
+    <slot></slot>
+    <div class="ti-date-picker_body">
+      <div class="ti-datetime-panel">
+        <div
+          class="ti-datetime-picker_panel--item"
+          v-for="p in pattern"
+          :key="p.id"
+        >
+          <TiTimePanel
+            :start="p.start"
+            :step="p.step"
+            :end="p.end"
+            v-model="panel[p.id]"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -25,7 +30,6 @@ export default defineComponent({
   name: 'TiDatetimePanel',
   components: { TiTimePanel },
   props: {
-    selectedValue: String,
     modelValue: [String, Number],
     valueFormat: {
       type: String,
