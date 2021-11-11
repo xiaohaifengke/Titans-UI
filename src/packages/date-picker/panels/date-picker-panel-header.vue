@@ -77,46 +77,51 @@ export default defineComponent({
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-.ti-date-picker-panel-header {
-  padding: 10px;
-  font-size: map_get($defaultThemeMap, fontsize);
-  font-weight: 500;
-  text-align: center;
+@include themes {
+  .ti-date-picker-panel-header {
+    padding: 5px 10px;
+    font-size: map_get($defaultThemeMap, fontsize);
+    font-weight: 500;
+    text-align: center;
 
-  .ti-icon-d-arrow-left,
-  .ti-icon-arrow-left,
-  .ti-icon-arrow-right,
-  .ti-icon-d-arrow-right {
-    padding: 0 5px;
-    cursor: pointer;
-    &:hover {
-      color: map-get($defaultThemeMap, primary);
+    .ti-icon-d-arrow-left,
+    .ti-icon-arrow-left,
+    .ti-icon-arrow-right,
+    .ti-icon-d-arrow-right {
+      padding: 0 3px;
+      margin-top: 3px;
+      cursor: pointer;
+
+      &:hover {
+        color: map-get($defaultThemeMap, primary);
+      }
     }
-  }
 
-  .ti-icon-d-arrow-left {
-    float: left;
-  }
+    .ti-icon-d-arrow-left {
+      float: left;
+    }
 
-  .ti-icon-arrow-left {
-    float: left;
-  }
+    .ti-icon-arrow-left {
+      float: left;
+    }
 
-  .ti-icon-arrow-right {
-    float: right;
-  }
+    .ti-icon-arrow-right {
+      float: right;
+    }
 
-  .ti-icon-d-arrow-right {
-    float: right;
-  }
+    .ti-icon-d-arrow-right {
+      float: right;
+    }
 
-  .ti-date-picker_year,
-  .ti-date-picker_month,
-  .ti-date-picker_date {
-    padding: 0 3px;
-    cursor: pointer;
-    &:hover {
-      color: map-get($defaultThemeMap, primary);
+    .ti-date-picker_year,
+    .ti-date-picker_month,
+    .ti-date-picker_date {
+      padding: 0 3px;
+      cursor: pointer;
+
+      &:hover {
+        color: map-get($defaultThemeMap, primary);
+      }
     }
   }
 }

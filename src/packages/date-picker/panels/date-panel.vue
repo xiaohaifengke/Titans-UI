@@ -2,7 +2,7 @@
   <div class="ti-date-picker_wrapper">
     <slot></slot>
     <div class="ti-date-picker_body">
-      <table class="ti-date-panel">
+      <table class="ti-date-panel" cellpadding="0" cellspacing="0">
         <thead class="ti-date-picker_body--head">
           <tr>
             <td
@@ -25,14 +25,17 @@
               class="ti-date-picker_td--body"
               :class="dates[getDataIndex(row, col)].monthFlag"
             >
-              <span
-                class="ti-date-picker_panel--text"
+              <div
+                class="ti-date_panel--text"
                 :class="{
                   selected: dates[getDataIndex(row, col)].selected,
                   current: dates[getDataIndex(row, col)].today
                 }"
-                >{{ dates[getDataIndex(row, col)].day }}</span
               >
+                <span>
+                  {{ dates[getDataIndex(row, col)].day }}
+                </span>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -73,32 +76,54 @@ export default defineComponent({
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-.ti-date-panel {
-  width: 100%;
-  height: 288px;
-  text-align: center;
+@include themes {
+  .ti-date-panel {
+    //width: 100%;
+    //height: 288px;
+    margin: 0 auto;
+    text-align: center;
+    table-layout: fixed;
 
-  .ti-date-picker_td--head {
-    height: 30px;
-  }
+    .ti-date-picker_td--head {
+      height: 30px;
+      border-bottom: 1px solid #eee;
+    }
 
-  .current-month {
-    .ti-date-picker_panel--text {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      padding: 3px;
-      line-height: 20px;
-      border-radius: 2px;
+    .current-month {
+      .ti-date_panel--text {
+        display: inline-block;
+        padding: 3px;
+        border-radius: 50%;
 
-      &:hover {
-        color: map-get($defaultThemeMap, primary);
-        background-color: #f6f6f6;
-      }
+        &:hover {
+          color: map-get($defaultThemeMap, primary);
+          background-color: transparentize(
+            map-get($defaultThemeMap, primary),
+            0.8
+          );
+        }
 
-      &.selected {
-        color: #fff;
-        background-color: map-get($defaultThemeMap, primary);
+        & > span {
+          $size: 24px;
+
+          display: inline-block;
+          width: $size;
+          height: $size;
+          line-height: $size;
+          border-radius: 50%;
+        }
+
+        &.selected {
+          color: #fff;
+          background-color: transparentize(
+            map-get($defaultThemeMap, primary),
+            0.8
+          );
+
+          & > span {
+            background-color: map-get($defaultThemeMap, primary);
+          }
+        }
       }
     }
   }

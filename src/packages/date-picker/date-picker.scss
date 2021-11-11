@@ -8,19 +8,18 @@
 
   .ti-date-picker_popper {
     box-sizing: border-box;
-    width: 300px;
-    //height: 340px;
+    width: 252px;
     padding-top: 10px;
+    font-size: map-get($defaultThemeMap, fontsize);
     color: map-get($defaultThemeMap, default);
     border-radius: map-get($defaultThemeMap, default-border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
   .ti-date-picker_td--body {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
-    border: 1px solid #eee;
     .current {
       color: map-get($defaultThemeMap, primary);
     }
@@ -30,7 +29,7 @@
   .next-month,
   .prev-decade,
   .next-decade {
-    color: #b4bbce;
+    color: #dadde7;
   }
 }
 

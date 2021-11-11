@@ -102,7 +102,7 @@ export default defineComponent({
 <style lang="scss" rel="stylesheet/scss">
 .ti-date-picker-panel {
   position: relative;
-  height: 328px;
+  height: 262px;
   overflow: hidden;
 
   .ti-date-picker_table {

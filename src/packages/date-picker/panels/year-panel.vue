@@ -1,7 +1,7 @@
 <template>
   <div class="ti-date-picker_wrapper">
     <slot></slot>
-    <div class="ti-date-picker_body">
+    <div class="ti-date-picker_body ti-year-panel-wrapper">
       <table class="ti-year-panel">
         <tbody>
           <tr v-for="row in 4" :key="row">
@@ -14,14 +14,17 @@
               class="ti-date-picker_td--body"
               :class="years[getDataIndex(row, col)].yearFlag"
             >
-              <span
-                class="ti-date-picker_panel--text"
+              <div
+                class="ti-year_panel--text"
                 :class="{
                   selected: years[getDataIndex(row, col)].selected,
                   current: years[getDataIndex(row, col)].curYear
                 }"
-                >{{ years[getDataIndex(row, col)].y }}</span
               >
+                <span>
+                  {{ years[getDataIndex(row, col)].y }}
+                </span>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -61,26 +64,47 @@ export default defineComponent({
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+.ti-year-panel-wrapper {
+  padding: 0 15px;
+}
 .ti-year-panel {
   width: 100%;
-  height: 288px;
+  height: 225px;
   text-align: center;
+  table-layout: fixed;
 
   .current-decade {
-    .ti-date-picker_panel--text {
+    .ti-year_panel--text {
       display: inline-block;
-      padding: 3px 5px;
+      padding: 3px;
       line-height: 20px;
-      border-radius: 2px;
+      border-radius: 50px;
 
       &:hover {
         color: map-get($defaultThemeMap, primary);
-        background-color: #f6f6f6;
+        background-color: transparentize(
+          map-get($defaultThemeMap, primary),
+          0.8
+        );
+      }
+
+      & > span {
+        display: inline-block;
+        width: 58px;
+        line-height: 28px;
+        border-radius: 50px;
       }
 
       &.selected {
         color: #fff;
-        background-color: map-get($defaultThemeMap, primary);
+        background-color: transparentize(
+          map-get($defaultThemeMap, primary),
+          0.8
+        );
+
+        & > span {
+          background-color: map-get($defaultThemeMap, primary);
+        }
       }
     }
   }

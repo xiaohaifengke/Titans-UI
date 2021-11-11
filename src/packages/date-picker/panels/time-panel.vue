@@ -54,7 +54,7 @@ export default defineComponent({
     display: flex;
     width: 165px;
     height: 210px;
-    margin: 0 auto;
+    margin: 10px auto 0;
     border-radius: map-get($defaultThemeMap, default-border-radius);
   }
   .ti-datetime-picker_panel--item {

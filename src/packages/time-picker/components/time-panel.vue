@@ -7,6 +7,7 @@
           v-for="item in list"
           :key="item.value"
           class="ti-time-panel_list--item"
+          :class="{ selected: modelValue === item.value }"
           @click="handleClick(item.value)"
           @keydown.enter="handleClick(item.value)"
         >
@@ -139,7 +140,7 @@ export default defineComponent({
       width: 100%;
       height: $panel-item;
       content: '';
-      background-color: transparentize(map-get($defaultThemeMap, primary), 0.8);
+      background-color: transparentize(map-get($defaultThemeMap, primary), 0.9);
       border-top: 1px solid map-get($defaultThemeMap, default-border-color);
       border-bottom: 1px solid map-get($defaultThemeMap, default-border-color);
     }
@@ -166,6 +167,10 @@ export default defineComponent({
     line-height: $panel-item;
     list-style: none;
     outline: none;
+
+    &.selected {
+      color: map-get($globalThemeMap, primary);
+    }
 
     &:hover {
       background-color: transparentize(map-get($globalThemeMap, default), 0.9);

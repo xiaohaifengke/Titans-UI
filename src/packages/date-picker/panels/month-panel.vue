@@ -1,7 +1,7 @@
 <template>
   <div class="ti-date-picker_wrapper">
     <slot></slot>
-    <div class="ti-date-picker_body">
+    <div class="ti-date-picker_body ti-month-panel-wrapper">
       <table class="ti-month-panel">
         <tbody>
           <tr v-for="row in 4" :key="row">
@@ -13,14 +13,17 @@
               :key="col"
               class="ti-date-picker_td--body"
             >
-              <span
-                class="ti-date-picker_panel--text"
+              <div
+                class="ti-month_panel--text"
                 :class="{
                   selected: months[getDataIndex(row, col)].selected,
                   current: months[getDataIndex(row, col)].curMonth
                 }"
-                >{{ months[getDataIndex(row, col)].month }}</span
               >
+                <span>
+                  {{ months[getDataIndex(row, col)].month }}
+                </span>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -60,23 +63,47 @@ export default defineComponent({
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-.ti-month-panel {
-  width: 100%;
-  height: 288px;
-  text-align: center;
-  .ti-date-picker_panel--text {
-    display: inline-block;
-    padding: 3px 5px;
-    line-height: 20px;
-    border-radius: 2px;
+@include themes {
+  .ti-month-panel-wrapper {
+    padding: 0 15px;
+  }
+  .ti-month-panel {
+    width: 100%;
+    height: 225px;
+    text-align: center;
+    table-layout: fixed;
 
-    &:hover {
-      color: map-get($defaultThemeMap, primary);
-      background-color: #f6f6f6;
-    }
-    &.selected {
-      color: #fff;
-      background-color: map-get($defaultThemeMap, primary);
+    .ti-month_panel--text {
+      display: inline-block;
+      padding: 3px;
+      border-radius: 50px;
+
+      &:hover {
+        color: map-get($defaultThemeMap, primary);
+        background-color: transparentize(
+          map-get($defaultThemeMap, primary),
+          0.8
+        );
+      }
+
+      & > span {
+        display: inline-block;
+        width: 58px;
+        line-height: 28px;
+        border-radius: 50px;
+      }
+
+      &.selected {
+        color: #fff;
+        background-color: transparentize(
+          map-get($defaultThemeMap, primary),
+          0.8
+        );
+
+        & > span {
+          background-color: map-get($defaultThemeMap, primary);
+        }
+      }
     }
   }
 }
