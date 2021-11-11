@@ -1,6 +1,6 @@
 <template>
   <div class="ti-date-picker-panel">
-    <Transition :name="transitionName" appear>
+    <Transition :name="transitionName">
       <TiYearPanel
         v-if="panel.mode === 'year'"
         :selectedValue="model"
@@ -10,10 +10,8 @@
       >
         <slot />
       </TiYearPanel>
-    </Transition>
-    <Transition :name="transitionName" appear>
       <TiMonthPanel
-        v-if="panel.mode === 'month'"
+        v-else-if="panel.mode === 'month'"
         :selectedValue="model"
         :panelDate="panel.dateFormat"
         @update:panelDate="updatePanelDate"
@@ -21,10 +19,8 @@
       >
         <slot />
       </TiMonthPanel>
-    </Transition>
-    <Transition :name="transitionName" appear>
       <TiDatePanel
-        v-if="panel.mode === 'date'"
+        v-else-if="panel.mode === 'date'"
         :selectedValue="model"
         :panelDate="panel.dateFormat"
         @update:panelDate="updatePanelDate"
@@ -32,10 +28,8 @@
       >
         <slot />
       </TiDatePanel>
-    </Transition>
-    <Transition :name="transitionName" appear>
       <TiDatetimePanel
-        v-if="panel.mode === 'time'"
+        v-else-if="panel.mode === 'time'"
         :modelValue="panel.time"
         @update:modelValue="updatePanelTime"
         class="ti-date-picker_table ti-date-picker_table--datetime"
