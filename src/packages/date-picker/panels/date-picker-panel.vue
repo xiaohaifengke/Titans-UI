@@ -78,7 +78,6 @@ export default defineComponent({
     watch(
       () => props.panel.mode,
       (cur, old) => {
-        console.log(cur, old)
         const curIndex = panelModes.indexOf(cur)
         const oldIndex = panelModes.indexOf(old)
         transitionName.value =

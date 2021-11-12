@@ -234,7 +234,15 @@ export default defineComponent({
 
     // 切换年月。val：月份数 prevYear: -12, prevMonth: -1, nextMonth: 1, nextYear: 12
     const changePanelDate = (val: number) => {
-      panel.date = panel.date.add(val, 'month')
+      if (panel.mode === 'year') {
+        if (val > 0) {
+          panel.date = panel.date.add(10, 'year')
+        } else {
+          panel.date = panel.date.add(-10, 'year')
+        }
+      } else {
+        panel.date = panel.date.add(val, 'month')
+      }
     }
 
     return {

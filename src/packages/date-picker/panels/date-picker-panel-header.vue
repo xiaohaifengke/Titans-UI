@@ -1,7 +1,15 @@
 <template>
   <div class="ti-date-picker-panel-header">
-    <TiIcon icon="d-arrow-left" @click="$emit('changePanelDate', -12)" />
-    <TiIcon icon="arrow-left" @click="$emit('changePanelDate', -1)" />
+    <TiIcon
+      v-if="panelMode !== 'time'"
+      icon="d-arrow-left"
+      @click="$emit('changePanelDate', -12)"
+    />
+    <TiIcon
+      v-if="panelMode === 'date'"
+      icon="arrow-left"
+      @click="$emit('changePanelDate', -1)"
+    />
     <span
       v-if="panelMode !== 'time'"
       class="ti-date-picker_year"
@@ -28,8 +36,16 @@
     >
       {{ time }}
     </span>
-    <TiIcon icon="d-arrow-right" @click="$emit('changePanelDate', 12)" />
-    <TiIcon icon="arrow-right" @click="$emit('changePanelDate', 1)" />
+    <TiIcon
+      v-if="panelMode !== 'time'"
+      icon="d-arrow-right"
+      @click="$emit('changePanelDate', 12)"
+    />
+    <TiIcon
+      v-if="panelMode === 'date'"
+      icon="arrow-right"
+      @click="$emit('changePanelDate', 1)"
+    />
   </div>
 </template>
 
