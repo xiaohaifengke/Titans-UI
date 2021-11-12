@@ -1,154 +1,82 @@
 // 生成日期列表
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
-interface DateInfo {
-  t: any
-  date: string
-  day: number
-  week: number
-  month: number
-  monthFlag: string
-  today?: boolean
-  selected?: boolean
+// 显示的值
+export function transferModelValueToInputValue(
+  val: string | undefined | dayjs.Dayjs,
+  format: string
+): string | undefined {
+  const d = dayjs(val)
+  if (val && d.isValid()) {
+    return d.format(format)
+  } else {
+    return val as string | undefined
+  }
 }
-interface MonthInfo {
-  t: any
-  date: string
-  m: number // 月份对应的数字
-  month: string // 月份中文名
-  curMonth?: boolean // 当月
-  selected?: boolean // 选中的月份
+interface EndOffset {
+  value: number
+  unit: string
 }
-interface YearInfo {
-  t: any
-  date: string
-  y: number
-  yearFlag: string
-  curYear?: boolean
-  selected?: boolean
+function getRangeEndOffset(mode: string): EndOffset {
+  let offset: EndOffset
+  switch (mode) {
+    case 'year':
+      offset = {
+        value: 10,
+        unit: 'year'
+      }
+      break
+    case 'month':
+      offset = {
+        value: 1,
+        unit: 'year'
+      }
+      break
+    default:
+      offset = {
+        value: 1,
+        unit: 'month'
+      }
+  }
+  return offset
 }
-
-interface DatePanelData {
-  prev: DateInfo[]
-  cur: DateInfo[]
-  next: DateInfo[]
-}
-
-export const useGenerateDays = (
-  date: Dayjs | string | number | undefined,
-  modelValue: any,
-  valueFormat: string
-): DateInfo[] => {
-  const currentDateFormat = dayjs().format('YYYY-MM-DD')
-  const sel = dayjs(modelValue)
-  const selFormat = sel.format('YYYY-MM-DD')
-  const d = dayjs(date || Date.now())
-  const panelDigitalFormat = +d.format('YYYYMM')
-  const firstDateOfCurrentMonth = d.date(1)
-  const firstDayOfCurrentMonth = firstDateOfCurrentMonth.day()
-  const startDate = firstDateOfCurrentMonth.subtract(
-    firstDayOfCurrentMonth || 7,
-    'day'
-  )
-  return Array.from({ length: 42 }).map((u, i, arr: any[]) => {
-    const k = i - firstDayOfCurrentMonth
-    const key = k < 0 ? arr.length + k : k
-    const t = startDate.add(i, 'day')
-    const tDigitalFormat = +t.format('YYYYMM')
-    const tFormat = t.format('YYYY-MM-DD')
-    const month = t.month()
-    const monthFlag =
-      tDigitalFormat === panelDigitalFormat
-        ? 'current-month'
-        : tDigitalFormat > panelDigitalFormat
-        ? 'next-month'
-        : 'prev-month'
-    const selected = !!date && tFormat === selFormat
-    return {
-      key,
-      t,
-      date: t.format(valueFormat),
-      day: t.date(),
-      week: t.day(),
-      month: month,
-      monthFlag: monthFlag,
-      selected: selected,
-      today: !selected && tFormat === currentDateFormat
-    }
-  })
+// 根据输入框中的值得到日期面板的值
+export function getPanelDateByInputDate(
+  date: string | undefined,
+  mode: string,
+  isEnd?: boolean // range时，end 会比 start 多出的一个月。单位：month
+): dayjs.Dayjs {
+  const inputDate = dayjs(date)
+  if (date && inputDate.isValid()) {
+    return inputDate
+  } else if (isEnd) {
+    const { value, unit } = getRangeEndOffset(mode)
+    return dayjs().add(value, unit)
+  }
+  return dayjs()
 }
 
-export const useGenerateMonths = (
-  date: Dayjs | string | number | undefined,
-  modelValue: any,
-  valueFormat: string
-): MonthInfo[] => {
-  const months = [
-    '一月',
-    '二月',
-    '三月',
-    '四月',
-    '五月',
-    '六月',
-    '七月',
-    '八月',
-    '九月',
-    '十月',
-    '十一月',
-    '十二月'
-  ]
-  const sel = dayjs(modelValue)
-  const selFormat = sel.format('YYYY-MM')
-  const d = dayjs(date || Date.now())
-  const firstMonthOfCurrentYear = d.month(0)
-  const currentMonthFormat = dayjs().format('YYYY-MM')
-
-  return months.map((month, index) => {
-    const t = firstMonthOfCurrentYear.add(index, 'month')
-    const tFormat = t.format('YYYY-MM')
-    const selected = !!date && tFormat === selFormat
-    return {
-      t,
-      date: t.format(valueFormat),
-      m: index,
-      month,
-      selected,
-      curMonth: !selected && tFormat === currentMonthFormat
-    }
-  })
+// 正则方式由字符串解析出年月日
+export function parseDate(dateStr: string) {
+  const dateReg =
+    /^(?<year>(\d{4}))(?:[^\d]*(?<month>(\d{2}))(?:[^\d](?<date>(\d{2})))?)?$/
+  const r = dateStr.match(dateReg)
+  const { year, month, date } = r?.groups || {}
+  return { year, month, date }
 }
 
-export const useGenerateYears = (
-  date: Dayjs | string | number | undefined,
-  modelValue: any,
-  valueFormat: string
-): YearInfo[] => {
-  const currentYear = dayjs().year()
-  const sel = dayjs(modelValue)
-  const selYear = sel.year()
-  const d = dayjs(date || Date.now())
-  const panelYear = d.year()
-  const firstYearOfCurrentDecade = d.year(parseInt(`${panelYear / 10}`) * 10)
-  const startYear = firstYearOfCurrentDecade.subtract(1, 'year')
-
-  return new Array(12).fill(null).map((u, index) => {
-    const t = startYear.add(index, 'year')
-    const y = t.year()
-    const yearFlag =
-      index === 0
-        ? 'prev-decade'
-        : index === 11
-        ? 'next-decade'
-        : 'current-decade'
-    const selected = selYear === y
-    const curYear = !selected && currentYear === y
-    return {
-      t,
-      date: t.format(valueFormat),
-      y,
-      yearFlag,
-      selected,
-      curYear
-    }
-  })
+// 定义默认的mode
+export function getDefaultFormatByMode(mode: string): string {
+  switch (mode) {
+    case 'year':
+      return 'YYYY'
+    case 'month':
+      return 'YYYY-MM'
+    case 'date':
+      return 'YYYY-MM-DD'
+    case 'datetime':
+      return 'YYYY-MM-DD HH:mm:ss'
+    default:
+      return 'YYYY-MM-DD'
+  }
 }

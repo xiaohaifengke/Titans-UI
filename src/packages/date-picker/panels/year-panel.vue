@@ -36,7 +36,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useCreateGetDataIndex } from '../use/useMethods'
-import { useGenerateYears } from '../utils'
+import { useGenerateYears } from '../use/useGenerateYears'
 
 export default defineComponent({
   name: 'TiYearPanel',

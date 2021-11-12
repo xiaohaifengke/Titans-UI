@@ -35,7 +35,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useCreateGetDataIndex } from '../use/useMethods'
-import { useGenerateMonths } from '../utils'
+import { useGenerateMonths } from '../use/useGenerateMonths'
 
 export default defineComponent({
   name: 'TiMonthPanel',

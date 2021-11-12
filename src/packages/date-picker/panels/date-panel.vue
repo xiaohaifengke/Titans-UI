@@ -47,7 +47,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useCreateGetDataIndex } from '../use/useMethods'
-import { useGenerateDays } from '../utils'
+import { useGenerateDates } from '../use/useGenerateDates'
 
 export default defineComponent({
   name: 'TiDatePanel',
@@ -64,7 +64,7 @@ export default defineComponent({
     const getDataIndex = useCreateGetDataIndex('date')
     // 日期列表
     const dates = computed(() =>
-      useGenerateDays(props.panelDate, props.selectedValue, props.valueFormat)
+      useGenerateDates(props.panelDate, props.selectedValue, props.valueFormat)
     )
     return {
       weeks: ['日', '一', '二', '三', '四', '五', '六'],
