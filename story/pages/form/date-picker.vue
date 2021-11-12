@@ -2,18 +2,28 @@
   <div class="ti-date-picker-demo">
     <p>default</p>
     <TiDatePicker v-model="value1" />
-    <p>date</p>
-    <TiDatePicker v-model="value2" mode="date" />
-    <p>month</p>
-    <TiDatePicker v-model="value3" mode="month" />
-    <p>year</p>
-    <TiDatePicker v-model="value4" mode="year" />
+    <!--    <p>date</p>-->
+    <!--    <TiDatePicker v-model="value2" mode="date" />-->
+    <!--    <p>month</p>-->
+    <!--    <TiDatePicker v-model="value3" mode="month" />-->
+    <!--    <p>year</p>-->
+    <!--    <TiDatePicker v-model="value4" mode="year" />-->
     <p>datetime</p>
     <TiDatePicker
       v-model="value5"
       mode="datetime"
       format="YYYY-MM-DD HH:mm:ss"
     />
+    <p>datetime range</p>
+    <TiDatePicker
+      v-model:start="rangeValue.start"
+      v-model:end="rangeValue.end"
+      range
+      mode="datetime"
+      format="YYYY-MM-DD HH:mm:ss"
+    />
+    <span>start: {{ rangeValue.start }}</span>
+    <span>end: {{ rangeValue.end }}</span>
   </div>
 </template>
 
@@ -26,7 +36,11 @@ export default {
       value2: '',
       value3: '',
       value4: '',
-      value5: ''
+      value5: '',
+      rangeValue: {
+        start: null,
+        end: null
+      }
     }
   }
 }

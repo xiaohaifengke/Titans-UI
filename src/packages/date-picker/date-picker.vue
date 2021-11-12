@@ -1,6 +1,16 @@
 <template>
-  <div class="ti-date-picker" v-click-outside="handleBlur">
+  <div :class="classes" v-click-outside="handleBlur">
+    <TiRangeInput
+      v-if="range"
+      v-bind="$attrs"
+      :size="size"
+      :disabled="disabled"
+      :readonly="readonly"
+      :clearable="clearable"
+      @focus="handleFocus"
+    />
     <TiInput
+      v-else
       class="ti-date-picker_input"
       prefix-icon="date"
       @focus="handleFocus"
@@ -33,6 +43,7 @@
 import { defineComponent, ref, computed, shallowReactive, watch } from 'vue'
 import dayjs from 'dayjs'
 import clickOutside from '../../utils/clickOutside'
+import TiRangeInput from './range/range-input.vue'
 import TiInput from '../input'
 import TiDatePickerPanelHeader from './panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from './panels/date-picker-panel.vue'
@@ -69,6 +80,7 @@ function parseDate(dateStr: string) {
 
 export default defineComponent({
   name: 'TiDatePicker',
+  inheritAttrs: false,
   directives: { clickOutside },
   props: {
     modelValue: String,
@@ -88,10 +100,27 @@ export default defineComponent({
     mode: {
       type: String,
       default: 'date'
+    },
+    range: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    clearable: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue'],
   components: {
+    TiRangeInput,
     TiInput,
     TiDatePickerPanelHeader,
     TiDatePickerPanel
@@ -104,9 +133,12 @@ export default defineComponent({
       return props.valueFormat || getDefaultFormatByMode(props.mode)
     })
     const classes = computed(() => {
-      return {
-        [`ti-date-picker_size--${props.size}`]: props.size
-      }
+      return [
+        props.range ? 'ti-date-picker_range' : 'ti-date-picker',
+        {
+          [`ti-date-picker_size--${props.size}`]: props.size
+        }
+      ]
     })
 
     // 显示的值

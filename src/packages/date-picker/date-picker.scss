@@ -6,6 +6,13 @@
     user-select: none;
   }
 
+  .ti-date-picker_range {
+    display: inline-block;
+    width: 400px;
+    height: 40px;
+    user-select: none;
+  }
+
   .ti-date-picker_popper {
     box-sizing: border-box;
     width: 252px;
