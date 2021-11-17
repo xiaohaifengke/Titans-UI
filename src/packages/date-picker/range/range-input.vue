@@ -14,7 +14,7 @@
       :disabled="disabled"
       :readonly="readonly"
       @focus="onFocus"
-      @change="(e) => $emit('update:start', e.target.value)"
+      @input="(e) => $emit('update:start', e.target.value)"
     />
     <span class="ti-range-separator">{{ rangeSeparator }}</span>
     <input
@@ -25,7 +25,7 @@
       :disabled="disabled"
       :readonly="readonly"
       @focus="onFocus"
-      @change="(e) => $emit('update:end', e.target.value)"
+      @input="(e) => $emit('update:end', e.target.value)"
     />
     <TiIcon
       class="ti-range-input_icon"
@@ -73,7 +73,7 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['focus', 'update:start', 'update:end'],
+  emits: ['focus', 'input', 'update:start', 'update:end'],
   setup(props, { emit }) {
     const classes = computed(() => [
       `ti-range-input-size-${props.size}`,
@@ -82,6 +82,7 @@ export default defineComponent({
       }
     ])
     const rangeInputInnerClasses = computed(() => [])
+
     const onFocus = (e: InputEvent) => {
       emit('focus', e)
     }

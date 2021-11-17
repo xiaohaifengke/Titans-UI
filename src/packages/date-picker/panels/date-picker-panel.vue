@@ -20,6 +20,7 @@
         <slot />
       </TiMonthPanel>
       <TiDatePanel
+        :range="range"
         v-else-if="panel.mode === 'date'"
         :selectedValue="model"
         :panelDate="panel.dateFormat"
@@ -29,6 +30,7 @@
         <slot />
       </TiDatePanel>
       <TiDatetimePanel
+        :range="range"
         v-else-if="panel.mode === 'time'"
         :modelValue="panel.time"
         @update:modelValue="updatePanelTime"
@@ -57,7 +59,7 @@ export default defineComponent({
     TiDatetimePanel
   },
   props: {
-    model: String,
+    model: [String, Array],
     panel: {
       type: Object,
       required: true
@@ -69,6 +71,10 @@ export default defineComponent({
     updatePanelTime: {
       type: Function,
       default: () => () => null
+    },
+    range: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {

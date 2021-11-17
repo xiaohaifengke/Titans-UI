@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, WritableComputedRef } from 'vue'
+import { computed, defineComponent, ref, watch, WritableComputedRef } from 'vue'
 import dayjs from 'dayjs'
 import { transferModelValueToInputValue, getDefaultFormatByMode } from './utils'
 import TiInput from '../input'
@@ -110,6 +110,13 @@ export default defineComponent({
         model,
         valueFormat
       })
+    // 时间变化时，手动修改model的时间，不在panel generator 函数中修改，不然会和range的逻辑混在一起不利于维护
+    watch(
+      () => panel.value,
+      (value) => {
+        model.value = value
+      }
+    )
 
     // 切换年月。val：月份数 prevYear: -12, prevMonth: -1, nextMonth: 1, nextYear: 12
     const changePanelDate = (val: number) => {

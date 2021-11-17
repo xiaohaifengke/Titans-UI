@@ -23,16 +23,18 @@
             v-for="item in dates"
             :key="item.key"
             @click.stop="$emit('update:panelDate', item.date)"
+            @mouseenter="mouseEnterHandler(item)"
             class="ti-date-panel_body--item"
-            :class="item.monthFlag"
+            :class="{
+              selected: item.selected,
+              current: item.today,
+              'range-selected': item.isInRange,
+              'range-start': item.rangeStart,
+              'range-end': item.rangeEnd,
+              [item.monthFlag]: true
+            }"
           >
-            <div
-              class="ti-date_panel--text"
-              :class="{
-                selected: item.selected,
-                current: item.today
-              }"
-            >
+            <div class="ti-date_panel--text">
               <span>
                 {{ item.day }}
               </span>
@@ -48,28 +50,43 @@
 import { computed, defineComponent } from 'vue'
 import { useCreateGetDataIndex } from '../use/useMethods'
 import { useGenerateDates } from '../use/useGenerateDates'
+import { DateInfo } from '../use/useGenerateDates'
 
 export default defineComponent({
   name: 'TiDatePanel',
   props: {
-    selectedValue: String,
+    selectedValue: [String, Array],
     panelDate: [String, Number],
     valueFormat: {
       type: String,
       default: 'YYYY-MM-DD'
+    },
+    range: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:panelDate'],
-  setup(props) {
+  setup(props, { emit }) {
     const getDataIndex = useCreateGetDataIndex('date')
     // 日期列表
     const dates = computed(() =>
-      useGenerateDates(props.panelDate, props.selectedValue, props.valueFormat)
+      useGenerateDates(
+        props.panelDate,
+        props.selectedValue as any,
+        props.valueFormat
+      )
     )
+    const mouseEnterHandler = (item: DateInfo) => {
+      if (props.range && item.monthFlag === 'current-month') {
+        emit('update:panelDate', item.date, true)
+      }
+    }
     return {
       weeks: ['日', '一', '二', '三', '四', '五', '六'],
       dates,
-      getDataIndex
+      getDataIndex,
+      mouseEnterHandler
     }
   }
 })
@@ -121,18 +138,45 @@ export default defineComponent({
           border-radius: 50%;
         }
       }
-    }
-
-    .current-month {
-      .ti-date_panel--text {
-        &:hover {
+      &.current {
+        .ti-date_panel--text {
           color: map-get($defaultThemeMap, primary);
+        }
+      }
+
+      &.range-selected {
+        position: relative;
+        &::before {
+          position: absolute;
+          top: 1px;
+          right: 0;
+          bottom: 1px;
+          left: 0;
+          z-index: -1;
+          content: '';
           background-color: transparentize(
             map-get($defaultThemeMap, primary),
-            0.8
+            0.9
           );
         }
-        &.selected {
+
+        &.range-start {
+          &::before {
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+          }
+        }
+
+        &.range-end {
+          &::before {
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+          }
+        }
+      }
+
+      &.selected {
+        .ti-date_panel--text {
           color: #fff;
           background-color: transparentize(
             map-get($defaultThemeMap, primary),
@@ -143,6 +187,18 @@ export default defineComponent({
             background-color: map-get($defaultThemeMap, primary);
           }
         }
+      }
+    }
+  }
+
+  .current-month {
+    .ti-date_panel--text {
+      &:hover {
+        color: map-get($defaultThemeMap, primary);
+        background-color: transparentize(
+          map-get($defaultThemeMap, primary),
+          0.8
+        );
       }
     }
   }

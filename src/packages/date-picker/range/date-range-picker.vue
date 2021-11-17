@@ -7,13 +7,15 @@
       :disabled="disabled"
       :readonly="readonly"
       :clearable="clearable"
-      :class="{ 'ti-range-input-focus': panelVisible }"
+      :class="{ 'ti-range-input-focus': panelWrapper.visible }"
       @focus="handleFocus"
+      @update:start="updateStart"
+      @update:end="updateEnd"
     />
-    <div class="ti-date-picker_popper" v-if="panelVisible">
+    <div class="ti-date-picker_popper" v-if="panelWrapper.visible">
       <TiDatePickerPanel
         range
-        :model="start"
+        :model="computedStartAndEnd"
         :panel="startPanel"
         :updatePanelDate="updateStartPanelDate"
         :updatePanelTime="updateStartPanelTime"
@@ -32,7 +34,7 @@
       </TiDatePickerPanel>
       <TiDatePickerPanel
         range
-        :model="end"
+        :model="computedStartAndEnd"
         :panel="endPanel"
         :updatePanelDate="updateEndPanelDate"
         :updatePanelTime="updateEndPanelTime"
@@ -57,33 +59,32 @@
 import {
   computed,
   defineComponent,
-  watch,
-  ref,
   WritableComputedRef,
-  ComputedRef
+  ComputedRef,
+  reactive,
+  watch
 } from 'vue'
 import TiRangeInput from './range-input.vue'
 import TiDatePickerPanelHeader from '../panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from '../panels/date-picker-panel.vue'
 import {
   getDefaultFormatByMode,
+  getPanelDateByInputDate,
   transferModelValueToInputValue
 } from '../utils'
 import { useGeneratePanel, ComputedExtremity } from '../use/useGeneratePanel'
+import dayjs from 'dayjs'
 
 interface RangeModel {
-  start: string | undefined
-  end: string | undefined
+  start?: string | undefined
+  end?: string | undefined
 }
-interface ComputedStartOrEnd {
-  start: ComputedExtremity
-  end: ComputedExtremity
-}
-enum ComputedExtremityStatus {
-  unset = 'unset',
-  tip = 'tip',
-  selected = 'selected'
-}
+
+// enum ComputedExtremityStatus {
+//   unset = 'unset',
+//   tip = 'tip',
+//   selected = 'selected'
+// }
 export default defineComponent({
   name: 'TiDateRangePicker',
   components: {
@@ -142,34 +143,26 @@ export default defineComponent({
         }
       },
       set: (val: RangeModel): void => {
-        debugger
-        emit('update:start', val['start'])
-        emit('update:end', val['end'])
+        val['start'] != null && emit('update:start', val['start'])
+        val['end'] != null && emit('update:end', val['end'])
       }
     })
 
-    const panelVisible = ref(false)
-    const panelRangeValue = ref([])
-    const computedStartAndEnd: ComputedRef<ComputedStartOrEnd> = computed(
+    const panelWrapper = reactive({
+      visible: false,
+      rangeValue: [] as ComputedExtremity[]
+    })
+    const computedStartAndEnd: ComputedRef<Array<ComputedExtremity>> = computed(
       () => {
-        return {
-          start: panelRangeValue.value[0] || {
-            status: 'unset',
-            value: '5000-01-01'
-          },
-          end: panelRangeValue.value[1] || {
-            status: 'unset',
-            value: '1000-01-01'
-          }
+        const start = panelWrapper.rangeValue[0] || {
+          status: 'unset',
+          value: null
         }
-      }
-    )
-    watch(
-      () => panelVisible.value,
-      (val) => {
-        if (val) {
-          panelRangeValue.value.length = 0
+        const end = panelWrapper.rangeValue[1] || {
+          status: 'unset',
+          value: null
         }
+        return [start, end]
       }
     )
     // generate start panel
@@ -183,14 +176,12 @@ export default defineComponent({
       {
         model,
         valueFormat,
-        rangeValue: panelRangeValue
+        rangeValue: panelWrapper.rangeValue
       },
       'start'
     )
     // generate end panel
     const {
-      handleFocus,
-      handleBlur,
       panel: endPanel,
       updatePanelDate: updateEndPanelDate,
       updatePanelTime: updateEndPanelTime,
@@ -198,22 +189,70 @@ export default defineComponent({
     } = useGeneratePanel(
       props,
       {
-        visible: panelVisible,
         model,
         valueFormat,
-        rangeValue: panelRangeValue
+        rangeValue: panelWrapper.rangeValue
       },
       'end'
     )
-
+    // 时间变化时，手动修改model的时间，不在panel generator 函数中修改，不然会和range的逻辑混在一起不利于维护
+    watch(
+      () => panelWrapper.rangeValue,
+      (value) => {
+        if (
+          value.length === 2 &&
+          value[0].status === 'selected' &&
+          value[1].status === 'selected'
+        ) {
+          // 如果两次均选择同一个panel，则两个panel的date可能会均不同于最终选择的值
+          // 在这更新panel值，这样datetime模式选择时间时，panel的date和选择的值一致
+          startPanel.date = dayjs(value[0].value)
+          endPanel.date = dayjs(value[1].value)
+          model.value = {
+            start: value[0].value,
+            end: value[1].value
+          }
+        }
+      },
+      { deep: true }
+    )
+    watch(
+      () => startPanel.time,
+      () => {
+        if (model.value.start) {
+          model.value = { start: startPanel.value }
+        }
+      }
+    )
+    watch(
+      () => endPanel.time,
+      () => {
+        if (model.value.end) {
+          model.value = { end: endPanel.value }
+        }
+      }
+    )
     const setPanelVisible = (bool: boolean) => {
-      panelVisible.value = bool
+      panelWrapper.visible = bool
+    }
+
+    const handleFocus = () => {
+      startPanel.mode = endPanel.mode =
+        props.mode === 'datetime' ? 'date' : props.mode
+      startPanel.date = getPanelDateByInputDate(props.start, props.mode, false)
+      endPanel.date = getPanelDateByInputDate(props.end, props.mode, true)
+      setPanelVisible(true)
+    }
+    const updateStart = (value: string) => {
+      model.value = { start: value }
+    }
+    const updateEnd = (value: string) => {
+      model.value = { end: value }
     }
 
     return {
       model,
       classes,
-      panelVisible,
       startPanel,
       updateStartPanelDate,
       updateStartPanelTime,
@@ -222,10 +261,12 @@ export default defineComponent({
       updateEndPanelDate,
       updateEndPanelTime,
       handleFocus,
-      handleBlur,
       setPanelVisible,
       changeEndPanelDate,
-      panelRangeValue
+      panelWrapper,
+      computedStartAndEnd,
+      updateStart,
+      updateEnd
     }
   }
 })

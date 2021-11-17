@@ -1,4 +1,5 @@
 import {
+  computed,
   ComputedRef,
   Ref,
   shallowReactive,
@@ -18,7 +19,7 @@ interface GeneratePanelParams {
   visible?: Ref<boolean>
   model: WritableComputedRef<unknown>
   valueFormat: ComputedRef<string>
-  rangeValue?: Ref<Array<ComputedExtremity>>
+  rangeValue?: Array<ComputedExtremity>
 }
 
 export function useGeneratePanel(
@@ -26,11 +27,14 @@ export function useGeneratePanel(
   panelParams: GeneratePanelParams,
   rangeParams = 'start'
 ) {
-  const modelValue = props.range ? props[rangeParams] : props.modelValue
+  const modelValue = computed(() =>
+    props.range ? props[rangeParams] : props.modelValue
+  )
   const panel = shallowReactive({
+    value: modelValue.value,
     mode: props.mode === 'datetime' ? 'date' : props.mode,
     date: getPanelDateByInputDate(
-      modelValue,
+      modelValue.value,
       props.mode,
       rangeParams === 'end'
     ),
@@ -60,16 +64,17 @@ export function useGeneratePanel(
     },
     set time(time) {
       const { hours, minutes, seconds } = parseTime(time)
-      panelParams.model.value = this.date
+      this.date = this.date
         .hour(+hours)
         .minute(+minutes)
         .second(+seconds)
-        .format(panelParams.valueFormat.value)
+      this.value = this.dateFormat
     }
   })
   watch(
-    () => props.modelValue,
+    () => modelValue.value,
     (val) => {
+      panel.value = modelValue.value
       panel.date = getPanelDateByInputDate(
         val,
         props.mode,
@@ -78,9 +83,10 @@ export function useGeneratePanel(
     }
   )
   const handleFocus = () => {
+    /* Note: range 参数的逻辑并不使用该方法, 仅single使用，重构时可提取到外部 */
     panel.mode = props.mode === 'datetime' ? 'date' : props.mode
     panel.date = getPanelDateByInputDate(
-      props.modelValue,
+      panel.value,
       props.mode,
       rangeParams === 'end'
     )
@@ -92,12 +98,27 @@ export function useGeneratePanel(
 
   // 选择日期
   const updatePanelDate = (dateStr: string, isTip = false): void => {
+    if (isTip) {
+      const rangeVal = panelParams.rangeValue!
+      const selectCompleted =
+        rangeVal.length === 2 &&
+        rangeVal[0].status === 'selected' &&
+        rangeVal[1].status === 'selected' // 已经存在选择好的范围值
+      if (rangeVal.length === 0 || selectCompleted) {
+        return
+      }
+    }
+    let panelDate = panel.date
     const order = ['year', 'month', 'date']
     if (props.mode === 'datetime') {
       const { year, month, date } = parseDate(dateStr)
-      year && (panel.date = panel.date.year(+year))
-      month && (panel.date = panel.date.month(+month - 1))
-      date && (panel.date = panel.date.date(+date))
+      year && (panelDate = panelDate.year(+year))
+      month && (panelDate = panelDate.month(+month - 1))
+      date && (panelDate = panelDate.date(+date))
+      if (!isTip) {
+        panel.date = panelDate
+        panel.value = panel.dateFormat
+      }
       const panelModeIndexInOrder = order.indexOf(panel.mode)
       if (
         panelModeIndexInOrder >= 0 &&
@@ -107,42 +128,37 @@ export function useGeneratePanel(
       } else if (panelModeIndexInOrder === order.length - 1) {
         if (props.range) {
           rangeProcess()
-        } else {
-          panelParams.model.value = panel.date.format(
-            panelParams.valueFormat.value
-          )
         }
       }
     } else {
       const propsModeIndexInOrder = order.indexOf(props.mode)
       const panelModeIndexInOrder = order.indexOf(panel.mode)
       if (propsModeIndexInOrder < 0 || panelModeIndexInOrder < 0) return
+      panelDate = dayjs(dateStr)
+      panel.date = panelDate
+      panel.value = panel.dateFormat
       if (propsModeIndexInOrder > panelModeIndexInOrder) {
-        panel.date = dayjs(dateStr)
         panel.mode = order[panelModeIndexInOrder + 1]
       } else {
         if (props.range) {
           rangeProcess()
         } else {
-          panelParams.model.value = dayjs(dateStr).format(
-            panelParams.valueFormat.value
-          )
           panelParams.visible && (panelParams.visible.value = false)
         }
       }
     }
 
     function rangeProcess() {
-      const value = dayjs(dateStr).format(panelParams.valueFormat.value)
-      const rangeVal = panelParams.rangeValue!.value
+      const value = panelDate.format(panelParams.valueFormat.value)
+      const rangeVal = panelParams.rangeValue!
       const selectCompleted =
         rangeVal.length === 2 &&
         rangeVal[0].status === 'selected' &&
         rangeVal[1].status === 'selected' // 已经存在选择好的范围值
       if (rangeVal.length === 0 || selectCompleted) {
-        rangeVal.length = 0
         if (!isTip) {
-          panelParams.rangeValue!.value.push({
+          rangeVal.length = 0
+          panelParams.rangeValue!.push({
             status: 'selected',
             value
           })
@@ -161,18 +177,12 @@ export function useGeneratePanel(
             status: 'tip',
             value
           }
-          needReverse && rangeVal.reverse()
         } else {
           rangeVal[1] = {
             status: 'selected',
             value
           }
           needReverse && rangeVal.reverse()
-          panelParams.model.value = {
-            start: rangeVal[0].value,
-            end: rangeVal[1].value
-          }
-          panelParams.visible && (panelParams.visible.value = false)
         }
       }
     }

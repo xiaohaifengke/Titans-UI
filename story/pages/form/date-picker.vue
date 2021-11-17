@@ -8,6 +8,12 @@
     <!--    <TiDatePicker v-model="value3" mode="month" />-->
     <!--    <p>year</p>-->
     <!--    <TiDatePicker v-model="value4" mode="year" />-->
+    <p>date</p>
+    <TiDatePicker
+      v-model="dateValue"
+      mode="date"
+      format="YYYY-MM-DD HH:mm:ss"
+    />
     <p>datetime</p>
     <TiDatePicker
       v-model="value5"
@@ -16,11 +22,22 @@
     />
     <p>datetime range</p>
     <TiDatePicker
-      v-model:start="rangeValue.start"
-      v-model:end="rangeValue.end"
+      v-model:start="datetimeRangeValue.start"
+      v-model:end="datetimeRangeValue.end"
       range
       mode="datetime"
       format="YYYY-MM-DD HH:mm:ss"
+      @update:start="test"
+    />
+    <span>start: {{ datetimeRangeValue.start }}</span>
+    <span>end: {{ datetimeRangeValue.end }}</span>
+    <p>date range</p>
+    <TiDatePicker
+      v-model:start="rangeValue.start"
+      v-model:end="rangeValue.end"
+      range
+      mode="date"
+      format="YYYY-MM-DD"
     />
     <span>start: {{ rangeValue.start }}</span>
     <span>end: {{ rangeValue.end }}</span>
@@ -36,11 +53,21 @@ export default {
       value2: '',
       value3: '',
       value4: '',
+      dateValue: '',
       value5: '',
+      datetimeRangeValue: {
+        start: null,
+        end: null
+      },
       rangeValue: {
         start: null,
         end: null
       }
+    }
+  },
+  methods: {
+    test(p) {
+      console.log('@update:start ->', p)
     }
   }
 }

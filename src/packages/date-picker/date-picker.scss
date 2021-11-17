@@ -18,9 +18,6 @@
     width: 32px;
     height: 32px;
     cursor: pointer;
-    .current {
-      color: map-get($defaultThemeMap, primary);
-    }
   }
 
   .prev-month,
