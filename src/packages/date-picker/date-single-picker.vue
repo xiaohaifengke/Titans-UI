@@ -8,48 +8,31 @@
       :modelValue="model"
       @change="(val) => (model = val)"
     />
-
-    <Teleport to="body">
-      <Transition
-        name="popper-slide"
-        :duration="250"
-        @after-enter="afterEnter"
-        @after-leave="afterLeave"
-      >
-        <div
-          class="ti-date-picker_popper-wrapper"
-          ref="singlePopper"
-          v-show="datePickerPanelVisible"
-          v-click-outside="{
-            handler: handleBlur,
-            extraEls: [singlePicker],
-            isActive: active
-          }"
+    <TiPopperTransition
+      :vClickOutsideExtraEls="[singlePicker]"
+      ref="popperTransiton"
+    >
+      <div class="ti-date-picker_popper">
+        <TiDatePickerPanel
+          :model="modelValue"
+          :panel="panel"
+          :updatePanelDate="updatePanelDate"
+          :updatePanelTime="updatePanelTime"
         >
-          <div class="ti-date-picker_popper">
-            <TiDatePickerPanel
-              :model="modelValue"
-              :panel="panel"
-              :updatePanelDate="updatePanelDate"
-              :updatePanelTime="updatePanelTime"
-            >
-              <TiDatePickerPanelHeader
-                :pickerMode="mode"
-                :panelMode="panel.mode"
-                :year="panel.year"
-                :month="panel.month"
-                :date="panel.dateStr"
-                :time="panel.time"
-                @update:panelMode="(panelMode) => (panel.mode = panelMode)"
-                @changePanelDate="changePanelDate"
-                class="ti-date-picker_header"
-              />
-            </TiDatePickerPanel>
-          </div>
-          <div class="ti-date-picker-popper_arrow" data-popper-arrow></div>
-        </div>
-      </Transition>
-    </Teleport>
+          <TiDatePickerPanelHeader
+            :pickerMode="mode"
+            :panelMode="panel.mode"
+            :year="panel.year"
+            :month="panel.month"
+            :date="panel.dateStr"
+            :time="panel.time"
+            @update:panelMode="(panelMode) => (panel.mode = panelMode)"
+            @changePanelDate="changePanelDate"
+            class="ti-date-picker_header"
+          />
+        </TiDatePickerPanel>
+      </div>
+    </TiPopperTransition>
   </div>
 </template>
 
@@ -67,6 +50,7 @@ import TiDatePickerPanel from './panels/date-picker-panel.vue'
 import { useGeneratePanel } from './use/useGeneratePanel'
 import { createPopper } from '@popperjs/core'
 import clickOutside from '../../utils/clickOutside'
+import TiPopperTransition from '../popper-transtion/index'
 // import { Instance } from '@popperjs/core/lib/types'
 
 export default defineComponent({
@@ -75,7 +59,8 @@ export default defineComponent({
   components: {
     TiInput,
     TiDatePickerPanelHeader,
-    TiDatePickerPanel
+    TiDatePickerPanel,
+    TiPopperTransition
   },
   props: {
     modelValue: String,
@@ -112,7 +97,7 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     const singlePicker = ref(null as any)
-    const singlePopper = ref(null as any)
+    const popperTransiton = ref(null as any)
     const format = computed(() => {
       return props.format || getDefaultFormatByMode(props.mode)
     })
@@ -134,15 +119,13 @@ export default defineComponent({
       }
     })
 
-    // 显示或隐藏日历面板
-    const datePickerPanelVisible = ref(false)
     // 控制显示隐藏日期面板及相关事件
     const { panel, updatePanelDate, updatePanelTime } = useGeneratePanel(props)
     const handleFocus = () => {
       panel.mode = props.mode === 'datetime' ? 'date' : props.mode
       panel.date = getPanelDateByInputDate(panel.value, props.mode)
-      datePickerPanelVisible.value = true
-      createPopper(singlePicker.value, singlePopper.value, {
+      showPanel()
+      createPopper(singlePicker.value, popperTransiton.value.tooltipRef, {
         placement: 'bottom-start',
         modifiers: [
           {
@@ -159,7 +142,7 @@ export default defineComponent({
       () => panel.value,
       (value) => {
         model.value = value
-        datePickerPanelVisible.value = false
+        hidePanel()
       }
     )
 
@@ -176,40 +159,26 @@ export default defineComponent({
       }
     }
 
-    const setPanelVisible = (bool: boolean) => {
-      datePickerPanelVisible.value = bool
+    const showPanel = () => {
+      popperTransiton.value.show()
     }
 
-    const handleBlur = () => {
-      setPanelVisible(false)
-    }
-    const active = ref(false)
-    const afterEnter = (el: HTMLElement) => {
-      el.classList.add('popper-slide-enter-after')
-      active.value = true
-    }
-
-    const afterLeave = (el: HTMLElement) => {
-      el.classList.remove('popper-slide-enter-after')
-      active.value = false
+    const hidePanel = () => {
+      popperTransiton.value.hide()
     }
 
     return {
       singlePicker,
-      singlePopper,
+      popperTransiton,
       model,
       classes,
-      datePickerPanelVisible,
       handleFocus,
-      handleBlur,
       panel,
       changePanelDate,
       updatePanelDate,
       updatePanelTime,
-      setPanelVisible,
-      afterEnter,
-      afterLeave,
-      active
+      showPanel,
+      hidePanel
     }
   }
 })
@@ -221,25 +190,6 @@ export default defineComponent({
     display: inline-block;
     width: 220px;
     height: 40px;
-  }
-}
-.ti-date-picker_popper {
-  transition: all 0.25s ease;
-  transform-origin: top center;
-}
-.popper-slide-enter-active,
-.popper-slide-leave-active {
-  opacity: 1;
-  transition: opacity 0.25s ease;
-  .ti-date-picker_popper {
-    transform: scaleY(1);
-  }
-}
-.popper-slide-enter-from,
-.popper-slide-leave-to {
-  opacity: 0;
-  .ti-date-picker_popper {
-    transform: scaleY(0);
   }
 }
 </style>

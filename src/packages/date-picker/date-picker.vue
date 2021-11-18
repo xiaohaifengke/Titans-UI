@@ -23,22 +23,6 @@ export default defineComponent({
   components: {
     TiDateSinglePicker,
     TiDateRangePicker
-  },
-  setup(props) {
-    const rangeRef = ref(null as any)
-    const singleRef = ref(null as any)
-    const handleBlur = () => {
-      if (props.range) {
-        rangeRef.value && rangeRef.value.setPanelVisible(false)
-      } else {
-        singleRef.value && singleRef.value.setPanelVisible(false)
-      }
-    }
-    return {
-      rangeRef,
-      singleRef,
-      handleBlur
-    }
   }
 })
 </script>
