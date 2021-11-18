@@ -207,4 +207,10 @@ export default defineComponent({
 .flip-date-list-move {
   transition: transform 0.25s ease-out;
 }
+.flip-date-list-enter-from {
+  transform: translate(0);
+}
+.flip-date-list-enter-active {
+  transition: all 0s;
+}
 </style>

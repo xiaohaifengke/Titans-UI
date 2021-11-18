@@ -174,8 +174,6 @@ export default defineComponent({
     } = useGeneratePanel(
       props,
       {
-        model,
-        valueFormat,
         rangeValue: panelWrapper.rangeValue
       },
       'start'
@@ -189,8 +187,6 @@ export default defineComponent({
     } = useGeneratePanel(
       props,
       {
-        model,
-        valueFormat,
         rangeValue: panelWrapper.rangeValue
       },
       'end'

@@ -49,6 +49,7 @@
     "custom:publish": "publish-manager cleanse && npm publish && publish-manager restore"
   },
   "dependencies": {
+    "@popperjs/core": "^2.10.2",
     "dayjs": "^1.10.7",
     "vue": "^3.2.20"
   },

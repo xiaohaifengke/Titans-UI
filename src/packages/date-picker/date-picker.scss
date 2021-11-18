@@ -5,11 +5,13 @@
   }
 
   .ti-date-picker_popper {
+    z-index: 500;
     box-sizing: border-box;
     display: inline-flex;
     padding-top: 10px;
     font-size: map-get($defaultThemeMap, fontsize);
     color: map-get($defaultThemeMap, default);
+    background-color: #fff;
     border-radius: map-get($defaultThemeMap, default-border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
@@ -25,5 +27,42 @@
   .prev-decade,
   .next-decade {
     color: #dadde7;
+  }
+}
+
+.ti-date-picker-popper_arrow,
+.ti-date-picker-popper_arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+}
+
+.ti-date-picker-popper_arrow {
+  visibility: hidden;
+}
+
+.ti-date-picker-popper_arrow::before {
+  visibility: visible;
+  content: '';
+  box-shadow: -2px -2px 5px -1px rgba(0, 0, 0, 0.2);
+  transform: rotate(45deg);
+}
+
+.ti-date-picker_popper {
+  &[data-popper-placement^='top'] > .ti-date-picker-popper_arrow {
+    bottom: -4px;
+  }
+
+  &[data-popper-placement^='bottom'] > .ti-date-picker-popper_arrow {
+    top: -4px;
+  }
+
+  &[data-popper-placement^='left'] > .ti-date-picker-popper_arrow {
+    right: -4px;
+  }
+
+  &[data-popper-placement^='right'] > .ti-date-picker-popper_arrow {
+    left: -4px;
   }
 }

@@ -1,13 +1,18 @@
 <template>
-  <div class="ti-date-single-picker" :class="classes">
+  <div class="ti-date-single-picker" ref="singlePicker" :class="classes">
     <TiInput
+      ref="singlePicker"
       class="ti-date-picker_input"
       prefix-icon="date"
       @focus="handleFocus"
       :modelValue="model"
       @change="(val) => (model = val)"
     />
-    <div class="ti-date-picker_popper" v-if="datePickerPanelVisible">
+    <div
+      class="ti-date-picker_popper"
+      ref="singlePopper"
+      v-show="datePickerPanelVisible"
+    >
       <TiDatePickerPanel
         :model="modelValue"
         :panel="panel"
@@ -26,6 +31,7 @@
           class="ti-date-picker_header"
         />
       </TiDatePickerPanel>
+      <div class="ti-date-picker-popper_arrow" data-popper-arrow></div>
     </div>
   </div>
 </template>
@@ -33,11 +39,16 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch, WritableComputedRef } from 'vue'
 import dayjs from 'dayjs'
-import { transferModelValueToInputValue, getDefaultFormatByMode } from './utils'
+import {
+  transferModelValueToInputValue,
+  getDefaultFormatByMode,
+  getPanelDateByInputDate
+} from './utils'
 import TiInput from '../input'
 import TiDatePickerPanelHeader from './panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from './panels/date-picker-panel.vue'
 import { useGeneratePanel } from './use/useGeneratePanel'
+import { createPopper } from '@popperjs/core'
 
 export default defineComponent({
   name: 'TiDateSinglePicker',
@@ -80,6 +91,8 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    const singlePicker = ref(null as any)
+    const singlePopper = ref(null as any)
     const format = computed(() => {
       return props.format || getDefaultFormatByMode(props.mode)
     })
@@ -104,17 +117,35 @@ export default defineComponent({
     // 显示或隐藏日历面板
     const datePickerPanelVisible = ref(false)
     // 控制显示隐藏日期面板及相关事件
-    const { handleFocus, handleBlur, panel, updatePanelDate, updatePanelTime } =
-      useGeneratePanel(props, {
-        visible: datePickerPanelVisible,
-        model,
-        valueFormat
-      })
+    const { panel, updatePanelDate, updatePanelTime } = useGeneratePanel(props)
+    const handleFocus = () => {
+      panel.mode = props.mode === 'datetime' ? 'date' : props.mode
+      panel.date = getPanelDateByInputDate(panel.value, props.mode)
+      datePickerPanelVisible.value = true
+
+      const popperInstance = createPopper(
+        singlePicker.value,
+        singlePopper.value,
+        {
+          placement: 'bottom-start',
+          modifiers: [
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 10]
+              }
+            }
+          ]
+        }
+      )
+      // console.log(popperInstance)
+    }
     // 时间变化时，手动修改model的时间，不在panel generator 函数中修改，不然会和range的逻辑混在一起不利于维护
     watch(
       () => panel.value,
       (value) => {
         model.value = value
+        datePickerPanelVisible.value = false
       }
     )
 
@@ -136,11 +167,12 @@ export default defineComponent({
     }
 
     return {
+      singlePicker,
+      singlePopper,
       model,
       classes,
       datePickerPanelVisible,
       handleFocus,
-      handleBlur,
       panel,
       changePanelDate,
       updatePanelDate,

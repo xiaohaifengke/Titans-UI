@@ -16,15 +16,12 @@ export interface ComputedExtremity {
 }
 
 interface GeneratePanelParams {
-  visible?: Ref<boolean>
-  model: WritableComputedRef<unknown>
-  valueFormat: ComputedRef<string>
   rangeValue?: Array<ComputedExtremity>
 }
 
 export function useGeneratePanel(
   props: any,
-  panelParams: GeneratePanelParams,
+  panelParams: GeneratePanelParams = {},
   rangeParams = 'start'
 ) {
   const modelValue = computed(() =>
@@ -82,19 +79,6 @@ export function useGeneratePanel(
       )
     }
   )
-  const handleFocus = () => {
-    /* Note: range 参数的逻辑并不使用该方法, 仅single使用，重构时可提取到外部 */
-    panel.mode = props.mode === 'datetime' ? 'date' : props.mode
-    panel.date = getPanelDateByInputDate(
-      panel.value,
-      props.mode,
-      rangeParams === 'end'
-    )
-    panelParams.visible && (panelParams.visible.value = true)
-  }
-  const handleBlur = () => {
-    panelParams.visible && (panelParams.visible.value = false)
-  }
 
   // 选择日期
   const updatePanelDate = (dateStr: string, isTip = false): void => {
@@ -142,14 +126,14 @@ export function useGeneratePanel(
       } else {
         if (props.range) {
           rangeProcess()
-        } else {
+        } /* else {
           panelParams.visible && (panelParams.visible.value = false)
-        }
+        }*/
       }
     }
 
     function rangeProcess() {
-      const value = panelDate.format(panelParams.valueFormat.value)
+      const value = panelDate.format()
       const rangeVal = panelParams.rangeValue!
       const selectCompleted =
         rangeVal.length === 2 &&
@@ -205,8 +189,6 @@ export function useGeneratePanel(
     }
   }
   return {
-    handleFocus,
-    handleBlur,
     panel,
     updatePanelDate,
     updatePanelTime,

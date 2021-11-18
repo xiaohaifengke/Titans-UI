@@ -44,7 +44,7 @@ function getRangeEndOffset(mode: string): EndOffset {
 export function getPanelDateByInputDate(
   date: string | undefined,
   mode: string,
-  isEnd?: boolean // range时，end 会比 start 多出的一个月。单位：month
+  isEnd = false // range时，end 会比 start 多出的一个月。单位：month
 ): dayjs.Dayjs {
   const inputDate = dayjs(date)
   if (date && inputDate.isValid()) {

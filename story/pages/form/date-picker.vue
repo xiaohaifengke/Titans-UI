@@ -41,6 +41,12 @@
     />
     <span>start: {{ rangeValue.start }}</span>
     <span>end: {{ rangeValue.end }}</span>
+    <p>date</p>
+    <TiDatePicker
+      v-model="dateValue"
+      mode="date"
+      format="YYYY-MM-DD HH:mm:ss"
+    />
   </div>
 </template>
 
