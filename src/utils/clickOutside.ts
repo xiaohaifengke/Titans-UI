@@ -1,5 +1,6 @@
 // Note: temp use in vue3
 // vue2 version is https://github.com/ndelvalle/v-click-outside
+// add a param named extraEls at 2021/11/18
 import { SimpleFunction } from '../shims'
 
 const HANDLERS_PROPERTY = '__v-click-outside'
@@ -22,6 +23,7 @@ type BindingValue = {
   isActive: boolean
   detectIframe: any
   capture: boolean
+  extraEls: HTMLBaseElement[]
 } & SimpleFunction
 
 type EventOptions = {
@@ -29,6 +31,7 @@ type EventOptions = {
   event: any
   handler: SimpleFunction
   middleware: SimpleFunction
+  extraEls?: HTMLBaseElement[]
 }
 
 type EventParams = EventOptions & { srcTarget: HTMLElement; capture: boolean }
@@ -46,7 +49,8 @@ function processDirectiveArguments(bindingValue: BindingValue) {
     events: bindingValue.events || EVENTS,
     isActive: !(bindingValue.isActive === false),
     detectIframe: !(bindingValue.detectIframe === false),
-    capture: !!bindingValue.capture
+    capture: !!bindingValue.capture,
+    extraEls: bindingValue.extraEls || []
   }
 }
 
@@ -72,15 +76,24 @@ function onFauxIframeClick({ el, event, handler, middleware }: EventOptions) {
   }, 0)
 }
 
-function onEvent({ el, event, handler, middleware }: EventOptions) {
+function onEvent({
+  el,
+  event,
+  handler,
+  middleware,
+  extraEls = []
+}: EventOptions) {
   // Note: composedPath is not supported on IE and Edge, more information here:
   //       https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
   //       In the meanwhile, we are using el.contains for those browsers, not
   //       the ideal solution, but using IE or EDGE is not ideal either.
+  const allEl = [el, ...extraEls]
   const path = event.path || (event.composedPath && event.composedPath())
   const isClickOutside = path
-    ? path.indexOf(el) < 0
-    : !el!.contains(event.target)
+    ? /*path.indexOf(el) < 0*/ allEl.every((el) => path.indexOf(el) < 0)
+    : /*!el!.contains(event.target)*/ allEl.every(
+        (el) => !el!.contains(event.target)
+      )
 
   if (!isClickOutside) {
     return
@@ -90,8 +103,15 @@ function onEvent({ el, event, handler, middleware }: EventOptions) {
 }
 
 function created(el: any, { value }: Binding) {
-  const { events, handler, middleware, isActive, detectIframe, capture } =
-    processDirectiveArguments(value)
+  const {
+    events,
+    handler,
+    middleware,
+    isActive,
+    detectIframe,
+    capture,
+    extraEls
+  } = processDirectiveArguments(value)
   if (!isActive) {
     return
   }
@@ -99,7 +119,8 @@ function created(el: any, { value }: Binding) {
   el[HANDLERS_PROPERTY] = events.map((eventName) => ({
     event: eventName,
     srcTarget: document.documentElement,
-    handler: (event: Event) => onEvent({ el, event, handler, middleware }),
+    handler: (event: Event) =>
+      onEvent({ el, event, handler, middleware, extraEls }),
     capture
   }))
 

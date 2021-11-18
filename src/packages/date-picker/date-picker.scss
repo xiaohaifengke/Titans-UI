@@ -1,16 +1,15 @@
 @include themes {
   .ti-date-picker {
     display: inline-block;
-    user-select: none;
   }
 
   .ti-date-picker_popper {
-    z-index: 500;
     box-sizing: border-box;
     display: inline-flex;
     padding-top: 10px;
     font-size: map-get($defaultThemeMap, fontsize);
     color: map-get($defaultThemeMap, default);
+    user-select: none;
     background-color: #fff;
     border-radius: map-get($defaultThemeMap, default-border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -35,7 +34,7 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  background: inherit;
+  background: #fff;
 }
 
 .ti-date-picker-popper_arrow {
@@ -49,7 +48,9 @@
   transform: rotate(45deg);
 }
 
-.ti-date-picker_popper {
+.ti-date-picker_popper-wrapper {
+  z-index: 500;
+
   &[data-popper-placement^='top'] > .ti-date-picker-popper_arrow {
     bottom: -4px;
   }

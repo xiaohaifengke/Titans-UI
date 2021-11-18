@@ -1,5 +1,5 @@
 <template>
-  <div class="ti-date-picker" v-click-outside="handleBlur">
+  <div class="ti-date-picker">
     <TiDateRangePicker v-if="range" v-bind="$attrs" ref="rangeRef" />
     <TiDateSinglePicker v-else v-bind="$attrs" ref="singleRef" />
   </div>
