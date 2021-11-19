@@ -1,7 +1,6 @@
 <template>
   <div class="ti-date-single-picker" ref="singlePicker" :class="classes">
     <TiInput
-      ref="singlePicker"
       class="ti-date-picker_input"
       prefix-icon="date"
       @focus="handleFocus"
@@ -49,13 +48,11 @@ import TiDatePickerPanelHeader from './panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from './panels/date-picker-panel.vue'
 import { useGeneratePanel } from './use/useGeneratePanel'
 import { createPopper } from '@popperjs/core'
-import clickOutside from '../../utils/clickOutside'
 import TiPopperTransition from '../popper-transtion/index'
 // import { Instance } from '@popperjs/core/lib/types'
 
 export default defineComponent({
   name: 'TiDateSinglePicker',
-  directives: { clickOutside },
   components: {
     TiInput,
     TiDatePickerPanelHeader,
@@ -160,11 +157,11 @@ export default defineComponent({
     }
 
     const showPanel = () => {
-      popperTransiton.value.show()
+      popperTransiton.value?.show()
     }
 
     const hidePanel = () => {
-      popperTransiton.value.hide()
+      popperTransiton.value?.hide()
     }
 
     return {

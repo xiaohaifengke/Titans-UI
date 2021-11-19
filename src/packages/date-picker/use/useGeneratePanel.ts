@@ -36,7 +36,7 @@ export function useGeneratePanel(
       rangeParams === 'end'
     ),
     get dateFormat() {
-      return this.date.format('YYYY-MM-DD HH:mm:ss')
+      return this.date.format()
     },
     get year() {
       return this.date.year()
@@ -71,12 +71,12 @@ export function useGeneratePanel(
   watch(
     () => modelValue.value,
     (val) => {
-      panel.value = modelValue.value
       panel.date = getPanelDateByInputDate(
         val,
         props.mode,
         rangeParams === 'end'
       )
+      panel.value = panel.dateFormat
     }
   )
 
