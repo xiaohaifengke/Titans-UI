@@ -124,6 +124,7 @@ export default defineComponent({
       cursor: pointer;
 
       .ti-date_panel--text {
+        position: relative;
         display: inline-block;
         padding: 3px;
         border-radius: 50%;
@@ -152,7 +153,6 @@ export default defineComponent({
           right: 0;
           bottom: 1px;
           left: 0;
-          z-index: -1;
           content: '';
           background-color: transparentize(
             map-get($defaultThemeMap, primary),

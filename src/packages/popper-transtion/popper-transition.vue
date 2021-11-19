@@ -40,8 +40,8 @@ export default defineComponent({
       default: true
     }
   },
-  emits: [],
-  setup(props) {
+  emits: ['after-enter', 'after-leave'],
+  setup(props, { emit }) {
     const visible = ref(false)
     const show = () => {
       visible.value = true
@@ -59,11 +59,13 @@ export default defineComponent({
     const afterEnter = (el: HTMLElement) => {
       el.classList.add('popper-slide-enter-after')
       vClickOutsideActive.value = true
+      emit('after-enter', el)
     }
 
     const afterLeave = (el: HTMLElement) => {
       el.classList.remove('popper-slide-enter-after')
       vClickOutsideActive.value = false
+      emit('after-leave', el)
     }
 
     const tooltipRef = ref(null as any)

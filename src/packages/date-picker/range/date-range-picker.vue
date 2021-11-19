@@ -1,5 +1,5 @@
 <template>
-  <div class="ti-date-range-picker" :class="classes">
+  <div class="ti-date-range-picker" ref="rangePicker" :class="classes">
     <TiRangeInput
       :start="model.start"
       :end="model.end"
@@ -12,46 +12,53 @@
       @update:start="updateStart"
       @update:end="updateEnd"
     />
-    <div class="ti-date-picker_popper" v-if="panelWrapper.visible">
-      <TiDatePickerPanel
-        range
-        :model="computedStartAndEnd"
-        :panel="startPanel"
-        :updatePanelDate="updateStartPanelDate"
-        :updatePanelTime="updateStartPanelTime"
-      >
-        <TiDatePickerPanelHeader
-          :pickerMode="mode"
-          :panelMode="startPanel.mode"
-          :year="startPanel.year"
-          :month="startPanel.month"
-          :date="startPanel.dateStr"
-          :time="startPanel.time"
-          @update:panelMode="(panelMode) => (startPanel.mode = panelMode)"
-          @changePanelDate="changeStartPanelDate"
-          class="ti-date-picker_header"
-        />
-      </TiDatePickerPanel>
-      <TiDatePickerPanel
-        range
-        :model="computedStartAndEnd"
-        :panel="endPanel"
-        :updatePanelDate="updateEndPanelDate"
-        :updatePanelTime="updateEndPanelTime"
-      >
-        <TiDatePickerPanelHeader
-          :pickerMode="mode"
-          :panelMode="endPanel.mode"
-          :year="endPanel.year"
-          :month="endPanel.month"
-          :date="endPanel.dateStr"
-          :time="endPanel.time"
-          @update:panelMode="(panelMode) => (endPanel.mode = panelMode)"
-          @changePanelDate="changeEndPanelDate"
-          class="ti-date-picker_header"
-        />
-      </TiDatePickerPanel>
-    </div>
+    <TiPopperTransition
+      :vClickOutsideExtraEls="[rangePicker]"
+      ref="popperTransiton"
+      @after-enter="panelWrapper.visible = true"
+      @after-leave="panelWrapper.visible = false"
+    >
+      <div class="ti-date-picker_popper">
+        <TiDatePickerPanel
+          range
+          :model="computedStartAndEnd"
+          :panel="startPanel"
+          :updatePanelDate="updateStartPanelDate"
+          :updatePanelTime="updateStartPanelTime"
+        >
+          <TiDatePickerPanelHeader
+            :pickerMode="mode"
+            :panelMode="startPanel.mode"
+            :year="startPanel.year"
+            :month="startPanel.month"
+            :date="startPanel.dateStr"
+            :time="startPanel.time"
+            @update:panelMode="(panelMode) => (startPanel.mode = panelMode)"
+            @changePanelDate="changeStartPanelDate"
+            class="ti-date-picker_header"
+          />
+        </TiDatePickerPanel>
+        <TiDatePickerPanel
+          range
+          :model="computedStartAndEnd"
+          :panel="endPanel"
+          :updatePanelDate="updateEndPanelDate"
+          :updatePanelTime="updateEndPanelTime"
+        >
+          <TiDatePickerPanelHeader
+            :pickerMode="mode"
+            :panelMode="endPanel.mode"
+            :year="endPanel.year"
+            :month="endPanel.month"
+            :date="endPanel.dateStr"
+            :time="endPanel.time"
+            @update:panelMode="(panelMode) => (endPanel.mode = panelMode)"
+            @changePanelDate="changeEndPanelDate"
+            class="ti-date-picker_header"
+          />
+        </TiDatePickerPanel>
+      </div>
+    </TiPopperTransition>
   </div>
 </template>
 
@@ -62,7 +69,8 @@ import {
   WritableComputedRef,
   ComputedRef,
   reactive,
-  watch
+  watch,
+  ref
 } from 'vue'
 import TiRangeInput from './range-input.vue'
 import TiDatePickerPanelHeader from '../panels/date-picker-panel-header.vue'
@@ -74,6 +82,8 @@ import {
 } from '../utils'
 import { useGeneratePanel, ComputedExtremity } from '../use/useGeneratePanel'
 import dayjs from 'dayjs'
+import { createPopper } from '@popperjs/core'
+import TiPopperTransition from '../../popper-transtion'
 
 interface RangeModel {
   start?: string | undefined
@@ -90,7 +100,8 @@ export default defineComponent({
   components: {
     TiRangeInput,
     TiDatePickerPanelHeader,
-    TiDatePickerPanel
+    TiDatePickerPanel,
+    TiPopperTransition
   },
   props: {
     start: String,
@@ -124,6 +135,8 @@ export default defineComponent({
   },
   emits: ['update:start', 'update:end'],
   setup(props, { emit }) {
+    const rangePicker = ref(null as any)
+    const popperTransiton = ref(null as any)
     const format = computed(() => {
       return props.format || getDefaultFormatByMode(props.mode)
     })
@@ -143,8 +156,10 @@ export default defineComponent({
         }
       },
       set: (val: RangeModel): void => {
-        val['start'] != null && emit('update:start', val['start'])
-        val['end'] != null && emit('update:end', val['end'])
+        val['start'] != null &&
+          emit('update:start', dayjs(val['start']).format(valueFormat.value))
+        val['end'] != null &&
+          emit('update:end', dayjs(val['end']).format(valueFormat.value))
       }
     })
 
@@ -208,6 +223,9 @@ export default defineComponent({
             start: value[0].value,
             end: value[1].value
           }
+          if (props.mode !== 'datetime') {
+            hidePanel()
+          }
         }
       },
       { deep: true }
@@ -228,16 +246,24 @@ export default defineComponent({
         }
       }
     )
-    const setPanelVisible = (bool: boolean) => {
-      panelWrapper.visible = bool
-    }
 
     const handleFocus = () => {
       startPanel.mode = endPanel.mode =
         props.mode === 'datetime' ? 'date' : props.mode
       startPanel.date = getPanelDateByInputDate(props.start, props.mode, false)
       endPanel.date = getPanelDateByInputDate(props.end, props.mode, true)
-      setPanelVisible(true)
+      showPanel()
+      createPopper(rangePicker.value, popperTransiton.value.tooltipRef, {
+        placement: 'bottom-start',
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 10]
+            }
+          }
+        ]
+      })
     }
     const updateStart = (value: string) => {
       model.value = { start: value }
@@ -246,7 +272,17 @@ export default defineComponent({
       model.value = { end: value }
     }
 
+    const showPanel = () => {
+      popperTransiton.value.show()
+    }
+
+    const hidePanel = () => {
+      popperTransiton.value.hide()
+    }
+
     return {
+      rangePicker,
+      popperTransiton,
       model,
       classes,
       startPanel,
@@ -257,7 +293,8 @@ export default defineComponent({
       updateEndPanelDate,
       updateEndPanelTime,
       handleFocus,
-      setPanelVisible,
+      showPanel,
+      hidePanel,
       changeEndPanelDate,
       panelWrapper,
       computedStartAndEnd,
