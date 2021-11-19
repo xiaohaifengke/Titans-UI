@@ -1,7 +1,7 @@
 <template>
   <div class="ti-date-picker-demo">
     <p>default</p>
-    <TiDatePicker v-model="value1" />
+    <TiDatePicker v-model="value1" clearable />
     <!--    <p>date</p>-->
     <!--    <TiDatePicker v-model="value2" mode="date" />-->
     <!--    <p>month</p>-->
@@ -13,12 +13,14 @@
       v-model="dateValue"
       mode="date"
       format="YYYY-MM-DD HH:mm:ss"
+      clearable
     />
     <p>datetime</p>
     <TiDatePicker
       v-model="value5"
       mode="datetime"
       format="YYYY-MM-DD HH:mm:ss"
+      clearable
     />
     <p>datetime range</p>
     <TiDatePicker
@@ -28,6 +30,7 @@
       mode="datetime"
       format="YYYY-MM-DD HH:mm:ss"
       @update:start="test"
+      clearable
     />
     <span>start: {{ datetimeRangeValue.start }}</span>
     <span>end: {{ datetimeRangeValue.end }}</span>
@@ -38,6 +41,7 @@
       range
       mode="date"
       format="YYYY-MM-DD"
+      clearable
     />
     <span>start: {{ rangeValue.start }}</span>
     <span>end: {{ rangeValue.end }}</span>
@@ -46,6 +50,7 @@
       v-model="dateValue"
       mode="date"
       format="YYYY-MM-DD HH:mm:ss"
+      clearable
     />
   </div>
 </template>

@@ -7,10 +7,11 @@
       :disabled="disabled"
       :readonly="readonly"
       :clearable="clearable"
-      :class="{ 'ti-range-input-focus': panelWrapper.visible }"
+      :focus="panelWrapper.visible"
       @focus="handleFocus"
       @update:start="updateStart"
       @update:end="updateEnd"
+      @clear="clearHandler"
     />
     <TiPopperTransition
       :vClickOutsideExtraEls="[rangePicker]"
@@ -86,6 +87,7 @@ import { createPopper } from '@popperjs/core'
 import TiPopperTransition from '../../popper-transtion'
 
 interface RangeModel {
+  clear?: boolean
   start?: string | undefined
   end?: string | undefined
 }
@@ -156,6 +158,19 @@ export default defineComponent({
         }
       },
       set: (val: RangeModel): void => {
+        if (val.clear) {
+          emit(
+            'update:start',
+            (val['start'] && dayjs(val['start']).format(valueFormat.value)) ||
+              val['start']
+          )
+          emit(
+            'update:end',
+            (val['end'] && dayjs(val['end']).format(valueFormat.value)) ||
+              val['end']
+          )
+          return
+        }
         val['start'] != null &&
           emit('update:start', dayjs(val['start']).format(valueFormat.value))
         val['end'] != null &&
@@ -280,6 +295,12 @@ export default defineComponent({
       popperTransiton.value.hide()
     }
 
+    const clearHandler = () => {
+      model.value = { start: '', end: '', clear: true }
+      panelWrapper.visible = false
+      panelWrapper.rangeValue.length = 0
+    }
+
     return {
       rangePicker,
       popperTransiton,
@@ -299,7 +320,8 @@ export default defineComponent({
       panelWrapper,
       computedStartAndEnd,
       updateStart,
-      updateEnd
+      updateEnd,
+      clearHandler
     }
   }
 })

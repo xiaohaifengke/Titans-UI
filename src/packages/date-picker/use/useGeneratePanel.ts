@@ -76,7 +76,7 @@ export function useGeneratePanel(
         props.mode,
         rangeParams === 'end'
       )
-      panel.value = panel.dateFormat
+      panel.value = (val && panel.dateFormat) || val
     }
   )
 

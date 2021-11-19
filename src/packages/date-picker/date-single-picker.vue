@@ -6,6 +6,8 @@
       @focus="handleFocus"
       :modelValue="model"
       @change="(val) => (model = val)"
+      :clearable="clearable"
+      @clear="clearHandler"
     />
     <TiPopperTransition
       :vClickOutsideExtraEls="[singlePicker]"
@@ -112,7 +114,10 @@ export default defineComponent({
         return transferModelValueToInputValue(props.modelValue, format.value)
       },
       set: (val: string | undefined): void => {
-        emit('update:modelValue', dayjs(val).format(valueFormat.value))
+        emit(
+          'update:modelValue',
+          (val && dayjs(val).format(valueFormat.value)) || val
+        )
       }
     })
 
@@ -166,6 +171,10 @@ export default defineComponent({
       popperTransiton.value?.hide()
     }
 
+    const clearHandler = () => {
+      model.value = ''
+    }
+
     return {
       singlePicker,
       popperTransiton,
@@ -177,7 +186,8 @@ export default defineComponent({
       updatePanelDate,
       updatePanelTime,
       showPanel,
-      hidePanel
+      hidePanel,
+      clearHandler
     }
   }
 })

@@ -28,14 +28,17 @@
       @input="(e) => $emit('update:end', e.target.value)"
     />
     <TiIcon
-      class="ti-range-input_icon"
-      :icon="clearable && start && end ? 'circle-close' : ''"
+      class="ti-range-input_icon ti-range-input_icon--clear"
+      :icon="
+        clearable && start && end && (focus || isHover) ? 'circle-close' : ''
+      "
+      @click="$emit('clear')"
     ></TiIcon>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import TiIcon from '../../icon'
 
 export default defineComponent({
@@ -71,14 +74,19 @@ export default defineComponent({
     clearable: {
       type: Boolean,
       default: false
+    },
+    focus: {
+      type: Boolean,
+      default: false
     }
   },
-  emits: ['focus', 'input', 'update:start', 'update:end'],
+  emits: ['focus', 'input', 'update:start', 'update:end', 'clear'],
   setup(props, { emit }) {
     const classes = computed(() => [
       `ti-range-input-size-${props.size}`,
       {
-        'ti-range-input--disabled': props.disabled
+        'ti-range-input--disabled': props.disabled,
+        'ti-range-input-focus': props.focus
       }
     ])
     const rangeInputInnerClasses = computed(() => [])
@@ -87,10 +95,13 @@ export default defineComponent({
       emit('focus', e)
     }
 
+    const isHover = ref(false)
+
     return {
       classes,
       rangeInputInnerClasses,
-      onFocus
+      onFocus,
+      isHover
     }
   }
 })
