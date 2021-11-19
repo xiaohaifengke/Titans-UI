@@ -1,5 +1,5 @@
 <template>
-  <div class="ti-time-picker" v-click-outside="handleBlur">
+  <div class="ti-time-picker" ref="timePicker">
     <TiInput
       class="ti-time-picker_input"
       prefix-icon="time"
@@ -7,48 +7,42 @@
       :modelValue="model"
       @change="(val) => (model = val)"
     />
-    <div class="ti-time-picker_popper" v-if="timePickerPanelVisible">
-      <div class="ti-time-picker_panel">
-        <div
-          class="ti-time-picker_panel--item"
-          v-for="p in pattern"
-          :key="p.id"
-        >
-          <TiTimePanel
-            :start="p.start"
-            :step="p.step"
-            :end="p.end"
-            v-model="panel[p.id]"
-          />
+    <TiPopperTransition
+      :vClickOutsideExtraEls="[timePicker]"
+      ref="popperTransiton"
+    >
+      <div class="ti-time-picker_popper">
+        <div class="ti-time-picker_panel">
+          <div
+            class="ti-time-picker_panel--item"
+            v-for="p in pattern"
+            :key="p.id"
+          >
+            <TiTimePanel
+              :start="p.start"
+              :step="p.step"
+              :end="p.end"
+              v-model="panel[p.id]"
+            />
+          </div>
         </div>
-        <!--<div class="ti-time-picker_panel&#45;&#45;item">
-          <TimePanel :start="0" :step="1" :end="59" v-model="panel.minute" />
-        </div>
-        <div class="ti-time-picker_panel&#45;&#45;item">
-          <TimePanel :start="0" :step="1" :end="59" v-model="panel.second" />
-        </div>-->
       </div>
-    </div>
+    </TiPopperTransition>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-import dayjs from 'dayjs'
-import type { Dayjs } from 'dayjs'
-import clickOutside from '../../utils/clickOutside'
+import { defineComponent, ref } from 'vue'
 import TiInput from '../input'
 import TiTimePanel from './components/time-panel.vue'
-import {
-  useInitTimePickerPanel,
-  formatTime
-} from './use/useInitTimePickerPanel'
-import { usePattern } from '../../packages/time-picker/use/usePattern'
+import { useInitTimePickerPanel } from './use/useInitTimePickerPanel'
+import { usePattern } from './use/usePattern'
+import TiPopperTransition from '../popper-transtion'
+import { createPopper } from '@popperjs/core'
 
 export default defineComponent({
   name: 'TiTimePicker',
-  directives: { clickOutside },
-  components: { TiInput, TiTimePanel },
+  components: { TiInput, TiTimePanel, TiPopperTransition },
   emits: ['update:modelValue'],
   props: {
     modelValue: String,
@@ -63,17 +57,45 @@ export default defineComponent({
     valueFormat: {
       type: String,
       default: 'HH:mm:ss'
+    },
+    teleportToBody: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { emit }) {
-    const { model, timePickerPanelVisible, handleFocus, handleBlur, panel } =
-      useInitTimePickerPanel(props, { emit })
+    const timePicker = ref(null as any)
+    const popperTransiton = ref(null as any)
+    const { model, panel } = useInitTimePickerPanel(props, { emit })
     const pattern = usePattern(props)
+    const handleFocus = () => {
+      debugger
+      showPanel()
+      createPopper(timePicker.value, popperTransiton.value.tooltipRef, {
+        placement: 'bottom',
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 10]
+            }
+          }
+        ]
+      })
+    }
+    const showPanel = () => {
+      popperTransiton.value?.show()
+    }
+    const hidePanel = () => {
+      popperTransiton.value?.hide()
+    }
     return {
+      timePicker,
+      popperTransiton,
       model,
-      timePickerPanelVisible,
       handleFocus,
-      handleBlur,
+      showPanel,
+      hidePanel,
       panel,
       pattern
     }
@@ -81,6 +103,6 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
 @import './time-picker';
 </style>

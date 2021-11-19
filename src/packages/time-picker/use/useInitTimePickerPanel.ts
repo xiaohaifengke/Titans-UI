@@ -32,9 +32,9 @@ export function useInitTimePickerPanel(props: any, { emit }: { emit: any }) {
     },
     set: (val: string) => emit('update:modelValue', val)
   })
-  const timePickerPanelVisible = ref(false)
 
   const panel = reactive({
+    value: '',
     time: getPanelDateByInputDate(props.modelValue),
     get hour() {
       return this.time.hour()
@@ -61,19 +61,9 @@ export function useInitTimePickerPanel(props: any, { emit }: { emit: any }) {
       panel.time = getPanelDateByInputDate(val)
     }
   )
-  const handleFocus = () => {
-    // panel.time = getPanelDateByInputDate(props.modelValue)
-    timePickerPanelVisible.value = true
-  }
-  const handleBlur = () => {
-    timePickerPanelVisible.value = false
-  }
 
   return {
     model,
-    timePickerPanelVisible,
-    handleFocus,
-    handleBlur,
     panel
   }
 }
