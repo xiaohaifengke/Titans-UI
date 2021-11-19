@@ -44,7 +44,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import dayjs from 'dayjs'
 import TiDatePanel from './date-panel.vue'
 import TiMonthPanel from './month-panel.vue'
 import TiYearPanel from './year-panel.vue'

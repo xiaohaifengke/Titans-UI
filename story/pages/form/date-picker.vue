@@ -1,7 +1,13 @@
 <template>
   <div class="ti-date-picker-demo">
     <p>default</p>
-    <TiDatePicker v-model="value1" clearable />
+    <TiDatePicker
+      placeholder="请选择日期"
+      v-model="value1"
+      clearable
+      disabled
+      size="mini"
+    />
     <!--    <p>date</p>-->
     <!--    <TiDatePicker v-model="value2" mode="date" />-->
     <!--    <p>month</p>-->
@@ -10,6 +16,16 @@
     <!--    <TiDatePicker v-model="value4" mode="year" />-->
     <p>date</p>
     <TiDatePicker
+      placeholder="请选择日期"
+      v-model="dateValue"
+      mode="date"
+      format="YYYY-MM-DD HH:mm:ss"
+      clearable
+      readonly
+    />
+    <p>date</p>
+    <TiDatePicker
+      placeholder="请选择日期"
       v-model="dateValue"
       mode="date"
       format="YYYY-MM-DD HH:mm:ss"
@@ -24,6 +40,8 @@
     />
     <p>datetime range</p>
     <TiDatePicker
+      startPlaceholder="请选择开始日期"
+      endPlaceholder="请选择结束日期"
       v-model:start="datetimeRangeValue.start"
       v-model:end="datetimeRangeValue.end"
       range
@@ -31,6 +49,18 @@
       format="YYYY-MM-DD HH:mm:ss"
       @update:start="test"
       clearable
+      size="mini"
+    />
+    <p>datetime range</p>
+    <TiDatePicker
+      v-model:start="datetimeRangeValue.start"
+      v-model:end="datetimeRangeValue.end"
+      range
+      mode="datetime"
+      format="YYYY-MM-DD HH:mm:ss"
+      @update:start="test"
+      clearable
+      disabled
     />
     <span>start: {{ datetimeRangeValue.start }}</span>
     <span>end: {{ datetimeRangeValue.end }}</span>
@@ -42,6 +72,7 @@
       mode="date"
       format="YYYY-MM-DD"
       clearable
+      readonly
     />
     <span>start: {{ rangeValue.start }}</span>
     <span>end: {{ rangeValue.end }}</span>

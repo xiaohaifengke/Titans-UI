@@ -84,62 +84,68 @@ export default defineComponent({
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-.ti-date-picker_popper {
-  transition: all 0.25s ease;
-  transform-origin: top center;
-}
-.popper-slide-enter-active,
-.popper-slide-leave-active {
-  opacity: 1;
-  transition: opacity 0.25s ease;
-  .ti-date-picker_popper {
-    transform: scaleY(1);
+@include themes {
+  .popper-slide-enter-active,
+  .popper-slide-leave-active {
+    opacity: 1;
+    transition: opacity 0.25s ease;
+    .ti-date-picker_popper {
+      transform: scaleY(1);
+    }
   }
-}
-.popper-slide-enter-from,
-.popper-slide-leave-to {
-  opacity: 0;
-  .ti-date-picker_popper {
-    transform: scaleY(0);
-  }
-}
-
-.ti-popper_arrow,
-.ti-popper_arrow::before {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #fff;
-}
-
-.ti-popper_arrow {
-  visibility: hidden;
-}
-
-.ti-popper_arrow::before {
-  visibility: visible;
-  content: '';
-  box-shadow: -2px -2px 5px -1px rgba(0, 0, 0, 0.2);
-  transform: rotate(45deg);
-}
-
-.ti-popper-transition {
-  z-index: 500;
-
-  &[data-popper-placement^='top'] > .ti-popper_arrow {
-    bottom: -4px;
+  .popper-slide-enter-from,
+  .popper-slide-leave-to {
+    opacity: 0;
+    .ti-date-picker_popper {
+      transform: scaleY(0);
+    }
   }
 
-  &[data-popper-placement^='bottom'] > .ti-popper_arrow {
-    top: -4px;
+  .ti-popper_arrow,
+  .ti-popper_arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
   }
 
-  &[data-popper-placement^='left'] > .ti-popper_arrow {
-    right: -4px;
+  .ti-popper_arrow {
+    visibility: hidden;
   }
 
-  &[data-popper-placement^='right'] > .ti-popper_arrow {
-    left: -4px;
+  .ti-popper_arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+  }
+
+  .ti-popper-transition {
+    z-index: 500;
+    background-color: rgb(255, 255, 255);
+    border-radius: map-get($defaultThemeMap, default-border-radius);
+    box-shadow: rgb(0 0 0 / 20%) 0 2px 10px;
+
+    &[data-popper-placement^='top'] > .ti-popper_arrow {
+      bottom: -4px;
+      &::before {
+        box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    &[data-popper-placement^='bottom'] > .ti-popper_arrow {
+      top: -4px;
+      &::before {
+        box-shadow: -2px -2px 5px -1px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    &[data-popper-placement^='left'] > .ti-popper_arrow {
+      right: -4px;
+    }
+
+    &[data-popper-placement^='right'] > .ti-popper_arrow {
+      left: -4px;
+    }
   }
 }
 </style>

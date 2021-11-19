@@ -27,6 +27,13 @@
     placeholder="请输入"
     style="width: 220px; margin-right: 8px"
   ></ti-input>
+  <h4>readonly</h4>
+  <ti-input
+    v-model="value"
+    readonly
+    placeholder="请输入"
+    style="width: 220px; margin-right: 8px"
+  ></ti-input>
   <h4>prefix or suffix icon</h4>
   <ti-input
     v-model="value"

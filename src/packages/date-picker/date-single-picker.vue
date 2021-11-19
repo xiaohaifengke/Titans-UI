@@ -6,8 +6,12 @@
       @focus="handleFocus"
       :modelValue="model"
       @change="(val) => (model = val)"
+      :placeholder="placeholder"
       :clearable="clearable"
+      :disabled="disabled"
+      :readonly="readonly"
       @clear="clearHandler"
+      :size="size"
     />
     <TiPopperTransition
       :vClickOutsideExtraEls="[singlePicker]"
@@ -124,6 +128,7 @@ export default defineComponent({
     // 控制显示隐藏日期面板及相关事件
     const { panel, updatePanelDate, updatePanelTime } = useGeneratePanel(props)
     const handleFocus = () => {
+      if (props.readonly) return
       panel.mode = props.mode === 'datetime' ? 'date' : props.mode
       panel.date = getPanelDateByInputDate(panel.value, props.mode)
       showPanel()

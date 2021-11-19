@@ -1,6 +1,7 @@
 <template>
   <div class="ti-date-range-picker" ref="rangePicker" :class="classes">
     <TiRangeInput
+      v-bind="$attrs"
       :start="model.start"
       :end="model.end"
       :size="size"
@@ -73,14 +74,14 @@ import {
   watch,
   ref
 } from 'vue'
-import TiRangeInput from './range-input.vue'
-import TiDatePickerPanelHeader from '../panels/date-picker-panel-header.vue'
-import TiDatePickerPanel from '../panels/date-picker-panel.vue'
 import {
   getDefaultFormatByMode,
   getPanelDateByInputDate,
   transferModelValueToInputValue
 } from '../utils'
+import TiRangeInput from './range-input.vue'
+import TiDatePickerPanelHeader from '../panels/date-picker-panel-header.vue'
+import TiDatePickerPanel from '../panels/date-picker-panel.vue'
 import { useGeneratePanel, ComputedExtremity } from '../use/useGeneratePanel'
 import dayjs from 'dayjs'
 import { createPopper } from '@popperjs/core'
@@ -99,6 +100,7 @@ interface RangeModel {
 // }
 export default defineComponent({
   name: 'TiDateRangePicker',
+  inheritAttrs: false,
   components: {
     TiRangeInput,
     TiDatePickerPanelHeader,
@@ -263,6 +265,7 @@ export default defineComponent({
     )
 
     const handleFocus = () => {
+      if (props.readonly) return
       startPanel.mode = endPanel.mode =
         props.mode === 'datetime' ? 'date' : props.mode
       startPanel.date = getPanelDateByInputDate(props.start, props.mode, false)
