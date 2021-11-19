@@ -139,7 +139,9 @@ export default defineComponent({
       () => panel.value,
       (value) => {
         model.value = value
-        hidePanel()
+        if (props.mode !== 'datetime') {
+          hidePanel()
+        }
       }
     )
 

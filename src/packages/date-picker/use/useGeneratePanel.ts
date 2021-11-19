@@ -120,15 +120,14 @@ export function useGeneratePanel(
       if (propsModeIndexInOrder < 0 || panelModeIndexInOrder < 0) return
       panelDate = dayjs(dateStr)
       panel.date = panelDate
-      panel.value = panel.dateFormat
       if (propsModeIndexInOrder > panelModeIndexInOrder) {
         panel.mode = order[panelModeIndexInOrder + 1]
       } else {
         if (props.range) {
           rangeProcess()
-        } /* else {
-          panelParams.visible && (panelParams.visible.value = false)
-        }*/
+        } else {
+          panel.value = panel.dateFormat
+        }
       }
     }
 
