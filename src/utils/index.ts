@@ -57,5 +57,6 @@ export function toFixed(d: string | number, number: any) {
 }
 
 export function validatorInt(val: number | string): boolean {
+  // console.log(val, typeof val)
   return /^\d+$/.test(`${val}`)
 }

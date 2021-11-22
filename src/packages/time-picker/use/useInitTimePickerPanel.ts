@@ -2,7 +2,7 @@ import { computed, reactive, ref, SetupContext, watch } from 'vue'
 import dayjs from 'dayjs'
 export function parseTime(time: string) {
   const timeReg =
-    /^(?<hours>(\d+))[^\d](?<minutes>(\d+))[^\d](?<seconds>(\d+))$/
+    /^(?<hours>(\d+))[^\d]*(?<minutes>(\d+))[^\d]*(?<seconds>(\d+))[^\d]*$/
   const r = time.match(timeReg)
   const { hours, minutes, seconds } = r?.groups || {}
   return { hours, minutes, seconds }
