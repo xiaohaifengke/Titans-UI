@@ -10,7 +10,6 @@
     display: inline-flex;
     height: 210px;
     border-radius: map-get($defaultThemeMap, default-border-radius);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
   .ti-time-picker_panel--item {
     flex-grow: 1;

@@ -15,51 +15,49 @@
       @clear="clearHandler"
     />
     <TiPopperTransition
-      :vClickOutsideExtraEls="[rangePicker]"
+      :reference="rangePicker"
       ref="popperTransiton"
       @after-enter="panelWrapper.visible = true"
       @after-leave="panelWrapper.visible = false"
     >
-      <div class="ti-date-picker_popper">
-        <TiDatePickerPanel
-          range
-          :model="computedStartAndEnd"
-          :panel="startPanel"
-          :updatePanelDate="updateStartPanelDate"
-          :updatePanelTime="updateStartPanelTime"
-        >
-          <TiDatePickerPanelHeader
-            :pickerMode="mode"
-            :panelMode="startPanel.mode"
-            :year="startPanel.year"
-            :month="startPanel.month"
-            :date="startPanel.dateStr"
-            :time="startPanel.time"
-            @update:panelMode="(panelMode) => (startPanel.mode = panelMode)"
-            @changePanelDate="changeStartPanelDate"
-            class="ti-date-picker_header"
-          />
-        </TiDatePickerPanel>
-        <TiDatePickerPanel
-          range
-          :model="computedStartAndEnd"
-          :panel="endPanel"
-          :updatePanelDate="updateEndPanelDate"
-          :updatePanelTime="updateEndPanelTime"
-        >
-          <TiDatePickerPanelHeader
-            :pickerMode="mode"
-            :panelMode="endPanel.mode"
-            :year="endPanel.year"
-            :month="endPanel.month"
-            :date="endPanel.dateStr"
-            :time="endPanel.time"
-            @update:panelMode="(panelMode) => (endPanel.mode = panelMode)"
-            @changePanelDate="changeEndPanelDate"
-            class="ti-date-picker_header"
-          />
-        </TiDatePickerPanel>
-      </div>
+      <TiDatePickerPanel
+        range
+        :model="computedStartAndEnd"
+        :panel="startPanel"
+        :updatePanelDate="updateStartPanelDate"
+        :updatePanelTime="updateStartPanelTime"
+      >
+        <TiDatePickerPanelHeader
+          :pickerMode="mode"
+          :panelMode="startPanel.mode"
+          :year="startPanel.year"
+          :month="startPanel.month"
+          :date="startPanel.dateStr"
+          :time="startPanel.time"
+          @update:panelMode="(panelMode) => (startPanel.mode = panelMode)"
+          @changePanelDate="changeStartPanelDate"
+          class="ti-date-picker_header"
+        />
+      </TiDatePickerPanel>
+      <TiDatePickerPanel
+        range
+        :model="computedStartAndEnd"
+        :panel="endPanel"
+        :updatePanelDate="updateEndPanelDate"
+        :updatePanelTime="updateEndPanelTime"
+      >
+        <TiDatePickerPanelHeader
+          :pickerMode="mode"
+          :panelMode="endPanel.mode"
+          :year="endPanel.year"
+          :month="endPanel.month"
+          :date="endPanel.dateStr"
+          :time="endPanel.time"
+          @update:panelMode="(panelMode) => (endPanel.mode = panelMode)"
+          @changePanelDate="changeEndPanelDate"
+          class="ti-date-picker_header"
+        />
+      </TiDatePickerPanel>
     </TiPopperTransition>
   </div>
 </template>
@@ -84,7 +82,6 @@ import TiDatePickerPanelHeader from '../panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from '../panels/date-picker-panel.vue'
 import { useGeneratePanel, ComputedExtremity } from '../use/useGeneratePanel'
 import dayjs from 'dayjs'
-import { createPopper } from '@popperjs/core'
 import TiPopperTransition from '../../popper-transtion'
 
 interface RangeModel {
@@ -271,17 +268,6 @@ export default defineComponent({
       startPanel.date = getPanelDateByInputDate(props.start, props.mode, false)
       endPanel.date = getPanelDateByInputDate(props.end, props.mode, true)
       showPanel()
-      createPopper(rangePicker.value, popperTransiton.value.tooltipRef, {
-        placement: 'bottom-start',
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 10]
-            }
-          }
-        ]
-      })
     }
     const updateStart = (value: string) => {
       model.value = { start: value }

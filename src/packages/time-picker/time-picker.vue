@@ -8,23 +8,22 @@
       @change="(val) => (model = val)"
     />
     <TiPopperTransition
-      :vClickOutsideExtraEls="[timePicker]"
+      :reference="timePicker"
       ref="popperTransiton"
+      placement="bottom"
     >
-      <div class="ti-time-picker_popper">
-        <div class="ti-time-picker_panel">
-          <div
-            class="ti-time-picker_panel--item"
-            v-for="p in pattern"
-            :key="p.id"
-          >
-            <TiTimePanel
-              :start="p.start"
-              :step="p.step"
-              :end="p.end"
-              v-model="panel[p.id]"
-            />
-          </div>
+      <div class="ti-time-picker_panel">
+        <div
+          class="ti-time-picker_panel--item"
+          v-for="p in pattern"
+          :key="p.id"
+        >
+          <TiTimePanel
+            :start="p.start"
+            :step="p.step"
+            :end="p.end"
+            v-model="panel[p.id]"
+          />
         </div>
       </div>
     </TiPopperTransition>
@@ -38,7 +37,6 @@ import TiTimePanel from './components/time-panel.vue'
 import { useInitTimePickerPanel } from './use/useInitTimePickerPanel'
 import { usePattern } from './use/usePattern'
 import TiPopperTransition from '../popper-transtion'
-import { createPopper } from '@popperjs/core'
 
 export default defineComponent({
   name: 'TiTimePicker',
@@ -69,19 +67,7 @@ export default defineComponent({
     const { model, panel } = useInitTimePickerPanel(props, { emit })
     const pattern = usePattern(props)
     const handleFocus = () => {
-      debugger
       showPanel()
-      createPopper(timePicker.value, popperTransiton.value.tooltipRef, {
-        placement: 'bottom',
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 10]
-            }
-          }
-        ]
-      })
     }
     const showPanel = () => {
       popperTransiton.value?.show()

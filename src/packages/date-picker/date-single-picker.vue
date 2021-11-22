@@ -13,30 +13,25 @@
       @clear="clearHandler"
       :size="size"
     />
-    <TiPopperTransition
-      :vClickOutsideExtraEls="[singlePicker]"
-      ref="popperTransiton"
-    >
-      <div class="ti-date-picker_popper">
-        <TiDatePickerPanel
-          :model="modelValue"
-          :panel="panel"
-          :updatePanelDate="updatePanelDate"
-          :updatePanelTime="updatePanelTime"
-        >
-          <TiDatePickerPanelHeader
-            :pickerMode="mode"
-            :panelMode="panel.mode"
-            :year="panel.year"
-            :month="panel.month"
-            :date="panel.dateStr"
-            :time="panel.time"
-            @update:panelMode="(panelMode) => (panel.mode = panelMode)"
-            @changePanelDate="changePanelDate"
-            class="ti-date-picker_header"
-          />
-        </TiDatePickerPanel>
-      </div>
+    <TiPopperTransition :reference="singlePicker" ref="popperTransiton">
+      <TiDatePickerPanel
+        :model="modelValue"
+        :panel="panel"
+        :updatePanelDate="updatePanelDate"
+        :updatePanelTime="updatePanelTime"
+      >
+        <TiDatePickerPanelHeader
+          :pickerMode="mode"
+          :panelMode="panel.mode"
+          :year="panel.year"
+          :month="panel.month"
+          :date="panel.dateStr"
+          :time="panel.time"
+          @update:panelMode="(panelMode) => (panel.mode = panelMode)"
+          @changePanelDate="changePanelDate"
+          class="ti-date-picker_header"
+        />
+      </TiDatePickerPanel>
     </TiPopperTransition>
   </div>
 </template>
@@ -53,9 +48,7 @@ import TiInput from '../input'
 import TiDatePickerPanelHeader from './panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from './panels/date-picker-panel.vue'
 import { useGeneratePanel } from './use/useGeneratePanel'
-import { createPopper } from '@popperjs/core'
 import TiPopperTransition from '../popper-transtion/index'
-// import { Instance } from '@popperjs/core/lib/types'
 
 export default defineComponent({
   name: 'TiDateSinglePicker',
@@ -127,22 +120,12 @@ export default defineComponent({
 
     // 控制显示隐藏日期面板及相关事件
     const { panel, updatePanelDate, updatePanelTime } = useGeneratePanel(props)
+
     const handleFocus = () => {
       if (props.readonly) return
       panel.mode = props.mode === 'datetime' ? 'date' : props.mode
       panel.date = getPanelDateByInputDate(panel.value, props.mode)
       showPanel()
-      createPopper(singlePicker.value, popperTransiton.value.tooltipRef, {
-        placement: 'bottom-start',
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 10]
-            }
-          }
-        ]
-      })
     }
     // 时间变化时，手动修改model的时间，不在panel generator 函数中修改，不然会和range的逻辑混在一起不利于维护
     watch(

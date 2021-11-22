@@ -1,5 +1,6 @@
 <template>
   <div class="ti-date-picker-demo">
+    <div style="height: 800px"></div>
     <p>default</p>
     <TiDatePicker
       placeholder="请选择日期"
@@ -83,6 +84,7 @@
       format="YYYY-MM-DD HH:mm:ss"
       clearable
     />
+    <div style="height: 800px"></div>
   </div>
 </template>
 
