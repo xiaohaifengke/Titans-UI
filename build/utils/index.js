@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const resolve = (dir) => path.join(__dirname, '../../', dir)
-const packageJson = require('../../package')
+const packageJson = require('../../apackage.json')
 const join = path.join
 const webpack = require('webpack')
 const WebpackMerge = require('webpack-merge')

@@ -6,14 +6,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { iconProps } from './icon-props'
 export default defineComponent({
   name: 'TiIcon',
-  props: {
-    icon: {
-      type: String,
-      required: true
-    }
-  }
+  props: iconProps
 })
 </script>
 

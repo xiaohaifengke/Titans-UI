@@ -12,22 +12,22 @@
 </template>
 
 <script lang="ts">
-import { AppNavigator } from '../navigator/app-navigator'
 import { AppMenu, MENUS } from './menus'
+import { inject } from 'vue'
 export default {
   name: 'app-menu',
   props: {
     currentPath: { type: String }
   },
   setup() {
-    const navigator = AppNavigator.use.inject()
+    const navigator = inject(`@@app-navigator`)
 
     return {
       menus: MENUS,
       handleClickMenu(menu: AppMenu) {
         console.log(menu)
 
-        navigator.methods.go(menu.path)
+        // (navigator as any).methods.go(menu.path)
       }
     }
   }
