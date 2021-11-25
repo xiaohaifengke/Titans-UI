@@ -14,5 +14,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-@import './icon';
+@import '~@titans-ui/theme-chalk/src/icon';
 </style>

@@ -1,3 +1,6 @@
+@use './mixins/mixins' as *;
+@use './mixins/button-mixins' as *;
+
 $border-radius: 4px;
 $default-border-color: mix(#606266, #fff, 30%);
 $textColor: #fff;
