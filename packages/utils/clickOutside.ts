@@ -1,22 +1,21 @@
 // Note: temp use in vue3
 // vue2 version is https://github.com/ndelvalle/v-click-outside
 // add a param named extraEls at 2021/11/18
-import { SimpleFunction } from '../shims'
+import { SimpleFunction } from './shims'
 
 const HANDLERS_PROPERTY = '__v-click-outside'
 const HAS_WINDOWS = typeof window !== 'undefined'
 const HAS_NAVIGATOR = typeof navigator !== 'undefined'
 const IS_TOUCH =
   HAS_WINDOWS &&
-  ('ontouchstart' in window ||
-    (HAS_NAVIGATOR && navigator.msMaxTouchPoints > 0))
+  ('ontouchstart' in window || (HAS_NAVIGATOR && navigator.maxTouchPoints > 0))
 const EVENTS = IS_TOUCH ? ['touchstart'] : ['click']
 
 type Binding = {
   value: any
   oldValue: any
 }
-type BindingValue = {
+type BindingValueObj = {
   handler: SimpleFunction
   middleware: SimpleFunction
   events: string[]
@@ -24,7 +23,8 @@ type BindingValue = {
   detectIframe: any
   capture: boolean
   extraEls: HTMLBaseElement[]
-} & SimpleFunction
+}
+type BindingValue = BindingValueObj | (BindingValueObj & SimpleFunction)
 
 type EventOptions = {
   el?: HTMLBaseElement

@@ -1,4 +1,4 @@
-import { SimpleFunction } from '../shims'
+import { SimpleFunction } from './shims'
 
 function easeInOutQuad(t: number, b: number, c: number, d: number) {
   t /= d / 2
@@ -13,7 +13,7 @@ function easeInOutQuad(t: number, b: number, c: number, d: number) {
 let requestAnimFrame = (function () {
   return (
     window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
+    (window as any).webkitRequestAnimationFrame ||
     (window as any).mozRequestAnimationFrame ||
     function (callback) {
       window.setTimeout(callback, 1000 / 60)
