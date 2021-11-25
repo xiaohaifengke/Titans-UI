@@ -8,7 +8,7 @@
   "rules": {
     "at-rule-no-unknown": [
       true,
-      { "ignoreAtRules": ["mixin", "use", "extend", "content", "include", "for", "each", "if", "else"] }
+      { "ignoreAtRules": ["mixin", "use", "forward", "extend", "content", "include", "for", "each", "if", "else"] }
     ],
     "indentation": 2,
     "no-descending-specificity": null,
