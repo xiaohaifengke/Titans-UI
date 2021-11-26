@@ -11,8 +11,15 @@ import { buildConfig } from './utils/config'
 import { Project, SourceFile } from 'ts-morph'
 import fs from 'fs/promises'
 import * as vueCompiler from '@vue/compiler-sfc'
-import { run } from './utils'
+import { run, withTaskName } from './utils'
 
+/**
+ * 1. 打包每个组件 components 中的每个文件夹
+ * 2. 打包组件入口文件：components/index.ts
+ * 3. 给components中的所有文件生成ts的声明文件到types/components中，
+ *    然后将生成的.d.ts文件分别拷贝到 dist/es/components 和 dist/lib/components中
+ * 4. 删除步骤3中生成的 types 文件夹
+ */
 /**
  * 对于在组件中引用utils中的工具方法时：如 import *** from '@titans-ui/utils/index.ts'
  * 在构建过程中有两个关键点：
@@ -27,7 +34,8 @@ function pathRewriter(outputName: string) {
   }
 }
 
-const eachComponent = async () => {
+/* 打包每个组件 components 中的每个文件夹 */
+const buildEachComponent = async () => {
   const dirs = sync('*', {
     cwd: componentsDir,
     onlyDirectories: true
@@ -133,9 +141,37 @@ function copyTypes() {
   const src = path.resolve(outDir, 'types/components/')
   const copy = (module) => {
     let output = path.resolve(outDir, module, 'components')
-    return () => run(`cp -r ${src}/* ${output}`)
+    return withTaskName(`copyTypes(${module})`, () =>
+      run(`cp -r ${src}/* ${output}`)
+    )
   }
   return parallel(copy('es'), copy('lib'))
 }
 
-export const buildEachComponent = series(eachComponent, genTypes, copyTypes())
+async function buildComponentEntry() {
+  const inputOptions = {
+    input: path.resolve(componentsDir, 'index.ts'),
+    plugins: [typescript()],
+    external(id): boolean {
+      return true
+    }
+  }
+  const bundle = await rollup(inputOptions)
+  return Promise.all(
+    Object.values(buildConfig).map((config) => {
+      const outputOptions: OutputOptions = {
+        format: config.format as ModuleFormat,
+        file: path.resolve(config.output.path, `components/index.js`)
+      }
+      return bundle.write(outputOptions)
+    })
+  )
+}
+
+export const eachComponent = series(
+  buildEachComponent,
+  buildComponentEntry,
+  genTypes,
+  copyTypes(),
+  withTaskName('clean(types)', () => run('rm -rf dist/types'))
+)

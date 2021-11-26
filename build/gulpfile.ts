@@ -14,14 +14,14 @@ import { run, withTaskName } from './utils'
 export default series(
   // withTaskName('clean', async () => run(`rm -rf dist`)),
   parallel(
-    // withTaskName('build:packages', () =>
-    //   run(`pnpm run --filter ./packages --parallel --stream build`)
-    // ),
-    // withTaskName('build:allComponents', () =>
-    //   run('pnpm run build allComponents')
-    // ),
+    withTaskName('build:packages', () =>
+      run(`pnpm run --filter ./packages --parallel --stream build`)
+    ),
+    withTaskName('build:allComponents', () =>
+      run('pnpm run build allComponents')
+    ),
     withTaskName('build:eachComponent', () =>
-      run('pnpm run build buildEachComponent')
+      run('pnpm run build eachComponent')
     )
   )
 )
