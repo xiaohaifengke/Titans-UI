@@ -3,14 +3,16 @@
     this is story's app component
     <TiIcon icon="loading"></TiIcon>
     <IconDemo></IconDemo>
+    <ButtonDemo></ButtonDemo>
   </div>
 </template>
 
 <script>
 import IconDemo from './pages/normal/icon.vue'
+import ButtonDemo from './pages/form/button.vue'
 export default {
   name: 'app',
-  components: { IconDemo }
+  components: { IconDemo, ButtonDemo }
 }
 </script>
 

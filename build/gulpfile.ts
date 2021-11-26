@@ -16,7 +16,7 @@ export default series(
   withTaskName('build:packages', async () =>
     run(`pnpm run --filter ./packages --parallel --stream build`)
   ),
-  withTaskName('complete', async () => {
-    console.log('complete')
-  })
+  withTaskName('build:allComponents', () => run('pnpm run build allComponents'))
 )
+
+export * from './allComponents'

@@ -1,4 +1,7 @@
 import { installPlugins } from '../../utils/installPlugins'
 import Button from './src/button.vue'
 
-export default installPlugins(Button)
+const TiButton = installPlugins(Button)
+
+export default TiButton
+export { TiButton }

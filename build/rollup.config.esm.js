@@ -3,7 +3,7 @@ import commonjs from 'rollup-plugin-commonjs'
 // import jsx from 'acorn-jsx'
 // import typescript from '@rollup/plugin-typescript'
 import typescript from 'rollup-plugin-typescript2'
-import scss from 'rollup-plugin-scss'
+// import scss from 'rollup-plugin-scss'
 import * as path from 'path'
 // import postcss from 'postcss'
 // import autoprefixer from 'autoprefixer'
@@ -15,7 +15,7 @@ import vue from 'rollup-plugin-vue'
 const outDir = 'es'
 const defaults = { compilerOptions: { declaration: true } }
 export default {
-  input: path.resolve(__dirname, '../src/index.ts'),
+  input: path.resolve(__dirname, '../packages/titans-ui/index.ts'),
   output: {
     dir: outDir
   },
@@ -30,12 +30,6 @@ export default {
       rootDir: 'src',
       outDir: 'es',
       tsconfig: './tsconfig.json'
-    }),
-    scss({
-      output: `${outDir}/index.css`,
-      outputStyle: 'compressed',
-      // processor: () => postcss([autoprefixer({ overrideBrowserslist: 'Edge 18' })]),
-      prefix: `@import "src/style/global-import.scss";`
     })
   ],
   external(id) {

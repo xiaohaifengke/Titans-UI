@@ -64,6 +64,6 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
-@import '~@titans-ui/theme-chalk/src/button';
-</style>
+<!--<style lang="scss" rel="stylesheet/scss">
+@import '@titans-ui/theme-chalk/src/button.scss';
+</style>-->
