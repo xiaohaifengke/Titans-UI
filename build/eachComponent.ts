@@ -5,9 +5,13 @@ import typescript from 'rollup-plugin-typescript2'
 import vue from 'rollup-plugin-vue'
 import path from 'path'
 import { componentsDir, outDir, projectRoot } from './utils/paths'
-import { parallel } from 'gulp'
+import { parallel, series } from 'gulp'
 import { sync } from 'fast-glob'
 import { buildConfig } from './utils/config'
+import { Project, SourceFile } from 'ts-morph'
+import fs from 'fs/promises'
+import * as vueCompiler from '@vue/compiler-sfc'
+import { run } from './utils'
 
 /**
  * 对于在组件中引用utils中的工具方法时：如 import *** from '@titans-ui/utils/index.ts'
@@ -22,7 +26,8 @@ function pathRewriter(outputName: string) {
     return id.replace(/@titans-ui\//g, `titans-ui/${outputName}/`)
   }
 }
-export const eachComponent = async () => {
+
+const eachComponent = async () => {
   const dirs = sync('*', {
     cwd: componentsDir,
     onlyDirectories: true
@@ -59,3 +64,78 @@ export const eachComponent = async () => {
   })
   return Promise.all(tasks)
 }
+
+/* 生成ts的声明文件 */
+async function genTypes() {
+  const project = new Project({
+    tsConfigFilePath: path.resolve(projectRoot, 'tsconfig.json'),
+    skipAddingFilesFromTsConfig: true,
+    compilerOptions: {
+      declaration: true,
+      allowJs: true,
+      emitDeclarationOnly: true,
+      noEmitOnError: true,
+      outDir: path.resolve(outDir, 'types'),
+      baseUrl: projectRoot,
+      paths: {
+        '@titans-ui/*': ['packages/*']
+      },
+      skipLibCheck: true,
+      strict: false
+    }
+  })
+  const projectFilePaths = sync('**/*', {
+    cwd: componentsDir,
+    onlyFiles: true,
+    absolute: true
+  })
+  const sourceFiles: SourceFile[] = []
+  await Promise.all(
+    projectFilePaths.map(async (file) => {
+      if (file.endsWith('.vue')) {
+        const content = await fs.readFile(file, 'utf-8')
+        const sfc = vueCompiler.parse(content)
+        const { script } = sfc.descriptor
+        if (script?.lang === 'ts') {
+          let content = script.content
+          const sourceFile = project.createSourceFile(`${file}.ts`, content)
+          sourceFiles.push(sourceFile)
+        }
+      } else if (file.endsWith('.ts')) {
+        const sourceFile = project.addSourceFileAtPath(file)
+        sourceFiles.push(sourceFile)
+      }
+    })
+  )
+
+  await project.emit({
+    emitOnlyDtsFiles: true
+  })
+
+  const sourceFileTasks = sourceFiles.map(async (sourceFile: SourceFile) => {
+    const emitOutput = sourceFile.getEmitOutput()
+    const outputFileTasks = emitOutput
+      .getOutputFiles()
+      .map(async (outputFile) => {
+        const filepath = outputFile.getFilePath()
+        await fs.mkdir(path.dirname(filepath), {
+          recursive: true
+        })
+        const outputFileText = outputFile.getText()
+        await fs.writeFile(filepath, pathRewriter('es')(outputFileText))
+      })
+    await Promise.all(outputFileTasks)
+  })
+  await Promise.all(sourceFileTasks)
+}
+
+function copyTypes() {
+  const src = path.resolve(outDir, 'types/components/')
+  const copy = (module) => {
+    let output = path.resolve(outDir, module, 'components')
+    return () => run(`cp -r ${src}/* ${output}`)
+  }
+  return parallel(copy('es'), copy('lib'))
+}
+
+export const buildEachComponent = series(eachComponent, genTypes, copyTypes())

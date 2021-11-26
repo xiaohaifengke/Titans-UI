@@ -21,7 +21,7 @@ export default series(
     //   run('pnpm run build allComponents')
     // ),
     withTaskName('build:eachComponent', () =>
-      run('pnpm run build eachComponent')
+      run('pnpm run build buildEachComponent')
     )
   )
 )
