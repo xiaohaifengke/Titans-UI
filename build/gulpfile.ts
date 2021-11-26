@@ -12,11 +12,19 @@ import { run, withTaskName } from './utils'
  */
 
 export default series(
-  withTaskName('clean', async () => run(`rm -rf dist`)),
-  withTaskName('build:packages', async () =>
-    run(`pnpm run --filter ./packages --parallel --stream build`)
-  ),
-  withTaskName('build:allComponents', () => run('pnpm run build allComponents'))
+  // withTaskName('clean', async () => run(`rm -rf dist`)),
+  parallel(
+    // withTaskName('build:packages', () =>
+    //   run(`pnpm run --filter ./packages --parallel --stream build`)
+    // ),
+    // withTaskName('build:allComponents', () =>
+    //   run('pnpm run build allComponents')
+    // ),
+    withTaskName('build:eachComponent', () =>
+      run('pnpm run build eachComponent')
+    )
+  )
 )
 
 export * from './allComponents'
+export * from './eachComponent'
