@@ -12,15 +12,15 @@ import { run, withTaskName } from './utils'
  */
 
 export default series(
-  // withTaskName('clean', async () => run(`rm -rf dist`)),
+  withTaskName('clean', async () => run(`rm -rf dist`)),
   parallel(
-    withTaskName('build:packages', () =>
+    withTaskName('buildPackages', () =>
       run(`pnpm run --filter ./packages --parallel --stream build`)
     ),
-    withTaskName('build:allComponents', () =>
+    withTaskName('buildAllComponents', () =>
       run('pnpm run build allComponents')
     ),
-    withTaskName('build:eachComponent', () =>
+    withTaskName('buildEachComponent', () =>
       run('pnpm run build eachComponent')
     )
   )

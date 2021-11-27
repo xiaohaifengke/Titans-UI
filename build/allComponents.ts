@@ -5,7 +5,6 @@ import typescript from 'rollup-plugin-typescript2'
 import vue from 'rollup-plugin-vue'
 import path from 'path'
 import { outDir, projectRoot } from './utils/paths'
-import { parallel } from 'gulp'
 
 async function build() {
   const inputOptions = {
@@ -43,4 +42,4 @@ async function build() {
   return Promise.all(outputOptions.map((option) => bundle.write(option)))
 }
 
-export const allComponents = parallel(build)
+export const allComponents = build

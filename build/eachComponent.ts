@@ -141,7 +141,7 @@ function copyTypes() {
   const src = path.resolve(outDir, 'types/components/')
   const copy = (module) => {
     let output = path.resolve(outDir, module, 'components')
-    return withTaskName(`copyTypes(${module})`, () =>
+    return withTaskName(`eachComponent:copyTypes(${module})`, () =>
       run(`cp -r ${src}/* ${output}`)
     )
   }
@@ -169,9 +169,9 @@ async function buildComponentEntry() {
 }
 
 export const eachComponent = series(
-  buildEachComponent,
-  buildComponentEntry,
-  genTypes,
+  withTaskName('eachComponent:buildEachComponent', buildEachComponent),
+  withTaskName('eachComponent:buildComponentEntry', buildComponentEntry),
+  withTaskName('eachComponent:genTypes', genTypes),
   copyTypes(),
-  withTaskName('clean(types)', () => run('rm -rf dist/types'))
+  withTaskName('eachComponent:clean(types)', () => run('rm -rf dist/types'))
 )
