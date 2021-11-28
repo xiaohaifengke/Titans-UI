@@ -8,12 +8,15 @@ import { outDir, titansDir } from './utils/paths'
 import { parallel, series } from 'gulp'
 import { buildConfig } from './utils/config'
 import { sync } from 'fast-glob'
-import { pathRewriter, run, withTaskName } from './utils'
+import { run, withTaskName } from './utils'
 import {
   allComponentsEntryTypes as entryTypes,
   copyEntryTypes
 } from './allComponentsEntryTypes'
 
+const pathRewriter = (id: string) => {
+  return id.replace(/@titans-ui/g, '.')
+}
 /**
  * 1. 打包所有组件，不需要生成 .d.ts
  * 2. 将packages/titans-ui/index.ts编译到 dist/[es|lib]/index.js
@@ -78,7 +81,7 @@ async function allComponentsEntry() {
         format: config.format as ModuleFormat,
         dir: config.output.path,
         exports: config.format === 'cjs' ? 'named' : undefined,
-        paths: pathRewriter(config.output.name)
+        paths: pathRewriter
       }
       return bundle.write(outputOptions)
     })

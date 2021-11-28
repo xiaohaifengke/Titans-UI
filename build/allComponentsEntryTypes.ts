@@ -54,7 +54,7 @@ export async function allComponentsEntryTypes() {
           recursive: true
         })
         const outputFileText = outputFile.getText()
-        await fs.writeFile(filepath, pathRewriter('es')(outputFileText))
+        await fs.writeFile(filepath, outputFileText.replace(/@titans-ui/g, '.'))
       })
     await Promise.all(outputFileTasks)
   })
