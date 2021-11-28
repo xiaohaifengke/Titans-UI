@@ -10,8 +10,8 @@ import { sync } from 'fast-glob'
 import { buildConfig } from './utils/config'
 import { Project, SourceFile } from 'ts-morph'
 import fs from 'fs/promises'
+import { pathRewriter, run, withTaskName } from './utils'
 import * as vueCompiler from '@vue/compiler-sfc'
-import { run, withTaskName } from './utils'
 
 /**
  * 1. 打包每个组件 components 中的每个文件夹
@@ -28,11 +28,6 @@ import { run, withTaskName } from './utils'
  * '@titans-ui/utils/index.ts' 此路径会不存在，所以需要重写路径，把 import *** from '@titans-ui/utils/index.ts'
  * 修改为 import *** from 'titans-ui/[es|lib]/utils/index.ts' 这样才不会出现路径不存在的问题。
  */
-function pathRewriter(outputName: string) {
-  return (id: string) => {
-    return id.replace(/@titans-ui\//g, `titans-ui/${outputName}/`)
-  }
-}
 
 /* 打包每个组件 components 中的每个文件夹 */
 const buildEachComponent = async () => {
