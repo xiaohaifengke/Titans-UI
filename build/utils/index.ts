@@ -17,7 +17,7 @@ export async function run(commandStr: string) {
     const childProcess = spawn(command, args, {
       cwd: projectRoot,
       stdio: 'inherit',
-      shell: true
+      shell: process.platform === 'win32'
     })
     childProcess.on('close', resolve)
   })

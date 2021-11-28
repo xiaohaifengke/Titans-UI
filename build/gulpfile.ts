@@ -15,7 +15,7 @@ export default series(
   withTaskName('clean', async () => run(`rm -rf dist`)),
   parallel(
     withTaskName('buildPackages', () =>
-      run(`pnpm run --filter ./packages --parallel --stream build`)
+      run(`pnpm run --filter ./packages --parallel build`)
     ),
     withTaskName('buildAllComponents', () =>
       run('pnpm run build allComponents')

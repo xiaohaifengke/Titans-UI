@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import vue from 'rollup-plugin-vue'
 import path from 'path'
-import { componentsDir, outDir, projectRoot } from './utils/paths'
+import { componentsDir, distRoot, distTitans, projectRoot } from './utils/paths'
 import { parallel, series } from 'gulp'
 import { sync } from 'fast-glob'
 import { buildConfig } from './utils/config'
@@ -78,7 +78,7 @@ async function genTypes() {
       allowJs: true,
       emitDeclarationOnly: true,
       noEmitOnError: true,
-      outDir: path.resolve(outDir, 'types'),
+      outDir: path.resolve(distRoot, 'types'),
       baseUrl: projectRoot,
       paths: {
         '@titans-ui/*': ['packages/*']
@@ -133,9 +133,9 @@ async function genTypes() {
 }
 
 function copyTypes() {
-  const src = path.resolve(outDir, 'types/components/')
+  const src = path.resolve(distRoot, 'types/components/')
   const copy = (module) => {
-    let output = path.resolve(outDir, module, 'components')
+    let output = path.resolve(distTitans, module, 'components')
     return withTaskName(`eachComponent:copyTypes(${module})`, () =>
       run(`cp -r ${src}/* ${output}`)
     )

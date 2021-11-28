@@ -3,7 +3,7 @@ import { src, dest, series, parallel } from 'gulp'
 import path from 'path'
 import { buildConfig } from './utils/config'
 import { run, withTaskName } from './utils'
-import { outDir, projectRoot } from './utils/paths'
+import { distRoot, projectRoot } from './utils/paths'
 
 export default function buildPackages(pkgPath: string, pkgName: string) {
   const tsConfig = path.resolve(projectRoot, 'tsconfig.json')

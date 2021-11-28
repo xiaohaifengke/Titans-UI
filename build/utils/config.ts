@@ -1,12 +1,12 @@
 import path from 'path'
-import { outDir } from './paths'
+import { distTitans } from './paths'
 export const buildConfig = {
   esm: {
     module: 'ESNext',
     format: 'esm',
     output: {
       name: 'es',
-      path: path.resolve(outDir, 'es')
+      path: path.resolve(distTitans, 'es')
     },
     bundle: {
       path: 'titans-ui/es'
@@ -17,7 +17,7 @@ export const buildConfig = {
     format: 'cjs',
     output: {
       name: 'lib',
-      path: path.resolve(outDir, 'lib')
+      path: path.resolve(distTitans, 'lib')
     },
     bundle: {
       path: 'titans-ui/lib'

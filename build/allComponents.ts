@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import vue from 'rollup-plugin-vue'
 import path from 'path'
-import { outDir, titansDir } from './utils/paths'
+import { titansDir, titansDist } from './utils/paths'
 import { parallel, series } from 'gulp'
 import { buildConfig } from './utils/config'
 import { sync } from 'fast-glob'
@@ -41,7 +41,7 @@ async function buildAllComponents() {
   const outputOptions: OutputOptions[] = [
     {
       format: 'umd',
-      file: path.resolve(outDir, 'index.js'),
+      file: path.resolve(titansDist, 'index.js'),
       name: 'TitansUI',
       exports: 'named',
       globals: {
@@ -50,7 +50,7 @@ async function buildAllComponents() {
     },
     {
       format: 'esm',
-      file: path.resolve(outDir, 'index.esm.js')
+      file: path.resolve(titansDist, 'index.esm.js')
     }
   ]
   // create a bundle

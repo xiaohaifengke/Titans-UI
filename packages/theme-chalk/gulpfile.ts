@@ -4,6 +4,8 @@ import gulpSass from 'gulp-sass'
 import autoprefixer from 'gulp-autoprefixer'
 import cleanCSS from 'gulp-clean-css'
 import chalk from 'chalk'
+import { titansTheme } from '../../build/utils/paths'
+import path from 'path'
 
 const sass = gulpSass(dartSass)
 
@@ -20,7 +22,7 @@ async function buildStyles() {
         )
       })
     )
-    .pipe(dest('../../dist/theme-chalk/css'))
+    .pipe(dest(path.resolve(titansTheme, 'css')))
 }
 
 export default series(buildStyles)

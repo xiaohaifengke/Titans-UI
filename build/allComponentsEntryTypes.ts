@@ -1,6 +1,6 @@
 import { Project, SourceFile } from 'ts-morph'
 import path from 'path'
-import { outDir, projectRoot, titansDir } from './utils/paths'
+import { distRoot, distTitans, projectRoot, titansDir } from './utils/paths'
 import { sync } from 'fast-glob'
 import fs from 'fs/promises'
 import { pathRewriter, run, withTaskName } from './utils'
@@ -15,7 +15,7 @@ export async function allComponentsEntryTypes() {
       allowJs: true,
       emitDeclarationOnly: true,
       noEmitOnError: true,
-      outDir: path.resolve(outDir, 'allComponentsEntryTypes'),
+      outDir: path.resolve(distRoot, 'allComponentsEntryTypes'),
       baseUrl: projectRoot,
       paths: {
         '@titans-ui/*': ['packages/*']
@@ -62,9 +62,9 @@ export async function allComponentsEntryTypes() {
 }
 
 export const copyEntryTypes = () => {
-  const src = path.resolve(outDir, 'allComponentsEntryTypes', 'titans-ui')
+  const src = path.resolve(distRoot, 'allComponentsEntryTypes/titans-ui')
   const copy = (module) => {
-    let output = path.resolve(outDir, module)
+    let output = path.resolve(distTitans, module)
     return withTaskName(`allComponents:copyEntryTypes(${module})`, () =>
       run(`cp -r ${src}/* ${output}/`)
     )
