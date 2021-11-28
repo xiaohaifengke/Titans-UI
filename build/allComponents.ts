@@ -5,10 +5,14 @@ import typescript from 'rollup-plugin-typescript2'
 import vue from 'rollup-plugin-vue'
 import path from 'path'
 import { outDir, titansDir } from './utils/paths'
-import { parallel } from 'gulp'
+import { parallel, series } from 'gulp'
 import { buildConfig } from './utils/config'
 import { sync } from 'fast-glob'
-import { pathRewriter } from './utils'
+import { pathRewriter, run, withTaskName } from './utils'
+import {
+  allComponentsEntryTypes as entryTypes,
+  copyEntryTypes
+} from './allComponentsEntryTypes'
 
 /**
  * 1. 打包所有组件，不需要生成 .d.ts
@@ -52,7 +56,7 @@ async function buildAllComponents() {
   return Promise.all(outputOptions.map((option) => bundle.write(option)))
 }
 
-async function buildAllComponentsEntry() {
+async function allComponentsEntry() {
   const entryFiles = sync('**/*.ts', {
     cwd: titansDir,
     onlyFiles: true,
@@ -82,6 +86,13 @@ async function buildAllComponentsEntry() {
 }
 
 export const allComponents = parallel(
-  buildAllComponents,
-  buildAllComponentsEntry
+  withTaskName('allComponents:buildAllComponents', buildAllComponents),
+  withTaskName('allComponents:buildAllComponentsEntry', allComponentsEntry),
+  series(
+    withTaskName('allComponents:buildAllComponentsEntryTypes', entryTypes),
+    copyEntryTypes(),
+    withTaskName('allComponents:clean(types)', () =>
+      run('rm -rf dist/allComponentsEntryTypes')
+    )
+  )
 )
