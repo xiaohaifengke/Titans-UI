@@ -1,3 +1,3 @@
-# Titans-UI
+# @titans-ui
 
-You can think of it as a toy project.
+Vue 3.0+ 的自研组件库.
