@@ -1,48 +1,19 @@
 {
-  "name": "titans-ui",
   "private": true,
+  "packageManager": "pnpm@6.23.1",
   "version": "0.3.0",
   "description": "前端自研组件库",
-  "author": "Jhail <Jhail@foxmail.com>",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "module": "es/index.js",
-  "typings": "es/index.d.ts",
-  "style": "dist/index.css",
-  "unpkg": "dist/index.js",
-  "jsdevlivr": "dist/index.js",
-  "sideEffects": [
-    "dist/*"
-  ],
-  "directories": {
-    "test": "tests"
+  "engines": {
+    "node": ">= 14.12.0"
   },
   "scripts": {
     "dev": "pnpm -C story dev",
     "build": "gulp -f build/gulpfile.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky install",
+    "cz": "git-cz",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xiaohaifengke/Titans-UI.git"
-  },
-  "files": [
-    "dist",
-    "es",
-    "src"
-  ],
-  "keywords": [
-    "titans-ui",
-    "Titans-UI",
-    "vue",
-    "vue3",
-    "rollup",
-    "typescript"
-  ],
-  "bugs": {
-    "url": "https://github.com/xiaohaifengke/Titans-UI/issues"
-  },
-  "homepage": "https://github.com/xiaohaifengke/Titans-UI#readme",
   "devDependencies": {
     "@commitlint/cli": "13.1.0",
     "@commitlint/config-conventional": "13.1.0",
@@ -93,8 +64,9 @@
   "dependencies": {
     "@titans-ui/components": "workspace:^0.3.0",
     "@titans-ui/theme-chalk": "workspace:^0.3.0",
-    "@titans-ui/titans-ui": "workspace:^0.0.3",
-    "@titans-ui/utils": "workspace:^0.3.0"
+    "@titans-ui/utils": "workspace:^0.3.0",
+    "@popperjs/core": "^2.10.2",
+    "dayjs": "^1.10.7"
   },
   "lint-staged": {
     "(packages|story)/**/*.vue": [
