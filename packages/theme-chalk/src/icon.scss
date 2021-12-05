@@ -1,11 +1,20 @@
-@use './mixins/mixins';
+@use './mixins/mixins' as *;
 
-.ti-icon {
-  width: 1em;
-  height: 1em;
-  overflow: hidden;
-  vertical-align: -0.15em;
-  fill: currentColor;
+@include themes {
+  .ti-icon {
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    font-size: map_get($defaultThemeMap, fontsize);
+    vertical-align: -0.15em;
+    fill: currentColor;
+  }
+}
+[class^='ti-'],
+[class^='ti-'] *,
+[class^='ti-'] *::before,
+[class^='ti-'] *::after {
+  box-sizing: border-box;
 }
 .ti-icon-loading {
   animation: rotating 2s linear infinite;

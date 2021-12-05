@@ -93,7 +93,8 @@
           shape="circle"
           size="small"
           mode="outline"
-        ></TiButton>
+          >123456</TiButton
+        >
         <TiButton
           type="danger"
           icon="close"

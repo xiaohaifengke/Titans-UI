@@ -26,3 +26,9 @@ $globalThemeMap: $defaultThemeMap; // 先默认定义一个全局的 themeMap
     @content;
   }
 }
+
+@include themes {
+  body {
+    font-family: map_get($defaultThemeMap, font);
+  }
+}

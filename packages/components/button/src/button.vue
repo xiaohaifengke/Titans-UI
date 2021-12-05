@@ -6,15 +6,15 @@
   >
     <TiIcon v-if="loading" icon="loading" />
     <TiIcon v-if="icon && iconPosition !== 'suffix'" :icon="icon" />
-    <span
-      ><slot>{{ label }}</slot></span
-    >
+    <span v-if="labelVisible" class="ti-button_text">
+      <slot>{{ label }}</slot>
+    </span>
     <TiIcon v-if="!loading && icon && iconPosition === 'suffix'" :icon="icon" />
   </button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import TiIcon from '@titans-ui/components/icon'
 import { buttonProps } from './button-props'
 enum StyleShape {
@@ -45,8 +45,8 @@ export default defineComponent({
   emits: {
     click: (e: MouseEvent) => true
   },
-  setup(props) {
-    const classes = [
+  setup(props, { slots }) {
+    const classes = computed(() => [
       'ti-button',
       {
         [`ti-button-type-${props.type}`]: props.type,
@@ -56,9 +56,11 @@ export default defineComponent({
         'ti-button-disabled': props.disabled,
         'ti-button-loading': props.loading
       }
-    ]
+    ])
+    const labelVisible = computed(() => props.label || slots.default)
     return {
-      classes
+      classes,
+      labelVisible
     }
   }
 })

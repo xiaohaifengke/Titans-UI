@@ -8,7 +8,7 @@ $textColor: #fff;
 @include themes {
   .ti-button {
     display: inline-block;
-    font-size: map_get($defaultThemeMap, fontsize);
+    font-size: 0;
     line-height: 1;
     color: map_get($defaultThemeMap, defalut);
     cursor: pointer;
@@ -34,6 +34,10 @@ $textColor: #fff;
       cursor: not-allowed;
       background-color: $textColor;
       border-color: mix(map_get($defaultThemeMap, default), #fff, 15%);
+    }
+
+    .ti-button_text {
+      font-size: map_get($defaultThemeMap, fontsize);
     }
 
     @include typesUsingType(button) using($color, $type) {
@@ -166,9 +170,13 @@ $textColor: #fff;
         padding: $sizeValue;
       }
       @if ($sizeName == large or $sizeName == normal) {
-        font-size: 14px;
+        .ti-button_text {
+          font-size: 14px;
+        }
       } @else {
-        font-size: 12px;
+        .ti-button_text {
+          font-size: 12px;
+        }
       }
     }
 
