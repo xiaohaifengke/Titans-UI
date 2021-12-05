@@ -1,0 +1,95 @@
+@use './mixins/mixins' as *;
+@use './mixins/input-mixins' as *;
+
+@include themes {
+  $textColor: map-get($defaultThemeMap, default);
+  .ti-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    font-size: map_get($defaultThemeMap, fontsize);
+
+    &.ti-input--disabled {
+      .ti-input--inner {
+        color: mix(#fff, $textColor, 20%);
+        cursor: not-allowed;
+        background-color: mix(#000, #fff, 10%);
+        border-color: mix(
+          #fff,
+          map_get($defaultThemeMap, default-border-color),
+          20%
+        );
+      }
+    }
+
+    .ti-input--inner {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 15px;
+      font-size: inherit;
+      color: $textColor;
+      background-color: #fff;
+      border: 1px solid map_get($defaultThemeMap, default-border-color);
+      border-radius: map-get($defaultThemeMap, default-border-radius);
+      outline: none;
+      transition: map-get($defaultThemeMap, transition-border);
+      -webkit-appearance: none;
+
+      &:hover {
+        border-color: mix(
+          #000,
+          map_get($defaultThemeMap, default-border-color),
+          20%
+        );
+      }
+
+      &:focus {
+        border-color: map_get($defaultThemeMap, primary);
+      }
+
+      &.ti-input--prefix {
+        padding-left: 30px;
+      }
+
+      &.ti-input--suffix {
+        padding-right: 30px;
+      }
+    }
+
+    .ti-input_icon {
+      display: inline-block;
+      width: 25px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .ti-input_icon--prefix {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      height: 100%;
+      color: $textColor;
+    }
+
+    .ti-input_icon--suffix {
+      position: absolute;
+      top: 0;
+      right: 5px;
+      height: 100%;
+      color: mix(#fff, $textColor, 40%);
+      text-align: center;
+      .ti-icon-circle-close {
+        cursor: pointer;
+
+        &:hover {
+          color: $textColor;
+        }
+      }
+    }
+
+    @include sizes(input) using($sizeValue, $sizeName) {
+      height: $sizeValue;
+      line-height: $sizeValue;
+    }
+  }
+}

@@ -4,7 +4,13 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import vue from 'rollup-plugin-vue'
 import path from 'path'
-import { componentsDir, distRoot, distTitans, projectRoot } from './utils/paths'
+import {
+  componentsDir,
+  distRoot,
+  distTitans,
+  packagesDir,
+  projectRoot
+} from './utils/paths'
 import { parallel, series } from 'gulp'
 import { sync } from 'fast-glob'
 import { buildConfig } from './utils/config'
@@ -17,7 +23,7 @@ import * as vueCompiler from '@vue/compiler-sfc'
  * 1. 打包每个组件 components 中的每个文件夹
  * 2. 打包组件入口文件：components/index.ts
  * 3. 给components中的所有文件生成ts的声明文件到types/components中，
- *    然后将生成的.d.ts文件分别拷贝到 dist/es/components 和 dist/lib/components中
+ *    然后将生成的.d.ts文件分别拷贝到 dist/titans-ui/es/components 和 dist/titans-ui/lib/components中
  * 4. 删除步骤3中生成的 types 文件夹
  */
 /**
@@ -81,7 +87,8 @@ async function genTypes() {
       outDir: path.resolve(distRoot, 'types'),
       baseUrl: projectRoot,
       paths: {
-        '@titans-ui/*': ['packages/*']
+        '@titans-ui/*': ['packages/*'],
+        dayjs: ['node_modules/dayjs/']
       },
       skipLibCheck: true,
       strict: false
@@ -110,13 +117,16 @@ async function genTypes() {
       }
     })
   )
-
+  const diagnostics = project.getPreEmitDiagnostics()
+  console.log(project.formatDiagnosticsWithColorAndContext(diagnostics))
   await project.emit({
     emitOnlyDtsFiles: true
   })
 
   const sourceFileTasks = sourceFiles.map(async (sourceFile: SourceFile) => {
+    const relativePath = path.relative(packagesDir, sourceFile.getFilePath())
     const emitOutput = sourceFile.getEmitOutput()
+    // console.log(relativePath, emitOutput, emitOutput.getOutputFiles())
     const outputFileTasks = emitOutput
       .getOutputFiles()
       .map(async (outputFile) => {

@@ -1,0 +1,57 @@
+@use '../mixins/mixins' as *;
+@include themes {
+  $panel-item: 30px;
+  .ti-time-panel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    &::before {
+      position: absolute;
+      top: $panel-item * 3;
+      left: 0;
+      z-index: -1;
+      box-sizing: border-box;
+      width: 100%;
+      height: $panel-item;
+      content: '';
+      background-color: transparentize(map-get($defaultThemeMap, primary), 0.9);
+      border-top: 1px solid map-get($defaultThemeMap, default-border-color);
+      border-bottom: 1px solid map-get($defaultThemeMap, default-border-color);
+    }
+  }
+  .ti-time-panel {
+    width: 55px;
+    height: 100%;
+    overflow-y: hidden;
+
+    &:hover {
+      overflow-y: auto;
+    }
+  }
+
+  .ti-time-panel_list {
+    padding: $panel-item * 3 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .ti-time-panel_list--item {
+    height: $panel-item;
+    padding-left: 12px;
+    line-height: $panel-item;
+    list-style: none;
+    outline: none;
+
+    &.selected {
+      color: map-get($globalThemeMap, primary);
+    }
+
+    &:hover {
+      background-color: transparentize(map-get($globalThemeMap, default), 0.9);
+    }
+    &:focus {
+      color: map-get($globalThemeMap, primary);
+    }
+  }
+}

@@ -1,4 +1,3 @@
-import type { ExtractPropTypes } from 'vue'
 export const buttonProps = {
   label: { type: String },
   // 按钮类型: default/primary/success/warning/danger/info

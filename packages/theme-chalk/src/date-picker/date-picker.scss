@@ -1,0 +1,32 @@
+@use '../mixins/mixins' as *;
+@include themes {
+  .ti-date-picker {
+    display: inline-block;
+  }
+
+  /*
+  .ti-date-picker_popper {
+    box-sizing: border-box;
+    display: inline-flex;
+    padding-top: 10px;
+    font-size: map-get($defaultThemeMap, fontsize);
+    color: map-get($defaultThemeMap, default);
+    user-select: none;
+    transition: opacity, transform 10s ease;
+    transform-origin: top center;
+  }
+  */
+
+  .ti-date-picker_td--body {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  .prev-month,
+  .next-month,
+  .prev-decade,
+  .next-decade {
+    color: #dadde7;
+  }
+}

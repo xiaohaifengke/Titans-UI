@@ -1,0 +1,8 @@
+@use '../../mixins/mixins' as *;
+@include themes {
+  .ti-date-range-picker {
+    display: inline-block;
+    width: 400px;
+    height: 40px;
+  }
+}

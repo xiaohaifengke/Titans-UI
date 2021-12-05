@@ -60,7 +60,7 @@ async function buildAllComponents() {
 }
 
 async function allComponentsEntry() {
-  const entryFiles = sync('**/*.ts', {
+  const entryFiles = sync('*.ts', {
     cwd: titansDir,
     onlyFiles: true,
     absolute: true

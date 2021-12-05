@@ -12,6 +12,7 @@ importers:
       '@rollup/plugin-node-resolve': ^13.0.6
       '@titans-ui/components': workspace:^0.3.0
       '@titans-ui/theme-chalk': workspace:^0.3.0
+      '@titans-ui/use': workspace:^0.3.0
       '@titans-ui/utils': workspace:^0.3.0
       '@types/gulp': ^4.0.9
       '@types/gulp-autoprefixer': ^0.0.33
@@ -58,6 +59,7 @@ importers:
       '@popperjs/core': 2.11.0
       '@titans-ui/components': link:packages/components
       '@titans-ui/theme-chalk': link:packages/theme-chalk
+      '@titans-ui/use': link:packages/use
       '@titans-ui/utils': link:packages/utils
       dayjs: 1.10.7
     devDependencies:

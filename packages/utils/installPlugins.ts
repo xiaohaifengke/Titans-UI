@@ -1,14 +1,10 @@
 import type { App, Plugin } from 'vue'
 
-export function installPlugins<T extends { name: string }>(
-  Component: T,
-  plugins?: Plugin[]
-) {
-  return {
-    ...Component,
-    install(app: App) {
-      app.component(Component.name, Component)
-      plugins?.forEach(app.use)
-    }
+export type TiComponentPlugin<T> = T & Plugin
+
+export function installPlugins<T>(Component: T) {
+  ;(Component as TiComponentPlugin<T>).install = function (app: App) {
+    app.component((Component as any).name, Component)
   }
+  return Component as TiComponentPlugin<T>
 }
