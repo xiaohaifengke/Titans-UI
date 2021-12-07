@@ -2,6 +2,7 @@
 
 @include themes {
   .ti-icon {
+    box-sizing: content-box;
     width: 1em;
     height: 1em;
     overflow: hidden;
@@ -10,12 +11,7 @@
     fill: currentColor;
   }
 }
-[class^='ti-'],
-[class^='ti-'] *,
-[class^='ti-'] *::before,
-[class^='ti-'] *::after {
-  box-sizing: border-box;
-}
+
 .ti-icon-loading {
   animation: rotating 2s linear infinite;
 }
