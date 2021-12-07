@@ -33,7 +33,7 @@
 
 <script>
 import { ref } from 'vue'
-import AirdronePanel from '../../components/AirdronePanel'
+import AirdronePanel from '../../components/AirdronePanel/index.vue'
 
 export default {
   name: 'dialog-demo',

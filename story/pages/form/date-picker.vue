@@ -1,6 +1,6 @@
 <template>
   <div class="ti-date-picker-demo">
-    <div style="height: 800px"></div>
+    <div style="height: 500px"></div>
     <p>default</p>
     <TiDatePicker
       placeholder="请选择日期"
