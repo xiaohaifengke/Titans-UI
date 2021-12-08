@@ -23,11 +23,6 @@
   "bugs": {
     "url": "https://github.com/xiaohaifengke/Titans-UI/issues"
   },
-  "files": [
-    "dist",
-    "es",
-    "src"
-  ],
   "keywords": [
     "titans-ui",
     "Titans-UI",
