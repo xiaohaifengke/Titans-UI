@@ -20,7 +20,7 @@
     background-color: $offBackgroundColor;
     border: 1px solid $offBackgroundColor;
     border-radius: 100px;
-    transition: all 0.3s;
+    transition: background-color, border-color, 0.3s;
 
     &:focus {
       outline: 0;
@@ -41,7 +41,7 @@
       left: 1px;
       background-color: #fff;
       border-radius: 100%;
-      transition: all 0.3s;
+      transition: background-color, left, margin-left, 0.3s;
       transform: translateY(-50%);
     }
   }
