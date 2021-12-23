@@ -1,0 +1,35 @@
+@use './mixins/mixins' as *;
+
+@include themes {
+  $textColor: map-get($defaultThemeMap, default);
+  // select
+  .ti-select {
+    display: inline-block;
+    font-size: map_get($defaultThemeMap, fontsize);
+    line-height: 1;
+
+    .ti-icon-arrow-down {
+      transition: transform 0.2s;
+    }
+
+    &.ti-select--dropdown {
+      .ti-icon-arrow-down {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  // option
+  .ti-option {
+    &.ti-option_disabled {
+      color: mix(#fff, $textColor, 20%);
+      cursor: not-allowed;
+      background-color: mix(#000, #fff, 10%);
+      border-color: mix(
+        #fff,
+        map_get($defaultThemeMap, default-border-color),
+        20%
+      );
+    }
+  }
+}

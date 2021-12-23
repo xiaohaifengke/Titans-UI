@@ -10,7 +10,9 @@ import {
   TiPopperTransition,
   TiTimePicker,
   TiDatePicker,
-  TiWidget
+  TiWidget,
+  TiSelect,
+  TiOption
 } from '@titans-ui/components/index'
 
 const plugins = [
@@ -24,7 +26,9 @@ const plugins = [
   TiPopperTransition,
   TiTimePicker,
   TiDatePicker,
-  TiWidget
+  TiWidget,
+  TiSelect,
+  TiOption
 ]
 
 function install(app: App) {
@@ -47,5 +51,7 @@ export {
   TiTimePicker,
   TiDatePicker,
   TiWidget,
+  TiSelect,
+  TiOption,
   install
 }
