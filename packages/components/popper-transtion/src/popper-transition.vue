@@ -7,7 +7,12 @@
       @after-leave="afterLeave"
     >
       <div
-        :class="{ 'ti-popper-transition-active': popperTransitionInitialized }"
+        :class="[
+          className,
+          {
+            'ti-popper-transition-active': popperTransitionInitialized
+          }
+        ]"
         class="ti-popper-transition"
         ref="tooltipRef"
         v-show="visible"
@@ -59,7 +64,8 @@ export default defineComponent({
     placement: {
       type: String,
       default: 'bottom-start'
-    }
+    },
+    className: String
   },
   emits: ['after-enter', 'after-leave'],
   setup(props, { emit }) {
