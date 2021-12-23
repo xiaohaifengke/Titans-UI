@@ -82,7 +82,7 @@ import TiDatePickerPanelHeader from '../panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from '../panels/date-picker-panel.vue'
 import { useGeneratePanel, ComputedExtremity } from '../use/useGeneratePanel'
 import dayjs from 'dayjs'
-import TiPopperTransition from '@titans-ui/components/popper-transtion'
+import TiPopperTransition from '@titans-ui/components/popper-transition'
 
 interface RangeModel {
   clear?: boolean

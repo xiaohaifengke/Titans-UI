@@ -36,7 +36,7 @@ import TiInput from '@titans-ui/components/input'
 import TiTimePanel from './components/time-panel.vue'
 import { TimePanel, useInitTimePickerPanel } from './use/useInitTimePickerPanel'
 import { usePattern } from './use/usePattern'
-import TiPopperTransition from '@titans-ui/components/popper-transtion'
+import TiPopperTransition from '@titans-ui/components/popper-transition'
 
 export type ModelAndPanel = {
   model: WritableComputedRef<string>

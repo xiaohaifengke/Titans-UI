@@ -48,7 +48,7 @@ import TiInput from '@titans-ui/components/input'
 import TiDatePickerPanelHeader from './panels/date-picker-panel-header.vue'
 import TiDatePickerPanel from './panels/date-picker-panel.vue'
 import { useGeneratePanel } from './use/useGeneratePanel'
-import TiPopperTransition from '@titans-ui/components/popper-transtion'
+import TiPopperTransition from '@titans-ui/components/popper-transition'
 
 export default defineComponent({
   name: 'TiDateSinglePicker',

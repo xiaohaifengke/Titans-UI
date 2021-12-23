@@ -69,6 +69,10 @@ export default defineComponent({
       type: String,
       default: 'bottom-start'
     },
+    fitReferenceWidth: {
+      type: Boolean,
+      default: false
+    }
     className: String,
     offset: {
       typs: Array,
@@ -131,7 +135,8 @@ export default defineComponent({
           {
             name: 'computeStyles',
             options: {
-              gpuAcceleration: false
+              gpuAcceleration: false,
+              adaptive: false
             }
           },
           {
@@ -143,6 +148,25 @@ export default defineComponent({
         ]
 
         nextTick(() => {
+          if (props.fitReferenceWidth) {
+            tooltipRef.value.style.width = `${props.reference.scrollWidth}px`
+
+            // 当宽度变化时自动更新panel的宽度
+            const resizeObserver = new ResizeObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.target === props.reference) {
+                  tooltipRef.value.style.width = `${entry.contentRect.width}px`
+                } else if (
+                  entry.target === tooltipRef.value &&
+                  entry.contentRect.width !== 0 // 当panel隐藏时width为0
+                ) {
+                  popperInstance?.update()
+                }
+              })
+            })
+            resizeObserver.observe(props.reference, { box: 'border-box' })
+            resizeObserver.observe(tooltipRef.value, { box: 'border-box' })
+          }
           popperInstance = createPopper(
             props.reference as Element,
             tooltipRef.value,
@@ -158,7 +182,7 @@ export default defineComponent({
       watch(
         () => visible.value,
         () => {
-          popperInstance && popperInstance.update()
+          popperInstance?.update()
         }
       )
 
