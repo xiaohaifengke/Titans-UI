@@ -69,6 +69,11 @@ export default defineComponent({
       type: String,
       default: 'bottom-start'
     },
+    offset: {
+      typs: Array,
+      default: () => [0, 10]
+    },
+    className: String,
     fitReferenceWidth: {
       type: Boolean,
       default: false
@@ -77,11 +82,6 @@ export default defineComponent({
     padding: {
       type: String,
       default: '5px 0'
-    }
-    className: String,
-    offset: {
-      typs: Array,
-      default: () => [0, 10]
     }
   },
   emits: ['after-enter', 'after-leave'],
