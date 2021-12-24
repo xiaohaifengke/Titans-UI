@@ -52,6 +52,10 @@ export default defineComponent({
       type: Array,
       default: () => []
     },
+    vClickOustsideEvents: {
+      type: Array,
+      default: () => ['click']
+    },
     showArrow: {
       type: Boolean,
       default: true
@@ -59,6 +63,10 @@ export default defineComponent({
     placement: {
       type: String,
       default: 'bottom-start'
+    },
+    offset: {
+      typs: Array,
+      default: () => [0, 10]
     }
   },
   emits: ['after-enter', 'after-leave'],
@@ -74,18 +82,19 @@ export default defineComponent({
     const vClickOutsideParams = computed(() => ({
       handler: hide,
       extraEls: [...props.vClickOutsideExtraEls, props.reference],
+      events: props.vClickOustsideEvents,
       isActive: vClickOutsideActive.value
     }))
 
     const afterEnter = (el: HTMLElement) => {
-      el.classList.add('popper-slide-enter-after')
-      vClickOutsideActive.value = true
+      el.classList.add('popper-slide-enter-after') // 一些slot内容的过渡效果需要在有这个class之后才生效
+      vClickOutsideActive.value = true // 使当前的clickOutside实例生效
       emit('after-enter', el)
     }
 
     const afterLeave = (el: HTMLElement) => {
-      el.classList.remove('popper-slide-enter-after')
-      vClickOutsideActive.value = false
+      el.classList.remove('popper-slide-enter-after') // 使某些slot过渡失效
+      vClickOutsideActive.value = false // 使当前的clickOutside实例暂时失效
       emit('after-leave', el)
     }
 
@@ -122,7 +131,7 @@ export default defineComponent({
           {
             name: 'offset',
             options: {
-              offset: [0, 10]
+              offset: props.offset
             }
           }
         ]
