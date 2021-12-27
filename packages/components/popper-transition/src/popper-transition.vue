@@ -18,7 +18,7 @@
         v-show="visible"
         v-click-outside="vClickOutsideParams"
       >
-        <div class="ti-popper-transition_content">
+        <div class="ti-popper-transition_content" :style="{ padding: padding }">
           <slot :tooltipRef="tooltipRef"></slot>
         </div>
         <div v-if="showArrow" class="ti-popper_arrow" data-popper-arrow></div>
@@ -72,6 +72,11 @@ export default defineComponent({
     fitReferenceWidth: {
       type: Boolean,
       default: false
+    },
+    // content顶部和底部是否留5px的padding
+    padding: {
+      type: String,
+      default: '5px 0'
     }
     className: String,
     offset: {
@@ -110,7 +115,7 @@ export default defineComponent({
 
     const tooltipRef = ref(null as any)
 
-    const { duration, popperTransitionInitialized } =
+    const { duration, popperTransitionInitialized, updatePopper } =
       popperTransitionInitialize()
 
     function popperTransitionInitialize() {
@@ -118,6 +123,7 @@ export default defineComponent({
       const popperTransitionInitialized = ref(false)
       let scrollHeight: number
       let popperInstance: Instance
+      let resizeObserver: ResizeObserver
       onMounted(() => {
         scrollHeight = tooltipRef.value.scrollHeight
         hide()
@@ -149,10 +155,12 @@ export default defineComponent({
 
         nextTick(() => {
           if (props.fitReferenceWidth) {
-            tooltipRef.value.style.width = `${props.reference.scrollWidth}px`
+            tooltipRef.value.style.width = `${
+              (props.reference as Element).scrollWidth
+            }px`
 
             // 当宽度变化时自动更新panel的宽度
-            const resizeObserver = new ResizeObserver((entries) => {
+            resizeObserver = new ResizeObserver((entries) => {
               entries.forEach((entry) => {
                 if (entry.target === props.reference) {
                   tooltipRef.value.style.width = `${entry.contentRect.width}px`
@@ -164,7 +172,9 @@ export default defineComponent({
                 }
               })
             })
-            resizeObserver.observe(props.reference, { box: 'border-box' })
+            resizeObserver.observe(props.reference as Element, {
+              box: 'border-box'
+            })
             resizeObserver.observe(tooltipRef.value, { box: 'border-box' })
           }
           popperInstance = createPopper(
@@ -187,17 +197,25 @@ export default defineComponent({
       )
 
       onBeforeUnmount(() => {
+        resizeObserver?.unobserve(props.reference)
+        resizeObserver?.unobserve(tooltipRef.value)
         popperInstance.destroy()
       })
 
+      const updatePopper = () => {
+        popperInstance?.update()
+      }
+
       return {
         duration,
-        popperTransitionInitialized
+        popperTransitionInitialized,
+        updatePopper
       }
     }
     return {
       duration,
       popperTransitionInitialized,
+      updatePopper,
       tooltipRef,
       visible,
       show,
