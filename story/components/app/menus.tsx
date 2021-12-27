@@ -96,6 +96,14 @@ export const MENUS: Array<AppMenu> = [
         }
       },
       {
+        path: 'select',
+        name: 'select',
+        meta: {
+          title: 'Select',
+          subtitle: '选择器'
+        }
+      },
+      {
         path: 'date-picker',
         name: 'date-picker',
         meta: {
