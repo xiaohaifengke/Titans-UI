@@ -29,14 +29,13 @@ $theme-default: (
     font:
       'Avenir,-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol',
     ibc: #dcdfe6,
-    /*input border color    边框色*/ ibl: #ebeef5,
-    /*border light color    边框色：轻*/ itc: #314659,
-    /*input text color      文本色*/ itl: #697b8c,
-    /*input text color      文本色：轻*/ ihc: #000000,
-    /*title color           标题色*/ ipc: rgba(0, 0, 0, 0.25),
-    /*input placeholder color 占位符颜色*/ icc: rgba(0, 0, 0, 0.45),
-    /*input icon color      图标色*/ transitionFlexible:
-      cubic-bezier(0.24, 0.22, 0.015, 1.2),
+    ibl: #ebeef5,
+    itc: #314659,
+    itl: #697b8c,
+    ihc: #000000,
+    ipc: rgba(0, 0, 0, 0.25),
+    icc: rgba(0, 0, 0, 0.45),
+    transitionFlexible: cubic-bezier(0.24, 0.22, 0.015, 1.2),
     transition: cubic-bezier(0.23, 1, 0.32, 1),
     transition2: cubic-bezier(0.59, 1.12, 0.81, 0.95),
     boxshadow: $boxshadow,
@@ -49,6 +48,8 @@ $theme-default: (
     input-height-small: 34px,
     input-height-mini: 28px,
     /* input end */ transition-border: border-color 0.2s
-      cubic-bezier(0.645, 0.045, 0.355, 1)
+      cubic-bezier(0.645, 0.045, 0.355, 1),
+    // select start
+    // select end
   )
 );

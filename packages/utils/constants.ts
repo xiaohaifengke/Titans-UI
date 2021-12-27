@@ -23,3 +23,5 @@ export const StyleProps = {
   size: { type: String }, // normal,large,mini
   status: { type: String } // primary,success,error,warn,info
 }
+
+export const TI_SELECT_PROVIDE = '@@TI_SELECT_PROVIDE'
