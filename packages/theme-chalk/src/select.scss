@@ -4,6 +4,7 @@
   $textColor: map-get($defaultThemeMap, default);
   // select
   .ti-select {
+    position: relative;
     display: inline-block;
     font-size: map_get($defaultThemeMap, fontsize);
     line-height: 1;
@@ -17,10 +18,69 @@
         transform: rotate(180deg);
       }
     }
+
+    .ti-select_input,
+    .ti-input--inner {
+      cursor: pointer;
+    }
+
+    .ti-select_multiple-label-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: calc(100% - 30px);
+      transform: translateY(-50%);
+
+      .ti-button.ti-button-mode-plain.ti-button-type-info {
+        color: #969696;
+        background-color: whitesmoke;
+        border-color: #d5d5d5;
+      }
+
+      .ti-button {
+        margin: 2px 0 2px 5px;
+      }
+
+      .ti-select_multiple--close {
+        &:hover {
+          color: #fff;
+          background-color: #ababab;
+          border-radius: 50%;
+          transition: color, background-color, 0.2s;
+        }
+      }
+    }
+  }
+  .ti-select_panel {
+    width: 100%;
   }
 
   // option
   .ti-option {
+    height: 32px;
+    padding: 0 15px;
+    line-height: 32px;
+    list-style: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: transparentize(
+        map-get($defaultThemeMap, primary),
+        0.95
+      );
+    }
+
+    &.active {
+      color: map-get($defaultThemeMap, primary);
+      background-color: transparentize(
+        map-get($defaultThemeMap, primary),
+        0.95
+      );
+    }
+
     &.ti-option_disabled {
       color: mix(#fff, $textColor, 20%);
       cursor: not-allowed;
