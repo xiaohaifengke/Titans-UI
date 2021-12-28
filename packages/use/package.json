@@ -1,6 +1,6 @@
 {
   "name": "@titans-ui/use",
-  "version": "0.3.0",
+  "version": "0.3.4",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
