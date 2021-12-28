@@ -53,6 +53,7 @@
     </div>
 
     <TiPopperTransition
+      :teleportToBody="teleportToBody"
       :reference="reference"
       fitReferenceWidth
       ref="popperTransitonRef"
@@ -80,6 +81,7 @@ import { computed, provide } from '@vue/runtime-core'
 import { TI_SELECT_PROVIDE } from '@titans-ui/utils/constants'
 import { SimpleFunction } from '@titans-ui/utils/shims'
 import { TiButton } from '@titans-ui/components/button'
+import { TiPopperTransition } from '@titans-ui/components/popper-transition'
 
 export interface OptionItem {
   label: string
@@ -101,7 +103,7 @@ export interface ValueWrapper<T> {
 
 export default defineComponent({
   name: 'TiSelect',
-  components: { TiButton },
+  components: { TiButton, TiPopperTransition },
   props: selectProps,
   emits: ['update:modelValue'],
   setup(props, { emit }) {
