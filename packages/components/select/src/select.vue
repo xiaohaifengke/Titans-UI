@@ -79,27 +79,9 @@ import { ref } from '@vue/reactivity'
 import { selectProps } from './select-props'
 import { computed, provide } from '@vue/runtime-core'
 import { TI_SELECT_PROVIDE } from '@titans-ui/utils/constants'
-import { SimpleFunction } from '@titans-ui/utils/shims'
 import { TiButton } from '@titans-ui/components/button'
 import { TiPopperTransition } from '@titans-ui/components/popper-transition'
-
-export interface OptionItem {
-  label: string
-  value: any
-}
-export interface Panel {
-  model: any
-  pushToPanel: SimpleFunction
-  inputValue: OptionItem
-  multipleValue: OptionItem[]
-  updatedValue: (valueWrapper: ValueWrapper<any>) => void
-}
-
-export interface ValueWrapper<T> {
-  type: 'active' | 'inactive'
-  value: T
-  label: string
-}
+import { Panel, ValueWrapper } from './types'
 
 export default defineComponent({
   name: 'TiSelect',

@@ -162,7 +162,7 @@ export default defineComponent({
             // 当宽度变化时自动更新panel的宽度
             resizeObserver = new ResizeObserver((entries) => {
               entries.forEach((entry) => {
-                if (entry.target === props.reference) {
+                if (entry.target === (props.reference as Element)) {
                   tooltipRef.value.style.width = `${entry.contentRect.width}px`
                 } else if (
                   entry.target === tooltipRef.value &&
@@ -197,7 +197,7 @@ export default defineComponent({
       )
 
       onBeforeUnmount(() => {
-        resizeObserver?.unobserve(props.reference)
+        resizeObserver?.unobserve(props.reference as Element)
         resizeObserver?.unobserve(tooltipRef.value)
         popperInstance.destroy()
       })

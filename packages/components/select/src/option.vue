@@ -17,7 +17,7 @@
 import { defineComponent, watch } from 'vue'
 import { computed, inject } from '@vue/runtime-core'
 import { TI_SELECT_PROVIDE } from '@titans-ui/utils/constants'
-import { Panel } from './select.vue'
+import { Panel } from './types'
 
 export default defineComponent({
   name: 'TiOption',
