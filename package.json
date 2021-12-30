@@ -12,7 +12,8 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "cz": "git-cz",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "version": "gulp -f build/update-version.ts && conventional-changelog -p angular -i CHANGELOG.md -s && git add .",
+    "postversion": "pnpm run build"
   },
   "devDependencies": {
     "@commitlint/cli": "13.1.0",
