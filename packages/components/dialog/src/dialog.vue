@@ -5,12 +5,18 @@
       :duration="{ enter: 400, leave: 250 }"
       @afterLeave="afterLeave"
     >
-      <div v-if="vIf" class="ti-dialog-container" v-show="vShow">
+      <div
+        v-if="vIf"
+        class="ti-dialog-container"
+        v-show="vShow"
+        @click="clickOnOverlay"
+      >
         <div class="ti-dialog-overlay" v-if="overlay" />
         <div
           class="ti-dialog-wrapper"
-          :style="{ pointerEvents: vShow ? undefined : 'none' }"
-          @click.self="clickOnOverlay"
+          :style="{
+            pointerEvents: noPointerEventsOnOverlay ? 'none' : undefined
+          }"
         >
           <div
             class="ti-dialog"
@@ -19,6 +25,7 @@
             role="dialog"
             aria-modal="true"
             :aria-label="title || 'dialog'"
+            @click.stop
           >
             <div class="ti-dialog-header" v-if="showHeader">
               <slot name="title">
@@ -90,6 +97,17 @@ export default defineComponent({
     closeOnClickOverlay: {
       type: Boolean,
       default: true
+    },
+    /**
+     * 是否遮挡正常文档流的点击事件
+     * 当overlay=false且noPointerEventsOnOverlay=true时，closeOnClickOverlay控制的事件（点击弹窗外关闭弹窗的功能）会失效。
+     * 这是因为当前该事件靠overlay或者noPointerEventsOnOverlay绑定的dom元素冒泡触发的
+     * 如真有必要在overlay=false且noPointerEventsOnOverlay=true时通过击弹窗外关闭弹窗的话，可以通过clickOutside的原理关闭弹窗。
+     * noPointerEventsOnOverlay=true是为了在显示弹窗的同时能点击到弹窗下面的元素，故不需要在此属性打开时关闭弹窗，也就没有上一行存在的场景。
+     */
+    noPointerEventsOnOverlay: {
+      type: Boolean,
+      default: false
     },
     ok: {
       type: Function

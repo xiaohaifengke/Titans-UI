@@ -6,10 +6,11 @@
   .ti-dialog {
     width: 520px;
     margin: 0 auto;
+    pointer-events: auto;
     background: #fff;
     border-radius: $border-radius;
     box-shadow: 0 0 3px fade-out(black, 0.5);
-    transition: all 0.2s linear;
+    transition: width 0.2s linear;
 
     &-overlay {
       position: fixed;
