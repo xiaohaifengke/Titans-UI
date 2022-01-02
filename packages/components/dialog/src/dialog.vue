@@ -10,6 +10,7 @@
         class="ti-dialog-container"
         v-show="vShow"
         @click="clickOnOverlay"
+        v-drag="dragable"
       >
         <div class="ti-dialog-overlay" v-if="overlay" />
         <div
@@ -68,10 +69,12 @@
 import { ref, watch, computed, defineComponent } from 'vue'
 import TiIcon from '@titans-ui/components/icon'
 import TiButton from '@titans-ui/components/button'
+import drag from '@titans-ui/directives/drag'
 
 export default defineComponent({
   name: 'TiDialog',
   components: { TiIcon, TiButton },
+  directives: { drag },
   props: {
     visible: {
       type: Boolean,
@@ -147,9 +150,13 @@ export default defineComponent({
     showFooter: {
       type: Boolean,
       default: false
+    },
+    dragable: {
+      type: Boolean,
+      default: false
     }
   },
-  emits: ['update:visible'],
+  emits: ['update:visible', 'drag'],
   setup(props, { emit, slots }) {
     const close = () => {
       const close = () => {

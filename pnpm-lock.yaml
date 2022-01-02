@@ -11,6 +11,7 @@ importers:
       '@rollup/plugin-commonjs': ^21.0.1
       '@rollup/plugin-node-resolve': ^13.0.6
       '@titans-ui/components': workspace:^0.3.4
+      '@titans-ui/directives': workspace:^0.3.4
       '@titans-ui/theme-chalk': workspace:^0.3.4
       '@titans-ui/use': workspace:^0.3.4
       '@titans-ui/utils': workspace:^0.3.4
@@ -59,6 +60,7 @@ importers:
     dependencies:
       '@popperjs/core': 2.11.0
       '@titans-ui/components': link:packages/components
+      '@titans-ui/directives': link:packages/directives
       '@titans-ui/theme-chalk': link:packages/theme-chalk
       '@titans-ui/use': link:packages/use
       '@titans-ui/utils': link:packages/utils

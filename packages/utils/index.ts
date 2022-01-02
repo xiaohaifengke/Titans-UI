@@ -60,3 +60,8 @@ export function validatorInt(val: number | string): boolean {
   // console.log(val, typeof val)
   return /^\d+$/.test(`${val}`)
 }
+
+// 获取Dom属性
+export function getStyle(dom: Element, attr: keyof CSSStyleDeclaration) {
+  return getComputedStyle(dom, null)[attr]
+}
