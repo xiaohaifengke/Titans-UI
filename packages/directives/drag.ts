@@ -1,4 +1,11 @@
 import { getStyle } from '@titans-ui/utils'
+import { throttle } from '@titans-ui/utils/throttle'
+
+/**
+ * TODO:
+ * 1. 支持传入参数 targetEl 和 moveEl,使其为一个更通用的指令，而不仅仅用于 dialog 组件；
+ * 2. 支持传入 拖动事件触发时间间隔（节流间隔）的时间参数 wait，默认16ms；
+ */
 
 export type Binding = {
   value: boolean
@@ -57,7 +64,7 @@ function mounted(el, binding) {
     document.addEventListener('mouseup', el.mouseup)
   }
 
-  el.mousemove = (e: MouseEvent) => {
+  el.mousemove = throttle((e: MouseEvent) => {
     let curClientX: number = e.clientX
     let curClientY: number = e.clientY
     // 计算鼠标移动的距离
@@ -77,7 +84,7 @@ function mounted(el, binding) {
 
     // emit drag event
     binding.instance.$emit('drag', e)
-  }
+  }, 16)
 
   el.mouseup = () => {
     document.body.style.userSelect = ''
