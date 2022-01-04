@@ -4,6 +4,7 @@ import path from 'path'
 import { buildConfig } from './utils/config'
 import { run, withTaskName } from './utils'
 import { distRoot, projectRoot } from './utils/paths'
+import replace from 'gulp-replace'
 
 export default function buildPackages(pkgPath: string, pkgName: string) {
   const tsConfig = path.resolve(projectRoot, 'tsconfig.json')
@@ -21,7 +22,10 @@ export default function buildPackages(pkgPath: string, pkgName: string) {
             moduleResolution: 'node',
             strict: false
           })
-          src(inputs).pipe(tsProject()).pipe(dest(outputDir))
+          src(inputs)
+            .pipe(tsProject())
+            .pipe(replace('@titans-ui/', `titans-ui/${outputName}/`))
+            .pipe(dest(outputDir))
         }
       )
     )

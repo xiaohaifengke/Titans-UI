@@ -38,6 +38,7 @@ importers:
       gulp: ^4.0.2
       gulp-autoprefixer: ^8.0.0
       gulp-clean-css: ^4.3.0
+      gulp-replace: ^1.1.3
       gulp-sass: ^5.0.0
       gulp-typescript: ^6.0.0-alpha.1
       husky: 7.0.1
@@ -93,6 +94,7 @@ importers:
       gulp: 4.0.2
       gulp-autoprefixer: 8.0.0_gulp@4.0.2
       gulp-clean-css: 4.3.0
+      gulp-replace: registry.npmmirror.com/gulp-replace/1.1.3
       gulp-sass: 5.0.0
       gulp-typescript: 6.0.0-alpha.1_typescript@4.5.2
       husky: 7.0.1
@@ -684,22 +686,18 @@ packages:
     resolution: {integrity: sha512-C6N5s2ZFtuZRj54k2/zyRhNDjJwwcViAM3Nbm8zjBpbqAdZ00mr0CFxvSKeO8Y/e03WVFLpQMdHYVfUd6SB+Hw==}
     dev: true
 
-  /@types/expect/1.20.4:
-    resolution: {integrity: sha512-Q5Vn3yjTDyCMV50TB6VRIbQNxSE4OmZR86VSbGaNpfUolm0iePBB4KdEEHmxoY5sT2+2DIvXW0rvMDP2nHZ4Mg==}
-    dev: true
-
   /@types/glob-stream/6.1.1:
     resolution: {integrity: sha512-AGOUTsTdbPkRS0qDeyeS+6KypmfVpbT5j23SN8UPG63qjKXNKjXn6V9wZUr8Fin0m9l8oGYaPK8b2WUMF8xI1A==}
     dependencies:
       '@types/glob': 7.2.0
-      '@types/node': 16.11.11
+      '@types/node': registry.npmmirror.com/@types/node/16.11.11
     dev: true
 
   /@types/glob/7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 3.0.5
-      '@types/node': 16.11.11
+      '@types/node': registry.npmmirror.com/@types/node/16.11.11
     dev: true
 
   /@types/gulp-autoprefixer/0.0.33:
@@ -816,8 +814,8 @@ packages:
   /@types/vinyl/2.0.6:
     resolution: {integrity: sha512-ayJ0iOCDNHnKpKTgBG6Q6JOnHTj9zFta+3j2b8Ejza0e4cvRyMn0ZoLEmbPrTHe5YYRlDYPvPWVdV4cTaRyH7g==}
     dependencies:
-      '@types/expect': 1.20.4
-      '@types/node': 16.11.11
+      '@types/expect': registry.npmmirror.com/@types/expect/1.20.4
+      '@types/node': registry.npmmirror.com/@types/node/16.11.11
     dev: true
 
   /@typescript-eslint/eslint-plugin/2.34.0_9275f7a485892c0a658ceb7540b75666:
@@ -1302,7 +1300,7 @@ packages:
     dependencies:
       end-of-stream: 1.4.4
       once: 1.4.0
-      process-nextick-args: 2.0.1
+      process-nextick-args: registry.nlark.com/process-nextick-args/2.0.1
       stream-exhaust: 1.0.2
     dev: true
 
@@ -1533,7 +1531,7 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       ansi-styles: 3.2.1
-      escape-string-regexp: 1.0.5
+      escape-string-regexp: registry.nlark.com/escape-string-regexp/1.0.5
       supports-color: 5.5.0
     dev: true
 
@@ -1569,7 +1567,7 @@ packages:
       async-each: 1.0.3
       braces: 2.3.2
       glob-parent: 3.1.0
-      inherits: 2.0.4
+      inherits: registry.nlark.com/inherits/2.0.4
       is-binary-path: 1.0.1
       is-glob: 4.0.3
       normalize-path: 3.0.0
@@ -1683,9 +1681,9 @@ packages:
   /cloneable-readable/1.1.3:
     resolution: {integrity: sha512-2EF8zTQOxYq70Y4XKtorQupqF0m49MBz2/yf5Bj+MHjvpG3Hy7sImifnqD6UA+TKYxeSV+u6qqQPawN5UvnpKQ==}
     dependencies:
-      inherits: 2.0.4
-      process-nextick-args: 2.0.1
-      readable-stream: 2.3.7
+      inherits: registry.nlark.com/inherits/2.0.4
+      process-nextick-args: registry.nlark.com/process-nextick-args/2.0.1
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
     dev: true
 
   /code-block-writer/11.0.0:
@@ -1801,8 +1799,8 @@ packages:
     engines: {'0': node >= 0.8}
     dependencies:
       buffer-from: 1.1.2
-      inherits: 2.0.4
-      readable-stream: 2.3.7
+      inherits: registry.nlark.com/inherits/2.0.4
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
       typedarray: 0.0.6
     dev: true
 
@@ -1971,7 +1969,7 @@ packages:
   /convert-source-map/1.8.0:
     resolution: {integrity: sha512-+OQdjP49zViI/6i7nIJpA8rAl4sV/JdPfU9nZs3VqOwGIgizICvuN2ru6fMd+4llL0tar18UYJXfZ/TWtmhUjA==}
     dependencies:
-      safe-buffer: 5.1.2
+      safe-buffer: registry.nlark.com/safe-buffer/5.1.2
     dev: true
 
   /copy-descriptor/0.1.1:
@@ -1984,10 +1982,6 @@ packages:
     dependencies:
       each-props: 1.3.2
       is-plain-object: 5.0.0
-    dev: true
-
-  /core-util-is/1.0.3:
-    resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
   /cosmiconfig/7.0.1:
@@ -2221,8 +2215,8 @@ packages:
     resolution: {integrity: sha512-07z8uv2wMyS51kKhD1KsdXJg5WQ6t93RneqRxUHnskXVtlYYkLqM0gqStQZ3pj073g687jPCHrqNfCzawLYh5g==}
     dependencies:
       end-of-stream: 1.4.4
-      inherits: 2.0.4
-      readable-stream: 2.3.7
+      inherits: registry.nlark.com/inherits/2.0.4
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
       stream-shift: 1.0.1
     dev: true
 
@@ -2327,11 +2321,6 @@ packages:
   /escalade/3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
     engines: {node: '>=6'}
-    dev: true
-
-  /escape-string-regexp/1.0.5:
-    resolution: {integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=}
-    engines: {node: '>=0.8.0'}
     dev: true
 
   /escape-string-regexp/4.0.0:
@@ -2674,7 +2663,7 @@ packages:
     resolution: {integrity: sha1-OrGi0qYsi/tDGgyUy3l6L84nyWI=}
     engines: {node: '>=4'}
     dependencies:
-      escape-string-regexp: 1.0.5
+      escape-string-regexp: registry.nlark.com/escape-string-regexp/1.0.5
     dev: true
 
   /file-entry-cache/6.0.1:
@@ -2813,8 +2802,8 @@ packages:
   /flush-write-stream/1.1.1:
     resolution: {integrity: sha512-3Z4XhFZ3992uIq0XOqb9AreonueSYphE6oYbpt5+3u06JWklbsPkNv3ZKkP9Bz/r+1MWCaMoSQ28P85+1Yc77w==}
     dependencies:
-      inherits: 2.0.4
-      readable-stream: 2.3.7
+      inherits: registry.nlark.com/inherits/2.0.4
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
     dev: true
 
   /for-in/1.0.2:
@@ -2994,7 +2983,7 @@ packages:
       is-negated-glob: 1.0.0
       ordered-read-streams: 1.0.1
       pumpify: 1.5.1
-      readable-stream: 2.3.7
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
       remove-trailing-separator: 1.1.0
       to-absolute-glob: 2.0.2
       unique-stream: 2.3.1
@@ -3018,7 +3007,7 @@ packages:
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
-      inherits: 2.0.4
+      inherits: registry.nlark.com/inherits/2.0.4
       minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
@@ -3029,7 +3018,7 @@ packages:
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
-      inherits: 2.0.4
+      inherits: registry.nlark.com/inherits/2.0.4
       minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
@@ -3040,7 +3029,7 @@ packages:
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
-      inherits: 2.0.4
+      inherits: registry.nlark.com/inherits/2.0.4
       minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
@@ -3339,8 +3328,8 @@ packages:
       domhandler: 2.4.2
       domutils: 1.7.0
       entities: 1.1.2
-      inherits: 2.0.4
-      readable-stream: 3.6.0
+      inherits: registry.nlark.com/inherits/2.0.4
+      readable-stream: registry.nlark.com/readable-stream/3.6.0
     dev: true
 
   /human-signals/2.1.0:
@@ -3403,10 +3392,6 @@ packages:
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
-    dev: true
-
-  /inherits/2.0.4:
-    resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: true
 
   /ini/1.3.8:
@@ -3719,10 +3704,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /isarray/1.0.0:
-    resolution: {integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=}
-    dev: true
-
   /isexe/2.0.0:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
     dev: true
@@ -3731,7 +3712,7 @@ packages:
     resolution: {integrity: sha1-8GVWEJaj8dou9GJy+BXIQNh+DIk=}
     engines: {node: '>=0.10.0'}
     dependencies:
-      isarray: 1.0.0
+      isarray: registry.nlark.com/isarray/1.0.0
     dev: true
 
   /isobject/3.0.1:
@@ -3743,7 +3724,7 @@ packages:
     resolution: {integrity: sha512-0QMy/zPovLfUPyHuOuuU4E+kGACXXE84nRnq6lBVI9GJg5DCBiA97SATi+ZP8CpiJwEQy1oCPjRBf8AnLjN+Ag==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.11.11
+      '@types/node': registry.npmmirror.com/@types/node/16.11.11
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
@@ -3861,7 +3842,7 @@ packages:
     resolution: {integrity: sha512-b94GiNHQNy6JNTrt5w6zNyffMrNkXZb3KTkCZJb2V1xaEGCk093vkZ2jk3tpaeP33/OiXC+WvK9AxUebnf5nbw==}
     engines: {node: '>= 0.6.3'}
     dependencies:
-      readable-stream: 2.3.7
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
     dev: true
 
   /lcid/1.0.0:
@@ -4140,7 +4121,7 @@ packages:
       redent: 3.0.0
       trim-newlines: 3.0.1
       type-fest: 0.18.1
-      yargs-parser: 20.2.9
+      yargs-parser: registry.npmmirror.com/yargs-parser/20.2.9
     dev: true
 
   /meow/9.0.0:
@@ -4158,7 +4139,7 @@ packages:
       redent: 3.0.0
       trim-newlines: 3.0.1
       type-fest: 0.18.1
-      yargs-parser: 20.2.9
+      yargs-parser: registry.npmmirror.com/yargs-parser/20.2.9
     dev: true
 
   /merge-stream/2.0.0:
@@ -4284,7 +4265,7 @@ packages:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
     dependencies:
       any-promise: 1.3.0
-      object-assign: 4.1.1
+      object-assign: registry.nlark.com/object-assign/4.1.1
       thenify-all: 1.6.0
     dev: true
 
@@ -4395,11 +4376,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /object-assign/4.1.1:
-    resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
-    engines: {node: '>=0.10.0'}
-    dev: true
-
   /object-copy/0.1.0:
     resolution: {integrity: sha1-fn2Fi3gb18mRpBupde04EnVOmYw=}
     engines: {node: '>=0.10.0'}
@@ -4499,7 +4475,7 @@ packages:
   /ordered-read-streams/1.0.1:
     resolution: {integrity: sha1-d8DLN8QVJdZBZtmQ/61+xqDhNj4=}
     dependencies:
-      readable-stream: 2.3.7
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
     dev: true
 
   /os-locale/1.4.0:
@@ -4853,7 +4829,7 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       cssesc: 3.0.0
-      util-deprecate: 1.0.2
+      util-deprecate: registry.nlark.com/util-deprecate/1.0.2
     dev: true
 
   /postcss-sorting/5.0.1:
@@ -4916,10 +4892,6 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /process-nextick-args/2.0.1:
-    resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
-    dev: true
-
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
@@ -4936,7 +4908,7 @@ packages:
     resolution: {integrity: sha512-oClZI37HvuUJJxSKKrC17bZ9Cu0ZYhEAGPsPUy9KlMUmv9dKX2o77RUmq7f3XjIxbwyGwYzbzQ1L2Ks8sIradQ==}
     dependencies:
       duplexify: 3.7.1
-      inherits: 2.0.4
+      inherits: registry.nlark.com/inherits/2.0.4
       pump: 2.0.1
     dev: true
 
@@ -5012,34 +4984,13 @@ packages:
       type-fest: 0.6.0
     dev: true
 
-  /readable-stream/2.3.7:
-    resolution: {integrity: sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==}
-    dependencies:
-      core-util-is: 1.0.3
-      inherits: 2.0.4
-      isarray: 1.0.0
-      process-nextick-args: 2.0.1
-      safe-buffer: 5.1.2
-      string_decoder: 1.1.1
-      util-deprecate: 1.0.2
-    dev: true
-
-  /readable-stream/3.6.0:
-    resolution: {integrity: sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==}
-    engines: {node: '>= 6'}
-    dependencies:
-      inherits: 2.0.4
-      string_decoder: 1.3.0
-      util-deprecate: 1.0.2
-    dev: true
-
   /readdirp/2.2.1:
     resolution: {integrity: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==}
     engines: {node: '>=0.10'}
     dependencies:
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
       micromatch: 3.1.10
-      readable-stream: 2.3.7
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
     dev: true
 
   /readdirp/3.6.0:
@@ -5114,7 +5065,7 @@ packages:
     engines: {node: '>= 0.10'}
     dependencies:
       remove-bom-buffer: 3.0.0
-      safe-buffer: 5.2.1
+      safe-buffer: registry.nlark.com/safe-buffer/5.2.1
       through2: 2.0.5
     dev: true
 
@@ -5315,14 +5266,6 @@ packages:
     resolution: {integrity: sha512-7SQDi7xeTMCJpqViXh8gL/lebcwlp3d831F05+9B44A4B0WfsEwUQHR64gsH1kvJ+Ep/J9K2+n1hVl1CsGN23w==}
     dependencies:
       tslib: 2.1.0
-    dev: true
-
-  /safe-buffer/5.1.2:
-    resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
-    dev: true
-
-  /safe-buffer/5.2.1:
-    resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
     dev: true
 
   /safe-regex/1.1.0:
@@ -5551,7 +5494,7 @@ packages:
   /split2/3.2.2:
     resolution: {integrity: sha512-9NThjpgZnifTkJpzTZ7Eue85S49QwpNhZTq6GRJwObb6jnLFNGB7Qm73V5HewTROPyxD0C29xqmaI68bQtV+hg==}
     dependencies:
-      readable-stream: 3.6.0
+      readable-stream: registry.nlark.com/readable-stream/3.6.0
     dev: true
 
   /sprintf-js/1.0.3:
@@ -5607,18 +5550,6 @@ packages:
       emoji-regex: 8.0.0
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.1
-    dev: true
-
-  /string_decoder/1.1.1:
-    resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
-    dependencies:
-      safe-buffer: 5.1.2
-    dev: true
-
-  /string_decoder/1.3.0:
-    resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
-    dependencies:
-      safe-buffer: 5.2.1
     dev: true
 
   /stringify-object/3.3.0:
@@ -5946,27 +5877,27 @@ packages:
   /through2/2.0.5:
     resolution: {integrity: sha512-/mrRod8xqpA+IHSLyGCQ2s8SPHiCDEeQJSep1jqLYeEUClOFG2Qsh+4FU6G9VeqpZnGW/Su8LQGc4YKni5rYSQ==}
     dependencies:
-      readable-stream: 2.3.7
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
       xtend: 4.0.2
     dev: true
 
   /through2/3.0.1:
     resolution: {integrity: sha512-M96dvTalPT3YbYLaKaCuwu+j06D/8Jfib0o/PxbVt6Amhv3dUAtW6rTV1jPgJSBG83I/e04Y6xkVdVhSRhi0ww==}
     dependencies:
-      readable-stream: 3.6.0
+      readable-stream: registry.nlark.com/readable-stream/3.6.0
     dev: true
 
   /through2/3.0.2:
     resolution: {integrity: sha512-enaDQ4MUyP2W6ZyT6EsMzqBPZaM/avg8iuo+l2d3QCs0J+6RaqkHV/2/lOwDTueBHeJ/2LG9lrLW3d5rWPucuQ==}
     dependencies:
-      inherits: 2.0.4
-      readable-stream: 3.6.0
+      inherits: registry.nlark.com/inherits/2.0.4
+      readable-stream: registry.nlark.com/readable-stream/3.6.0
     dev: true
 
   /through2/4.0.2:
     resolution: {integrity: sha512-iOqSav00cVxEEICeD7TjLB1sueEL+81Wpzp2bY17uZjZN0pWZPuo4suZ/61VujxmqSGFfgOcNuTZ85QJwNZQpw==}
     dependencies:
-      readable-stream: 3.6.0
+      readable-stream: registry.nlark.com/readable-stream/3.6.0
     dev: true
 
   /time-stamp/1.1.0:
@@ -6274,10 +6205,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /util-deprecate/1.0.2:
-    resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
-    dev: true
-
   /uuid/3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
@@ -6335,7 +6262,7 @@ packages:
       lead: 1.0.0
       object.assign: 4.1.2
       pumpify: 1.5.1
-      readable-stream: 2.3.7
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
       remove-bom-buffer: 3.0.0
       remove-bom-stream: 1.2.0
       resolve-options: 1.1.0
@@ -6529,23 +6456,6 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  /yargs-parser/20.2.9:
-    resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
-    engines: {node: '>=10'}
-    dev: true
-
-  /yargs-parser/21.0.0:
-    resolution: {integrity: sha512-z9kApYUOCwoeZ78rfRYYWdiU/iNL6mwwYlkkZfJoyMR1xps+NEBX5X7XmRpxkZHhXJ6+Ey00IwKxBBSW9FIjyA==}
-    engines: {node: '>=12'}
-    dev: true
-
-  /yargs-parser/5.0.1:
-    resolution: {integrity: sha512-wpav5XYiddjXxirPoCTUPbqM0PXvJ9hiBMvuJgInvo4/lAOTZzUprArw17q2O1P2+GHhbBr18/iQwjL5Z9BqfA==}
-    dependencies:
-      camelcase: 3.0.0
-      object.assign: 4.1.2
-    dev: true
-
   /yargs/16.2.0:
     resolution: {integrity: sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==}
     engines: {node: '>=10'}
@@ -6556,7 +6466,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.9
+      yargs-parser: registry.npmmirror.com/yargs-parser/20.2.9
     dev: true
 
   /yargs/17.3.0:
@@ -6569,7 +6479,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 21.0.0
+      yargs-parser: registry.npmmirror.com/yargs-parser/21.0.0
     dev: true
 
   /yargs/7.1.2:
@@ -6587,7 +6497,7 @@ packages:
       string-width: 1.0.2
       which-module: 1.0.0
       y18n: 3.2.2
-      yargs-parser: 5.0.1
+      yargs-parser: registry.npmmirror.com/yargs-parser/5.0.1
     dev: true
 
   /yocto-queue/0.1.0:
@@ -6609,6 +6519,19 @@ packages:
     dev: true
     optional: true
 
+  registry.nlark.com/core-util-is/1.0.3:
+    resolution: {integrity: sha1-pgQtNjTCsn6TKPg3uWX6yDgI24U=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/core-util-is/download/core-util-is-1.0.3.tgz}
+    name: core-util-is
+    version: 1.0.3
+    dev: true
+
+  registry.nlark.com/escape-string-regexp/1.0.5:
+    resolution: {integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/escape-string-regexp/download/escape-string-regexp-1.0.5.tgz}
+    name: escape-string-regexp
+    version: 1.0.5
+    engines: {node: '>=0.8.0'}
+    dev: true
+
   registry.nlark.com/file-uri-to-path/1.0.0:
     resolution: {integrity: sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/file-uri-to-path/download/file-uri-to-path-1.0.0.tgz}
     name: file-uri-to-path
@@ -6617,6 +6540,18 @@ packages:
     dev: true
     optional: true
 
+  registry.nlark.com/inherits/2.0.4:
+    resolution: {integrity: sha1-D6LGT5MpF8NDOg3tVTY6rjdBa3w=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/inherits/download/inherits-2.0.4.tgz}
+    name: inherits
+    version: 2.0.4
+    dev: true
+
+  registry.nlark.com/isarray/1.0.0:
+    resolution: {integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/isarray/download/isarray-1.0.0.tgz}
+    name: isarray
+    version: 1.0.0
+    dev: true
+
   registry.nlark.com/nan/2.15.0:
     resolution: {integrity: sha1-PzSkc/8Y4VwbVia2KQO1rW5mX+4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/nan/download/nan-2.15.0.tgz}
     name: nan
@@ -6624,6 +6559,78 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  registry.nlark.com/object-assign/4.1.1:
+    resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/object-assign/download/object-assign-4.1.1.tgz}
+    name: object-assign
+    version: 4.1.1
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  registry.nlark.com/process-nextick-args/2.0.1:
+    resolution: {integrity: sha1-eCDZsWEgzFXKmud5JoCufbptf+I=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/process-nextick-args/download/process-nextick-args-2.0.1.tgz}
+    name: process-nextick-args
+    version: 2.0.1
+    dev: true
+
+  registry.nlark.com/readable-stream/2.3.7:
+    resolution: {integrity: sha1-Hsoc9xGu+BTAT2IlKjamL2yyO1c=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/readable-stream/download/readable-stream-2.3.7.tgz}
+    name: readable-stream
+    version: 2.3.7
+    dependencies:
+      core-util-is: registry.nlark.com/core-util-is/1.0.3
+      inherits: registry.nlark.com/inherits/2.0.4
+      isarray: registry.nlark.com/isarray/1.0.0
+      process-nextick-args: registry.nlark.com/process-nextick-args/2.0.1
+      safe-buffer: registry.nlark.com/safe-buffer/5.1.2
+      string_decoder: registry.nlark.com/string_decoder/1.1.1
+      util-deprecate: registry.nlark.com/util-deprecate/1.0.2
+    dev: true
+
+  registry.nlark.com/readable-stream/3.6.0:
+    resolution: {integrity: sha1-M3u9o63AcGvT4CRCaihtS0sskZg=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/readable-stream/download/readable-stream-3.6.0.tgz}
+    name: readable-stream
+    version: 3.6.0
+    engines: {node: '>= 6'}
+    dependencies:
+      inherits: registry.nlark.com/inherits/2.0.4
+      string_decoder: registry.nlark.com/string_decoder/1.3.0
+      util-deprecate: registry.nlark.com/util-deprecate/1.0.2
+    dev: true
+
+  registry.nlark.com/safe-buffer/5.1.2:
+    resolution: {integrity: sha1-mR7GnSluAxN0fVm9/St0XDX4go0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/safe-buffer/download/safe-buffer-5.1.2.tgz}
+    name: safe-buffer
+    version: 5.1.2
+    dev: true
+
+  registry.nlark.com/safe-buffer/5.2.1:
+    resolution: {integrity: sha1-Hq+fqb2x/dTsdfWPnNtOa3gn7sY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/safe-buffer/download/safe-buffer-5.2.1.tgz}
+    name: safe-buffer
+    version: 5.2.1
+    dev: true
+
+  registry.nlark.com/string_decoder/1.1.1:
+    resolution: {integrity: sha1-nPFhG6YmhdcDCunkujQUnDrwP8g=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/string_decoder/download/string_decoder-1.1.1.tgz}
+    name: string_decoder
+    version: 1.1.1
+    dependencies:
+      safe-buffer: registry.nlark.com/safe-buffer/5.1.2
+    dev: true
+
+  registry.nlark.com/string_decoder/1.3.0:
+    resolution: {integrity: sha1-QvEUWUpGzxqOMLCoT1bHjD7awh4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/string_decoder/download/string_decoder-1.3.0.tgz}
+    name: string_decoder
+    version: 1.3.0
+    dependencies:
+      safe-buffer: registry.nlark.com/safe-buffer/5.2.1
+    dev: true
+
+  registry.nlark.com/util-deprecate/1.0.2:
+    resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/util-deprecate/download/util-deprecate-1.0.2.tgz}
+    name: util-deprecate
+    version: 1.0.2
+    dev: true
 
   registry.npmmirror.com/@commitlint/load/13.1.0:
     resolution: {integrity: sha1-1sm1R1UfIhZYbWwZZNk/kuewQnc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@commitlint/load/download/@commitlint/load-13.1.0.tgz}
@@ -6641,6 +6648,40 @@ packages:
       resolve-from: 5.0.0
     dev: true
     optional: true
+
+  registry.npmmirror.com/@types/expect/1.20.4:
+    resolution: {integrity: sha1-gojlFze/fjq118d7+mlYg3RSZOU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/expect/download/@types/expect-1.20.4.tgz}
+    name: '@types/expect'
+    version: 1.20.4
+    dev: true
+
+  registry.npmmirror.com/@types/node/14.18.4:
+    resolution: {integrity: sha512-swe3lD4izOJWHuxvsZdDFRq6S9i6koJsXOnQKYekhSO5JTizMVirUFgY/bUsaOJQj8oSD4oxmRYPBM/0b6jpdw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/download/@types/node-14.18.4.tgz}
+    name: '@types/node'
+    version: 14.18.4
+    dev: true
+
+  registry.npmmirror.com/@types/node/16.11.11:
+    resolution: {integrity: sha512-KB0sixD67CeecHC33MYn+eYARkqTheIRNuu97y2XMjR7Wu3XibO1vaY6VBV6O/a89SPI81cEUIYT87UqUWlZNw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/download/@types/node-16.11.11.tgz}
+    name: '@types/node'
+    version: 16.11.11
+    dev: true
+
+  registry.npmmirror.com/@types/vinyl/2.0.6:
+    resolution: {integrity: sha1-stE0YDVXp8PStdPcI4Y+orXrKbA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/vinyl/download/@types/vinyl-2.0.6.tgz}
+    name: '@types/vinyl'
+    version: 2.0.6
+    dependencies:
+      '@types/expect': registry.npmmirror.com/@types/expect/1.20.4
+      '@types/node': registry.npmmirror.com/@types/node/16.11.11
+    dev: true
+
+  registry.npmmirror.com/binaryextensions/2.3.0:
+    resolution: {integrity: sha1-HSacv35iQ+qIaqQUU8NlHMvhPCI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/binaryextensions/download/binaryextensions-2.3.0.tgz}
+    name: binaryextensions
+    version: 2.3.0
+    engines: {node: '>=0.8'}
+    dev: true
 
   registry.npmmirror.com/esbuild-android-arm64/0.13.15:
     resolution: {integrity: sha512-m602nft/XXeO8YQPUDVoHfjyRVPdPgjyyXOxZ44MK/agewFFkPa8tUo6lAzSWh5Ui5PB4KR9UIFTSBKh/RrCmg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/esbuild-android-arm64/download/esbuild-android-arm64-0.13.15.tgz}
@@ -6842,6 +6883,46 @@ packages:
     version: 4.2.8
     dev: true
 
+  registry.npmmirror.com/gulp-replace/1.1.3:
+    resolution: {integrity: sha1-hkHNynjmg+hXPKSgEufk67fk22A=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/gulp-replace/download/gulp-replace-1.1.3.tgz}
+    name: gulp-replace
+    version: 1.1.3
+    engines: {node: '>=10'}
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/14.18.4
+      '@types/vinyl': registry.npmmirror.com/@types/vinyl/2.0.6
+      istextorbinary: registry.npmmirror.com/istextorbinary/3.3.0
+      replacestream: registry.npmmirror.com/replacestream/4.0.3
+      yargs-parser: registry.npmmirror.com/yargs-parser/21.0.0
+    dev: true
+
+  registry.npmmirror.com/istextorbinary/3.3.0:
+    resolution: {integrity: sha1-BrHFfZSNoRRhvSN8AM4J6ZApZPI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/istextorbinary/download/istextorbinary-3.3.0.tgz}
+    name: istextorbinary
+    version: 3.3.0
+    engines: {node: '>=8'}
+    dependencies:
+      binaryextensions: registry.npmmirror.com/binaryextensions/2.3.0
+      textextensions: registry.npmmirror.com/textextensions/3.3.0
+    dev: true
+
+  registry.npmmirror.com/replacestream/4.0.3:
+    resolution: {integrity: sha1-PuV5gJK+Nksc2xSEMISSyz3/LzY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/replacestream/download/replacestream-4.0.3.tgz}
+    name: replacestream
+    version: 4.0.3
+    dependencies:
+      escape-string-regexp: registry.nlark.com/escape-string-regexp/1.0.5
+      object-assign: registry.nlark.com/object-assign/4.1.1
+      readable-stream: registry.nlark.com/readable-stream/2.3.7
+    dev: true
+
+  registry.npmmirror.com/textextensions/3.3.0:
+    resolution: {integrity: sha1-A1MNUoe4Z3PAi3dFhYkUiHDMcdM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/textextensions/download/textextensions-3.3.0.tgz}
+    name: textextensions
+    version: 3.3.0
+    engines: {node: '>=8'}
+    dev: true
+
   registry.npmmirror.com/uglify-js/3.14.5:
     resolution: {integrity: sha512-qZukoSxOG0urUTvjc2ERMTcAy+BiFh3weWAkeurLwjrCba73poHmG3E36XEjd/JGukMzwTL7uCxZiAexj8ppvQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/uglify-js/download/uglify-js-3.14.5.tgz}
     name: uglify-js
@@ -6851,3 +6932,26 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  registry.npmmirror.com/yargs-parser/20.2.9:
+    resolution: {integrity: sha1-LrfcOwKJcY/ClfNidThFxBoMlO4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/yargs-parser/download/yargs-parser-20.2.9.tgz?cache=0&sync_timestamp=1637031602871&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fyargs-parser%2Fdownload%2Fyargs-parser-20.2.9.tgz}
+    name: yargs-parser
+    version: 20.2.9
+    engines: {node: '>=10'}
+    dev: true
+
+  registry.npmmirror.com/yargs-parser/21.0.0:
+    resolution: {integrity: sha512-z9kApYUOCwoeZ78rfRYYWdiU/iNL6mwwYlkkZfJoyMR1xps+NEBX5X7XmRpxkZHhXJ6+Ey00IwKxBBSW9FIjyA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/yargs-parser/download/yargs-parser-21.0.0.tgz?cache=0&sync_timestamp=1637031602871&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fyargs-parser%2Fdownload%2Fyargs-parser-21.0.0.tgz}
+    name: yargs-parser
+    version: 21.0.0
+    engines: {node: '>=12'}
+    dev: true
+
+  registry.npmmirror.com/yargs-parser/5.0.1:
+    resolution: {integrity: sha1-ft4ynB2M274gm9Jc25kOmx67s5Q=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/yargs-parser/download/yargs-parser-5.0.1.tgz?cache=0&sync_timestamp=1637031602871&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fyargs-parser%2Fdownload%2Fyargs-parser-5.0.1.tgz}
+    name: yargs-parser
+    version: 5.0.1
+    dependencies:
+      camelcase: 3.0.0
+      object.assign: 4.1.2
+    dev: true
