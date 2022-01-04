@@ -1,7 +1,7 @@
 // Note: temp use in vue3
 // vue2 version is https://github.com/ndelvalle/v-click-outside
 // add a param named extraEls at 2021/11/18
-import { SimpleFunction } from './shims'
+import { SimpleFunction } from '@titans-ui/utils/shims'
 
 const HANDLERS_PROPERTY = '__v-click-outside'
 const HAS_WINDOWS = typeof window !== 'undefined'

@@ -37,7 +37,7 @@ import {
   nextTick,
   watch
 } from 'vue'
-import clickOutside from '@titans-ui/utils/clickOutside'
+import clickOutside from '@titans-ui/directives/clickOutside'
 import { createPopper } from '@popperjs/core'
 import { Instance } from '@popperjs/core/lib/types'
 import { Placement } from '@popperjs/core'
