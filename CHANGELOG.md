@@ -1,3 +1,30 @@
+## [0.3.5](https://github.com/xiaohaifengke/Titans-UI/compare/v0.3.0...v0.3.5) (2022-01-07)
+
+
+### Bug Fixes
+
+* 解决临时发版时fix的一些问题 ([ee640d1](https://github.com/xiaohaifengke/Titans-UI/commit/ee640d1175912a47f68ea4d051c0f6754570c677))
+* 注册局部组件 ([2591a30](https://github.com/xiaohaifengke/Titans-UI/commit/2591a302a8dbb581d7db0d1f1c7394b0cfd74170))
+* adjust transition-property ([deef975](https://github.com/xiaohaifengke/Titans-UI/commit/deef9755d2c2ee5b991a3baad2ff11768898798d))
+
+
+### Features
+
+* 扩展popper-transition组件的功能 ([41ae5c6](https://github.com/xiaohaifengke/Titans-UI/commit/41ae5c683bf2fd39645077bde6f198259addf53c))
+* 修改input组件的样式 ([9c5a194](https://github.com/xiaohaifengke/Titans-UI/commit/9c5a194f2821404a4cd9b23ac7cb03ed6a5bf95e))
+* 修改popper-transition组件的默认样式 ([dabc1ab](https://github.com/xiaohaifengke/Titans-UI/commit/dabc1ab1c55d4c2bf25ad10c79eecc2b53842a2c))
+* **dialog component:** 使用节流思想限制拖动dialog时触发drag事件的时间间隔 ([a2fdead](https://github.com/xiaohaifengke/Titans-UI/commit/a2fdead5528c0b8f5ae49037684a1079ccc6b8b9))
+* **dialog component:** add noPointerEventsOnOverlay prop to Dialog component ([4c72441](https://github.com/xiaohaifengke/Titans-UI/commit/4c72441d0c9999ff4ac6476386cab10c1bd6398e))
+* **dialog component:** dialog组件新增dragable属性和drag事件 ([1bb4a58](https://github.com/xiaohaifengke/Titans-UI/commit/1bb4a58a4a0164b23fb99bbe19c743f846566ccb))
+* **popper-transition component:** 新增fitReferenceWidth属性，使slot宽度可以自适应参考的DOM元素宽度 ([7dbd6e7](https://github.com/xiaohaifengke/Titans-UI/commit/7dbd6e741119daeda74c9654d59d5004120121cd))
+* **popper-transition component:** popper-transition 新增vClickOustsideEvents和offset参数 ([f1d38cc](https://github.com/xiaohaifengke/Titans-UI/commit/f1d38cc57b8be408ee3dce586e734fe90a92e628))
+* **popper-transition component:** popper-transition 新增vClickOustsideEvents和offset参数 ([29c41e7](https://github.com/xiaohaifengke/Titans-UI/commit/29c41e7a3b1fbc0e07d31854e89731e14f2874ab))
+* **popper-transition.vue:** 新增className属性 ([5f599ae](https://github.com/xiaohaifengke/Titans-UI/commit/5f599ae50c344460d70812239b0ce4a1bcac1edb))
+* **select component:** 开始开发select组件 ([85667b8](https://github.com/xiaohaifengke/Titans-UI/commit/85667b8f76cf70e77f45a1949e0fb478dfe2f099))
+* **select component:** 完成select组件的部分功能 ([32c5a00](https://github.com/xiaohaifengke/Titans-UI/commit/32c5a0019b5e25c36d8c3834e829e260b0777d5b))
+
+
+
 ## [0.2.5](https://github.com/xiaohaifengke/Titans-UI/compare/v0.2.4...v0.2.5) (2021-10-19)
 
 
