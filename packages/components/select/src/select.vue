@@ -119,7 +119,12 @@ export default defineComponent({
       if (props.disabled || props.readonly) return
       // 启用筛选功能时，显示时清空输入框的值，并将当前值的label赋值在placeholder上
       // 当隐藏下拉项时，将当前值的label重新赋值在输入框上
-      if (!props.multiple && props.filterable && panel.inputValue) {
+      if (
+        !props.multiple &&
+        props.filterable &&
+        panel.inputValue &&
+        typeof panel.inputValue?.value !== 'symbol'
+      ) {
         filterableTemp.inputValue = panel.inputValue
         internalPlaceholder.value = panel.inputValue?.label
         panel.inputValue = null
@@ -133,10 +138,9 @@ export default defineComponent({
         if (props.multiple) {
           panel.inputValue = null
         } else {
-          // 当临时值存在，且panel.inputValue无新值时
           if (
-            filterableTemp.inputValue &&
-            (!panel.inputValue || typeof panel.inputValue?.value === 'symbol')
+            !panel.inputValue ||
+            typeof panel.inputValue?.value === 'symbol'
           ) {
             panel.inputValue = filterableTemp.inputValue
             filterableTemp.inputValue = null // reset
