@@ -8,15 +8,17 @@
     @click="handleFocus"
   >
     <TiInput
+      :disabled="disabled"
       class="ti-select_input"
-      :modelValue="multiple ? null : panel.inputValue?.label"
+      v-model="model"
       @change="(val) => (model = val)"
       :name="name"
       :autocomplete="autocomplete"
-      readonly
+      :readonly="readonly || !filterable"
       :clearable="clearable"
       :size="size"
       ref="tiInputRef"
+      :placeholder="cptPlaceholder"
     >
       <template #suffix>
         <ti-icon v-show="!clearIconVisible" icon="arrow-down"></ti-icon>
@@ -29,6 +31,7 @@
     </TiInput>
     <div
       class="ti-select_multiple-label-wrapper"
+      :class="{ 'ti-select_multiple--filterable': filterable }"
       ref="multipleLabelWrapper"
       v-if="multiple"
     >
@@ -59,6 +62,7 @@
       ref="popperTransitonRef"
       placement="bottom"
       :className="popperClass"
+      @afterLeave="afterPopperHide"
     >
       <div class="ti-select_panel" @click.stop>
         <slot></slot>
@@ -73,33 +77,17 @@ import {
   onBeforeUnmount,
   onMounted,
   reactive,
-  watch
+  watch,
+  computed,
+  provide,
+  ref
 } from 'vue'
-import { ref } from '@vue/reactivity'
 import { selectProps } from './select-props'
-import { computed, provide } from '@vue/runtime-core'
 import { TI_SELECT_PROVIDE } from '@titans-ui/utils/constants'
 import { SimpleFunction } from '@titans-ui/utils/shims'
 import { TiButton } from '@titans-ui/components/button'
 import { TiPopperTransition } from '@titans-ui/components/popper-transition'
-
-export interface OptionItem {
-  label: string
-  value: any
-}
-export interface Panel {
-  model: any
-  pushToPanel: SimpleFunction
-  inputValue: OptionItem
-  multipleValue: OptionItem[]
-  updatedValue: (valueWrapper: ValueWrapper<any>) => void
-}
-
-export interface ValueWrapper<T> {
-  type: 'active' | 'inactive'
-  value: T
-  label: string
-}
+import { SelectPanel, OptionItem, ValueWrapper } from './types'
 
 export default defineComponent({
   name: 'TiSelect',
@@ -110,9 +98,51 @@ export default defineComponent({
     const reference = ref(null)
     const popperTransitonRef = ref(null)
     const isDropdown = ref(false)
+    const internalPlaceholder = ref(null)
+    const cptPlaceholder = computed(() => {
+      let placeholder = props.placeholder
+      // 判断是否有值
+      if (
+        (props.multiple && Array.isArray(panel.model) && panel.model.length) ||
+        (!props.multiple && panel.model)
+      ) {
+        placeholder = null
+      }
+      return internalPlaceholder.value || placeholder
+    })
+    const filterableTemp: {
+      inputValue: OptionItem
+    } = {
+      inputValue: null
+    }
     const handleFocus = () => {
-      console.log('handleFocus')
+      if (props.disabled || props.readonly) return
+      // 启用筛选功能时，显示时清空输入框的值，并将当前值的label赋值在placeholder上
+      // 当隐藏下拉项时，将当前值的label重新赋值在输入框上
+      if (!props.multiple && props.filterable && panel.inputValue) {
+        filterableTemp.inputValue = panel.inputValue
+        internalPlaceholder.value = panel.inputValue?.label
+        panel.inputValue = null
+      }
       popperTransitonRef.value?.show()
+    }
+    const afterPopperHide = () => {
+      // 启用筛选功能时，当隐藏下拉项时，将当前值的label重新赋值在输入框上
+      if (props.filterable) {
+        internalPlaceholder.value = null
+        if (props.multiple) {
+          panel.inputValue = null
+        } else {
+          // 当临时值存在，且panel.inputValue无新值时
+          if (
+            filterableTemp.inputValue &&
+            (!panel.inputValue || typeof panel.inputValue?.value === 'symbol')
+          ) {
+            panel.inputValue = filterableTemp.inputValue
+            filterableTemp.inputValue = null // reset
+          }
+        }
+      }
     }
     // 控制下拉图标的方向
     watch(
@@ -122,7 +152,9 @@ export default defineComponent({
       }
     )
 
-    const panel: Panel = reactive({
+    const panel: SelectPanel = reactive({
+      filterable: props.filterable,
+      filterMethod: props.filterMethod as SimpleFunction,
       model: computed({
         get: () => {
           if (props.multiple) {
@@ -189,7 +221,20 @@ export default defineComponent({
         }
       }
     })
-    provide<Panel>(TI_SELECT_PROVIDE, panel)
+    provide<SelectPanel>(TI_SELECT_PROVIDE, panel)
+    const model = computed({
+      get: () => {
+        // if (props.multiple) return null
+        return panel.inputValue?.label
+      },
+      set: (val: string) => {
+        // 此处只会通过输入框输入时修改该值，不需要判断单、多选
+        panel.inputValue = {
+          label: val,
+          value: Symbol('temp input value')
+        }
+      }
+    })
 
     const handleClear = () => {
       panel.model = null
@@ -216,10 +261,16 @@ export default defineComponent({
         const initHeight = tiInputRef.value.inputRef.offsetHeight
         multipleLabelWrapperObserver = new ResizeObserver((entries) => {
           entries.forEach((entry) => {
-            tiInputRef.value.inputRef.style.height = `${Math.max(
-              initHeight,
-              entry.contentRect.height
-            )}px`
+            if (props.filterable) {
+              const height = entry.contentRect.height
+              if (panel.model?.length > 0) {
+                tiInputRef.value.inputRef.style.height = `${height + 30}px`
+                tiInputRef.value.inputRef.style.paddingTop = `${height}px`
+              }
+            } else {
+              const height = Math.max(initHeight, entry.contentRect.height)
+              tiInputRef.value.inputRef.style.height = `${height}px`
+            }
             popperTransitonRef.value?.updatePopper()
           })
         })
@@ -250,7 +301,11 @@ export default defineComponent({
       clearIconVisible,
       multipleLabelWrapper,
       tiInputRef,
-      removeItem
+      removeItem,
+      model,
+      cptPlaceholder,
+      afterPopperHide,
+      internalPlaceholder
     }
   }
 })

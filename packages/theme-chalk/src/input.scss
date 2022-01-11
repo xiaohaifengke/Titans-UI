@@ -17,7 +17,7 @@
         border-color: mix(
           #fff,
           map_get($defaultThemeMap, default-border-color),
-          20%
+          60%
         );
       }
     }
@@ -53,6 +53,14 @@
 
       &.ti-input--suffix {
         padding-right: 30px;
+      }
+
+      &::-webkit-input-placeholder {
+        color: mix(#fff, $textColor, 50%);
+      }
+
+      &::-moz-placeholder {
+        color: mix(#fff, $textColor, 50%);
       }
     }
 

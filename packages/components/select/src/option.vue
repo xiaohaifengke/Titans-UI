@@ -1,5 +1,6 @@
 <template>
   <li
+    v-if="exist"
     class="ti-option"
     :class="{
       'ti-option_disabled': disabled,
@@ -14,10 +15,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from 'vue'
-import { computed, inject } from '@vue/runtime-core'
+import { defineComponent, watch, computed, inject, DeepReadonly } from 'vue'
 import { TI_SELECT_PROVIDE } from '@titans-ui/utils/constants'
-import { Panel } from './select.vue'
+import type { SelectPanel } from './types'
 
 export default defineComponent({
   name: 'TiOption',
@@ -30,7 +30,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const TiSelectPanel = inject<Panel>(TI_SELECT_PROVIDE)
+    const TiSelectPanel = inject<SelectPanel>(TI_SELECT_PROVIDE)
     const isActive = computed<boolean>(() => {
       return Array.isArray(TiSelectPanel.model)
         ? TiSelectPanel.model.includes(props.value)
@@ -54,10 +54,24 @@ export default defineComponent({
         immediate: true
       }
     )
+    // filterable
+    const filterable = computed(() => TiSelectPanel.filterable)
+    const filterMethod = computed(() => TiSelectPanel.filterMethod)
+    const exist = computed(() => {
+      if (filterable.value) {
+        return filterMethod.value(TiSelectPanel.inputValue?.label, {
+          label: props.label,
+          value: props.value,
+          disabled: props.disabled
+        })
+      }
+      return true
+    })
     return {
       TiSelectPanel,
       isActive,
-      clickItem
+      clickItem,
+      exist
     }
   }
 })
