@@ -284,7 +284,7 @@ const loading = ref(false)
 const remoteOptions = ref([])
 const remoteMethod = async (input: string) => {
   loading.value = true
-  await sleep(2000)
+  await sleep(1000)
   loading.value = false
   if (!input || !input.trim()) {
     remoteOptions.value = filterMethodOptions.value
