@@ -128,7 +128,7 @@ export default defineComponent({
       // 当隐藏下拉项时，将当前值的label重新赋值在输入框上
       if (
         !props.multiple &&
-        cptFilterable.value &&
+        (cptFilterable.value || props.remote) &&
         panel.inputValue &&
         typeof panel.inputValue?.value !== 'symbol'
       ) {
@@ -140,7 +140,7 @@ export default defineComponent({
     }
     const afterPopperHide = () => {
       // 启用筛选功能时，当隐藏下拉项时，将当前值的label重新赋值在输入框上
-      if (cptFilterable.value) {
+      if (cptFilterable.value || props.remote) {
         internalPlaceholder.value = null
         if (props.multiple) {
           panel.inputValue = null

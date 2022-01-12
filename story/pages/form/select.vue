@@ -172,6 +172,7 @@
     :loading="loading"
     remote
     @inputChange="remoteMethod"
+    clearable
   >
     <ti-option
       v-for="item in remoteOptions"
