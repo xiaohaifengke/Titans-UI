@@ -22,6 +22,8 @@
       @blur="onBlur"
       @input="onInput"
       @change="onChange"
+      @compositionstart="onCompositionstart"
+      @compositionend="onCompositionend"
     />
     <span v-if="prefixIcon || prefixSlot" class="ti-input_icon--prefix">
       <span class="ti-input_icon">
@@ -134,39 +136,53 @@ export default defineComponent({
       )
     })
 
-    const methods = {
-      onFocus: (e: InputEvent) => {
-        isFocused.value = true
-        emit('focus', e)
-      },
-      onBlur: (e: InputEvent) => {
-        isFocused.value = false
-        emit('blur', e)
-      },
-      onInput: (e: InputEvent) => {
-        emit('input', (e.target as HTMLInputElement).value)
-      },
-      onChange: (e: InputEvent) => {
-        emit('change', (e.target as HTMLInputElement).value)
-      },
-      focus: () => {
-        inputRef.value!.focus()
-      },
-      clear: () => {
-        model.value = ''
-        emit('clear')
-      }
+    let composition = false
+    const onFocus = (e: InputEvent) => {
+      isFocused.value = true
+      emit('focus', e)
+    }
+    const onBlur = (e: InputEvent) => {
+      isFocused.value = false
+      emit('blur', e)
+    }
+    const onInput = (e: InputEvent) => {
+      if (composition) return
+      emit('input', (e.target as HTMLInputElement).value)
+    }
+    const onCompositionstart = (e: InputEvent) => {
+      composition = true
+    }
+    const onCompositionend = (e: InputEvent) => {
+      composition = false
+      onInput(e)
+    }
+    const onChange = (e: InputEvent) => {
+      emit('change', (e.target as HTMLInputElement).value)
+    }
+    const focus = () => {
+      inputRef.value!.focus()
+    }
+    const clear = () => {
+      model.value = ''
+      emit('clear')
     }
     return {
       classes,
       inputInnerClasses,
       model,
       inputRef,
-      ...methods,
       prefixSlot,
       suffixSlot,
       clearIconVisible,
-      isHover
+      isHover,
+      onFocus,
+      onBlur,
+      onInput,
+      onCompositionstart,
+      onCompositionend,
+      onChange,
+      focus,
+      clear
     }
   }
 })
