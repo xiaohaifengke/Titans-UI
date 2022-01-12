@@ -14,13 +14,17 @@
       :name="name"
       :autocomplete="autocomplete"
       :readonly="readonly || !filterable"
-      :clearable="clearable"
       :size="size"
       ref="tiInputRef"
       :placeholder="cptPlaceholder"
+      @input="inputHandler"
     >
       <template #suffix>
-        <ti-icon v-show="!clearIconVisible" icon="arrow-down"></ti-icon>
+        <ti-icon v-show="loading" icon="loading"></ti-icon>
+        <ti-icon
+          v-show="!loading && !clearIconVisible"
+          icon="arrow-down"
+        ></ti-icon>
         <ti-icon
           v-if="clearIconVisible"
           icon="circle-close"
@@ -242,11 +246,12 @@ export default defineComponent({
         }
       }
     })
-    watch(model, (val: string) => {
+
+    const inputHandler = (val: string) => {
       if (props.remote) {
         emit('input-change', val)
       }
-    })
+    }
 
     const handleClear = () => {
       panel.model = null
@@ -256,7 +261,10 @@ export default defineComponent({
     const clearIconVisible = computed(() => {
       return props.multiple
         ? false
-        : props.clearable && panel.inputValue && hoverSelect.value
+        : !props.loading &&
+            props.clearable &&
+            panel.inputValue &&
+            hoverSelect.value
     })
 
     // 动态更新select's input的高度
@@ -318,7 +326,8 @@ export default defineComponent({
       cptPlaceholder,
       cptFilterable,
       afterPopperHide,
-      internalPlaceholder
+      internalPlaceholder,
+      inputHandler
     }
   }
 })
