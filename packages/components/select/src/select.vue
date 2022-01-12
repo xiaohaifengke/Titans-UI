@@ -28,7 +28,7 @@
         <ti-icon
           v-if="clearIconVisible"
           icon="circle-close"
-          @click="handleClear"
+          @click.stop="handleClear"
         ></ti-icon>
       </template>
     </TiInput>
@@ -255,6 +255,7 @@ export default defineComponent({
 
     const handleClear = () => {
       panel.model = null
+      panel.inputValue = null
     }
 
     const hoverSelect = ref(false)
