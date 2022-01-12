@@ -11,7 +11,6 @@
       :disabled="disabled"
       class="ti-select_input"
       v-model="model"
-      @change="(val) => (model = val)"
       :name="name"
       :autocomplete="autocomplete"
       :readonly="readonly || !filterable"
@@ -31,7 +30,7 @@
     </TiInput>
     <div
       class="ti-select_multiple-label-wrapper"
-      :class="{ 'ti-select_multiple--filterable': filterable }"
+      :class="{ 'ti-select_multiple--filterable': cptFilterable }"
       ref="multipleLabelWrapper"
       v-if="multiple"
     >
@@ -93,7 +92,7 @@ export default defineComponent({
   name: 'TiSelect',
   components: { TiButton, TiPopperTransition },
   props: selectProps,
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'input-change'],
   setup(props, { emit }) {
     const reference = ref(null)
     const popperTransitonRef = ref(null)
@@ -110,6 +109,10 @@ export default defineComponent({
       }
       return internalPlaceholder.value || placeholder
     })
+    // 当remote为true时，filterable不起作用
+    const cptFilterable = computed(() => {
+      return !props.remote && props.filterable
+    })
     const filterableTemp: {
       inputValue: OptionItem
     } = {
@@ -121,7 +124,7 @@ export default defineComponent({
       // 当隐藏下拉项时，将当前值的label重新赋值在输入框上
       if (
         !props.multiple &&
-        props.filterable &&
+        cptFilterable.value &&
         panel.inputValue &&
         typeof panel.inputValue?.value !== 'symbol'
       ) {
@@ -133,7 +136,7 @@ export default defineComponent({
     }
     const afterPopperHide = () => {
       // 启用筛选功能时，当隐藏下拉项时，将当前值的label重新赋值在输入框上
-      if (props.filterable) {
+      if (cptFilterable.value) {
         internalPlaceholder.value = null
         if (props.multiple) {
           panel.inputValue = null
@@ -157,7 +160,7 @@ export default defineComponent({
     )
 
     const panel: SelectPanel = reactive({
-      filterable: props.filterable,
+      filterable: cptFilterable.value,
       filterMethod: props.filterMethod as SimpleFunction,
       model: computed({
         get: () => {
@@ -239,6 +242,11 @@ export default defineComponent({
         }
       }
     })
+    watch(model, (val: string) => {
+      if (props.remote) {
+        emit('input-change', val)
+      }
+    })
 
     const handleClear = () => {
       panel.model = null
@@ -265,7 +273,7 @@ export default defineComponent({
         const initHeight = tiInputRef.value.inputRef.offsetHeight
         multipleLabelWrapperObserver = new ResizeObserver((entries) => {
           entries.forEach((entry) => {
-            if (props.filterable) {
+            if (cptFilterable.value) {
               const height = entry.contentRect.height
               if (panel.model?.length > 0) {
                 tiInputRef.value.inputRef.style.height = `${height + 30}px`
@@ -308,6 +316,7 @@ export default defineComponent({
       removeItem,
       model,
       cptPlaceholder,
+      cptFilterable,
       afterPopperHide,
       internalPlaceholder
     }

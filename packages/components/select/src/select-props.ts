@@ -54,7 +54,6 @@ export const selectProps = {
     type: Boolean,
     default: false
   },
-  remoteMethod: Function,
   loading: {
     type: Boolean,
     default: false
