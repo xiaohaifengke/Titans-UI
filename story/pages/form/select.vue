@@ -162,9 +162,47 @@
       :disabled="item.disabled"
     />
   </ti-select>
+  <h4>remote</h4>
+
+  <ti-select
+    v-model="value"
+    filterable
+    placeholder="请输入"
+    style="width: 220px; margin-right: 8px"
+    :loading="loading"
+    remote
+    @inputChange="remoteMethod"
+  >
+    <ti-option
+      v-for="item in remoteOptions"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+      :disabled="item.disabled"
+    />
+  </ti-select>
+  <ti-select
+    v-model="multipleValue"
+    multiple
+    filterable
+    placeholder="请输入"
+    style="width: 220px; margin-right: 8px"
+    :loading="loading"
+    remote
+    @inputChange="remoteMethod"
+  >
+    <ti-option
+      v-for="item in remoteOptions"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+      :disabled="item.disabled"
+    />
+  </ti-select>
 </template>
 <script setup lang="ts">
 import { ref } from '@vue/reactivity'
+import { sleep } from '../../utils'
 
 const value = ref('')
 const multipleValue = ref([])
@@ -239,6 +277,23 @@ const filterableOptions = ref([
 const filterMethod = (input: string, option: { label: string; value: any }) => {
   if (!input || !input.trim()) return true
   return `${option.label}${option.value}`.includes(input)
+}
+
+const loading = ref(false)
+const remoteOptions = ref([])
+const remoteMethod = async (input: string) => {
+  loading.value = true
+  await sleep(2000)
+  loading.value = false
+  if (!input || !input.trim()) {
+    remoteOptions.value = filterMethodOptions.value
+  } else {
+    remoteOptions.value = filterMethodOptions.value.filter((option) => {
+      return `${option.label}${option.value}`
+        .toLocaleLowerCase()
+        .includes(input.toLocaleLowerCase())
+    })
+  }
 }
 
 const filterMethodOptions = ref([
