@@ -12,6 +12,7 @@ import {
   TiDatePicker,
   TiWidget,
   TiSelect,
+  TiOptionGroup,
   TiOption
 } from '@titans-ui/components/index'
 
@@ -28,6 +29,7 @@ const plugins = [
   TiDatePicker,
   TiWidget,
   TiSelect,
+  TiOptionGroup,
   TiOption
 ]
 
@@ -52,6 +54,7 @@ export {
   TiDatePicker,
   TiWidget,
   TiSelect,
+  TiOptionGroup,
   TiOption,
   install
 }

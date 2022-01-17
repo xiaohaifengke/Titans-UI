@@ -155,6 +155,7 @@ export default defineComponent({
       popperTransitonRef.value?.show()
     }
     const afterPopperHide = () => {
+      debugger
       // 启用筛选功能时，当隐藏下拉项时，将当前值的label重新赋值在输入框上
       if (cptFilterable.value || props.remote) {
         internalPlaceholder.value = null
@@ -234,7 +235,12 @@ export default defineComponent({
         if (props.multiple) {
           // 多选时，因为选中的值为一个数组，所以active与inactive均需考虑
           if (type === 'active') {
-            panel.multipleValue.push(optionItem)
+            const one = panel.multipleValue.find(
+              (item) => item.value === optionItem.value
+            )
+            if (!one) {
+              panel.multipleValue.push(optionItem)
+            }
           } else {
             panel.multipleValue = panel.multipleValue.filter(
               (item) => item.value !== optionItem.value
@@ -309,8 +315,14 @@ export default defineComponent({
             if (cptFilterable.value) {
               const height = entry.contentRect.height
               if (panel.model?.length > 0) {
+                // 有选中的值
                 tiInputRef.value.inputRef.style.height = `${height + 30}px`
                 tiInputRef.value.inputRef.style.paddingTop = `${height}px`
+              } else {
+                // 没有选中的值
+                const height = Math.max(initHeight, entry.contentRect.height)
+                tiInputRef.value.inputRef.style.height = `${height}px`
+                tiInputRef.value.inputRef.style.paddingTop = ''
               }
             } else {
               const height = Math.max(initHeight, entry.contentRect.height)

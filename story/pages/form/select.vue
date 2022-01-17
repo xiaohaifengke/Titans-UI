@@ -274,6 +274,7 @@ const filterableOptions = ref([
   { label: '池州', value: '皖R' },
   { label: '亳州', value: '皖S' }
 ])
+const filterableOptions1 = ref([])
 
 const filterMethod = (input: string, option: { label: string; value: any }) => {
   if (!input || !input.trim()) return true
@@ -281,7 +282,9 @@ const filterMethod = (input: string, option: { label: string; value: any }) => {
 }
 
 const loading = ref(false)
-const remoteOptions = ref([])
+const remoteOptions = ref<{ label: string; value: any; disabled?: boolean }[]>(
+  []
+)
 const remoteMethod = async (input: string) => {
   loading.value = true
   await sleep(1000)

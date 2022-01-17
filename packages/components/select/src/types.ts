@@ -21,3 +21,8 @@ export interface ValueWrapper<T> {
   value: T
   label: string
 }
+
+export interface OptionGroup {
+  groupVisible: boolean
+  displayGroup: (bool: boolean) => void
+}

@@ -15,9 +15,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, computed, inject, DeepReadonly } from 'vue'
-import { TI_SELECT_PROVIDE } from '@titans-ui/utils/constants'
-import type { SelectPanel } from './types'
+import { defineComponent, watch, computed, inject } from 'vue'
+import {
+  TI_SELECT_GROUP_PROVIDE,
+  TI_SELECT_PROVIDE
+} from '@titans-ui/utils/constants'
+import type { SelectPanel, OptionGroup } from './types'
 import { ref } from '@vue/reactivity'
 
 export default defineComponent({
@@ -32,6 +35,7 @@ export default defineComponent({
   },
   setup(props) {
     const TiSelectPanel = inject<SelectPanel>(TI_SELECT_PROVIDE)
+    const TiOptionGroup = inject<OptionGroup>(TI_SELECT_GROUP_PROVIDE, null)
     const isActive = computed<boolean>(() => {
       return Array.isArray(TiSelectPanel.model)
         ? TiSelectPanel.model.includes(props.value)
@@ -74,19 +78,11 @@ export default defineComponent({
         // 当有任何option显示时，则隐藏 noMatchText
         if (b && TiSelectPanel.noMatchDataVisible) {
           TiSelectPanel.displayNoMatchData(false)
+          TiOptionGroup?.displayGroup(true)
         }
       }
     )
-    /*    const exist = computed(() => {
-      if (filterable.value) {
-        return filterMethod.value(TiSelectPanel.inputValue?.label, {
-          label: props.label,
-          value: props.value,
-          disabled: props.disabled
-        })
-      }
-      return true
-    })*/
+
     return {
       TiSelectPanel,
       isActive,
