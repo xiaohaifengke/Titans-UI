@@ -17,7 +17,7 @@
         border-color: mix(
           #fff,
           map_get($defaultThemeMap, default-border-color),
-          20%
+          60%
         );
       }
     }
@@ -54,6 +54,14 @@
       &.ti-input--suffix {
         padding-right: 30px;
       }
+
+      &::-webkit-input-placeholder {
+        color: mix(#fff, $textColor, 50%);
+      }
+
+      &::-moz-placeholder {
+        color: mix(#fff, $textColor, 50%);
+      }
     }
 
     .ti-input_icon {
@@ -67,6 +75,9 @@
       position: absolute;
       top: 0;
       left: 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       height: 100%;
       color: $textColor;
     }

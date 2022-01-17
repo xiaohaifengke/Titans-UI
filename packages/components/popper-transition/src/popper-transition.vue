@@ -86,6 +86,9 @@ export default defineComponent({
   },
   emits: ['after-enter', 'after-leave'],
   setup(props, { emit }) {
+    const reference = computed<HTMLElement>(
+      () => props.reference as HTMLElement
+    )
     const visible = ref(true)
     const show = () => {
       visible.value = true
@@ -96,7 +99,7 @@ export default defineComponent({
     const vClickOutsideActive = ref(false)
     const vClickOutsideParams = computed(() => ({
       handler: hide,
-      extraEls: [...props.vClickOutsideExtraEls, props.reference],
+      extraEls: [...props.vClickOutsideExtraEls, reference.value],
       events: props.vClickOustsideEvents,
       isActive: vClickOutsideActive.value
     }))
@@ -113,7 +116,7 @@ export default defineComponent({
       emit('after-leave', el)
     }
 
-    const tooltipRef = ref(null as any)
+    const tooltipRef = ref<HTMLElement>(null)
 
     const { duration, popperTransitionInitialized, updatePopper } =
       popperTransitionInitialize()
@@ -155,14 +158,12 @@ export default defineComponent({
 
         nextTick(() => {
           if (props.fitReferenceWidth) {
-            tooltipRef.value.style.width = `${
-              (props.reference as Element).scrollWidth
-            }px`
+            tooltipRef.value.style.width = `${reference.value.scrollWidth}px`
 
             // 当宽度变化时自动更新panel的宽度
             resizeObserver = new ResizeObserver((entries) => {
               entries.forEach((entry) => {
-                if (entry.target === (props.reference as Element)) {
+                if (entry.target === reference.value) {
                   tooltipRef.value.style.width = `${entry.contentRect.width}px`
                 } else if (
                   entry.target === tooltipRef.value &&
@@ -172,19 +173,17 @@ export default defineComponent({
                 }
               })
             })
-            resizeObserver.observe(props.reference as Element, {
+            resizeObserver.observe(reference.value, {
               box: 'border-box'
             })
-            resizeObserver.observe(tooltipRef.value, { box: 'border-box' })
+            resizeObserver.observe(tooltipRef.value, {
+              box: 'border-box'
+            })
           }
-          popperInstance = createPopper(
-            props.reference as Element,
-            tooltipRef.value,
-            {
-              placement: props.placement as Placement,
-              modifiers
-            }
-          )
+          popperInstance = createPopper(reference.value, tooltipRef.value, {
+            placement: props.placement as Placement,
+            modifiers
+          })
         })
       })
 
@@ -197,7 +196,7 @@ export default defineComponent({
       )
 
       onBeforeUnmount(() => {
-        resizeObserver?.unobserve(props.reference as Element)
+        resizeObserver?.unobserve(reference.value)
         resizeObserver?.unobserve(tooltipRef.value)
         popperInstance.destroy()
       })

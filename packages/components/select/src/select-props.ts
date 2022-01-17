@@ -36,12 +36,24 @@ export const selectProps = {
     type: Boolean,
     default: false
   },
-  filterMethod: Function,
+  filterMethod: {
+    type: Function,
+    default: (
+      input: string,
+      option: {
+        label: string
+        value: any
+        disabled: boolean
+      }
+    ) => {
+      if (!input || !input.trim()) return true
+      return option.label.includes(input)
+    }
+  },
   remote: {
     type: Boolean,
     default: false
   },
-  remoteMethod: Function,
   loading: {
     type: Boolean,
     default: false
