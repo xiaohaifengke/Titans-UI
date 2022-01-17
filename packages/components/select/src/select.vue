@@ -68,7 +68,8 @@
       @afterLeave="afterPopperHide"
     >
       <div class="ti-select_panel" @click.stop>
-        <slot></slot>
+        <li class="ti-select_loading" v-if="loading">{{ loadingText }}</li>
+        <slot v-else></slot>
       </div>
     </TiPopperTransition>
   </div>

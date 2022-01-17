@@ -1,7 +1,15 @@
 @use './mixins/mixins' as *;
+@mixin ti-option-base {
+  height: 32px;
+  padding: 0 15px;
+  line-height: 32px;
+  list-style: none;
+  cursor: pointer;
+}
 
 @include themes {
   $textColor: map-get($defaultThemeMap, default);
+
   // select
   .ti-select {
     position: relative;
@@ -66,13 +74,17 @@
     overflow: auto;
   }
 
+  .ti-select_loading {
+    @include ti-option-base;
+
+    color: mix(#fff, $textColor, 40%);
+    text-align: center;
+    cursor: auto;
+  }
+
   // option
   .ti-option {
-    height: 32px;
-    padding: 0 15px;
-    line-height: 32px;
-    list-style: none;
-    cursor: pointer;
+    @include ti-option-base;
 
     &:hover {
       background-color: transparentize(
