@@ -12,6 +12,8 @@ export interface SelectPanel {
   inputValue: OptionItem
   multipleValue: OptionItem[]
   updatedValue: (valueWrapper: ValueWrapper<any>) => void
+  noMatchDataVisible: boolean
+  displayNoMatchData: (bool: boolean) => void
 }
 
 export interface ValueWrapper<T> {

@@ -18,6 +18,7 @@
 import { defineComponent, watch, computed, inject, DeepReadonly } from 'vue'
 import { TI_SELECT_PROVIDE } from '@titans-ui/utils/constants'
 import type { SelectPanel } from './types'
+import { ref } from '@vue/reactivity'
 
 export default defineComponent({
   name: 'TiOption',
@@ -57,7 +58,26 @@ export default defineComponent({
     // filterable
     const filterable = computed(() => TiSelectPanel.filterable)
     const filterMethod = computed(() => TiSelectPanel.filterMethod)
-    const exist = computed(() => {
+    const exist = ref(true)
+    watch(
+      () => TiSelectPanel.inputValue?.label,
+      (label: string) => {
+        let b = true
+        if (filterable.value) {
+          b = filterMethod.value(label, {
+            label: props.label,
+            value: props.value,
+            disabled: props.disabled
+          })
+        }
+        exist.value = b
+        // 当有任何option显示时，则隐藏 noMatchText
+        if (b && TiSelectPanel.noMatchDataVisible) {
+          TiSelectPanel.displayNoMatchData(false)
+        }
+      }
+    )
+    /*    const exist = computed(() => {
       if (filterable.value) {
         return filterMethod.value(TiSelectPanel.inputValue?.label, {
           label: props.label,
@@ -66,7 +86,7 @@ export default defineComponent({
         })
       }
       return true
-    })
+    })*/
     return {
       TiSelectPanel,
       isActive,

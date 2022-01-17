@@ -74,7 +74,7 @@
     overflow: auto;
   }
 
-  .ti-select_loading {
+  .ti-option_tip {
     @include ti-option-base;
 
     color: mix(#fff, $textColor, 40%);

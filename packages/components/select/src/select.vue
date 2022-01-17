@@ -68,8 +68,15 @@
       @afterLeave="afterPopperHide"
     >
       <div class="ti-select_panel" @click.stop>
-        <li class="ti-select_loading" v-if="loading">{{ loadingText }}</li>
-        <slot v-else></slot>
+        <li class="ti-option_tip" v-if="loading">{{ loadingText }}</li>
+        <slot v-else>
+          <li class="ti-option_tip">
+            {{ noDataText }}
+          </li>
+        </slot>
+        <li class="ti-option_tip" v-if="hasSlotsData && noMatchDataVisible">
+          {{ noMatchText }}
+        </li>
       </div>
     </TiPopperTransition>
   </div>
@@ -98,7 +105,15 @@ export default defineComponent({
   components: { TiButton, TiPopperTransition },
   props: selectProps,
   emits: ['update:modelValue', 'input-change'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
+    // REFACTOR: 用此方式获取slots中的数据，在select组件中处理逻辑，减少与option组件的通信
+    const hasSlotsData = computed(() => {
+      if (props.filterable && !props.remote) {
+        const slotVnodes = slots.default()
+        return slotVnodes?.[0]?.children.length > 0
+      }
+      return false
+    })
     const reference = ref(null)
     const popperTransitonRef = ref(null)
     const isDropdown = ref(false)
@@ -231,6 +246,10 @@ export default defineComponent({
             panel.inputValue = optionItem
           }
         }
+      },
+      noMatchDataVisible: false,
+      displayNoMatchData(bool: boolean) {
+        this.noMatchDataVisible = bool
       }
     })
     provide<SelectPanel>(TI_SELECT_PROVIDE, panel)
@@ -244,6 +263,10 @@ export default defineComponent({
         panel.inputValue = {
           label: val,
           value: Symbol('temp input value')
+        }
+        // 显示 noMatchText，当有任何option显示时，则隐藏 noMatchText
+        if (props.filterable && !props.remote) {
+          panel.displayNoMatchData(true)
         }
       }
     })
@@ -312,6 +335,12 @@ export default defineComponent({
       panel.model = panel.model.filter((n) => n !== item.value)
     }
 
+    const noMatchDataVisible = computed(() => {
+      return (
+        props.filterable && panel.inputValue?.label && panel.noMatchDataVisible
+      )
+    })
+
     return {
       panel,
       isDropdown,
@@ -329,7 +358,9 @@ export default defineComponent({
       cptFilterable,
       afterPopperHide,
       internalPlaceholder,
-      inputHandler
+      inputHandler,
+      noMatchDataVisible,
+      hasSlotsData
     }
   }
 })
