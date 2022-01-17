@@ -200,6 +200,38 @@
       :disabled="item.disabled"
     />
   </ti-select>
+
+  <h4>group</h4>
+  <ti-select v-model="groupValue" filterable multiple>
+    <ti-option-group
+      v-for="group in groupOptions"
+      :key="group.label"
+      :label="group.label"
+    >
+      <ti-option
+        v-for="item in group.children"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+        :disabled="item.disabled"
+      />
+    </ti-option-group>
+  </ti-select>
+
+  <!--  <select id="">
+    <optgroup label="code">
+      <option label="a" value="a"></option>
+      <option label="b" value="b"></option>
+    </optgroup>
+    <optgroup label="num">
+      <option label="1" value="1"></option>
+      <option label="2" value="2"></option>
+    </optgroup>
+    <optgroup label="text">
+      <option label="一" value="一"></option>
+      <option label="二" value="二"></option>
+    </optgroup>
+  </select>-->
 </template>
 <script setup lang="ts">
 import { ref } from '@vue/reactivity'
@@ -317,5 +349,24 @@ const filterMethodOptions = ref([
   { label: 'XuanCheng', value: 'XuanCheng' },
   { label: 'ChiZhou', value: 'ChiZhou' },
   { label: 'BoZhou', value: 'BoZhou' }
+])
+
+const groupValue = ref([])
+const groupOptions = ref([
+  {
+    label: '蔬菜',
+    children: [
+      { label: '西红柿', value: 'tomato' },
+      { label: '黄瓜', value: 'cucumber' }
+    ]
+  },
+  {
+    label: '水果',
+    children: [
+      { label: '香蕉', value: 'banana' },
+      { label: '桔子', value: 'orange' },
+      { label: '葡萄', value: 'grape' }
+    ]
+  }
 ])
 </script>
