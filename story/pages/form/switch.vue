@@ -58,7 +58,6 @@
       />
       <ti-switch
         v-model="switchValue"
-        ref="switchRef"
         on-text="开启"
         off-text="关闭"
         :width="100"
@@ -66,34 +65,66 @@
         type="success"
       />
     </div>
+
+    <h4>禁用/只读</h4>
+    <ti-switch
+      class="disabled-demo"
+      v-model="isDisabled"
+      on-text="禁用/只读"
+      off-text="正常"
+      type="success"
+    />
+
+    <ti-switch
+      class="disabled-demo"
+      v-model="disableItem"
+      type="success"
+      on-text="开启"
+      off-text="关闭"
+      :disabled="isDisabled"
+    ></ti-switch>
+
+    <ti-switch
+      class="disabled-demo"
+      v-model="readonlyItem"
+      type="success"
+      on-text="开启"
+      off-text="关闭"
+      :readonly="isDisabled"
+    ></ti-switch>
+
+    <ti-switch
+      class="disabled-demo"
+      v-model="normalItem"
+      type="success"
+      on-text="开启"
+      off-text="关闭"
+    ></ti-switch>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'switch-demo',
-  data() {
-    return {
-      value: false,
-      value2: true,
-      value3: true,
-      switchValue: true
-    }
-  },
-  mounted() {
-    this.$refs.switchRef.focus()
-    // this.$refs.switchRef.blur();
-  },
-  methods: {
-    change(a) {
-      console.log(a)
-    }
-  }
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const value = ref(false)
+const value2 = ref(false)
+const value3 = ref(false)
+const switchValue = ref(false)
+const change = (a) => {
+  console.log(a)
 }
+
+const isDisabled = ref(false)
+const disableItem = ref(false)
+const readonlyItem = ref(false)
+const normalItem = ref(false)
 </script>
 
 <style scoped lang="scss" rel="stylesheet/scss">
 .sep {
   margin: 10px;
+}
+.disabled-demo {
+  margin-right: 10px;
 }
 </style>

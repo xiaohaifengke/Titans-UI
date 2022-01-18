@@ -6,6 +6,7 @@
     :style="switchStyles"
     @keydown.prevent.self="handleKeydown"
     @click="handleChange"
+    :disabled="disabled"
   >
     <span class="ti-switch-text"> {{ isOn ? onText : offText }} </span>
     <span class="ti-switch-handle" :style="handleStyles" />
@@ -56,6 +57,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
     onText: {
       type: String
     },
@@ -83,7 +88,8 @@ export default defineComponent({
       {
         'is-on': isOn.value,
         [`ti-switch-type-${props.type}`]: props.type,
-        'ti-switch-disabled': props.disabled
+        'ti-switch-disabled': props.disabled,
+        'ti-switch-readonly': props.readonly
       }
     ])
 
@@ -111,7 +117,7 @@ export default defineComponent({
       backgroundColor: isOn.value ? props.handleOnColor : props.handleOffColor
     }))
     const handleChange = (e: Event) => {
-      if (props.disabled) return
+      if (props.disabled || props.readonly) return
       const modelValue = isOn.value ? props.offValue : props.onValue
       emit('update:modelValue', modelValue)
     }
