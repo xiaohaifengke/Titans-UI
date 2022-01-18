@@ -26,6 +26,7 @@ $theme-default: (
     square: 0,
     circle: 50%,
     fontsize: 14px,
+    fontsize-small: 12px,
     font:
       'Avenir,-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol',
     ibc: #dcdfe6,
@@ -49,7 +50,10 @@ $theme-default: (
     input-height-mini: 28px,
     /* input end */ transition-border: border-color 0.2s
       cubic-bezier(0.645, 0.045, 0.355, 1),
-    // select start
-    // select end
+    // checkbox start
+    checkbox-height-large: 42px,
+    checkbox-height-normal: 34px,
+    checkbox-height-small: 26px,
+    checkbox-selector-color: mix(#606266, #fff, 50%) // checkbox end
   )
 );

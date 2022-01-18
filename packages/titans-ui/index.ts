@@ -13,7 +13,9 @@ import {
   TiWidget,
   TiSelect,
   TiOptionGroup,
-  TiOption
+  TiOption,
+  TiCheckbox,
+  TiCheckboxGroup
 } from '@titans-ui/components/index'
 
 const plugins = [
@@ -30,7 +32,9 @@ const plugins = [
   TiWidget,
   TiSelect,
   TiOptionGroup,
-  TiOption
+  TiOption,
+  TiCheckbox,
+  TiCheckboxGroup
 ]
 
 function install(app: App) {
@@ -56,5 +60,7 @@ export {
   TiSelect,
   TiOptionGroup,
   TiOption,
+  TiCheckbox,
+  TiCheckboxGroup,
   install
 }

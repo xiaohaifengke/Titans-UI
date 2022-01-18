@@ -26,3 +26,4 @@ export const StyleProps = {
 
 export const TI_SELECT_PROVIDE = '@@TI_SELECT_PROVIDE'
 export const TI_SELECT_GROUP_PROVIDE = '@@TI_SELECT_GROUP_PROVIDE'
+export const TI_CHECKBOX_GROUP_PROVIDE = '@@TI_CHECKBOX_GROUP_PROVIDE'
