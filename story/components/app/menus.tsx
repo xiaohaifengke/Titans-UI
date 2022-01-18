@@ -118,6 +118,14 @@ export const MENUS: Array<AppMenu> = [
           title: 'TimePicker',
           subtitle: '时间选择'
         }
+      },
+      {
+        path: 'checkbox',
+        name: 'checkbox',
+        meta: {
+          title: 'Checkbox',
+          subtitle: '多选框'
+        }
       }
     ]
   },
