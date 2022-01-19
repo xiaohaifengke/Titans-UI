@@ -22,6 +22,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: (modelValue) => {
         emit('update:modelValue', modelValue)
+        emit('change', modelValue)
       }
     })
 

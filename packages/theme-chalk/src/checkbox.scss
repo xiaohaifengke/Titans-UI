@@ -53,6 +53,24 @@
       }
     }
   }
+  .ti-checkbox_selector--indeterminate {
+    .ti-checkbox_selector {
+      &::before {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        left: 0;
+        display: block;
+        height: 2px;
+        content: '';
+        background-color: #fff;
+        transform: scale(0.5);
+      }
+      &::after {
+        content: none;
+      }
+    }
+  }
 
   // size
   @each $size in large, normal, small {
@@ -96,6 +114,15 @@
           color: $typeColor;
         }
       }
+      &.ti-checkbox_selector--indeterminate {
+        .ti-checkbox_selector {
+          background-color: $typeColor;
+          border: 1px solid $typeColor;
+        }
+        .ti-checkbox_label {
+          color: inherit;
+        }
+      }
     }
   }
 
@@ -109,6 +136,9 @@
       .ti-checkbox_selector {
         background-color: mix($disabledColor, #fff, 40%);
         border: 1px solid $disabledColor;
+        &::before {
+          background-color: $disabledColor;
+        }
         &::after {
           border-color: $disabledColor;
         }
