@@ -126,6 +126,14 @@ export const MENUS: Array<AppMenu> = [
           title: 'Checkbox',
           subtitle: '多选框'
         }
+      },
+      {
+        path: 'radio',
+        name: 'radio',
+        meta: {
+          title: 'Radio',
+          subtitle: '单选框'
+        }
       }
     ]
   },
