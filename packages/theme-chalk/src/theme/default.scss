@@ -51,9 +51,16 @@ $theme-default: (
     /* input end */ transition-border: border-color 0.2s
       cubic-bezier(0.645, 0.045, 0.355, 1),
     // checkbox start
-    checkbox-height-large: 42px,
-    checkbox-height-normal: 34px,
-    checkbox-height-small: 26px,
-    checkbox-selector-color: mix(#606266, #fff, 50%) // checkbox end
+    checkbox-height-large: 40px,
+    checkbox-height-normal: 32px,
+    checkbox-height-small: 24px,
+    checkbox-selector-color: mix(#606266, #fff, 50%),
+    // checkbox end
+    // radio start
+    radio-height-large: 40px,
+    radio-height-normal: 32px,
+    radio-height-small: 24px,
+    radio-selector-color: mix(#606266, #fff, 50%),
+    // radio end
   )
 );
