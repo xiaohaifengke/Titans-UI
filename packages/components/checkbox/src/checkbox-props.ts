@@ -1,6 +1,6 @@
 export const checkboxProps = {
   modelValue: [Boolean, String, Number],
-  label: String,
+  label: [String, Number],
   size: {
     type: String,
     default: 'normal'
@@ -21,5 +21,9 @@ export const checkboxProps = {
   },
   disabled: Boolean,
   readonly: Boolean,
-  width: [String, Number]
+  width: [String, Number],
+  indeterminate: {
+    type: Boolean,
+    default: false
+  }
 }

@@ -65,10 +65,21 @@
       false-label="参考项"
     />
     <h4>复选框组</h4>
-    <ti-checkbox-group v-model="checkedList">
+    <ti-checkbox-group v-model="checkedList" @change="testGroupChange">
       <ti-checkbox v-for="weekday in week" :label="weekday" :key="weekday" />
     </ti-checkbox-group>
     <span> {{ checkedList }}</span>
+    <h4>全选/反选</h4>
+    <ti-checkbox
+      v-model="checkAll"
+      label="中间状态"
+      :indeterminate="isIndeterminate"
+      @change="handleCheckAllChange"
+    />
+    <ti-checkbox-group v-model="checkedNums" @change="handleCheckedNumsChange">
+      <ti-checkbox v-for="num in nums" :label="num" :key="num" />
+    </ti-checkbox-group>
+    <span> {{ checkedNums }}</span>
   </div>
 </template>
 
@@ -94,6 +105,23 @@ const week = [
   '星期日'
 ]
 const checkedList = ref(['星期二', '星期六'])
+const testGroupChange = (val: string[]) => {
+  console.log(val)
+}
+
+const checkAll = ref(false)
+const isIndeterminate = ref(true)
+const nums = [1, 2, 3, 4, 5]
+const checkedNums = ref([2, 5])
+const handleCheckAllChange = (val: boolean) => {
+  checkedNums.value = val ? nums : []
+  isIndeterminate.value = false
+}
+const handleCheckedNumsChange = (list: number[]) => {
+  const checkedCount = list.length
+  checkAll.value = checkedCount === nums.length
+  isIndeterminate.value = checkedCount > 0 && checkedCount < nums.length
+}
 </script>
 
 <!--<style scoped lang="scss" rel="stylesheet/scss">-->

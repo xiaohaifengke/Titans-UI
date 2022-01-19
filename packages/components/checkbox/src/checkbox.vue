@@ -11,9 +11,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, WritableComputedRef } from 'vue'
+import { defineComponent, computed, WritableComputedRef, inject } from 'vue'
 import { checkboxProps } from './checkbox-props'
-import { inject } from '@vue/runtime-core'
 import { TI_CHECKBOX_GROUP_PROVIDE } from '@titans-ui/utils/constants'
 
 export default defineComponent({
@@ -34,10 +33,12 @@ export default defineComponent({
         return props.modelValue === props.trueValue
       }
     })
+
     const classes = computed(() => [
       `ti-checkbox_size--${props.size}`,
       `ti-checkbox_type--${props.type}`,
       {
+        'ti-checkbox_selector--indeterminate': props.indeterminate,
         'ti-checkbox_selector--checked': isChecked.value,
         'ti-checkbox--disabled': props.disabled,
         'ti-checkbox--readonly': props.readonly
@@ -52,11 +53,13 @@ export default defineComponent({
             (item) => item !== props.label
           )
         } else {
-          checkboxGroupModel.value.push(props.label)
+          checkboxGroupModel.value = [...checkboxGroupModel.value, props.label]
         }
       } else {
         const modelValue = isChecked.value ? props.falseValue : props.trueValue
         emit('update:modelValue', modelValue)
+        // change 事件
+        emit('change', modelValue)
       }
     }
     // label
@@ -64,16 +67,10 @@ export default defineComponent({
       () =>
         (isChecked.value ? props.trueLabel : props.falseLabel) || props.label
     )
-    // change 事件
-    watch(
-      () => props.modelValue,
-      (val) => {
-        emit('change', val)
-      }
-    )
+
     // width
     const cptWidth = computed(() => {
-      if (/^\d+$/.test(props.width)) {
+      if (/^\d+$/.test(`${props.width}`)) {
         return `${props.width}px`
       }
       return props.width
