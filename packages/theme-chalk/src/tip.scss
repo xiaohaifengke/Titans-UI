@@ -3,55 +3,36 @@
 @include themes {
   .ti-tip {
     position: absolute;
-    right: 390px;
-    bottom: 75px;
-    width: 140px;
+    right: 50px;
+    bottom: 20px;
+    z-index: 1000;
+    width: 120px;
     height: 30px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), transparent);
+    font-size: map-get($globalThemeMap, fontsize);
+    background: linear-gradient(90deg, rgba(18, 180, 165, 0.18), transparent);
   }
 
   .tip {
     position: absolute;
-    top: 6px;
+    top: 50%;
     left: 10px;
     display: flex;
-    font-family: PingFang SC;
-    font-size: 13px;
-    font-weight: 600;
-    color: #fff;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-  }
-
-  .tip-content {
-    position: absolute;
-  }
-
-  .name {
-    width: 55px;
-    margin-right: 7px;
-  }
-
-  .online {
-    color: #00ffa7;
-  }
-
-  .offline {
-    color: #ccc;
+    transform: translateY(-50%);
   }
 
   .tip-enter-active,
   .tip-leave-active {
-    transition: top, opacity, 0.4s ease-in-out;
+    transition: top, opacity, transform, 0.4s ease-in-out;
   }
 
   .tip-enter-from {
-    top: 24px;
     opacity: 0;
+    transform: translateY(calc(-50% + 1em));
   }
 
   .tip-leave-to {
-    top: -12px;
     opacity: 0;
+    transform: translateY(calc(-50% - 1em));
   }
 
   .arise-enter-active,
@@ -60,7 +41,7 @@
   }
   .arise-enter-from,
   .arise-leave-to {
-    right: 300px;
     opacity: 0;
+    transform: translateX(100%);
   }
 }

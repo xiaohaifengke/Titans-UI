@@ -1,6 +1,5 @@
 <template>
   <Transition
-    appear
     name="arise"
     @before-enter="beforeEnter"
     @after-enter="afterEnter"
@@ -8,21 +7,8 @@
   >
     <div class="ti-tip" v-show="visible">
       <Transition name="tip">
-        <div class="tip" v-if="flag">
-          <span class="name text-ellipsis">
-            {{ active?.USERID }}
-          </span>
-          <span :class="active?.STATUS === '0' ? 'online' : 'offline'">{{
-            active?.STATUS === '0' ? '已上线' : '已下线'
-          }}</span>
-        </div>
-        <div class="tip" v-else>
-          <span class="name text-ellipsis">
-            {{ active?.USERID }}
-          </span>
-          <span :class="active?.STATUS === '0' ? 'online' : 'offline'">{{
-            active?.STATUS === '0' ? '已上线' : '已下线'
-          }}</span>
+        <div class="tip" :key="flag">
+          <slot v-bind="slotProps">{{ slotProps.tip }}</slot>
         </div>
       </Transition>
     </div>
@@ -31,6 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch, onBeforeUnmount, computed } from 'vue'
+import { TipSlotProps } from './tip-types'
 
 export default defineComponent({
   name: 'TiTip',
@@ -38,6 +25,10 @@ export default defineComponent({
     modelValue: {
       type: Array,
       default: () => []
+    },
+    interval: {
+      type: Number,
+      default: 3000
     }
   },
   emits: ['update:modelValue', 'afterEnter', 'afterLeave'],
@@ -48,11 +39,15 @@ export default defineComponent({
         emit('update:modelValue', val)
       }
     })
-    const visible = ref(false)
-    const active = ref(null)
-    const flag = ref(false)
+    const visible = ref(false) // 控制tip的display
+    const active = ref(null) // 当前的消息 {string|object}
+    const flag = ref(false) // 控制内部消息内容的切换
     const timer = ref(null)
-
+    const slotProps = computed<TipSlotProps>(() =>
+      typeof active.value === 'object'
+        ? { tip: '', ...active.value }
+        : { tip: active.value }
+    )
     watch(
       model,
       (val) => {
@@ -79,7 +74,7 @@ export default defineComponent({
           clearInterval(timer.value)
           timer.value = null
         }
-      }, 3000)
+      }, props.interval)
       emit('afterEnter')
     }
 
@@ -98,6 +93,7 @@ export default defineComponent({
       active,
       flag,
       timer,
+      slotProps,
       beforeEnter,
       afterEnter,
       afterLeave
