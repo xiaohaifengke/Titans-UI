@@ -167,6 +167,14 @@ export const MENUS: Array<AppMenu> = [
           title: 'Widget',
           subtitle: '小零件'
         }
+      },
+      {
+        path: 'tip',
+        name: 'tip',
+        meta: {
+          title: 'Tip',
+          subtitle: '小提示'
+        }
       }
     ]
   }
