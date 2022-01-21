@@ -1,0 +1,39 @@
+@use '../mixins/mixins' as *;
+
+@keyframes wordsLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@include themes {
+  .ti-marquee {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+
+    .txt {
+      display: flex;
+      flex-grow: 1;
+      flex-shrink: 0;
+      min-width: 100%;
+      animation: 20s wordsLoop linear infinite normal;
+
+      &:first-child {
+        padding-right: 15px;
+      }
+    }
+  }
+  .ti-marquee-pause {
+    &:hover {
+      .txt {
+        animation-play-state: paused;
+      }
+    }
+  }
+}
