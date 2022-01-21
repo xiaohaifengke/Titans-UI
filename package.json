@@ -71,7 +71,8 @@
     "@titans-ui/theme-chalk": "workspace:^0.3.5",
     "@titans-ui/use": "workspace:^0.3.5",
     "@titans-ui/utils": "workspace:^0.3.5",
-    "dayjs": "^1.10.7"
+    "dayjs": "^1.10.7",
+    "screenfull": "5.1.0"
   },
   "lint-staged": {
     "(packages|story)/**/*.vue": [

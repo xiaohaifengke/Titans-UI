@@ -48,6 +48,7 @@ importers:
       rollup-plugin-typescript2: ^0.31.1
       rollup-plugin-vue: ^6.0.0
       sass: ^1.43.4
+      screenfull: 5.1.0
       stylelint: 13.13.1
       stylelint-config-prettier: 8.0.2
       stylelint-config-recess-order: 2.5.0
@@ -66,6 +67,7 @@ importers:
       '@titans-ui/use': link:packages/use
       '@titans-ui/utils': link:packages/utils
       dayjs: 1.10.7
+      screenfull: 5.1.0
     devDependencies:
       '@commitlint/cli': 13.1.0
       '@commitlint/config-conventional': 13.1.0
@@ -3820,7 +3822,7 @@ packages:
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
     optionalDependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
     dev: true
 
   /jsonfile/6.1.0:
@@ -5339,6 +5341,11 @@ packages:
       ajv: 6.12.6
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
+
+  /screenfull/5.1.0:
+    resolution: {integrity: sha512-dYaNuOdzr+kc6J6CFcBrzkLCfyGcMg+gWkJ8us93IQ7y1cevhQAugFsaCdMHb6lw8KV3xPzSxzH7zM1dQap9mA==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /semver-compare/1.0.0:
     resolution: {integrity: sha1-De4hahyUGrN+nvsXiPavxf9VN/w=}
