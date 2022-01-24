@@ -1,0 +1,102 @@
+@use './mixins/mixins' as *;
+
+@include themes {
+  $controls-bar-bgc: rgba(255, 255, 255, 0.3);
+
+  .altitude-path-supporter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ti-player-controls {
+    position: relative;
+    width: 100%;
+    font-size: map-get($globalThemeMap, fontsize);
+    user-select: none;
+
+    .controls-bar {
+      height: 70px;
+      clip-path: url(#altitudePath);
+      background-color: $controls-bar-bgc;
+    }
+
+    .player-controls-bar-top {
+      height: 38px;
+      cursor: pointer;
+    }
+
+    .player-controls-bar-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 32px;
+      color: rgba(255, 255, 2555, 0.85);
+      pointer-events: none;
+
+      .right-panel {
+        display: flex;
+        line-height: 32px;
+        pointer-events: auto;
+
+        .sep {
+          margin: 0 5px;
+        }
+
+        .item {
+          padding: 0 10px;
+        }
+
+        .ti-icon-refresh-right {
+          height: 100%;
+          padding: 0 10px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .ti-degree-scale {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .ti-speed {
+    display: flex;
+    pointer-events: auto;
+
+    .el-icon-minus,
+    .play,
+    .el-icon-plus {
+      height: 32px;
+      padding: 0 5px;
+      font-size: 20px;
+      line-height: 32px;
+      cursor: pointer;
+    }
+
+    .current-speed {
+      height: 32px;
+      padding: 0 5px;
+      line-height: 32px;
+    }
+  }
+}
+
+.fadeInUp-enter-active,
+.fadeInUp-leave-active {
+  transition: transform, opacity, 1s;
+}
+.fadeInUp-enter-from,
+.fadeInUp-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+}

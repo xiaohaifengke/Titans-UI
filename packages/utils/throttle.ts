@@ -1,11 +1,11 @@
 import { SimpleFunction } from './shims'
 
 /**
- * TODO: add third param im
+ * TODO: add third param immediate
  * @param func
  * @param wait
  */
-export function throttle(func: SimpleFunction, wait: number): SimpleFunction {
+export function throttle(func: SimpleFunction, wait = 16): SimpleFunction {
   let timer: ReturnType<typeof setTimeout> = null
   let lastTime = 0
   return function (...args) {

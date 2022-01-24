@@ -18,7 +18,8 @@ import {
   TiCheckboxGroup,
   TiRadio,
   TiRadioGroup,
-  TiTip
+  TiTip,
+  TiPlayerControls
 } from '@titans-ui/components/index'
 
 const plugins = [
@@ -40,7 +41,8 @@ const plugins = [
   TiCheckboxGroup,
   TiRadio,
   TiRadioGroup,
-  TiTip
+  TiTip,
+  TiPlayerControls
 ]
 
 function install(app: App) {
@@ -71,5 +73,6 @@ export {
   TiRadio,
   TiRadioGroup,
   TiTip,
+  TiPlayerControls,
   install
 }
