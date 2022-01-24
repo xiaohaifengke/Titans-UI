@@ -175,6 +175,14 @@ export const MENUS: Array<AppMenu> = [
           title: 'Tip',
           subtitle: '小提示'
         }
+      },
+      {
+        path: 'player-controls',
+        name: 'PlayerControlsStory',
+        meta: {
+          title: 'player-controls',
+          subtitle: '轨迹回放控制条'
+        }
       }
     ]
   }
