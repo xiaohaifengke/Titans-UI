@@ -155,7 +155,6 @@ export default defineComponent({
       popperTransitonRef.value?.show()
     }
     const afterPopperHide = () => {
-      debugger
       // 启用筛选功能时，当隐藏下拉项时，将当前值的label重新赋值在输入框上
       if (cptFilterable.value || props.remote) {
         internalPlaceholder.value = null
