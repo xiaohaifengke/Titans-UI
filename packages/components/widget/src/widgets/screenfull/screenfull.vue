@@ -47,10 +47,10 @@ export default defineComponent({
         )
         return false
       }
-      screenfull.toggle(props.screenfullElement)
+      screenfull.toggle(props.screenfullElement as Element)
     }
     const change = () => {
-      isFullscreen.value = screenfull.isFullscreen
+      isFullscreen.value = (screenfull as screenfull.Screenfull).isFullscreen
     }
     onMounted(() => {
       if (screenfull.isEnabled) {
