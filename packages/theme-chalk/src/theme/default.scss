@@ -62,5 +62,16 @@ $theme-default: (
     radio-height-small: 24px,
     radio-selector-color: mix(#606266, #fff, 50%),
     // radio end
+    // slider start
+    slider-height-large: 40px,
+    slider-height-normal: 32px,
+    slider-height-small: 24px,
+    slider-track-height-large: 8px,
+    slider-track-height-normal: 6px,
+    slider-track-height-small: 4px,
+    slider-handle-large: 24px,
+    slider-handle-normal: 20px,
+    slider-handle-small: 16px,
+    // slider end
   )
 );
