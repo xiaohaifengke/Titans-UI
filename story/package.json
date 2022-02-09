@@ -1,5 +1,5 @@
 {
-  "name": "@titans-ui/story",
+  "name": "story",
   "version": "0.3.5",
   "description": "titans-ui's docs",
   "main": "index.js",
@@ -7,9 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "docs:dev": "pnpm run register:components && vitepress dev docs",
+    "docs:build": "pnpm run register:components && vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "register:components": "vitepress-rc"
   },
   "keywords": [
     "titans-ui",
@@ -20,5 +21,8 @@
   "devDependencies": {
     "vitepress": "^0.21.6",
     "vitepress-theme-demoblock": "^1.4.2"
+  },
+  "dependencies": {
+    "titans-ui": "latest"
   }
 }
