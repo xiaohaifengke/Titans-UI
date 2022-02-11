@@ -20,7 +20,7 @@
 :::
 
 ## 按钮类型 type
-共有六类型：主要（ `primary` ）、成功（ `success` ）、信息（ `info` ）、警告（ `warning` ）、危险（ `danger` ）、默认（ `default` ）。
+共有六种类型：主要（ `primary` ）、成功（ `success` ）、信息（ `info` ）、警告（ `warning` ）、危险（ `danger` ）、默认（ `default` ）。
 :::demo
 ```vue
 <template>
