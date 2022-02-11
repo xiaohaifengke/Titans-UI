@@ -7,15 +7,11 @@
   </ul>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { icons } from './icons'
-
-const testClick = (e) => {
-  console.log('icon click', e)
-}
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="scss" rel="stylesheet/scss">
 .icon-list {
   padding: 0;
   margin: 0;
