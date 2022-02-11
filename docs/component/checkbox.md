@@ -23,31 +23,11 @@ const checked = ref(true)
 :::demo
 ```vue
 <template>
-  <ti-checkbox
-    v-model="checked"
-    label="primary"
-    size="large"
-  />
-  <ti-checkbox
-    v-model="checked"
-    label="success"
-    type="success"
-  />
-  <ti-checkbox
-    v-model="checked"
-    label="info"
-    type="info"
-  />
-  <ti-checkbox
-    v-model="checked"
-    label="warning"
-    type="warning"
-  />
-  <ti-checkbox
-    v-model="checked"
-    label="danger"
-    type="danger"
-  />
+  <ti-checkbox v-model="checked" label="primary" size="large"></ti-checkbox>
+  <ti-checkbox v-model="checked" label="success" type="success"></ti-checkbox>
+  <ti-checkbox v-model="checked" label="info" type="info"></ti-checkbox>
+  <ti-checkbox v-model="checked" label="warning" type="warning"></ti-checkbox>
+  <ti-checkbox v-model="checked" label="danger" type="danger"></ti-checkbox>
 </template>
 <script setup>
 import { ref } from 'vue'
@@ -62,13 +42,7 @@ const checked = ref(true)
 :::demo
 ```vue
 <template>
-  <ti-checkbox
-    v-model="checked"
-    true-label="true-label"
-    false-label="false-label"
-    true-value="trueValue"
-    false-value="falseValue"
-  ></ti-checkbox>
+  <ti-checkbox v-model="checked" true-label="true-label" false-label="false-label" true-value="trueValue" false-value="falseValue"/>
   <span>当前值：{{checked}}</span>
 </template>
 <script setup>
@@ -195,3 +169,43 @@ const handleCheckedNumsChange = (list) => {
 ```
 :::
 
+## Checkbox 属性
+| 参数      | 说明    | 类型    | 可选值                                              | 默认值  |
+| -------- | ------ | ------- | -------------------------------------------------- | ------- |
+| model-value / v-model    | 选中项绑定值 | string / number / boolean    | —          | —      |
+| label    | 多选框名称 | string / number | —                                         | —      |
+| size     | 多选框尺寸 | string  | large / normal / small                            | normal |
+| type     | 类型   | string  | primary / success / info / warning / danger         | primary |
+| true-label | 选中时的名称 | string / number  | —                                    | —      |
+| false-label | 没有选中时的名称 | string / number  | —                               | —      |
+| true-value | 选中时的值 | string / number / boolean  | —                           | true   |
+| false-value | 没有选中时的值 | string / number / boolean  | —                       | false  |
+| disabled | 是否禁用状态 | boolean | —                                              | false   |
+| readonly | 是否只读状态 | boolean | —                                              | false   |
+| width  | 多选框名称的宽度（可带单位。不带单位时，单位默认为 px。） | string / number | —   | —       |
+| indeterminate | 是否中间状态，只负责样式控制 | boolean | —                            | false   |
+
+## Checkbox 事件
+| 事件名      | 说明    | 回调参数 |
+| ---------- | ------ | ------- |
+| change    | 当绑定值变化时触发的事件 | value |
+
+## Checkbox 插槽
+| 插槽名      	| 说明           |
+| ----------	| ------------- |
+| —   	      | 自定义默认内容   |
+
+## Checkbox-Group 属性
+| 参数                      | 说明    | 类型     | 可选值                             | 默认值  |
+| ------------------------ | ------ | ------- | ---------------------------------- | ------- |
+| model-value / v-model    | 绑定值  | array   | —                                  | []      |
+
+## Checkbox-Group 事件
+| 事件名      | 说明    | 回调参数 |
+| ---------- | ------ | ------- |
+| change    | 当绑定值变化时触发的事件 | value |
+
+## Checkbox-Group 插槽
+| 插槽名      	| 说明           |
+| ----------	| ------------- |
+| —   	      | 自定义默认内容   |
