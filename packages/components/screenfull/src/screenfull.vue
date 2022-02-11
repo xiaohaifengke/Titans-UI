@@ -30,7 +30,7 @@
 <script lang="ts">
 import { defineComponent, ref, onBeforeUnmount, onMounted } from 'vue'
 import screenfull from 'screenfull'
-import Icon from '@titans-ui/components/icon/src/icon.vue'
+import Icon from '@titans-ui/components/icon'
 
 export default defineComponent({
   name: 'TiScreenfull',

@@ -35,7 +35,7 @@ import { defineComponent } from 'vue'
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import DegreeScale from './components/degree-scale.vue'
 import Speed from './components/speed.vue'
-import Screenfull from '@titans-ui/components/widget/src/widgets/screenfull/screenfull.vue'
+import Screenfull from '@titans-ui/components/screenfull'
 import Icon from '@titans-ui/components/icon'
 import { PolarValue } from './types'
 
