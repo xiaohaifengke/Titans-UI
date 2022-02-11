@@ -13,7 +13,10 @@
     "prepare": "husky install",
     "cz": "git-cz",
     "version": "gulp -f build/update-version.ts && conventional-changelog -p angular -i CHANGELOG.md -s && git add .",
-    "postversion": "pnpm run build"
+    "postversion": "pnpm run build",
+    "docs:dev": "vitepress-rc && vitepress dev docs",
+    "docs:build": "vitepress-rc && vitepress build docs",
+    "docs:serve": "vitepress serve docsa"
   },
   "devDependencies": {
     "@commitlint/cli": "13.1.0",
@@ -62,6 +65,8 @@
     "sucrase": "^3.20.3",
     "ts-morph": "^13.0.2",
     "typescript": "^4.5.2",
+    "vitepress": "^0.21.6",
+    "vitepress-theme-demoblock": "^1.4.2",
     "vue": "^3.2.22"
   },
   "dependencies": {
@@ -72,7 +77,8 @@
     "@titans-ui/use": "workspace:^0.3.5",
     "@titans-ui/utils": "workspace:^0.3.5",
     "dayjs": "^1.10.7",
-    "screenfull": "5.1.0"
+    "screenfull": "5.1.0",
+    "titans-ui": "workspace:^0.3.5"
   },
   "lint-staged": {
     "(packages|story)/**/*.vue": [
