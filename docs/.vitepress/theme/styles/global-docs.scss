@@ -2,10 +2,10 @@
   .source {
     font-size: 14px;
     > div {
-      > div:not([class^='ti-'], :last-child) {
+      > div:not([class^='ti-'], :last-of-type) {
         margin-bottom: 20px;
 
-        > div:not([class^='ti-'], :last-child) {
+        > div:not([class^='ti-'], :last-of-type) {
           margin-bottom: 20px;
         }
       }

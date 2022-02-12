@@ -54,6 +54,7 @@ const checked = ref('trueValue')
 
 ## 禁用/只读
 多选框禁用状态和只读状态。
+
 设置 `disabled` 属性和 `readonly` 属性即可。
 
 :::demo
