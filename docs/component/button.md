@@ -41,17 +41,15 @@
 :::demo
 ```vue
 <template>
-  <div>
-    <div v-for="mode in modeList" :key="mode">
-      <ti-button
-        v-for="type in typeList"
-        :key="type"
-        :type="type === 'default' ? 'primary' : type"
-        :mode="mode"
-      >
-        {{ type === 'default' ? `mode: ${mode}` : type }}
-      </ti-button>
-    </div>
+  <div v-for="mode in modeList" :key="mode">
+    <ti-button
+      v-for="type in typeList"
+      :key="type"
+      :type="type === 'default' ? 'primary' : type"
+      :mode="mode"
+    >
+      {{ type === 'default' ? `mode: ${mode}` : type }}
+    </ti-button>
   </div>
 </template>
 <script setup>
