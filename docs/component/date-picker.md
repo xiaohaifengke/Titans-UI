@@ -82,7 +82,11 @@ const endDateTime = ref(null)
 
 在 [这里](https://day.js.org/docs/zh-CN/display/format) 查看 Day.js 支持的 format 参数。
 
+<br/>
 
+::: warning Bugs
+1. mode为 year,month时的样式问题待修复
+:::
 
 ## DatePicker 属性
 | 参数      | 说明    | 类型    | 可选值                                              | 默认值  |
