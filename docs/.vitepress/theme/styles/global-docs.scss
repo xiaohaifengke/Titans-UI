@@ -10,5 +10,25 @@
         }
       }
     }
+
+    // 相邻的两个组件demo之间的间隔
+    div:not([class^="ti-"]) {
+      > [class^="ti-"] {
+        & + [class^="ti-"] {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}
+
+// 属性table
+.page .container .content {
+  table {
+    display: table;
+    width: 100%;
+  }
+  th {
+    text-align: left;
   }
 }
