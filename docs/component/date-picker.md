@@ -91,7 +91,7 @@ const endDateTime = ref(null)
 ## DatePicker 属性
 | 参数      | 说明    | 类型    | 可选值                                              | 默认值  |
 | -------- | ------ | ------- | -------------------------------------------------- | ------- |
-| model-value / v-model    | 选中项绑定值 | string                       | —          | —      |
+| model-value / v-model    | 绑定值 | string                           | —          | —      |
 | mode     | 类型   | string  | year / month / date / datetime                      | primary |
 | placeholder    | 非范围选择时的占位内容 | string | —                                 | —      |
 | start-placeholder  | 范围选择时开始日期的占位内容 | string | —                        | —      |

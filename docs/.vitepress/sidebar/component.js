@@ -20,7 +20,7 @@ module.exports = [
         link: '/component/checkbox'
       },
       {
-        text: 'DatePicker 日期选择',
+        text: 'DatePicker 日期时间选择',
         link: '/component/date-picker'
       },
       {
