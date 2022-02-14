@@ -19,12 +19,18 @@ function getPkgContent(filepath: string): string {
 }
 
 function getWorkspaces(): string[] {
-  return fs.readdirSync(path.join(__dirname, '../packages'))
+  const hardCodePath = path.resolve(__dirname, '../dist', 'titans-ui')
+  const dirPaths = fs
+    .readdirSync(path.join(__dirname, '../packages'))
+    .map((ws) => {
+      return path.resolve(__dirname, '../packages', ws)
+    })
+  return [...dirPaths, hardCodePath]
 }
 
 function updatePkgs(version: string) {
   const workspacesPkgPath: string[] = getWorkspaces().map((ws) => {
-    return path.resolve(__dirname, '../packages', ws, 'package.json')
+    return path.resolve(ws, 'package.json')
   })
 
   workspacesPkgPath.forEach((pkgPath) => {
@@ -42,6 +48,6 @@ export default series(
     updatePkgs(pkg.version)
   }),
   withTaskName('update @titans-ui/*', async () => {
-    run('pnpm up "@titans-ui/*"')
+    run('pnpm up titans-ui "@titans-ui/*"')
   })
 )
