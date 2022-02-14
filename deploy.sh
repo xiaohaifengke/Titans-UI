@@ -4,9 +4,7 @@
 set -e
 
 # build
-npm i -g pnpm
-pnpm run build
-pnpm run docs:build
+# npm run docs:build
 
 # navigate into the build output directory
 cd docs/.vitepress/dist

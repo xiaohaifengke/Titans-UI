@@ -1,5 +1,5 @@
 .DS_Store
-dist
+/dist
 packages/*/es
 packages/*/lib
 node_modules
