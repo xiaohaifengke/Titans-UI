@@ -10,11 +10,11 @@ importers:
       '@popperjs/core': ^2.10.2
       '@rollup/plugin-commonjs': ^21.0.1
       '@rollup/plugin-node-resolve': ^13.0.6
-      '@titans-ui/components': workspace:^0.3.5
-      '@titans-ui/directives': workspace:^0.3.5
-      '@titans-ui/theme-chalk': workspace:^0.3.5
-      '@titans-ui/use': workspace:^0.3.5
-      '@titans-ui/utils': workspace:^0.3.5
+      '@titans-ui/components': workspace:^0.4.0
+      '@titans-ui/directives': workspace:^0.4.0
+      '@titans-ui/theme-chalk': workspace:^0.4.0
+      '@titans-ui/use': workspace:^0.4.0
+      '@titans-ui/utils': workspace:^0.4.0
       '@types/gulp': ^4.0.9
       '@types/gulp-autoprefixer': ^0.0.33
       '@types/gulp-clean-css': ^4.3.0
@@ -3762,7 +3762,7 @@ packages:
       source-map: registry.npmmirror.com/source-map/0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: 3.14.5
+      uglify-js: 3.15.1
     dev: true
 
   /hard-rejection/2.1.0:
@@ -4294,7 +4294,7 @@ packages:
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
     optionalDependencies:
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.8
     dev: true
 
   /jsonparse/1.3.1:
@@ -6665,8 +6665,8 @@ packages:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
     dev: true
 
-  /uglify-js/3.14.5:
-    resolution: {integrity: sha512-qZukoSxOG0urUTvjc2ERMTcAy+BiFh3weWAkeurLwjrCba73poHmG3E36XEjd/JGukMzwTL7uCxZiAexj8ppvQ==}
+  /uglify-js/3.15.1:
+    resolution: {integrity: sha512-FAGKF12fWdkpvNJZENacOH0e/83eG6JyVQyanIJaBXCN1J11TUQv1T1/z8S+Z0CG0ZPk1nPcreF/c7lrTd0TEQ==}
     engines: {node: '>=0.8.0'}
     hasBin: true
     requiresBuild: true

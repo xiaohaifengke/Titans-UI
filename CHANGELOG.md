@@ -1,3 +1,46 @@
+# [0.4.0](https://github.com/xiaohaifengke/Titans-UI/compare/v0.3.5...v0.4.0) (2022-02-14)
+
+
+### Bug Fixes
+
+* 注册局部组件 ([79ffb81](https://github.com/xiaohaifengke/Titans-UI/commit/79ffb816ccb4675b77dce7518d713a9e0cf859a4))
+* adjust transition-property ([ad4ff52](https://github.com/xiaohaifengke/Titans-UI/commit/ad4ff525d4db24dfbec19a98af776c8ac6d960f5))
+* **input component:** fix a style issue ([08add38](https://github.com/xiaohaifengke/Titans-UI/commit/08add38b9ff5990d5c6d9281930ab5f268c9182f))
+* **select component:** fix a bug about clearable ([9befe59](https://github.com/xiaohaifengke/Titans-UI/commit/9befe596e45f6eb06b1631fbd7004e2a16242dc7))
+* **select component:** fix an issue ([791746e](https://github.com/xiaohaifengke/Titans-UI/commit/791746e47b73780b6a6187ae16ce6328364504b3))
+* **select:** fix a bug ([bfe153a](https://github.com/xiaohaifengke/Titans-UI/commit/bfe153aa9ee1aded0cf3f7c669728d35c27e5759))
+* **select:** remove debugger code ([fe64715](https://github.com/xiaohaifengke/Titans-UI/commit/fe6471572ecb3947b354af9867aaf082855cbfcb))
+* **widget/screenfull:** fixed a ts issue ([fdf1653](https://github.com/xiaohaifengke/Titans-UI/commit/fdf1653ba9a30fb4ae404f075a31e7b358a56af0))
+
+
+### Features
+
+* 从widget组件中抽离子组件至全局组件中 ([947a7ae](https://github.com/xiaohaifengke/Titans-UI/commit/947a7aebc4b989ac7d3908b3eefaabb687c05afd))
+* 扩展popper-transition组件的功能 ([0db534e](https://github.com/xiaohaifengke/Titans-UI/commit/0db534ecb739c1d75901264c55da2b3c4297afed))
+* 修改input组件的样式 ([802324d](https://github.com/xiaohaifengke/Titans-UI/commit/802324d9cbd56255aa4d5ba1006557296d05df4d))
+* **checkbox:** 新增checkbox的中间状态属性：indeterminate ([a0bb5ea](https://github.com/xiaohaifengke/Titans-UI/commit/a0bb5ea09e811a3cbef93bfa08b42e7cc1120151))
+* **checkbox:** 新增checkbox和checkbox-group组件 ([0e68053](https://github.com/xiaohaifengke/Titans-UI/commit/0e680531a1805403760b3b9080fb2b24eeaad1f0))
+* **date-picker:** 新增date-picker组件的文档 ([3e1a14d](https://github.com/xiaohaifengke/Titans-UI/commit/3e1a14dcf989eb33f8dac9800b54e6098aa1632c))
+* **player-controls:** 新增player-controls组件 ([68b555c](https://github.com/xiaohaifengke/Titans-UI/commit/68b555cde70b6dce1262f389287673b1360e79ba))
+* **popper-transition component:** 新增fitReferenceWidth属性，使slot宽度可以自适应参考的DOM元素宽度 ([2647bd7](https://github.com/xiaohaifengke/Titans-UI/commit/2647bd7bd6158030ece02775126be9ddebefb243))
+* **popper-transition.vue:** 新增className属性 ([2c8cd11](https://github.com/xiaohaifengke/Titans-UI/commit/2c8cd11158581321b205e3a3e3a01c135f5b14cb))
+* **radio:** 新增radio及radio-group组件 ([230aeb4](https://github.com/xiaohaifengke/Titans-UI/commit/230aeb44e7667b787a5134fd5cf7db97ceea2875))
+* **select component:** 开发显示noMatchText和noDataText属性的逻辑 ([f5477e1](https://github.com/xiaohaifengke/Titans-UI/commit/f5477e1c63fa45a87b723108c4d983f08dd107d7))
+* **select component:** 开始开发select组件 ([082cbd6](https://github.com/xiaohaifengke/Titans-UI/commit/082cbd63182dbb0c4ef0832cdd872b65f76039f9))
+* **select component:** 添加loading属性 ([a7b0b17](https://github.com/xiaohaifengke/Titans-UI/commit/a7b0b177dfcc3384fed90301182da99d36233f18))
+* **select component:** 完成select组件的部分功能 ([2875e0c](https://github.com/xiaohaifengke/Titans-UI/commit/2875e0c0c33d475bc2c77576073b479efea2e6c7))
+* **select component:** 新增option-group组件 ([3460fb9](https://github.com/xiaohaifengke/Titans-UI/commit/3460fb9ab3e8fef84ab47cdc25aa4d33999f9236))
+* **select component:** add loadingText prop ([df45fc1](https://github.com/xiaohaifengke/Titans-UI/commit/df45fc1dd55712da505c46920b80b0049e512ec6))
+* **select component:** select 组件新增disabled/readonly/filterable/filterMethod参数 ([079ceb9](https://github.com/xiaohaifengke/Titans-UI/commit/079ceb9093832ab58d111090c7c7e73a8503eb8c))
+* **select component:** select组件添加远程查询的功能 ([11e1967](https://github.com/xiaohaifengke/Titans-UI/commit/11e19676bf1e377def1c2795665dd256e4ac9d67))
+* **switch:** 新增readonly属性 ([a758014](https://github.com/xiaohaifengke/Titans-UI/commit/a75801488c7619ac226fa32eb66c4aa44cbd1594))
+* **tip:** 新增tip组件 ([0cc9a5f](https://github.com/xiaohaifengke/Titans-UI/commit/0cc9a5febb60494f3d843d5e87aed93b81432e69))
+* **tip:** 新增tip组件 ([dc270e7](https://github.com/xiaohaifengke/Titans-UI/commit/dc270e75bda082155fc415348db8c9e0072a5573))
+* **widget/marquee:** 新增widget组件的子组件marquee ([1bf7bcd](https://github.com/xiaohaifengke/Titans-UI/commit/1bf7bcd7dbc4f2450b79914cbd8ae18398a2e820))
+* **widget/screenfull:** 新增widget/screenfull组件 ([2f08f02](https://github.com/xiaohaifengke/Titans-UI/commit/2f08f02072035ee729d8945f46525334f7a70542))
+
+
+
 ## [0.3.5](https://github.com/xiaohaifengke/Titans-UI/compare/v0.3.0...v0.3.5) (2022-01-07)
 
 
