@@ -97,8 +97,8 @@ const endDateTime = ref(null)
 | start-placeholder  | 范围选择时开始日期的占位内容 | string | —                        | —      |
 | end-placeholder    | 范围选择时结束日期的占位内容 | string | —                        | —      |
 | size     | 多选框尺寸 | string  | large / normal / small / mini                    | normal |
-| format    | 显示在输入框中的格式（年份（YYYY）、月份（YYYY-MM）、日期（YYYY-MM-DD）、日期时间（YYYY-MM-DD HH:mm:ss）） | string | 请查看 [日期格式](/Titans-UI/component/date-picker.html#日期格式) | —      |
-| value-format    | 可选，绑定值的格式。 不指定时同 `format` 。 | string | 请查看 [日期格式](/Titans-UI/component/date-picker.html#日期格式) | —      |
+| format    | 显示在输入框中的格式（年份（YYYY）、月份（YYYY-MM）、日期（YYYY-MM-DD）、日期时间（YYYY-MM-DD HH:mm:ss）） | string | 请查看 [日期格式](https://xiaohaifengke.github.io/Titans-UI/component/date-picker.html#日期格式) | —      |
+| value-format    | 可选，绑定值的格式。 不指定时同 `format` 。 | string | 请查看 [日期格式](https://xiaohaifengke.github.io/Titans-UI/component/date-picker.html#日期格式) | —      |
 | disabled | 是否禁用状态 | boolean | —                                              | false   |
 | readonly | 是否只读状态 | boolean | —                                              | false   |
 | clearable | 是否显示清除按钮 | boolean | —                                          | false   |
