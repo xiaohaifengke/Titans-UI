@@ -10,7 +10,7 @@ import IconList from '../../component/icon/icon-list.vue'
 
 export default {
   ...theme,
-  enhanceApp({ app, router, siteData }) {
+  async enhanceApp({ app, router, siteData }) {
     app.use(TiTansUI)
     app.component('IconList', IconList)
     registerComponents(app)

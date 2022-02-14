@@ -116,20 +116,21 @@ const addObjTipToObjTipList = (n: number) => {
     
     <ti-tip
       v-model="slotTipList"
-      v-slot="slotProps"
       :interval="3000"
       :style="customStyles ? styles : {}"
     >
-      <div>
-        <TiIcon
-          :class="slotProps.status === '0' ? 'online' : 'offline'"
-          :icon="slotProps.status === '0' ? 'bell' : 'close-notification'"
-        ></TiIcon>
-        <span class="name">{{ slotProps.name }}</span>
-        <span :class="slotProps.status === '0' ? 'online' : 'offline'">{{
-            slotProps.status === '0' ? '已上线' : '已下线'
+      <template v-slot="slotProps">
+        <div>
+          <TiIcon
+            :class="slotProps?.status === '0' ? 'demo-tip_online' : 'demo-tip_offline'"
+            :icon="slotProps?.status === '0' ? 'bell' : 'close-notification'"
+          ></TiIcon>
+          <span class="demo-tip_name">{{ slotProps?.name }}</span>
+          <span :class="slotProps?.status === '0' ? 'demo-tip_online' : 'demo-tip_offline'">{{
+            slotProps?.status === '0' ? '已上线' : '已下线'
           }}</span>
-      </div>
+        </div>
+      </template>
     </ti-tip>
   </div>
 </template>
@@ -173,18 +174,18 @@ const styles = {
   border: 1px dashed gray;
 }
 
-.name {
+.demo-tip_name {
   width: 55px;
   margin: 0 7px;
   font-weight: 600;
   color: #ff7400;
 }
 
-.online {
+.demo-tip_online {
   color: #00ffa7;
 }
 
-.offline {
+.demo-tip_offline {
   color: #ccc;
 }
 </style>

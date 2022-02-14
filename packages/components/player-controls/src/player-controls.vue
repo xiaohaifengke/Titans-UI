@@ -58,7 +58,7 @@ export default defineComponent({
       type: Array
     },
     screenfullElement: {
-      type: HTMLDivElement
+      type: Object
     },
     progress: {
       type: Number,

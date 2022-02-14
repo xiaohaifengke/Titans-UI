@@ -20,7 +20,7 @@
     "resolveJsonModule": true,
     "strict": false,
     "skipLibCheck": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"]
   },
   "include": ["packages", "typings"],
   "exclude": [
