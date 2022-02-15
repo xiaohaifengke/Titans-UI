@@ -22,4 +22,4 @@ const screenfullElement = ref(null)
 ## Screenfull 属性
 | 参数      | 说明    | 类型    | 可选值                                              | 默认值  |
 | -------- | ------ | ------- | -------------------------------------------------- | ------- |
-| screenfull-element | 需要全屏的元素 | DOM | —                                       | <html>  |
+| screenfull-element | 需要全屏的元素 | DOM | —                                       | `<html>`  |

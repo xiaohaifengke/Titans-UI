@@ -6,14 +6,16 @@
 ## 基础用法
 
 :::demo
+
 ```vue
+
 <template>
   <div class="ti-player-controls_story">
     <div class="ti-player-controls_data-demo">
-      <div>points({{points.length}}):</div>
+      <div>points({{points?.length}}):</div>
       <div class="ti-player-controls_data">
         <div v-for="point in points">
-          {{  JSON.stringify(point) }}
+          {{ JSON.stringify(point) }}
         </div>
       </div>
     </div>
@@ -41,11 +43,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import {computed, onMounted, ref, watch} from 'vue'
+
 const useGeneratePoints = (distance: number, pointsLength: number = 252) => {
   const perDistance = distance / (pointsLength - 1)
   const altitude = 5000
-  return Array.from({ length: pointsLength }).map((point, index) => {
+  return Array.from({length: pointsLength}).map((point, index) => {
     return {
       distance: index * perDistance,
       altitude: Math.random() * altitude
@@ -80,7 +83,9 @@ const useImitateContrailReplay = (totalDistance: number) => {
       pause.value = true // 结束时
     }
   }
-  requestAnimationFrame(step)
+  onMounted(() => {
+    requestAnimationFrame(step)
+  })
   watch(
     () => pause.value,
     (val) => {
@@ -104,7 +109,7 @@ const totalDistance = +(Math.random() * 50).toFixed(2) + 30 // 模拟距离在 3
 const points = useGeneratePoints(totalDistance)
 
 const screenfullElement = ref(null)
-const { progress, rate, pause } = useImitateContrailReplay(totalDistance)
+const {progress, rate, pause} = useImitateContrailReplay(totalDistance)
 const defaultRate = rate
 
 const onProgressChange = (progressVal: number) => {
