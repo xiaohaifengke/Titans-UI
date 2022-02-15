@@ -65,6 +65,10 @@ module.exports = [
         link: '/component/player-controls'
       },
       {
+        text: 'Screenfull 全屏组件',
+        link: '/component/screenfull'
+      },
+      {
         text: 'Tip 小提示',
         link: '/component/tip'
       },

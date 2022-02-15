@@ -179,7 +179,7 @@ const onReplay = () => {
 | points | 轨迹点数组,每个数据点包含距离和高程信息: `{distance: number, altitude: number}` | array  | —        | []    |
 | progress | 回放的进度 | number | —                                                 | 0      |
 | screenfullable | 是否显示全屏按钮 | boolean | —                                       | false  |
-| screenfull-element  | 在点击控件上的全屏按钮时需要全屏的元素的ref | -      | —      | —      |
+| screenfull-element  | 在点击控件上的全屏按钮时需要全屏的元素的ref | DOM      | —      | —      |
 
 
 
