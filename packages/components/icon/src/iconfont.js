@@ -1,7 +1,4 @@
 if (typeof window != 'undefined') {
-  console.log(
-    '----------------------==========================--------------------------'
-  )
   !(function (c) {
     var s,
       h,
