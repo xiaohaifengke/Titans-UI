@@ -1,5 +1,5 @@
 <template>
-  <div class="ti-screenfull" :class="slotClass" @click="click">
+  <div class="ti-screenfull" @click="click">
     <template v-if="isFullscreen">
       <slot name="exit-fullscreen-icon">
         <div class="ti-screenfull-wrapper">
