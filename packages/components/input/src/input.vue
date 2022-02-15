@@ -36,14 +36,17 @@
       class="ti-input_icon--suffix"
     >
       <span class="ti-input_icon">
-        <slot name="suffix"></slot>
-        <ti-icon v-if="suffixIcon" :icon="suffixIcon"></ti-icon>
         <ti-icon
           v-if="clearIconVisible"
           @mousedown.prevent
           @click.capture="clear"
           icon="circle-close"
         ></ti-icon>
+        <ti-icon
+          v-else-if="suffixIcon && !clearIconVisible"
+          :icon="suffixIcon"
+        ></ti-icon>
+        <slot name="suffix" v-else></slot>
       </span>
     </span>
   </div>
@@ -106,7 +109,8 @@ export default defineComponent({
       `ti-input-type-${props.type}`,
       `ti-input-size-${props.size}`,
       {
-        'ti-input--disabled': props.disabled
+        'ti-input--disabled': props.disabled,
+        'ti-input--readonly': props.readonly
       }
     ])
     const prefixSlot = toRef(slots, 'prefix')

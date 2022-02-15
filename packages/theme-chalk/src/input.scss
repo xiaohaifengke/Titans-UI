@@ -22,6 +22,28 @@
       }
     }
 
+    &.ti-input--readonly {
+      .ti-input--inner {
+        cursor: default;
+      }
+    }
+
+    &:not(.ti-input--disabled, .ti-input--readonly) {
+      .ti-input--inner {
+        &:hover {
+          border-color: mix(
+            #000,
+            map_get($defaultThemeMap, default-border-color),
+            20%
+          );
+        }
+
+        &:focus {
+          border-color: map_get($defaultThemeMap, primary);
+        }
+      }
+    }
+
     .ti-input--inner {
       box-sizing: border-box;
       width: 100%;
@@ -34,18 +56,6 @@
       outline: none;
       transition: map-get($defaultThemeMap, transition-border);
       -webkit-appearance: none;
-
-      &:hover {
-        border-color: mix(
-          #000,
-          map_get($defaultThemeMap, default-border-color),
-          20%
-        );
-      }
-
-      &:focus {
-        border-color: map_get($defaultThemeMap, primary);
-      }
 
       &.ti-input--prefix {
         padding-left: 30px;
