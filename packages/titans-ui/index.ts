@@ -19,7 +19,9 @@ import {
   TiRadio,
   TiRadioGroup,
   TiTip,
-  TiPlayerControls
+  TiPlayerControls,
+  TiMarquee,
+  TiScreenfull
 } from '@titans-ui/components/index'
 
 const plugins = [
@@ -42,7 +44,9 @@ const plugins = [
   TiRadio,
   TiRadioGroup,
   TiTip,
-  TiPlayerControls
+  TiPlayerControls,
+  TiMarquee,
+  TiScreenfull
 ]
 
 function install(app: App) {
@@ -74,5 +78,7 @@ export {
   TiRadioGroup,
   TiTip,
   TiPlayerControls,
+  TiMarquee,
+  TiScreenfull,
   install
 }
