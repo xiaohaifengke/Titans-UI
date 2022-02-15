@@ -1,6 +1,11 @@
 <template>
   <Transition name="fadeInUp">
-    <div class="ti-player-controls" v-show="visible">
+    <div
+      class="ti-player-controls"
+      v-show="visible"
+      :class="classes"
+      :style="styles"
+    >
       <svg class="altitude-path-supporter">
         <clipPath id="altitudePath">
           <path :d="d"></path>
@@ -12,17 +17,17 @@
         <div class="player-controls-bar-bottom">
           <Speed v-bind="$attrs" :progress="progress" ref="speedRef" />
           <div class="right-panel">
-            <div class="distance-text item">
+            <div class="distance-text">
               <span class="cur">{{ curDistance }}</span>
               <span class="sep">/</span>
               <span class="total">{{ totalDistance }}km</span>
             </div>
             <Screenfull
               v-if="screenfullable"
-              class="item"
+              class="ti-player-controls_screenfull item"
               :screenfullElement="screenfullElement"
             />
-            <Icon icon="refresh-right" @click.stop="emitReplay" />
+            <Icon class="item" icon="refresh-right" @click.stop="emitReplay" />
           </div>
         </div>
       </div>
@@ -67,10 +72,14 @@ export default defineComponent({
     screenfullable: {
       type: Boolean,
       default: false
-    }
+    },
+    class: String,
+    style: String
   },
   emits: ['onReplay'],
   setup(props, { emit }) {
+    const classes = computed(() => props.class)
+    const styles = computed(() => props.style)
     const { controlsBar, d } = useGeneratorPath(props.points)
     const { totalDistance, curDistance } = useGetDistance(props)
 
@@ -86,7 +95,9 @@ export default defineComponent({
       totalDistance,
       curDistance,
       emitReplay,
-      speedRef
+      speedRef,
+      classes,
+      styles
     }
   }
 })
