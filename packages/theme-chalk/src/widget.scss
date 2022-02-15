@@ -1,8 +1,6 @@
 @use './mixins/mixins' as *;
 @use './widget/loading' as *;
 @use './widget/voice' as *;
-@use './widget/marquee' as *;
-@use './widget/screenfull' as *;
 
 @include themes {
   .ti-widget {
