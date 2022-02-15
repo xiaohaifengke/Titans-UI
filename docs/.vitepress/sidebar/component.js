@@ -57,16 +57,20 @@ module.exports = [
         link: '/component/digital-transition'
       },
       {
-        text: 'Widget 小零件',
-        link: '/component/widget'
+        text: 'Marquee 跑马灯',
+        link: '/component/marquee'
+      },
+      {
+        text: 'PlayerControls 轨迹回放控件',
+        link: '/component/player-controls'
       },
       {
         text: 'Tip 小提示',
         link: '/component/tip'
       },
       {
-        text: 'PlayerControls 轨迹回放控件',
-        link: '/component/player-controls'
+        text: 'Widget 小零件',
+        link: '/component/widget'
       }
     ]
   }
