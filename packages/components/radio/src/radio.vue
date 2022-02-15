@@ -6,7 +6,9 @@
     :style="{ width: cptWidth }"
   >
     <span class="ti-radio_selector"></span>
-    <span class="ti-radio_label">{{ label }}</span>
+    <span class="ti-radio_label">
+      <slot>{{ label }}</slot>
+    </span>
   </span>
 </template>
 
