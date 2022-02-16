@@ -6,7 +6,7 @@
 ## 使用包管理器安装
 
 ```command line
-# NPM
+# npm
 $ npm install titans-ui
 
 # Yarn

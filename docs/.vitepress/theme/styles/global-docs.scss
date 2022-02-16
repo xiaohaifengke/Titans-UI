@@ -32,3 +32,25 @@
     text-align: left;
   }
 }
+
+/* reset default-theme's table styles */
+table[class^="ti-"] {
+  display: table;
+  border-collapse: collapse;
+  margin: initial;
+  overflow-x: auto;
+
+  tr {
+    border-top: initial;
+  }
+
+  tr:nth-child(2n) {
+    background-color: initial;
+  }
+
+  th,
+  td {
+    border: none;
+    padding: initial;
+  }
+}

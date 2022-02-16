@@ -1,5 +1,4 @@
-// import theme from 'vitepress/theme'
-import theme from 'vitepress/dist/client/theme-default'
+import theme from 'vitepress/theme'
 import 'vitepress-theme-demoblock/theme/styles/index.css'
 import './custom.css'
 import './styles/index.scss'

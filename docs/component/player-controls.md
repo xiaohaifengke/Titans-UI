@@ -11,14 +11,6 @@
 
 <template>
   <div class="ti-player-controls_story">
-    <div class="ti-player-controls_data-demo">
-      <div>points({{points?.length}}):</div>
-      <div class="ti-player-controls_data">
-        <div v-for="point in points">
-          {{ JSON.stringify(point) }}
-        </div>
-      </div>
-    </div>
     <div class="ti-player-controls_container" ref="screenfullElement">
       <div class="ti-player-controls_content">
         <div>回放进度：{{ (progress * 100).toFixed(2) }} %</div>
@@ -52,7 +44,6 @@ const useGeneratePoints = (distance: number, pointsLength: number = 252) => {
     return {
       distance: index * perDistance,
       altitude: Math.random() * altitude
-      // speed: Math.random() * 3 + 15
     }
   })
 }
@@ -133,26 +124,15 @@ const onReplay = () => {
 <style scoped lang="scss" rel="stylesheet/scss">
 .ti-player-controls_story {
   position: relative;
-  height: 500px;
+  height: 450px;
   overflow: auto;
   background: #12345661;
   background-size: cover;
 }
 
-.ti-player-controls_data-demo {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.ti-player-controls_data {
-  padding: 0 20px;
-  height: 90px;
-  overflow: auto;
-}
-
 .ti-player-controls_container {
   position: absolute;
-  top: 120px;
+  top: 60px;
   left: 10%;
   display: flex;
   align-items: center;

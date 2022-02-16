@@ -213,12 +213,15 @@ const modeList = ['fill', 'plain', 'outline', 'text']
 ```
 :::
 
-<br/>
+[comment]: <> (<br/>)
 
-::: warning Bugs
-1. shape为circle时，应设置最小宽度等于高度，这样当内容很少时（如一个字母），也还是圆形。
-2. mode为text时，disabled 时的样式需修复。
-:::
+[comment]: <> (::: warning Bugs)
+
+[comment]: <> (1. shape为circle时，应设置最小宽度等于高度，这样当内容很少时（如一个字母），也还是圆形。)
+
+[comment]: <> (2. mode为text时，disabled 时的样式需修复。)
+
+[comment]: <> (:::)
 
 ## Button 属性
 | 参数      | 说明    | 类型    | 可选值                                              | 默认值  |
