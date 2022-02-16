@@ -39,7 +39,7 @@ import {
 } from 'vue'
 import clickOutside from '@titans-ui/directives/clickOutside'
 import { createPopper } from '@popperjs/core'
-import { Instance } from '@popperjs/core/lib/types'
+import { Instance, OptionsGeneric } from '@popperjs/core/lib/types'
 import { Placement } from '@popperjs/core'
 
 export default defineComponent({
@@ -201,8 +201,12 @@ export default defineComponent({
         popperInstance.destroy()
       })
 
-      const updatePopper = () => {
-        popperInstance?.update()
+      const updatePopper = (options?: Partial<OptionsGeneric<any>>) => {
+        if (options) {
+          return popperInstance.setOptions(options)
+        } else {
+          return popperInstance?.update()
+        }
       }
 
       return {
@@ -219,6 +223,7 @@ export default defineComponent({
       visible,
       show,
       hide,
+      update: updatePopper,
       vClickOutsideActive,
       vClickOutsideParams,
       afterEnter,

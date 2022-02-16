@@ -10,7 +10,7 @@
     <TiPopperTransition
       :reference="timePicker"
       ref="popperTransiton"
-      placement="bottom"
+      fit-reference-width
     >
       <div class="ti-time-picker_panel">
         <div

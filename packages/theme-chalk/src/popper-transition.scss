@@ -70,6 +70,7 @@
   .ti-popper-transition_content {
     box-sizing: border-box;
     display: inline-flex;
+    justify-content: center;
     width: 100%;
     font-size: map-get($defaultThemeMap, fontsize);
     color: map-get($defaultThemeMap, default);

@@ -63,7 +63,6 @@
       :reference="reference"
       fitReferenceWidth
       ref="popperTransitonRef"
-      placement="bottom"
       :className="popperClass"
       @afterLeave="afterPopperHide"
     >
