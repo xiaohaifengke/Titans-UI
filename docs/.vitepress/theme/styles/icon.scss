@@ -1,0 +1,12 @@
+.demo-icon {
+  .source {
+    div {
+      & > .ti-icon {
+        margin: 0 20px;
+        font-size: 1.5em;
+        color: #606266;
+        vertical-align: middle;
+      }
+    }
+  }
+}

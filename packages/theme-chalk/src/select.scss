@@ -1,0 +1,146 @@
+@use './mixins/mixins' as *;
+@mixin ti-option-base {
+  height: 32px;
+  padding: 0 15px;
+  line-height: 32px;
+  list-style: none;
+  cursor: pointer;
+}
+
+@include themes {
+  $textColor: map-get($defaultThemeMap, default);
+
+  // select
+  .ti-select {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    font-size: map_get($defaultThemeMap, fontsize);
+    line-height: 1;
+
+    .ti-icon-arrow-down {
+      transition: transform 0.2s;
+    }
+
+    &.ti-select--dropdown {
+      .ti-icon-arrow-down {
+        transform: rotate(180deg);
+      }
+    }
+
+    .ti-select_input,
+    .ti-input--inner {
+      cursor: pointer;
+    }
+
+    .ti-select_multiple-label-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: calc(100% - 30px);
+      transform: translateY(-50%);
+
+      &.ti-select_multiple--filterable {
+        top: 0;
+        transform: translateY(0);
+      }
+
+      .ti-button.ti-button-mode-plain.ti-button-type-info {
+        color: #969696;
+        background-color: whitesmoke;
+        border-color: #d5d5d5;
+      }
+
+      .ti-button {
+        margin: 2px 0 2px 5px;
+      }
+
+      .ti-select_multiple--close {
+        &:hover {
+          color: #fff;
+          background-color: #ababab;
+          border-radius: 50%;
+          transition: color, background-color, 0.2s;
+        }
+      }
+    }
+  }
+  .ti-select_panel {
+    width: 100%;
+    max-height: 256px;
+    overflow: auto;
+  }
+
+  .ti-option_tip {
+    @include ti-option-base;
+
+    color: mix(#fff, $textColor, 40%);
+    text-align: center;
+    cursor: auto;
+  }
+  // option-group
+  .ti-option-group,
+  .ti-option-group_children {
+    padding: 0;
+    margin: 0;
+  }
+  .ti-option-group:not(:last-of-type) {
+    position: relative;
+    padding-bottom: 20px;
+    &::after {
+      position: absolute;
+      right: 20px;
+      bottom: 12px;
+      left: 20px;
+      display: block;
+      height: 1px;
+      content: '';
+      background-color: mix(#fff, $textColor, 50%);
+    }
+  }
+  .ti-option-group_title {
+    @include ti-option-base;
+
+    color: mix(#fff, $textColor, 20%);
+    cursor: auto;
+  }
+  .ti-option-group_children {
+    .ti-option {
+      padding-left: 30px;
+    }
+  }
+
+  // option
+  .ti-option {
+    @include ti-option-base;
+
+    &:hover {
+      background-color: transparentize(
+        map-get($defaultThemeMap, primary),
+        0.95
+      );
+    }
+
+    &.active {
+      color: map-get($defaultThemeMap, primary);
+      background-color: transparentize(
+        map-get($defaultThemeMap, primary),
+        0.95
+      );
+    }
+
+    &.ti-option_disabled {
+      color: mix(#fff, $textColor, 20%);
+      cursor: not-allowed;
+      background-color: mix(#000, #fff, 10%);
+      border-color: mix(
+        #fff,
+        map_get($defaultThemeMap, default-border-color),
+        20%
+      );
+    }
+  }
+}

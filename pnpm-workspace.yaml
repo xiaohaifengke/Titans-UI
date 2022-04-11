@@ -1,0 +1,6 @@
+packages:
+  - 'packages/**'
+  - '!packages/titans-ui'
+  - story
+  - docs
+  - 'dist/titans-ui'

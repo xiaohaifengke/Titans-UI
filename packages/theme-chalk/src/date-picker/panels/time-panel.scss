@@ -1,0 +1,14 @@
+@use '../../mixins/mixins' as *;
+@include themes {
+  .ti-datetime-panel {
+    display: flex;
+    width: 165px;
+    height: 210px;
+    margin: 10px auto 0;
+    border-radius: map-get($defaultThemeMap, default-border-radius);
+  }
+  .ti-datetime-picker_panel--item {
+    flex-grow: 1;
+    height: 100%;
+  }
+}

@@ -1,0 +1,55 @@
+@use './mixins' as *;
+
+@mixin typesUsingType($component) {
+  @each $type in default, primary, success, warning, danger, info {
+    &.ti-#{$component}-type-#{$type} {
+      @content (map_get($globalThemeMap, $type), $type);
+    }
+  }
+}
+
+@mixin types($component) {
+  @include typesUsingType($component) using ($color, $type) {
+    @content ($color);
+  }
+}
+
+@mixin modes($component, $color) {
+  @each $mode in fill, plain, outline, text {
+    &.ti-#{$component}-mode-#{$mode} {
+      @content ($color, $mode);
+    }
+  }
+}
+
+@mixin shapes($component) {
+  @each $shape in fillet, round, square, circle {
+    &.ti-#{$component}-shape-#{$shape} {
+      border-radius: map_get($globalThemeMap, $shape);
+    }
+    //@if $shape != circle {
+    //  &.ti-#{$component}-shape-#{$shape} {
+    //    border-radius: map_get($globalThemeMap, $shape);
+    //  }
+    //} @else {
+    //  &.ti-#{$component}-shape-#{$shape} {
+    //    border-radius: map_get($globalThemeMap, $shape);
+    //  }
+    //}
+  }
+}
+
+@mixin sizes($component) {
+  $default-padding: map_get($defaultThemeMap, normal);
+  // 默认的 button 的padding
+  padding: $default-padding $default-padding + 6px;
+  // 默认的 button[shape=circle] 的padding
+  &.ti-button-shape-circle {
+    padding: $default-padding;
+  }
+  @each $size in large, normal, small, mini {
+    &.ti-#{$component}-size-#{$size} {
+      @content (map_get($globalThemeMap, $size), $size);
+    }
+  }
+}

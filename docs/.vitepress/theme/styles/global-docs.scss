@@ -1,0 +1,56 @@
+.demo-block {
+  .source {
+    font-size: 14px;
+    > div {
+      > div:not([class^='ti-'], :last-of-type) {
+        margin-bottom: 20px;
+
+        > div:not([class^='ti-'], :last-of-type) {
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    // 相邻的两个组件demo之间的间隔
+    div:not([class^="ti-"]) {
+      > [class^="ti-"] {
+        & + [class^="ti-"] {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}
+
+// 属性table
+.page .container .content {
+  table {
+    display: table;
+    width: 100%;
+  }
+  th {
+    text-align: left;
+  }
+}
+
+/* reset default-theme's table styles */
+table[class^="ti-"] {
+  display: table;
+  border-collapse: collapse;
+  margin: initial;
+  overflow-x: auto;
+
+  tr {
+    border-top: initial;
+  }
+
+  tr:nth-child(2n) {
+    background-color: initial;
+  }
+
+  th,
+  td {
+    border: none;
+    padding: initial;
+  }
+}

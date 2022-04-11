@@ -1,0 +1,13 @@
+.demo-widget {
+  .genre-round {
+    .ti-loading:not(:first-of-type) {
+      margin-left: 16px !important;
+    }
+  }
+
+  .genre-linear {
+    .ti-loading:not(:first-of-type) {
+      margin-left: 3em !important;
+    }
+  }
+}

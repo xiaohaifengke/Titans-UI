@@ -1,0 +1,12 @@
+{
+  "name": "@titans-ui/theme-chalk",
+  "version": "0.4.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

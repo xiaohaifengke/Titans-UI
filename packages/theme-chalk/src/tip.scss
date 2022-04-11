@@ -1,0 +1,47 @@
+@use './mixins/mixins' as *;
+
+@include themes {
+  .ti-tip {
+    position: absolute;
+    right: 50px;
+    bottom: 20px;
+    z-index: 1000;
+    width: 120px;
+    height: 30px;
+    font-size: map-get($globalThemeMap, fontsize);
+    background: linear-gradient(90deg, rgba(18, 180, 165, 0.18), transparent);
+  }
+
+  .tip {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    display: flex;
+    transform: translateY(-50%);
+  }
+
+  .tip-enter-active,
+  .tip-leave-active {
+    transition: top, opacity, transform, 0.4s ease-in-out;
+  }
+
+  .tip-enter-from {
+    opacity: 0;
+    transform: translateY(calc(-50% + 1em));
+  }
+
+  .tip-leave-to {
+    opacity: 0;
+    transform: translateY(calc(-50% - 1em));
+  }
+
+  .arise-enter-active,
+  .arise-leave-active {
+    transition: right, opacity, 0.5s ease-in;
+  }
+  .arise-enter-from,
+  .arise-leave-to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@titans-ui/directives",
+  "version": "0.4.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "build": "gulp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

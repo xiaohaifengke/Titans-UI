@@ -1,0 +1,26 @@
+@use './mixins/mixins' as *;
+
+@include themes {
+  .ti-icon {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    font-size: map_get($defaultThemeMap, fontsize);
+    vertical-align: -0.15em;
+    fill: currentColor;
+  }
+}
+
+.ti-icon-loading {
+  animation: rotating 2s linear infinite;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

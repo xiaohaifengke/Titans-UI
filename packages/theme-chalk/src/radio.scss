@@ -1,0 +1,122 @@
+@use './mixins/mixins' as *;
+
+@include themes {
+  $textColor: map-get($defaultThemeMap, default);
+  $normalSize: map-get($globalThemeMap, fontsize);
+  $smallSize: map-get($globalThemeMap, fontsize-small);
+  $disabledColor: mix(map_get($defaultThemeMap, default), #fff, 35%);
+  .ti-radio {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 28px;
+    color: $textColor;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+
+    .ti-radio_selector {
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+      border: 1px solid map-get($globalThemeMap, radio-selector-color);
+      border-radius: 50%;
+      transition: border-color, background-color 0.2s;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: content-box;
+        width: 4px;
+        height: 4px;
+        content: '';
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.15s ease-in 0.05s;
+        transform: translate(-50%, -50%) scaleY(0);
+        transform-origin: center;
+      }
+    }
+
+    .ti-radio_label {
+      margin-left: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .ti-radio_selector--checked {
+    .ti-radio_selector {
+      &::after {
+        transform: translate(-50%, -50%) scaleY(1);
+      }
+    }
+  }
+
+  // size
+  @each $size in large, normal, small {
+    .ti-radio_size--#{$size} {
+      height: map-get($globalThemeMap, radio-height-#{$size});
+
+      @if ($size == small) {
+        font-size: $smallSize;
+        .ti-radio_selector {
+          width: $smallSize;
+          height: $smallSize;
+        }
+      } @else {
+        font-size: $normalSize;
+        .ti-radio_selector {
+          width: $normalSize;
+          height: $normalSize;
+        }
+      }
+    }
+  }
+
+  // type
+  @each $type in primary, success, warning, danger, info {
+    $typeColor: map-get($globalThemeMap, $type);
+    .ti-radio_type--#{$type} {
+      .ti-radio_selector:hover {
+        border: 1px solid $typeColor;
+      }
+      &.ti-radio_selector--checked {
+        .ti-radio_selector {
+          background-color: $typeColor;
+          border: 1px solid $typeColor;
+        }
+        .ti-radio_label {
+          color: $typeColor;
+        }
+      }
+    }
+  }
+
+  .ti-radio--readonly {
+    cursor: auto;
+  }
+
+  .ti-radio--disabled {
+    cursor: not-allowed;
+    &.ti-radio {
+      .ti-radio_selector {
+        background-color: mix($disabledColor, #fff, 40%);
+        border: 1px solid $disabledColor;
+        &::before {
+          background-color: $disabledColor;
+        }
+        &::after {
+          background-color: $disabledColor;
+        }
+        &:hover {
+          border: 1px solid $disabledColor;
+        }
+      }
+
+      .ti-radio_label {
+        color: $disabledColor;
+      }
+    }
+  }
+}

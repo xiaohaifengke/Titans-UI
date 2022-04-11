@@ -1,0 +1,155 @@
+@use './mixins/mixins' as *;
+
+@include themes {
+  $textColor: map-get($defaultThemeMap, default);
+  $normalSize: map-get($globalThemeMap, fontsize);
+  $smallSize: map-get($globalThemeMap, fontsize-small);
+  $disabledColor: mix(map_get($defaultThemeMap, default), #fff, 35%);
+  .ti-checkbox {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 28px;
+    color: $textColor;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+
+    .ti-checkbox_selector {
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+      border: 1px solid map-get($globalThemeMap, checkbox-selector-color);
+      border-radius: 2px;
+      transition: border-color, background-color 0.2s;
+
+      &::after {
+        position: absolute;
+        top: 1px;
+        left: 4px;
+        box-sizing: content-box;
+        width: 3px;
+        height: 7px;
+        content: '';
+        border: 1px solid #fff;
+        border-top: 0;
+        border-left: 0;
+        transition: transform 0.15s ease-in 0.05s;
+        transform: rotate(45deg) scaleY(0);
+        transform-origin: center;
+      }
+    }
+
+    .ti-checkbox_label {
+      margin-left: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .ti-checkbox_selector--checked {
+    .ti-checkbox_selector {
+      &::after {
+        transform: rotate(45deg) scaleY(1);
+      }
+    }
+  }
+  .ti-checkbox_selector--indeterminate {
+    .ti-checkbox_selector {
+      &::before {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        left: 0;
+        display: block;
+        height: 2px;
+        content: '';
+        background-color: #fff;
+        transform: scale(0.5);
+      }
+      &::after {
+        content: none;
+      }
+    }
+  }
+
+  // size
+  @each $size in large, normal, small {
+    .ti-checkbox_size--#{$size} {
+      height: map-get($globalThemeMap, checkbox-height-#{$size});
+
+      @if ($size == small) {
+        font-size: $smallSize;
+        .ti-checkbox_selector {
+          width: $smallSize;
+          height: $smallSize;
+
+          &::after {
+            width: 2px;
+            height: 6px;
+          }
+        }
+      } @else {
+        font-size: $normalSize;
+        .ti-checkbox_selector {
+          width: $normalSize;
+          height: $normalSize;
+        }
+      }
+    }
+  }
+
+  // type
+  @each $type in primary, success, warning, danger, info {
+    $typeColor: map-get($globalThemeMap, $type);
+    .ti-checkbox_type--#{$type} {
+      .ti-checkbox_selector:hover {
+        border: 1px solid $typeColor;
+      }
+      &.ti-checkbox_selector--checked {
+        .ti-checkbox_selector {
+          background-color: $typeColor;
+          border: 1px solid $typeColor;
+        }
+        .ti-checkbox_label {
+          color: $typeColor;
+        }
+      }
+      &.ti-checkbox_selector--indeterminate {
+        .ti-checkbox_selector {
+          background-color: $typeColor;
+          border: 1px solid $typeColor;
+        }
+        .ti-checkbox_label {
+          color: inherit;
+        }
+      }
+    }
+  }
+
+  .ti-checkbox--readonly {
+    cursor: auto;
+  }
+
+  .ti-checkbox--disabled {
+    cursor: not-allowed;
+    &.ti-checkbox {
+      .ti-checkbox_selector {
+        background-color: mix($disabledColor, #fff, 40%);
+        border: 1px solid $disabledColor;
+        &::before {
+          background-color: $disabledColor;
+        }
+        &::after {
+          border-color: $disabledColor;
+        }
+        &:hover {
+          border: 1px solid $disabledColor;
+        }
+      }
+
+      .ti-checkbox_label {
+        color: $disabledColor;
+      }
+    }
+  }
+}

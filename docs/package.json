@@ -1,0 +1,10 @@
+{
+  "name": "@titans-ui/docs",
+  "version": "0.3.5",
+  "description": "titans-ui's docs",
+  "main": "index.js",
+  "keywords": [
+    "titans-ui",
+    "docs"
+  ]
+}

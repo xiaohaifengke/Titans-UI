@@ -1,0 +1,8 @@
+@use '../mixins/mixins' as *;
+@include themes {
+  .ti-date-single-picker {
+    display: inline-block;
+    width: 220px;
+    height: 40px;
+  }
+}

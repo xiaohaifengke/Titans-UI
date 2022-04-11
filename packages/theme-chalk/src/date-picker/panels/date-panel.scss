@@ -1,0 +1,116 @@
+@use '../../mixins/mixins' as *;
+@use '../../mixins/reset-mixins' as *;
+@include themes {
+  .ti-date-panel {
+    margin: 0 auto;
+    text-align: center;
+    table-layout: fixed;
+
+    .ti-date-panel_head,
+    .ti-date-panel_body {
+      @include plainTagResetMixin;
+    }
+
+    .ti-date-panel_body {
+      padding-top: 5px;
+    }
+
+    .ti-date-panel_head--item {
+      display: inline-block;
+      width: 32px;
+      height: 30px;
+      line-height: 30px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .ti-date-panel_body--item {
+      @include plainTagResetMixin;
+
+      display: inline-block;
+      padding: 1px;
+      cursor: pointer;
+
+      .ti-date_panel--text {
+        position: relative;
+        display: inline-block;
+        padding: 3px;
+        border-radius: 50%;
+
+        & > span {
+          $size: 24px;
+
+          display: inline-block;
+          width: $size;
+          height: $size;
+          line-height: $size;
+          border-radius: 50%;
+        }
+      }
+      &.current {
+        .ti-date_panel--text {
+          color: map-get($defaultThemeMap, primary);
+        }
+      }
+
+      &.range-selected {
+        position: relative;
+        &::before {
+          position: absolute;
+          top: 1px;
+          right: 0;
+          bottom: 1px;
+          left: 0;
+          content: '';
+          background-color: transparentize(
+            map-get($defaultThemeMap, primary),
+            0.9
+          );
+        }
+
+        &.range-start {
+          &::before {
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+          }
+        }
+
+        &.range-end {
+          &::before {
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+          }
+        }
+      }
+
+      &.selected {
+        .ti-date_panel--text {
+          color: #fff;
+          background-color: transparentize(
+            map-get($defaultThemeMap, primary),
+            0.8
+          );
+
+          & > span {
+            background-color: map-get($defaultThemeMap, primary);
+          }
+        }
+      }
+    }
+  }
+
+  .current-month {
+    .ti-date_panel--text {
+      &:hover {
+        color: map-get($defaultThemeMap, primary);
+        background-color: transparentize(
+          map-get($defaultThemeMap, primary),
+          0.8
+        );
+      }
+    }
+  }
+}
+
+.popper-slide-enter-after .flip-date-list-move {
+  transition: transform 0.25s ease-out;
+}

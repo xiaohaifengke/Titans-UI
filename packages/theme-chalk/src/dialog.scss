@@ -1,0 +1,151 @@
+@use './mixins/mixins' as *;
+@include themes {
+  $border-radius: 4px;
+  $border-color: #d9d9d9;
+
+  .ti-dialog {
+    position: relative;
+    width: 520px;
+    margin: 0 auto;
+    pointer-events: auto;
+    background: #fff;
+    border-radius: $border-radius;
+    box-shadow: 0 0 3px fade-out(black, 0.5);
+    transition: width 0.2s linear;
+
+    &-overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      background-color: fade-out(#000, 0.5);
+    }
+
+    &-wrapper {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    & &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-size: 20px;
+      border-bottom: 1px solid $border-color;
+    }
+    & &-close {
+      cursor: pointer;
+      &:hover {
+        color: map_get($defaultThemeMap, primary);
+      }
+    }
+
+    & &-content {
+      padding: 12px 16px;
+    }
+
+    & &-footer {
+      padding: 12px 16px;
+      text-align: right;
+      border-top: 1px solid $border-color;
+
+      .ti-dialog-footer-default-slot-button {
+        & + .ti-dialog-footer-default-slot-button {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+
+  .dialog-enter-active {
+    .ti-dialog-overlay {
+      animation: fade-in-overlay 0.25s ease;
+    }
+    .ti-dialog {
+      animation: zoom-in 0.4s both;
+    }
+  }
+  .dialog-leave-active {
+    .ti-dialog-overlay {
+      animation: fade-out-overlay 0.25s ease forwards;
+    }
+    .ti-dialog {
+      //transform-origin: center bottom;
+      animation: zoom-out 0.25s both;
+    }
+  }
+
+  @keyframes zoom-in {
+    from {
+      opacity: 0;
+      transform: scale3d(0.1, 0.1, 0.1);
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes zoom-out {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: scale3d(0.1, 0.1, 0.1);
+    }
+  }
+
+  @keyframes zoom-in-down {
+    from {
+      opacity: 0;
+      transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    60% {
+      opacity: 1;
+      transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+      animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    }
+  }
+  @keyframes zoom-out-up {
+    40% {
+      opacity: 1;
+      transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+      animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    }
+  }
+}
+
+@keyframes fade-in-overlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out-overlay {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

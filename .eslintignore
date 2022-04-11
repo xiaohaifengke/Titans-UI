@@ -1,0 +1,6 @@
+src/packages/icon/iconfont.js
+packages/components/icon/src/iconfont.js
+dist
+es
+docs
+/*.js

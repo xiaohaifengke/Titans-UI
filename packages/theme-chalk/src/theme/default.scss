@@ -1,0 +1,66 @@
+/* stylelint-disable */
+//$boxshadow: 0 1px 1px 0 rgba(60, 64, 67, 0.08), 0 1px 3px 1px rgba(60, 64, 67, 0.16);
+$boxshadowColor: #f0f1f2;
+$boxshadow: 0 2px 8px $boxshadowColor;
+$default-border-color: mix(#606266, #fff, 30%);
+$theme-default: (
+  '': (
+    default-border-color: $default-border-color,
+    default-border-radius: 4px,
+    default: #62656a,
+    primary: #12b4a5,
+    success: #00cc00,
+    warning: #ff7400,
+    danger: #ea6161,
+    info: #969696,
+    disabled: #f5f7fa,
+    disabledLight: #fcfcfc,
+    disabledDeep: #c6c6c6,
+    disabledText: #c0c4cc,
+    large: 10px,
+    normal: 8px,
+    small: 6px,
+    mini: 4px,
+    fillet: 4px,
+    round: 50px,
+    square: 0,
+    circle: 50%,
+    fontsize: 14px,
+    fontsize-small: 12px,
+    font:
+      'Avenir,-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol',
+    ibc: #dcdfe6,
+    ibl: #ebeef5,
+    itc: #314659,
+    itl: #697b8c,
+    ihc: #000000,
+    ipc: rgba(0, 0, 0, 0.25),
+    icc: rgba(0, 0, 0, 0.45),
+    transitionFlexible: cubic-bezier(0.24, 0.22, 0.015, 1.2),
+    transition: cubic-bezier(0.23, 1, 0.32, 1),
+    transition2: cubic-bezier(0.59, 1.12, 0.81, 0.95),
+    boxshadow: $boxshadow,
+    //阴影
+    boxshadowColor: $boxshadowColor,
+    //阴影
+    popperRadius: 2px,
+    /* input start */ input-height-large: 46px,
+    input-height-normal: 40px,
+    input-height-small: 34px,
+    input-height-mini: 28px,
+    /* input end */ transition-border: border-color 0.2s
+      cubic-bezier(0.645, 0.045, 0.355, 1),
+    // checkbox start
+    checkbox-height-large: 40px,
+    checkbox-height-normal: 32px,
+    checkbox-height-small: 24px,
+    checkbox-selector-color: mix(#606266, #fff, 50%),
+    // checkbox end
+    // radio start
+    radio-height-large: 40px,
+    radio-height-normal: 32px,
+    radio-height-small: 24px,
+    radio-selector-color: mix(#606266, #fff, 50%),
+    // radio end
+  )
+);
