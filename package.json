@@ -4,7 +4,7 @@
   "version": "0.4.0",
   "description": "前端自研组件库",
   "engines": {
-    "node": ">= 14.12.0"
+    "node": ">= 16.9.1"
   },
   "scripts": {
     "dev": "pnpm -C story docs:dev",
