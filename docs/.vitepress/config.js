@@ -26,7 +26,7 @@ module.exports = {
       },
       {
         text: 'GitLab',
-        link: 'http://192.168.0.17/frontend/Titans-UI'
+        link: 'http://192.168.0.16/frontend/Titans-UI'
       },
       {
         text: '交接文档',

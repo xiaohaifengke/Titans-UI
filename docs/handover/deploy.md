@@ -1,10 +1,10 @@
 # 智慧森防的部署信息
 
-## 服务器信息
+## 开发环境服务器信息
 - 服务器地址：192.168.0.18
 - 用户名/密码：root/root
 
-## docker信息
+## 开发环境docker信息
 此项目使用docker进行部署。
 - 镜像名称：production/frontend/ffp-web-frontend
 - 容器名称：ffp-web-frontend
@@ -88,3 +88,48 @@ server {
     }
 }
 ```
+
+## 黑龙江环境部署教程
+
+因为12环境的Jenkins无法访问黑龙江环境，所以需要在本地环境手动构建部署。使用Intellij Idea进行如下操作：
+
+> 切记要先打开vpn~
+
+1. 先安装IDEA的插件：Docker,再找到Services视图
+
+   ![image-20220414102019042](./deploy_img/image-20220414102019042.png)
+
+2. Docker Connection
+
+   ![image-20220414102224464](./deploy_img/image-20220414102224464.png)
+
+3. 输入配置，如下图
+
+   ![image-20220414102606898](./deploy_img/image-20220414102606898.png)
+
+4. 先运行build命令打包前端代码到dist目录。然后可以新建个目录（比如docker），把dist目录中的打包后的文件和根目录的Dockerfile文件拷贝到docker目录。（Dockerfile文件拷贝到docker文件夹后，记得改下内容，参考下面图片为修改内容后的！）
+   ![image-20220414175543051](./deploy_img/image-20220414175543051.png)
+
+   ![image-20220414180826979](./deploy_img/image-20220414180826979.png)
+   
+5. 在IDEA中的run菜单中找到 **Edit Configurations**,按如下图配置：
+
+   ![image-20220414175821938](./deploy_img/image-20220414175821938.png)
+
+   ![image-20220414180130388](./deploy_img/image-20220414180130388.png)
+
+6. 配置完成后，运行：
+
+   ![image-20220414180320727](./deploy_img/image-20220414180320727.png)
+
+7. 查看Services面板：
+
+   ![image-20220414180556877](./deploy_img/image-20220414180556877.png)
+
+>镜像名称：production/frontend/ffp-web-frontend  
+>容器名称：ffp-web-frontend  
+>nginx配置路径：/home/docker/forest-fire-prevention/nginx/conf  
+>服务访问地址：http://192.168.230.26:12345  
+>
+>不要忘记打开vpn
+

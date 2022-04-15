@@ -19,6 +19,10 @@ module.exports = [
         link: '/handover/branch'
       },
       {
+        text: 'Git 提交规范',
+        link: '/handover/git-commit'
+      },
+      {
         text: '仓库地址',
         link: '/handover/gitlab'
       }
